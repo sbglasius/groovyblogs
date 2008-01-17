@@ -1,0 +1,77 @@
+<project name="groovyblogs" default="test">
+
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+    <target name="clean" description="--> Cleans a Grails application">
+		<exec executable="grails" failonerror="true">
+			<arg value="clean"/>
+		</exec>                               
+    </target>
+
+	<!-- ================================= 
+          target: war              
+         ================================= -->
+    <target name="war" description="--> Creates a WAR of a Grails application">
+		<exec executable="grails" failonerror="true">
+			<arg value="war"/>
+		</exec>                               
+    </target>
+	
+	<!-- ================================= 
+          target: test              
+         ================================= -->
+    <target name="test" description="--> Run a Grails applications unit tests">
+		<exec executable="grails" failonerror="true">
+			<arg value="test-app"/>
+		</exec>                               
+    </target>
+	
+	<!-- ================================= 
+          target: deploy              
+         ================================= -->
+    <target name="deploy" depends="war" description="--> The deploy target (initially empty)">
+        <!-- TODO -->
+    </target>
+	
+	
+	<target name="distro" description="--> Creates a Grails src distribution">
+		
+		<property name="dist.src.dir" location="distro"/>
+		<property name="zip.dir.name" value="groovyblogs-1.0-RC1"/>
+		
+	       <delete dir="${dist.src.dir}/${zip.dir.name}" />
+	        <mkdir dir="${dist.src.dir}/${zip.dir.name}" />
+
+	        <copy todir="${dist.src.dir}/${zip.dir.name}">
+	            <fileset dir="${basedir}">
+	                <include name="src/**/*.*" />
+	                <include name="test/**/*.*" />
+	            	<include name="lib/**/*.*" />
+	                <include name="art/**/*.*" />
+	                <include name="spring/**/*.*" />
+	                <include name="plugins/**/*.*" />
+	                <include name="hibernate/**/*.*" />
+	                <include name="scripts/**/*.*" />
+	                <include name="grails-app/**/*.*" />
+	                <include name="plugsins/**/*.*" />
+	            	<include name="grails-test/**/*.*" />
+	            	<include name="web-app/**/*.*" />
+	            	<exclude name="**/WEB-INF/lib/*.*"/>
+	            	<exclude name="**/testdb.*"/>
+	            </fileset>
+	            <fileset dir="${basedir}" includes="*.*" excludes="*.war,*.zip"/>
+	        </copy>
+
+	        <property name="src.tar.name" value="${dist.src.dir}/${zip.dir.name}.tar"/>
+
+	        <tar destfile="${src.tar.name}"
+	                   basedir="${dist.src.dir}" includes="${zip.dir.name}/**/*.*"
+	              />
+
+	        <gzip src="${src.tar.name}" destfile="${src.tar.name}.gz"/>
+
+	        <delete file="${src.tar.name}"/>
+		
+	</target>
+</project>
