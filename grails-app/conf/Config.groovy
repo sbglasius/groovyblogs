@@ -47,7 +47,7 @@ pdf {
 }
 
 cache {
-	enabled = false
+	enabled = true
 }
 
 mail {
@@ -63,7 +63,7 @@ http {
 	port=3128
 	useragent="GroovyBlogs/1.0 (http://www.groovyblogs.org)"
 	usefeedburner=true
-	maxpollsperminute=15
+	maxpollsperminute=3
 	feedburner_atom="http://feeds.feedburner.com/groovyblogs"
 	feedburner_rss="http://feeds.feedburner.com/groovyblogs" 
 	feedburner_stats_url="http://feeds.feedburner.com/~fc/groovyblogs?bg=99CCFF&amp;fg=444444&amp;anim=0"

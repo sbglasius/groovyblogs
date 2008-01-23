@@ -6,7 +6,7 @@ class EntriesController {
 	def index = { }
 	
 	// suppress when more than three entries from same author
-	def limitEntries(entries) {
+	public static def limitEntries(entries) {
 		
 		def authorHash = [ : ] // count by blog
    		def limitEntries = [ ] // limit to three entries

@@ -11,6 +11,8 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder;
  */
 public class ThumbnailService {
 
+    CacheService cacheService
+
     public void writeFile(String url, String thumbpathBig, String thumbpath) {
 
 		log.warn("Staring download on $url ...")
@@ -35,6 +37,13 @@ public class ThumbnailService {
         }
 
         log.info "Fetching thumbnail for id $id"
+
+
+        byte[] t = cacheService.getFromCache("thumbFileCache", 3600, "${id}-${smallSize}")
+	    if (t && t.length > 0) {
+            log.debug "Found file in the cache..."
+            return t
+		}
 
 		BlogEntry entry = BlogEntry.get(id)
 
@@ -61,12 +70,16 @@ public class ThumbnailService {
             }
 
 		} else {
-			log.info "Already got that image in the cache..."
+			log.info "Already got that image in the filesystem..."
 		}
 
 
 		File file = smallSize ? new File(thumbnail) : new File(thumbnailBig)
 		byte[] b = file.readBytes()
+
+		// put it in the cache for next time...
+        cacheService.putToCache("thumbFileCache", 3600, "${id}-${smallSize}", b)
+
 		return b
 
 	}
