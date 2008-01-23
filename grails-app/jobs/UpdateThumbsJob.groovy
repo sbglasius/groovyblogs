@@ -9,7 +9,9 @@ class UpdateThumbsJob {
 	
 	// Update the lists every 15 minutes
 	def cronExpression = "0 * * * * ?"
-			
+
+
+					
 
 	def execute() {	
 		
@@ -19,6 +21,7 @@ class UpdateThumbsJob {
 
 		def entries = BlogEntry.findAllByDateAddedGreaterThan(
 						aWhileAgo, [ sort: 'dateAdded', order: "desc" ] )
+		entries = EntriesController.limitEntries(entries)
 		entries = entries.findAll { entry -> entry.isGroovyRelated() }
 		entries.each { entry ->
 		    log.info("Checking thumbnail for (${entry.id}) at ${entry.toThumbnailPath()}")
