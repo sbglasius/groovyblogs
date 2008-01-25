@@ -19,13 +19,19 @@ public class ThumbnailService {
 
 		def server = new XMLRPCServerProxy(ConfigurationHolder.config.thumbnail.serviceurl)
 
-		def list = server.getThumbnail(url)
+        Thread.start {
+            def list = server.getThumbnail(url)
 
-		FileOutputStream big = new FileOutputStream(thumbpathBig)
-		big << list[0]
+            if (list[0].length) {
+                FileOutputStream big = new FileOutputStream(thumbpathBig)
+                big << list[0]
+            }
 
-		FileOutputStream small = new FileOutputStream(thumbpath)
-		small << list[1]
+            if (list[1].length) {
+                FileOutputStream small = new FileOutputStream(thumbpath)
+                small << list[1]
+            }
+        }
 
 	}
 
@@ -75,12 +81,18 @@ public class ThumbnailService {
 
 
 		File file = smallSize ? new File(thumbnail) : new File(thumbnailBig)
-		byte[] b = file.readBytes()
+		if (file.exists()) {
+		    byte[] b = file.readBytes()
 
-		// put it in the cache for next time...
-        cacheService.putToCache("thumbFileCache", 3600, "${id}-${smallSize}", b)
+		    if (b.length) {
+		        // put it in the cache for next time...
+                cacheService.putToCache("thumbFileCache", 3600, "${id}-${smallSize}", b)
+            }
 
-		return b
+		    return b
+        } else {
+            return new byte[0]
+        }
 
 	}
 

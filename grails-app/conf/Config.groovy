@@ -40,6 +40,9 @@ thumbnail {
 	enabled=true
 	serviceurl="http://localhost:7999"
 	dir = "/data/thumbs/groovyblogs"
+	usemq=false
+	sendQueueName="thumbs.request"
+	receiveQueueName="thumbs.response"
 }
 
 pdf {
@@ -63,7 +66,7 @@ http {
 	port=3128
 	useragent="GroovyBlogs/1.0 (http://www.groovyblogs.org)"
 	usefeedburner=true
-	maxpollsperminute=3
+	maxpollsperminute=5
 	feedburner_atom="http://feeds.feedburner.com/groovyblogs"
 	feedburner_rss="http://feeds.feedburner.com/groovyblogs" 
 	feedburner_stats_url="http://feeds.feedburner.com/~fc/groovyblogs?bg=99CCFF&amp;fg=444444&amp;anim=0"

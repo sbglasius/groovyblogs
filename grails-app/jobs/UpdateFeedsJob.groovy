@@ -6,8 +6,8 @@ class UpdateFeedsJob {
 
 	FeedService feedService
 	
-	def cronExpression = "0 * * * * ?"
-			
+	// def cronExpression = "0 * * * * ?"
+	// use default to fetch every minute		
 
 	def execute() {	
 		

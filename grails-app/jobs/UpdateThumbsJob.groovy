@@ -7,10 +7,8 @@ class UpdateThumbsJob {
 	CacheService cacheService
 	ThumbnailService thumbnailService
 	
-	// Update the lists every 15 minutes
-	def cronExpression = "0 * * * * ?"
-
-
+	// Update the lists every 15 minutes, 1,16,31,46
+	// def cronExpression = "30 * * * * ?"
 					
 
 	def execute() {	
