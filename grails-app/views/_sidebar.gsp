@@ -76,7 +76,7 @@
 	      			<div class="niceBoxHd">Get the Source</div>
 	      			<div class="niceBoxBody">
 						Download the 
-						<a href="http://www.bytecode.com.au/downloads/grails">complete source code</a>
+						<a href="http://code.google.com/p/groovyblogs/">complete source code</a>
 						to groovyblogs.org. Contribute patches and enhancements!
 	      			</div>
 	      		</div>

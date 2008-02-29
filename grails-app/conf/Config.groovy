@@ -173,3 +173,7 @@ grails.war.java5.dependencies = [
     "hibernate-annotations.jar",
     "ejb3-persistence.jar",
 ]
+
+// The following properties have been added by the Upgrade process...
+grails.views.default.codec="none" // none, html, base64
+grails.views.gsp.encoding="UTF-8"
