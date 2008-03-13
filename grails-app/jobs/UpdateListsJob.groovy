@@ -1,8 +1,5 @@
-import org.apache.commons.logging.LogFactory
 
 class UpdateListsJob {
-
-	//def log = LogFactory.getLog(UpdateListsJob.class.name)
 	
 	FeedService feedService
 	

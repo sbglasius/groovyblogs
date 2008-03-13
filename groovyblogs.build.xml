@@ -38,7 +38,7 @@
 	<target name="distro" description="--> Creates a Grails src distribution">
 		
 		<property name="dist.src.dir" location="distro"/>
-		<property name="zip.dir.name" value="groovyblogs-1.0-RC1"/>
+		<property name="zip.dir.name" value="groovyblogs-1.0"/>
 		
 	       <delete dir="${dist.src.dir}/${zip.dir.name}" />
 	        <mkdir dir="${dist.src.dir}/${zip.dir.name}" />

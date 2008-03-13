@@ -1,12 +1,9 @@
-import org.apache.commons.logging.LogFactory
 
 /* Once a day update the indexes to make sure all is compressed and running well */
 
 
 class UpdateIndexJob {
-	
-	//def log = LogFactory.getLog(UpdateIndexJob.class.name)
-	
+		
 	def cronExpression = "0 0 12 * * ?"
 
 	SearchService searchService
