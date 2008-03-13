@@ -1,9 +1,6 @@
-import org.apache.commons.logging.LogFactory
 
 class UpdateFeedsJob {
 	
-	//def log = LogFactory.getLog(UpdateFeedsJob.class.name)
-
 	FeedService feedService
 	
 	// def cronExpression = "0 * * * * ?"

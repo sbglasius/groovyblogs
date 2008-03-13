@@ -1,11 +1,11 @@
-import org.apache.commons.logging.LogFactory
 
 class UpdateThumbsJob {
 
-	//def log = LogFactory.getLog(UpdateListsJob.class.name)
-	
 	CacheService cacheService
 	ThumbnailService thumbnailService
+
+	def startDelay = 1000 * 90  // wait 90 seconds
+    def timeout = 1000 * 60 * 5 // run every 5 minutes
 	
 	// Update the lists every 15 minutes, 1,16,31,46
 	// def cronExpression = "30 * * * * ?"
