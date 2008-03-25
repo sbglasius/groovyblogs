@@ -24,10 +24,10 @@ class ThumbnailController {
 			def id = params.id
 			
 	    	// grab thumb bytes from cache if possible
-			byte[] b = cacheService.getFromCache("thumbCache", 60*5, "small-" + id)
+			byte[] b = cacheService.getFromCache("thumbCache", 60*60, "small-" + id)
 			if (!b) {			
 				b = thumbnailService.getFile(id, true, false)
-				cacheService.putToCache("thumbCache", 60*5, "small-" + id, b)				
+				cacheService.putToCache("thumbCache", 60*60, "small-" + id, b)				
 			}
 
 			writeImage(response, b)
@@ -39,10 +39,10 @@ class ThumbnailController {
 		def id = params.id
 		
     	// grab thumb bytes from cache if possible
-		byte[] b = cacheService.getFromCache("thumbCache", 3600, "big-" + id)
+		byte[] b = cacheService.getFromCache("thumbCache", 60*60, "big-" + id)
 		if (!b) {			
 			b = thumbnailService.getFile(id, false, false)
-			cacheService.putToCache("thumbCache", 3600, "big-" + id, b)				
+			cacheService.putToCache("thumbCache", 60*60, "big-" + id, b)				
 		}
 		
 		writeImage(response, b)
