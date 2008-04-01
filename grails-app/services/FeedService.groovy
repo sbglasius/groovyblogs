@@ -68,18 +68,25 @@ class FeedService {
 		log.info("Trying to fetch [$url]")
 
         def client = new HttpClient()
+        def clientParams = client.getParams()
+        clientParams.setParameter(org.apache.commons.httpclient.params.HttpClientParams.HTTP_CONTENT_CHARSET, "UTF-8");
 
-		if (ConfigurationHolder.config.http.useproxy) {
+        if (ConfigurationHolder.config.http.useproxy) {
 			def hostConfig = client.getHostConfiguration()
 			hostConfig.setProxy(ConfigurationHolder.config.http.host, ConfigurationHolder.config.http.port)
 			log.warn("Setting proxy to [" + ConfigurationHolder.config.http.host + "]")
 		}
 		
 		if (ConfigurationHolder.config.http.useragent) {
-			def clientParams = client.getParams()
 			clientParams.setParameter(org.apache.commons.httpclient.params.HttpClientParams.USER_AGENT,
 					ConfigurationHolder.config.http.useragent)
 		}
+
+        if (ConfigurationHolder.config.http.timeout) {
+
+		    clientParams.setParameter(org.apache.commons.httpclient.params.HttpClientParams.SO_TIMEOUT,
+					ConfigurationHolder.config.http.timeout)
+        }
 		
         def mthd = new GetMethod(url)  
 	        
