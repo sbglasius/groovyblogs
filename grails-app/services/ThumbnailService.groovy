@@ -12,6 +12,7 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder;
 public class ThumbnailService {
 
     CacheService cacheService
+    ThumbnailQueueService thumbnailQueueService
 
     public void writeFile(String url, String thumbpathBig, String thumbpath) {
 
@@ -61,15 +62,19 @@ public class ThumbnailService {
             new File(thumbsPath).mkdirs()
         }
 
-		def thumbnail = "${thumbsPath}${entry.id}.jpg"
-		def thumbnailBig = "${thumbsPath}${entry.id}-orig.jpg"
+		def smallFilename = "${thumbsPath}${entry.id}.jpg"
+		def bigFilename = "${thumbsPath}${entry.id}-orig.jpg"
 		
-		log.info "file path is $thumbnailBig"
+		log.info "file path is $smallFilename"
 
-		if (!(new File(thumbnail).exists())) {
+		if (!(new File(smallFilename).exists())) {
 
             if (writeThumb) {
-                writeFile(entry.link, thumbnailBig, thumbnail)
+                if (ConfigurationHolder.config.mq.enabled) {
+                    thumbnailQueueService.sendRequest(entry, smallFilename, bigFilename)        
+                } else {
+                    writeFile(entry.link, bigFilename, smallFilename)
+                }
             } else {
                 // I don't have it, and can't fetch it, but I've got to return something
                 return new byte[0]
@@ -80,7 +85,7 @@ public class ThumbnailService {
 		}
 
 
-		File file = smallSize ? new File(thumbnail) : new File(thumbnailBig)
+		File file = smallSize ? new File(smallFilename) : new File(bigFilename)
 		if (file.exists()) {
 		    byte[] b = file.readBytes()
 

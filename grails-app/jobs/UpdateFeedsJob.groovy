@@ -3,7 +3,11 @@ class UpdateFeedsJob {
 	
 	FeedService feedService
 
+    def concurrent = false
+
     private static updating = false
+
+    def startDelay = 1000 * 60 * 1  // wait 1 mins
 
     // def cronExpression = "0 * * * * ?"
 	// use default to fetch every minute		

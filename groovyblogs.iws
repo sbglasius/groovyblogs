@@ -16,13 +16,99 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/groovyblogs.iws" afterPath="$PROJECT_DIR$/groovyblogs.iws" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_solid.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/artifacts/Job.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/groovy/org/codehaus/groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_pointbase.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/scripts/CreateJob.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/java/org/codehaus/groovy/grails/plugins/quartz/CronTriggerFactoryBean.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/java/org/codehaus/groovy/grails/plugins/quartz/GrailsTaskClassProperty.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stacktrace.log" afterPath="$PROJECT_DIR$/stacktrace.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.classpath" afterPath="$PROJECT_DIR$/.classpath" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_sapdb.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/grails-app" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_derby.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/scripts/InstallQuartzConfig.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/java/org/codehaus/groovy/grails/plugins/quartz/listeners" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_oracle.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/groovyblogs.iws" afterPath="$PROJECT_DIR$/groovyblogs.iws" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/conf/spring/resources.xml" afterPath="$PROJECT_DIR$/grails-app/conf/spring/resources.xml.old" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/services/ThumbnailQueueService.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/java/org/codehaus/groovy/grails/plugins/quartz/listeners/SessionBinderJobListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application.properties" afterPath="$PROJECT_DIR$/application.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/ThumbnailService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/ThumbnailService.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/Config.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/jobs/UpdateFeedsJob.groovy" afterPath="$PROJECT_DIR$/grails-app/jobs/UpdateFeedsJob.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/java/org/codehaus/groovy/grails/plugins/quartz/listeners/ExceptionPrinterJobListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/scripts/_Install.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/groovy/org/codehaus/groovy/grails/plugins/quartz/config" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/EntriesController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/EntriesController.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/lib/quartz-1.6.0.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/grails-app/conf/DefaultQuartzConfig.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/groovy/org/codehaus" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/images/contegix_logo.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_mysql_innodb.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_firebird.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_db2_v72.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web-app/WEB-INF/jetty-env.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/groovyblogs.iml" afterPath="$PROJECT_DIR$/groovyblogs.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_hsqldb.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/java/org/codehaus/groovy/grails/plugins/quartz" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_postgres.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/java/org/codehaus/groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_sybase.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/grails-app/conf/QuartzBootStrap.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/groovy/org/codehaus/groovy/grails/plugins/quartz/config/TriggersConfigBuilder.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/java/org/codehaus/groovy/grails/plugins/quartz/GrailsJobFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/groovy/org" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/plugins/grails-quartz-0.1.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/plugins/grails-quartz-0.2.zip" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/entries/_entry.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/jobs/UpdateThumbsJob.groovy" afterPath="$PROJECT_DIR$/grails-app/jobs/UpdateThumbsJob.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/scripts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_db2.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/grails-quartz-0.3.3.zip" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/groovy/org/codehaus/groovy/grails/plugins" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_mysql.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/java/org" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/application.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/conf/spring/resources.xml.old" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/conf/spring/resources.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_informix.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_cloudscape.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/entries/recent.gsp" afterPath="$PROJECT_DIR$/grails-app/views/entries/recent.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/java/org/codehaus/groovy/grails/plugins/quartz/SimpleTriggerFactoryBean.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/java/org/codehaus/groovy/grails/plugins/quartz/DefaultGrailsTaskClass.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/java/org/codehaus" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/lib" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/BlogEntry.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/BlogEntry.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/groovy/org/codehaus/groovy/grails" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/java/org/codehaus/groovy/grails" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/DataSource.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/DataSource.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/java/org/codehaus/groovy/grails/plugins/quartz/GrailsTaskClass.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/grails-app/conf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_hsqldb_old.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_sqlServer.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_db2_v8.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/groovy/org/codehaus/groovy/grails/plugins/quartz" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/scripts/_Upgrade.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/plugin.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.classpath" afterPath="$PROJECT_DIR$/.classpath" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/java/org/codehaus/groovy/grails/plugins" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/services/UrlQueueService.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/views/_sidebar.gsp" afterPath="$PROJECT_DIR$/grails-app/views/_sidebar.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/java/org/codehaus/groovy/grails/plugins/quartz/JobDetailFactoryBean.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/java/org/codehaus/groovy/grails/plugins/quartz/TaskArtefactHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/artifacts" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/src/templates/sql/tables_postgres7.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/grails-jms-0.3.zip" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/FeedService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/FeedService.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/jobs/UpdateFeedsJob.groovy" afterPath="$PROJECT_DIR$/grails-app/jobs/UpdateFeedsJob.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plugins/quartz-0.3.3/QuartzGrailsPlugin.groovy" />
     </list>
     <ignored path="groovyblogs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -93,55 +179,7 @@
       <file leaf-file-name="FeedService.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/services/FeedService.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="172" column="9" selection-start="5318" selection-end="5318" vertical-scroll-proportion="0.17391305">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BlogEntry.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/BlogEntry.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UpdateThumbsJob.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/jobs/UpdateThumbsJob.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="6" selection-start="7" selection-end="7" vertical-scroll-proportion="0.022058824">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UpdateListsJob.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/jobs/UpdateListsJob.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="0" selection-start="24" selection-end="24" vertical-scroll-proportion="0.04411765">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataSource.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/conf/DataSource.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="11" selection-start="186" selection-end="186" vertical-scroll-proportion="0.1764706">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Config.groovy" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="22" selection-start="2317" selection-end="2317" vertical-scroll-proportion="0.4763705">
+            <state line="308" column="13" selection-start="10858" selection-end="10858" vertical-scroll-proportion="0.51417005">
               <folding />
             </state>
           </provider>
@@ -150,34 +188,80 @@
       <file leaf-file-name="UpdateFeedsJob.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/jobs/UpdateFeedsJob.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="6" selection-start="7" selection-end="7" vertical-scroll-proportion="0.022058824">
+            <state line="23" column="31" selection-start="447" selection-end="447" vertical-scroll-proportion="0.5168539">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lists.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/entries/lists.gsp">
+      <file leaf-file-name="ThumbnailService.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/services/ThumbnailService.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="11" column="13" selection-start="208" selection-end="208" vertical-scroll-proportion="-1.2890173">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="recent.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/entries/recent.gsp">
+      <file leaf-file-name="Blog.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/domain/Blog.groovy">
+          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="84" selection-start="1101" selection-end="1101" vertical-scroll-proportion="0.62761503">
+            <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UpdateIndexJob.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/jobs/UpdateIndexJob.groovy">
+      <file leaf-file-name="UpdateThumbsJob.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/jobs/UpdateThumbsJob.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="6" selection-start="93" selection-end="93" vertical-scroll-proportion="0.0882353">
+            <state line="35" column="35" selection-start="1108" selection-end="1108" vertical-scroll-proportion="0.6300578">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Config.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="45" column="17" selection-start="1900" selection-end="1900" vertical-scroll-proportion="0.51445085">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/main.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.9230769">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_sidebar.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/_sidebar.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="24" selection-start="118" selection-end="118" vertical-scroll-proportion="0.071570575">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="contegix_logo.jpg" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web-app/images/contegix_logo.jpg">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UrlQueueService.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/services/UrlQueueService.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="32" column="9" selection-start="752" selection-end="861" vertical-scroll-proportion="0.56179774">
               <folding />
             </state>
           </provider>
@@ -222,19 +306,13 @@
           <option name="myItemId" value="groovyblogs" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
         </PATH_ELEMENT>
-      </PATH>
-      <PATH>
         <PATH_ELEMENT>
-          <option name="myItemId" value="groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.LibraryGroupNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+          <option name="myItemId" value="GroovyBlogs" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
         </PATH_ELEMENT>
       </PATH>
       <PATH>
@@ -247,34 +325,8 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs/plugins" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs/grails-app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs/grails-app/views" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.LibraryGroupNode" />
         </PATH_ELEMENT>
       </PATH>
       <PATH>
@@ -288,124 +340,6 @@
         </PATH_ELEMENT>
         <PATH_ELEMENT>
           <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs/grails-app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs/grails-app/views" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs/grails-app/views/entries" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs/grails-app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs/grails-app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs/grails-app/services" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs/grails-app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs/grails-app/jobs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs/grails-app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs/grails-app/controllers" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs/grails-app" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:/Users/glen/IdeaProjects/groovyblogs/grails-app/conf" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -459,13 +393,60 @@
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3" value="74" />
   </component>
   <component name="RunManager" selected="Grails Application.groovyblogs">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+    </configuration>
     <configuration default="true" type="GroovyScriptRunConfigurationType" factoryName="Groovy Script">
       <module name="" />
       <setting name="path" value="" />
       <setting name="vmparams" value="" />
       <setting name="params" value="" />
-      <setting name="workDir" value="." />
+      <setting name="workDir" value="$PROJECT_DIR$/." />
       <setting name="debug" value="false" />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="ADDITIONAL_CLASS_PATH" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <envs />
+      <method>
+        <option name="Make" value="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails Application">
+      <module name="" />
+      <setting name="vmparams" value="" />
+      <setting name="grailsparams" value="" />
+      <setting name="operation" value="run-app" />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
       <option name="MAIN_CLASS_NAME" />
@@ -509,59 +490,18 @@
         <option name="Make" value="true" />
       </method>
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="ADDITIONAL_CLASS_PATH" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="wholeProject" />
-      </option>
-      <envs />
-      <method>
-        <option name="Make" value="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails Application">
-      <module name="" />
-      <setting name="vmparams" value="" />
-      <setting name="grailsparams" value="" />
-      <setting name="operation" value="run-app" />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-    </configuration>
     <configuration default="false" name="groovyblogs" type="GrailsRunConfigurationType" factoryName="Grails Application">
       <module name="groovyblogs" />
       <setting name="vmparams" value="" />
       <setting name="grailsparams" value="" />
       <setting name="operation" value="run-app" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="65205" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method>
         <option name="Make" value="true" />
@@ -621,13 +561,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="22" y="84" width="1248" height="717" extended-state="0" />
+    <frame x="198" y="23" width="1134" height="707" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
+      <window_info id="DBOutput" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" order="8" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="7" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3119266" order="0" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3108856" order="0" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32899868" order="1" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270548" order="8" />
@@ -637,16 +578,18 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
       <window_info id="Maven projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.375" order="8" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32646048" order="2" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37328768" order="8" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32534248" order="2" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="0" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="3" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989726" order="3" />
+      <window_info id="DBHelper" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" order="8" />
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="SVN Repositories" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32828283" order="8" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="0" />
+      <window_info id="Grails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32876712" order="8" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="EJB" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="4" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="5" />
@@ -661,7 +604,7 @@
     <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Increased cache time for thumbnails." />
+    <option name="LAST_COMMIT_MESSAGE" value="Migrated to Grails 1.0.3 and started work on JMS architecture." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -679,6 +622,9 @@
     <MESSAGE value="Removed dead logging code. Added hibernate cache settings. Updated version to 1.0.1" />
     <MESSAGE value="Made large thumbnail only show on mouseover" />
     <MESSAGE value="Increased cache time for thumbnails." />
+    <MESSAGE value="Fixes for the move to Grails 1.0.2" />
+    <MESSAGE value="Removed old copy of quartz plugin." />
+    <MESSAGE value="Migrated to Grails 1.0.3 and started work on JMS architecture." />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -719,119 +665,120 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/zipdistro.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/spring/resources.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="32" selection-start="1024" selection-end="1024" vertical-scroll-proportion="0.34586465">
+        <state line="10" column="0" selection-start="194" selection-end="194" vertical-scroll-proportion="0.2247191">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/EntriesController.groovy">
+    <entry file="file://$PROJECT_DIR$/web-app/WEB-INF/jetty-env.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="21" selection-start="177" selection-end="177" vertical-scroll-proportion="0.024896266">
+        <state line="11" column="29" selection-start="454" selection-end="454" vertical-scroll-proportion="0.26242545">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="94" selection-end="94" vertical-scroll-proportion="0.14328358">
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/Account.groovy">
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/css/thumbs.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/CacheableConfiguration.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="79" selection-start="2704" selection-end="2704" vertical-scroll-proportion="0.60294116">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/ThumbnailController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="25" selection-start="168" selection-end="168" vertical-scroll-proportion="0.02357564">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/BlogEntry.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/jobs/UpdateListsJob.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/AccountController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="24" selection-end="24" vertical-scroll-proportion="0.04411765">
+        <state line="119" column="47" selection-start="3639" selection-end="3639" vertical-scroll-proportion="0.4318182">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/jobs/UpdateIndexJob.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/services/ThumbnailQueueService.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="6" selection-start="93" selection-end="93" vertical-scroll-proportion="0.0882353">
+        <state line="38" column="64" selection-start="1159" selection-end="1159" vertical-scroll-proportion="0.752809">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/conf/DataSource.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="11" selection-start="186" selection-end="186" vertical-scroll-proportion="0.1764706">
+        <state line="25" column="0" selection-start="451" selection-end="1042" vertical-scroll-proportion="0.31460676">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/services/FeedService.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/Blog.groovy">
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="9" selection-start="5318" selection-end="5318" vertical-scroll-proportion="0.17391305">
+        <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/services/UrlQueueService.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="9" selection-start="752" selection-end="861" vertical-scroll-proportion="0.56179774">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/jobs/UpdateThumbsJob.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="6" selection-start="7" selection-end="7" vertical-scroll-proportion="0.022058824">
+        <state line="35" column="35" selection-start="1108" selection-end="1108" vertical-scroll-proportion="0.6300578">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/services/ThumbnailService.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="13" selection-start="208" selection-end="208" vertical-scroll-proportion="-1.2890173">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/jobs/UpdateFeedsJob.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="6" selection-start="7" selection-end="7" vertical-scroll-proportion="0.022058824">
+        <state line="23" column="31" selection-start="447" selection-end="447" vertical-scroll-proportion="0.5168539">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/entries/lists.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/services/FeedService.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/entries/recent.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="84" selection-start="1101" selection-end="1101" vertical-scroll-proportion="0.62761503">
+        <state line="308" column="13" selection-start="10858" selection-end="10858" vertical-scroll-proportion="0.51417005">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="22" selection-start="2317" selection-end="2317" vertical-scroll-proportion="0.4763705">
+        <state line="45" column="17" selection-start="1900" selection-end="1900" vertical-scroll-proportion="0.51445085">
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/main.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.9230769">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/_sidebar.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="24" selection-start="118" selection-end="118" vertical-scroll-proportion="0.071570575">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/images/contegix_logo.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
   </component>

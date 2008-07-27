@@ -26,12 +26,11 @@ class EntriesController {
 		return limitEntries
 		
 	}
-	
+    
 
-	
-	def recent = {
+    def recent = {
 			
-			def entries = cacheService.getFromCache("recentCache", 60, "recentList")
+			def entries // = cacheService.getFromCache("recentCache", 60, "recentList")
 			if (!entries) {
 				
 				def aWhileAgo = new Date().minus(7) // 7 days ago
@@ -50,7 +49,7 @@ class EntriesController {
 	
 	def popular = {
 
-			def entries = cacheService.getFromCache("popularCache", 60, "popularList")
+			def entries // = cacheService.getFromCache("popularCache", 60, "popularList")
 			if (!entries) {
 			
 				def aWhileAgo = new Date().minus(7) // 7 days ago
