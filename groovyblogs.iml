@@ -27,6 +27,7 @@
       <sourceFolder url="file://$MODULE_DIR$/grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/plugins/cacheable-0.1/grails-app/services" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/plugins/cacheable-0.1/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/plugins/jms-0.3/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/integration" isTestSource="true" />

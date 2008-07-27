@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+
+<Configure class="org.mortbay.jetty.webapp.WebAppContext">
+
+  <New id="domainDb" class="org.mortbay.jetty.plus.naming.Resource">
+    <Arg>jdbc/groovyblogs</Arg>
+    <Arg>
+     <New class="org.postgresql.ds.PGSimpleDataSource">
+		<Set name="user">glen</Set>
+		<Set name="password">password</Set>
+		<Set name="databaseName">groovyblogs</Set></New>
+    </Arg>
+   </New>
+
+
+</Configure>
+

@@ -21,7 +21,8 @@ class BlogEntry {
 	     title(size:0..255)
 	     description(size:0..4096)
 	     language(nullable:true)
-	}
+         link(unique: true)
+    }
 	
 	
 	def indexedFields() {

@@ -2,8 +2,8 @@
 	      			<div class="niceBoxHd">About</div>
 	      			<div class="niceBoxBody">
 						groovyblogs.org was developed by
-						<a href="http://blogs.bytecode.com.au/glen">Glen Smith</a>
-						as part of a 20 hour challenge. This site is running groovyblogs version
+						<a href="http://blogs.bytecode.com.au/glen">Glen Smith</a>.
+						Graciously hosted by <a href="http://www.contegix.com/">Contegix</a>. This site is running groovyblogs version
                         <g:meta name="app.version"/> on
                             Grails <g:meta name="app.grails.version"/>
 
@@ -102,8 +102,14 @@
 	      		
 
 	      		<div style="padding-left: 3em;">
-	      			<a href="http://www.grails.org/">
-	      				<img src="${createLinkTo(dir:'images',file:'grails_button.gif')}" alt="Powered By Grails"/>
-	      			</a>
-	      		</div>
+                      <p>
+                          <a href="http://www.grails.org/">
+                              <img src="${createLinkTo(dir: 'images', file: 'grails_button.gif')}" alt="Powered By Grails"/>
+                          </a>
+                      </p>
+                      <p>
+                          <a href="http://www.contegix.com/"><img src="${createLinkTo(dir: 'images', file: 'contegix_logo.jpg')}" width="145" height="41" border="0" alt="Hosted by Contegix"/></a>
+                      </p>
+
+                  </div>
 
