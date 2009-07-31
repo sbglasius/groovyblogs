@@ -1,15 +1,15 @@
 
 dataSource {
-	pooled = false // JNDI, baby. All the way...
+    pooled = false // JNDI, baby. All the way...
 }
 
 /*
-    // Old School version for fairies...
-	driverClassName = "org.postgresql.Driver"
-	url = "jdbc:postgresql://localhost/groovyblogs"
-	username = "glen"
-	password = "password"
-	dbCreate = "update"
+// Old School version for fairies...
+driverClassName = "org.postgresql.Driver"
+url = "jdbc:postgresql://localhost/groovyblogs"
+username = "glen"
+password = "password"
+dbCreate = "update"
 
 
  */
@@ -27,8 +27,14 @@ environments {
     development {
         dataSource {
             // check out /web-app/WEB-INF/jetty-env.xml for the details
+            //dbCreate = "update"
+            //jndiName = "java:comp/env/jdbc/groovyblogs"
             dbCreate = "update"
-            jndiName = "java:comp/env/jdbc/groovyblogs"
+            pooled = false
+            driverClassName = "org.postgresql.Driver"
+            url = "jdbc:postgresql://localhost/groovyblogs"
+            username = "glen"
+            password = "password"
         }
     }
     test {

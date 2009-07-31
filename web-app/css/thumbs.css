@@ -39,9 +39,9 @@
 #pic a.p1:hover .large {
 	border: 1px solid #000000;
 	display: block;
-	height: 373px;
+	height: 240px; /* 373px; */
 	left: 173px;
 	position: absolute;
 	top: -60px;
-	width: 504px;
+	width: 320px; /* 504px; */
 }		

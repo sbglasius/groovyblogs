@@ -5,11 +5,22 @@
 		<link rel="stylesheet" href="${createLinkTo(dir:'css',file:'groovyblogs.css')}"/>
 		<link rel="shortcut icon" href="${createLinkTo(file:'favicon.ico')}" />
 		<g:layoutHead />
-		<g:javascript library="application" />	
+		<g:javascript library="application" />
+
 		
 		<meta name="description" content="groovyblogs.org is a groovy and grails blog aggregator" />
 		<meta name="keywords" content="groovy,grails,blogs" />
 		<meta name="robots" content="index,follow" />
+
+                <script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-1038671-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
 					
 	</head>
 	<body>
@@ -19,23 +30,28 @@
 			
 			  <div id="tabs">
 			    <ul>
-			      <!-- <li class="${request.requestURI =~ /home/ ? 'current' : 'notcurrent'}"><a href="<g:createLinkTo dir=''/>" >home</a></li> -->
-			      <li id="${request.requestURI =~ /entries\/recent/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='entries' action='recent'/>">Just In</a></li>
-     			  <li id="${request.requestURI =~ /entries\/popular/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='entries' action='popular'/>">Popular</a></li>
-     			  <li id="${request.requestURI =~ /entries\/lists/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='entries' action='lists'/>">The Lists</a></li>
-     			  <li id="${request.requestURI =~ /account/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='account' action='edit'/>">My Blogs</a></li>
-     			  <g:if test="${session.account}">
-			      	<li id="${request.requestURI =~ /login/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='login' action='logout'/>">Logout</a></li>
-			      </g:if>
-			      <g:else>
-			      <li id="${request.requestURI =~ /login/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='login' action='login'/>">Login</a></li>
-			      </g:else>
-			      <g:if test="${request.requestURI =~ /search/}">
+			      <!-- <li class="${request.forwardURI =~ /home/ ? 'current' : 'notcurrent'}"><a href="<g:createLinkTo dir=''/>" >home</a></li> -->
+			      <li id="${request.forwardURI =~ /entries\/recent/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='entries' action='recent'/>">Just In</a></li>
+     			  <li id="${request.forwardURI =~ /entries\/popular/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='entries' action='popular'/>">Popular</a></li>
+     			  <li id="${request.forwardURI =~ /entries\/lists/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='entries' action='lists'/>">The Lists</a></li>
+     			  <!-- <li id="${request.forwardURI =~ /entries\/tweets/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='entries' action='tweets'/>">Tweets</a></li> -->
+				<jsec:hasRole name="admin">
+     			  <li id="${request.forwardURI =~ /blog\/list/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='blog' action='list'/>">All Blogs</a></li>
+				</jsec:hasRole>
+
+                          <li id="${request.forwardURI =~ /account/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='account' action='edit'/>">My Blogs</a></li>
+
+                          <jsec:user>
+			      	<li id="${request.forwardURI =~ /login/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='auth' action='signOut'/>">Logout</a></li>
+			  </jsec:user>
+
+                          <jsec:notUser>
+			      <li id="${request.forwardURI =~ /login/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='auth' action='login'/>">Login</a></li>
+			  </jsec:notUser>
+			      <g:if test="${request.forwardURI =~ /search/}">
 				      <li id="current"><a href="<g:createLink controller='search' action='search'/>">Search</a></li>
 			      </g:if>
-			      <g:if test="${request.requestURI =~ /blog\/show/}">
-				      <li id="current"><a href="<g:createLink controller='blog' action='list' id='params.id'/>">Blog Info</a></li>
-			      </g:if>
+
 			      
 			      
 			    </ul>
@@ -57,7 +73,7 @@
 	        	</div> 
 	      	</div> 
 	      	<div class="yui-b">
-	      	
+             
 	      		<g:render template="/sidebar"/>
 	      	
 	      	</div> 

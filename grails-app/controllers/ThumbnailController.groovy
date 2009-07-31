@@ -1,74 +1,35 @@
-import groovy.net.xmlrpc.*
+import net.sf.ehcache.Ehcache
 
 class ThumbnailController {
 	
-	CacheService cacheService
-	ThumbnailService thumbnailService
+    ThumbnailService thumbnailService
 
-	def index = {
-			redirect(action: show)
-	}
-
+    def index = {
+        redirect(action: show)
+    }
 
 	
-	private void writeImage(def response, byte[] b) {
+    private void writeImage(def response, String imgSize) {
 		
-		response.setContentType("image/jpeg")		 
-		response.setContentLength(b.length)
-		response.getOutputStream().write(b)
+		byte[] b = thumbnailService.getFile(params.id, imgSize)
+        response.setContentType("image/jpeg")
+        response.setContentLength(b.length)
+        response.getOutputStream().write(b)
 		
-	}
+    }
 	
-	def show = { 
-			
-			def id = params.id
-			
-	    	// grab thumb bytes from cache if possible
-			byte[] b = cacheService.getFromCache("thumbCache", 60*60, "small-" + id)
-			if (!b) {			
-				b = thumbnailService.getFile(id, true, false)
-				cacheService.putToCache("thumbCache", 60*60, "small-" + id, b)				
-			}
+    def show = {
 
-			writeImage(response, b)
+        writeImage(response, "small")
 		
-	}
+    }
 	
-	def showLarge = {
+    def showLarge = {
+
+        writeImage(response, "large")
 		
-		def id = params.id
-		
-    	// grab thumb bytes from cache if possible
-		byte[] b = cacheService.getFromCache("thumbCache", 60*60, "big-" + id)
-		if (!b) {			
-			b = thumbnailService.getFile(id, false, false)
-			cacheService.putToCache("thumbCache", 60*60, "big-" + id, b)				
-		}
-		
-		writeImage(response, b)
-		
-	}
-	
-	def preview = {
-	
-		def url = params.url
-		
-		def tempThumbsDir = grailsApplication.config.thumbnail.tmpdir
-		
-		def thumbnail = "${tempThumbsDir}/" + url.encodeAsTempFile() + ".png"
-		def thumbnailBig = "${tempThumbsDir}/" + url.encodeAsTempFile() + "-orig.png"
-		
-		def f = new File(thumbnail)
-		
-		if (!f.exists()) {
-			thumbnailService.writeFile(url, thumbnailBig, thumbnail)
-		}
-		
-		byte[] b = f.readBytes()
-		
-		writeImage(response, b)
-		
-	}
+    }
+
 	
 	
 }
