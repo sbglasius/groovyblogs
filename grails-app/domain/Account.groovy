@@ -21,5 +21,10 @@ class Account {
 	     status(nullable:true)
 	     role(nullable:true)
 	}
+
+    static mapping = {
+        userid index:'User_Id_Idx'
+    }
+
 	
 }	

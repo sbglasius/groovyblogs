@@ -1,18 +1,18 @@
 
 class UpdateListsJob {
 	
-	FeedService feedService
+    FeedService feedService
 	
-	// Update the lists every 15 minutes
-	def cronExpression = "15 0,15,30,45 * * * ?"
+    // Update the lists every 15 minutes
+    def cronExpression = "15 0,15,30,45 * * * ?"
 			
 
-	def execute() {	
+    def execute() {
 		
-		log.info("Starting scheduled lists check at: " + new Date())
+        log.info("Starting scheduled lists check at: " + new Date())
 	
-		feedService.updateLists()
+        feedService.updateLists()
 	    
-	    log.info("Finished scheduled lists check at: " + new Date())
-	}
+        log.info("Finished scheduled lists check at: " + new Date())
+    }
 }

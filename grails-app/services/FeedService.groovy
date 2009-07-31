@@ -3,19 +3,65 @@ import org.apache.commons.httpclient.methods.*
 
 import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
+
+import net.sf.ehcache.Ehcache
+import net.sf.ehcache.Element
+
 class FeedService {
 
-    //def log = LogFactory.getLog(this.class.name)
-
-    SearchService searchService
-    CacheService cacheService
+    Ehcache listCache
+    Ehcache pendingCache
+    Ehcache tweetCache
     ThumbnailService thumbnailService
-    UrlQueueService urlQueueService
+    TranslateService translateService
 
     boolean transactional = true
 
+
+
+    // Returns the HTML for the supplied URL
+    String getHtmlForUrl(url) {
+
+        log.info("Trying to fetch [$url]")
+
+        def client = new HttpClient()
+        def clientParams = client.getParams()
+        clientParams.setParameter(org.apache.commons.httpclient.params.HttpClientParams.HTTP_CONTENT_CHARSET, "UTF-8");
+
+        if (ConfigurationHolder.config.http.useproxy) {
+            def hostConfig = client.getHostConfiguration()
+            hostConfig.setProxy(ConfigurationHolder.config.http.host, ConfigurationHolder.config.http.port as int)
+            log.warn("Setting proxy to [" + ConfigurationHolder.config.http.host + "]")
+        }
+
+        if (ConfigurationHolder.config.http.useragent) {
+            clientParams.setParameter(org.apache.commons.httpclient.params.HttpClientParams.USER_AGENT,
+                ConfigurationHolder.config.http.useragent)
+        }
+
+        if (ConfigurationHolder.config.http.timeout) {
+
+            clientParams.setParameter(org.apache.commons.httpclient.params.HttpClientParams.SO_TIMEOUT,
+                ConfigurationHolder.config.http.timeout)
+        }
+
+        def mthd = new GetMethod(url)
+
+        def statusCode = client.executeMethod(mthd)
+        def responseBody = mthd.getResponseBody()
+        mthd.releaseConnection()
+
+        def urlStr = new String(responseBody)
+
+        log.debug("Fetched [$url] successfully")
+
+        return urlStr
+
+    }
+
+
     // takes html and returns a FeedInfo object
-    def getFeedInfoFromHtml(feedStr) {
+    def getFeedInfoFromHtml(feedStr, translate) {
 
         def sfi = new com.sun.syndication.io.SyndFeedInput()
         // def feedReader = new StringReader(feedStr)
@@ -28,8 +74,8 @@ class FeedService {
 
 
         def feedInfo = new FeedInfo(title: sf.title,
-                description: sf.description ? sf.description : "",
-                author: sf.author, type: sf.feedType)
+            description: sf.description ? sf.description : "",
+            author: sf.author, type: sf.feedType)
 
         for (e in sf.entries) {
             String title = e.title
@@ -51,9 +97,9 @@ class FeedService {
             }
 
             def feedEntry = new FeedEntry(title: title, link: link, publishedDate: publishedDate,
-                    description: description ? description : "",
-                    summary: summary ? summary : "",
-                    author: e.author ? e.author : "")
+                description: description ? description : "",
+                summary: summary ? summary : "",
+                author: e.author ? e.author : "")
 
             //TODO ignore stuff older than X days
             def trimEntriesOlderThanXdays = ConfigurationHolder.config.feeds.ignoreFeedEntriesOlderThan
@@ -61,13 +107,15 @@ class FeedService {
                 def trimTime = new Date().minus(trimEntriesOlderThanXdays) // X days ago
                 if (publishedDate && publishedDate < trimTime) {
                     log.debug("Skipping old entry: [$title] from [$publishedDate]")
-                    feedEntry = null // too old to include    
+                    feedEntry = null // too old to include
                 }
             }
 
 
 
             if (feedEntry) {
+                if (translate)
+                feedEntry.language = translateService.getLanguage(summary)
                 log.debug("Found entry with title [$title] and link [$link]")
                 feedInfo.entries.add(feedEntry)
             }
@@ -78,54 +126,17 @@ class FeedService {
 
     }
 
+
+
     // takes a URL and returns ROME feed info
-    def getFeedInfo(feedUrlStr) {
+    def getFeedInfo(feedUrlStr, boolean translate = true) {
 
         def feedStr = getHtmlForUrl(feedUrlStr)
-        return getFeedInfoFromHtml(feedStr)
+        return getFeedInfoFromHtml(feedStr, translate)
 
 
     }
 
-    // Returns the HTML for the supplied URL
-    String getHtmlForUrl(url) {
-
-        log.info("Trying to fetch [$url]")
-
-        def client = new HttpClient()
-        def clientParams = client.getParams()
-        clientParams.setParameter(org.apache.commons.httpclient.params.HttpClientParams.HTTP_CONTENT_CHARSET, "UTF-8");
-
-        if (ConfigurationHolder.config.http.useproxy) {
-            def hostConfig = client.getHostConfiguration()
-            hostConfig.setProxy(ConfigurationHolder.config.http.host, ConfigurationHolder.config.http.port)
-            log.warn("Setting proxy to [" + ConfigurationHolder.config.http.host + "]")
-        }
-
-        if (ConfigurationHolder.config.http.useragent) {
-            clientParams.setParameter(org.apache.commons.httpclient.params.HttpClientParams.USER_AGENT,
-                    ConfigurationHolder.config.http.useragent)
-        }
-
-        if (ConfigurationHolder.config.http.timeout) {
-
-            clientParams.setParameter(org.apache.commons.httpclient.params.HttpClientParams.SO_TIMEOUT,
-                    ConfigurationHolder.config.http.timeout)
-        }
-
-        def mthd = new GetMethod(url)
-
-        def statusCode = client.executeMethod(mthd)
-        def responseBody = mthd.getResponseBody()
-        mthd.releaseConnection()
-
-        def urlStr = new String(responseBody)
-
-        log.debug("Fetched [$url] successfully")
-
-        return urlStr
-
-    }
 
     void updateFeed(Blog blog, FeedInfo fi) {
 
@@ -136,7 +147,7 @@ class FeedService {
 
             log.debug("Looking for $entry.link")
             //def existing = existingEntries.find { entry.link == it.link }
-            def existing = BlogEntry.findByLink(entry.link)
+            def existing = BlogEntry.findByHash(entry.description.encodeAsMD5()) || BlogEntry.findByLink(entry.link)
             log.debug("Existing? " + existing)
             ///if (!BlogEntry.findByLink(entry.link)) {
             if (!existing) {
@@ -144,44 +155,47 @@ class FeedService {
                 //log.debug("Creating entry with title [$entry.title] and link [$entry.link]")
 
                 BlogEntry be = new BlogEntry(title: entry.title, link: entry.link,
-                        description: entry.description,
-                        summary: entry.summary, language: entry.language)
+                    description: entry.description,
+                    summary: entry.summary, language: entry.language,
+                    hash: entry.summary.encodeAsMD5())
 
 
                 if (be.isGroovyRelated()) {
                     //log.info("Added new entry: $be.title")
 
-                        try {
-                            blog.addToBlogEntries(be)
-                            if (!be.validate()) {
-                                log.warn("Validation failed updating blog entry [$be.title]")
-                                be.errors.allErrors.each {
-                                    log.warn(it)
-                                }
-                            } else{
-                                be.save()
-                                blog.save()
+                    try {
+
+
+                        blog.addToBlogEntries(be)
+                        if (!be.validate()) {
+                            log.warn("Validation failed updating blog entry [$be.title]")
+                            be.errors.allErrors.each {
+                                log.warn(it)
                             }
-                            
-                        } catch (Throwable t) {
-                            t.printStackTrace()
+                        } else {
+                            be.save()
+                            blog.save()
+                            try {
+
+                                if (ConfigurationHolder.config.thumbnail.enabled) {
+                                    // be.thumbnail = thumbnailService.fetchThumbnail(be.link)
+                                    pendingCache.put( new Element(be.link, be.id))
+                                }
+                            } catch (Exception e) {
+                                log.debug "Error during thumbnail collection", e
+
+                            }
                         }
 
-                        // write out a thumbnail image if we need to...
-                        // thumbnailService.getFile("${be.id}", true, true)
-
-
+                    } catch (Throwable t) {
+                        t.printStackTrace()
+                    }
 
                     log.debug("Saved entry with title [$be.title]")
 
-                    // and make it searchable
-                    searchService.index(be)
 
-                    if (ConfigurationHolder.config.mq.enabled) {
-                        log.debug "Putting request on Thumbnail Queue for ${be.link} (${be.id}) ($thumbnailService)"
-                        thumbnailService.getFile("${be.id}", true, true)
-                        log.debug "Back from putting request on Queue"
-                    }
+
+
                 } else {
                     log.debug("Ignoring non-groovy blog entry: $be.title")
                 }
@@ -211,7 +225,7 @@ class FeedService {
             fi = getFeedInfo(blog.feedUrl)
         } catch (Exception e) {
             log.warn("Could not parse feed [$blog.feedUrl]", e)
-            blog.status = "Error parsing [$blog.feedUrl] " + e.message
+            blog.lastError = "Error parsing [$blog.feedUrl] " + e.message
         }
         updateFeed(blog, fi)
 
@@ -220,14 +234,14 @@ class FeedService {
 
     void updateFeedFromHtml(String blogId, String feedHtml) {
 
-       Blog blog = Blog.get(blogId)
-       log.info("Now updating: [$blog.title]")
+        Blog blog = Blog.get(blogId)
+        log.info("Now updating: [$blog.title]")
         FeedInfo fi
         try {
             fi = getFeedInfoFromHtml(feedHtml)
         } catch (Exception e) {
             log.warn("Could not parse feed [$blog.feedUrl]", e)
-            blog.status = "Error parsing [$blog.feedUrl] " + e.message
+            blog.lastError = "Error parsing [$blog.feedUrl] " + e.message
         }
         updateFeed(blog, fi)
 
@@ -236,27 +250,22 @@ class FeedService {
     void updateFeeds() {
 
         log.info("FeedService starting polled update")
-        def feedsToUpdate = Blog.findAllByNextPollLessThan(new Date())
+        def feedsToUpdate = Blog.findAllByStatusAndNextPollLessThan("ACTIVE", new Date())
         log.info("${feedsToUpdate.size()} to update")
 
-
-        if (ConfigurationHolder.config.mq.enabled) {
-            feedsToUpdate.each {blog ->
-                urlQueueService.sendRequest(blog)
-                long nextPollTime = new Date().getTime() + blog.pollFrequency * 60 * 60 * 1000
-                blog.nextPoll = new Date(nextPollTime)
-            }
-        } else {
-            // Limit to 5 updated blogs per minute. Could probably up this significantly
-            // by going multithreaded...
-            if (feedsToUpdate.size() > ConfigurationHolder.config.http.maxpollsperminute) {
-                log.warn("${feedsToUpdate.size()} exceeds max for this minute. Limiting update to ${ConfigurationHolder.config.http.maxpollsperminute}.")
-                feedsToUpdate = feedsToUpdate[0..ConfigurationHolder.config.http.maxpollsperminute - 1]
-            }
-            feedsToUpdate.each {blog ->
-                updateFeed(blog)
-            }
+        // Limit to 5 updated blogs per minute. Could probably up this significantly
+        // by going multithreaded...
+        if (feedsToUpdate.size() > ConfigurationHolder.config.http.maxpollsperminute) {
+            log.warn("${feedsToUpdate.size()} exceeds max for this minute. Limiting update to ${ConfigurationHolder.config.http.maxpollsperminute}.")
+            feedsToUpdate = feedsToUpdate[0..ConfigurationHolder.config.http.maxpollsperminute - 1]
         }
+
+        feedsToUpdate.each {blog ->
+            updateFeed(blog)
+        }
+
+
+
         log.info("FeedService finished polled update")
     }
 
@@ -268,7 +277,7 @@ class FeedService {
         ConfigurationHolder.config.lists.each {name, url ->
 
             log.info("Updating list [$name] from [$url]")
-            def feed = getFeedInfo(url)
+            def feed = getFeedInfo(url, false)
 
             Blog listBlog = new Blog(title: feed.title)
 
@@ -300,9 +309,9 @@ class FeedService {
             }
         }
 
-        log.debug("Putting to cache: " + allEntries.size())
+        log.debug("Putting to list cache: " + allEntries.size())
 
-        cacheService.putToCache("listCache", 60 * 60, "listEntries", allEntries)
+        listCache.put(new Element("listEntries", allEntries))
 
         return allEntries
 
@@ -310,11 +319,46 @@ class FeedService {
 
     def getCachedListEntries() {
 
-        def listEntries = cacheService.getFromCache("listCache", 60 * 60, "listEntries")
+        def listEntries = listCache.get("listEntries")?.value
         if (!listEntries) {
             listEntries = updateLists()
         }
         return listEntries
+
+    }
+
+
+
+    def updateTweets() {
+
+
+
+        def tweetFeed = getFeedInfo(ConfigurationHolder.config.tweets.url, false)
+
+        def allEntries = tweetFeed.entries.collect { entry ->
+            // entry.description = entry.description.replaceFirst("[^:]+:\\s*", "")
+            entry
+        }
+
+
+        log.debug("Putting to tweet cache: " + allEntries.size())
+
+        tweetCache.put(new Element("tweetEntries", allEntries))
+
+        return allEntries
+
+    }
+
+
+
+    def getCachedTweetEntries() {
+
+        def tweetEntries = tweetCache.get("tweetEntries")?.value
+        if (!tweetEntries) {
+            tweetEntries = updateTweets()
+        }
+        return tweetEntries
+
 
     }
 
