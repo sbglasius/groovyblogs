@@ -175,16 +175,19 @@ class FeedService {
                         } else {
                             be.save()
                             blog.save()
+							
                             try {
 
                                 if (ConfigurationHolder.config.thumbnail.enabled) {
                                     // be.thumbnail = thumbnailService.fetchThumbnail(be.link)
+									log.debug "Adding to pending thumbs cache: ${be?.link}"
                                     pendingCache.put( new Element(be.link, be.id))
                                 }
                             } catch (Exception e) {
                                 log.debug "Error during thumbnail collection", e
 
                             }
+							
                         }
 
                     } catch (Throwable t) {

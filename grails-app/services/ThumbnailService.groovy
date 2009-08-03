@@ -81,14 +81,7 @@ public class ThumbnailService {
 
     }
 
-    /** Requires the ImageTools plugin
-    byte[] scale2(byte[] srcFile, int destWidth, int destHeight) throws IOException {
-        def imageTool = new ImageTool()
-        imageTool.load(srcFile)
-        imageTool.thumbnail(destWidth)
-        return imageTool.getBytes("JPEG")
-    }
-    */
+  
 
     // image scaling stuff from http://www.velocityreviews.com/forums/t148931-how-to-resize-a-jpg-image-file.html
     byte[] scale(byte[] srcFile, int destWidth, int destHeight) throws IOException {
@@ -126,22 +119,17 @@ public class ThumbnailService {
         //log.debug entry.dump()
         def image
         try {
-            //if (!entry.thumbnail || entry.thumbnail.size() < 100) { // Image is too small, corrupted...
-                // entry.thumbnail = fetchThumbnail(entry.link)
+
                 pendingCache.put(new Element(entry.link, entry.id))
                 if (!noThumbAvailablePic) {
                     def noThumbUrl = this.class.getResource("/resources/no-thumb.jpg")
                     log.debug "The noThumb image is ${noThumbUrl}"
                     noThumbAvailablePic = new File(noThumbUrl.toURI()).readBytes()
 
-                    //def noThumbAvailablePic = new File(noThumbUrl.toURI()).readBytes()
-                    //entry.thumbnail = new File(noThumbUrl.toURI()).readBytes()
+                    
                 }
-                image = noThumbAvailablePic
-                // entry.thumbnail = noThumbAvailablePic
-            //}
-            //log.debug "Thumb is: ${entry.thumbnail}"
-            // all images stored as 640x480, resize them here
+            image = noThumbAvailablePic
+                
             switch(thumbSize) {
                 case "small":
                     image = scale(image, 170, 124)
@@ -166,91 +154,5 @@ public class ThumbnailService {
 
 
 
-    /*
-        Old approach
-
-        public void writeFile(String url, String thumbpathBig, String thumbpath) {
-
-        log.warn("Staring download on $url ...")
-
-        def server = new XMLRPCServerProxy(ConfigurationHolder.config.thumbnail.serviceurl)
-
-        Thread.start {
-            def list = server.getThumbnail(url)
-
-            if (list[0].length) {
-                FileOutputStream big = new FileOutputStream(thumbpathBig)
-                big << list[0]
-            }
-
-            if (list[1].length) {
-                FileOutputStream small = new FileOutputStream(thumbpath)
-                small << list[1]
-            }
-        }
-
-    }
-
-    public byte[] getFile(String id, boolean smallSize, boolean writeThumb) {
-
-        if (!ConfigurationHolder.config.thumbnail.enabled) {
-            log.debug("Thumbnail service disabled")
-            return new byte[0]
-        }
-
-        log.info "Fetching thumbnail for id $id"
-
-
-        byte[] t = cacheService.getFromCache("thumbFileCache", 3600, "${id}-${smallSize}")
-        if (t && t.length > 0) {
-            log.debug "Found file in the cache..."
-            return t
-        }
-
-        BlogEntry entry = BlogEntry.get(id)
-
-        def thumbsDir = ConfigurationHolder.config.thumbnail.dir
-        def thumbsPath = "${thumbsDir}/${entry.toThumbnailPath()}"
-
-        if (entry && writeThumb && !(new File(thumbsPath).exists())) {
-            log.debug "Creating new Thumbnail dir: ${thumbsPath}"
-            new File(thumbsPath).mkdirs()
-        }
-
-        def thumbnail = "${thumbsPath}${entry.id}.jpg"
-        def thumbnailBig = "${thumbsPath}${entry.id}-orig.jpg"
-
-        log.info "file path is $thumbnailBig"
-
-        if (!(new File(thumbnail).exists())) {
-
-            if (writeThumb) {
-                writeFile(entry.link, thumbnailBig, thumbnail)
-            } else {
-                // I don't have it, and can't fetch it, but I've got to return something
-                return new byte[0]
-            }
-
-        } else {
-            log.info "Already got that image in the filesystem..."
-        }
-
-
-        File file = smallSize ? new File(thumbnail) : new File(thumbnailBig)
-        if (file.exists()) {
-            byte[] b = file.readBytes()
-
-            if (b.length) {
-                // put it in the cache for next time...
-                cacheService.putToCache("thumbFileCache", 3600, "${id}-${smallSize}", b)
-            }
-
-            return b
-        } else {
-            return new byte[0]
-        }
-
-    }
-    */
-
+  
 }

@@ -5,7 +5,7 @@ class EntriesService {
 
     boolean transactional = false
 
-    def entriesCache
+    Ehcache entriesCache
 
     // suppress when more than three entries from same author
     public static def limitEntries(entries) {
@@ -48,6 +48,8 @@ class EntriesService {
 
         def entries = entriesCache.get("recentList")?.value
         if (!entries) {
+	
+			log.debug "Recent cache empty. Reading from db."
 
             def aWhileAgo = new Date().minus(7) // 7 days ago
 
@@ -55,7 +57,9 @@ class EntriesService {
                 aWhileAgo, [ sort: 'dateAdded', order: "desc" ] )
             entries = entries.findAll { entry -> entry.isGroovyRelated() }
             entriesCache.put(new Element("recentList", entries))
-        }
+        } else {
+				log.debug "Reading recent entries from cache"
+		}
         return entries
 
     }
@@ -65,6 +69,8 @@ class EntriesService {
         def entries = entriesCache.get("popularList")?.value
         if (!entries) {
 
+			log.debug "Popular cache empty. Reading from db."
+			
             def aWhileAgo = new Date().minus(7) // 7 days ago
 
             entries = BlogEntry.findAllByDateAddedGreaterThanAndHitCountGreaterThan(
@@ -72,7 +78,9 @@ class EntriesService {
             entries = entries.findAll { entry -> entry.isGroovyRelated() }
 
             entriesCache.put(new Element("popularList", entries))
-        }
+        } else {
+			log.debug "Reading popular entries from cache"
+		}
         return entries
 
     }
