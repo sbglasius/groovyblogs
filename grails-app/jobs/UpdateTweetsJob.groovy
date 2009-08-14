@@ -2,6 +2,8 @@
 class UpdateTweetsJob {
 	
     FeedService feedService
+
+    def concurrent = false
 	
     // Update the tweets every 15 minutes
     def cronExpression = "15 0,15,30,45 * * * ?"

@@ -18,7 +18,7 @@ import net.sf.ehcache.Element
 
 class ChartController {
 
-    Ehcache chartCache
+    def chartCache
 		
     def index = { redirect(action:siteStats, params:params) }
     

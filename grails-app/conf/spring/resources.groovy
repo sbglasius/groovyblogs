@@ -2,15 +2,27 @@ import org.springframework.cache.ehcache.EhCacheFactoryBean
 
 beans = {
 
+    memCache(MemcacheFactoryBean) {
+        host = "localhost"
+        port = 11211
+    }
+
+    thumbCache(MemcacheMap) {
+        client = memCache
+        timeToLive = 60*60*24*14 // 14 days
+    }
+
     feedCache(EhCacheFactoryBean) {
         timeToLive = 60
     }
 
+    /*
     thumbCache(EhCacheFactoryBean) {
         eternal = true
 		overflowToDisk = false
 		maxElementsInMemory = 1000
     }
+    */
 
     pendingCache(EhCacheFactoryBean) {
         timeToLive = 90
@@ -24,7 +36,8 @@ beans = {
         timeToLive = 900
     }
 
-    chartCache(EhCacheFactoryBean) {
+    chartCache(MemcacheMap) {
+        client = memCache
         timeToLive = 3600
     }
 
@@ -32,11 +45,13 @@ beans = {
         timeToLive = 60
     }
 
-    recentBlogsCache(EhCacheFactoryBean) {
+    recentBlogsCache(MemcacheMap) {
+        client = memCache
         timeToLive = 900
     }
 
-    recentStatsCache(EhCacheFactoryBean) {
+    recentStatsCache(MemcacheMap) {
+        client = memCache
         timeToLive = 3600
     }
 

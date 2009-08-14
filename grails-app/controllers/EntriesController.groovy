@@ -6,7 +6,7 @@ class EntriesController {
     FeedService feedService
     EntriesService entriesService
     
-    Ehcache entriesCache
+    def entriesCache
 	
     def index = { redirect(action:'recent',params:params) }
 
