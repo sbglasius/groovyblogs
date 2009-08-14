@@ -5,7 +5,7 @@ class EntriesService {
 
     boolean transactional = false
 
-    Ehcache entriesCache
+    def entriesCache
 
     // suppress when more than three entries from same author
     public static def limitEntries(entries) {

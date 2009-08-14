@@ -9,9 +9,9 @@ import net.sf.ehcache.Element
 
 class FeedService {
 
-    Ehcache listCache
-    Ehcache pendingCache
-    Ehcache tweetCache
+    def listCache
+    def pendingCache
+    def tweetCache
     ThumbnailService thumbnailService
     TranslateService translateService
 
@@ -115,7 +115,7 @@ class FeedService {
 
             if (feedEntry) {
                 if (translate)
-                feedEntry.language = translateService.getLanguage(summary)
+                feedEntry.language = translateService.getLanguage(description)
                 log.debug("Found entry with title [$title] and link [$link]")
                 feedInfo.entries.add(feedEntry)
             }
@@ -180,8 +180,8 @@ class FeedService {
 
                                 if (ConfigurationHolder.config.thumbnail.enabled) {
                                     // be.thumbnail = thumbnailService.fetchThumbnail(be.link)
-									log.debug "Adding to pending thumbs cache: ${be?.link}"
-                                    pendingCache.put( new Element(be.link, be.id))
+									// log.debug "Adding to pending thumbs cache: ${be?.link}"
+                                    //pendingCache.put( new Element(be.link, be.id))
                                 }
                             } catch (Exception e) {
                                 log.debug "Error during thumbnail collection", e

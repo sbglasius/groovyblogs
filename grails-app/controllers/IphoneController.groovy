@@ -5,6 +5,8 @@ class IphoneController {
 
     EntriesService entriesService
 
+    def index = { redirect(action:'recent',params:params) }
+
     // suppress when more than three entries from same author
     public static def limitEntries(entries) {
 

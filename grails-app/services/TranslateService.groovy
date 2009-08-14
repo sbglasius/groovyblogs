@@ -9,8 +9,8 @@ class TranslateService {
 
     def getLanguage(String text) {
 
-        if (text.size() > 40) {
-            text = text[0..<40]
+        if (text.size() > 200) {
+            text = text[0..<200]
         }
 
         String url = ConfigurationHolder.config.translate.langUrl +

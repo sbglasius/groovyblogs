@@ -20,10 +20,11 @@
                     </div>
                 </iphone:textbox>
 
-
+				<!--
                 <g:link controller="entries" action="jump" id="${entry.id}">
                     <img alt="no thumb" src="${g.createLink(controller: 'thumbnail', action: 'show', id: entry.id)}" style="float: left;"/>
                 </g:link>
+				-->
 
                 <g:summariseEntry description="${entry.description}"/><br/><br/>
 

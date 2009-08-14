@@ -4,8 +4,8 @@ import net.sf.ehcache.Element
 
 class BlogTagLib {
 
-    Ehcache recentBlogsCache
-    Ehcache recentStatsCache
+    def recentBlogsCache
+    def recentStatsCache
 
     def summariseEntry = { attrs ->
 

@@ -18,7 +18,7 @@ import java.io.ByteArrayInputStream
  */
 public class ThumbnailService {
 
-    Ehcache thumbCache
+    def thumbCache
     Ehcache pendingCache
     byte[] noThumbAvailablePic
 
@@ -32,10 +32,11 @@ public class ThumbnailService {
         def largeCacheEntry = "${id}-large".toString()
         thumbCache.put(new Element(largeCacheEntry, large)) 
         
+		/*
         byte[] iphone = fetchThumbnail(url, "small")
         def iphoneCacheEntry = "${id}-iphone".toString()
         thumbCache.put(new Element(iphoneCacheEntry, iphone))
-
+		*/
         
 
     }
@@ -110,7 +111,7 @@ public class ThumbnailService {
 
         def cacheEntry = "${id}-${thumbSize}".toString()
         byte[] t = thumbCache.get(cacheEntry)?.value
-        if (t && t.length > 0) {
+        if (t && t.length > 10) {  // Could be "Bad Hash"
             log.debug "Found file in the cache..."
             return t
         }

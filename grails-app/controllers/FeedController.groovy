@@ -5,7 +5,7 @@ import net.sf.ehcache.Element
 
 class FeedController {
 
-    Ehcache feedCache
+    def feedCache
 
     def supportedFormats = [ "rss_0.90", "rss_0.91", "rss_0.92", "rss_0.93", "rss_0.94", "rss_1.0", "rss_2.0", "atom_0.3", "atom_1.0"]
 

@@ -2,9 +2,11 @@
 class UpdateListsJob {
 	
     FeedService feedService
+
+    def concurrent = false
 	
     // Update the lists every 15 minutes
-    def cronExpression = "15 0,15,30,45 * * * ?"
+    def cronExpression = "0 0,15,30,45 * * * ?"
 			
 
     def execute() {
