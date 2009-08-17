@@ -49,13 +49,13 @@ class AccountController  {
 
     def signup = {
         def account = new Account()
-        account.properties = params
+        account.properties['userId', 'password', 'email'] = params
         return ['account':account]
     }
 
     def register = {
         def account = new Account()
-        account.properties = params
+        account.properties['userId', 'password', 'email'] = params
         account.registered = new Date()
         account.status = "active"
         account.password = params.password.encodeAsSHA1Bytes().encodeBase64()
@@ -98,7 +98,7 @@ class AccountController  {
 
 
             def blog = new Blog()
-            blog.properties = params
+            blog.properties['feedUrl'] = params
             def feedInfo = feedService.getFeedInfo(params.feedUrl)
 
             blog.title = feedInfo.title ? feedInfo.title : ""

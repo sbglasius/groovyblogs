@@ -14,6 +14,7 @@ class FeedService {
     def tweetCache
     ThumbnailService thumbnailService
     TranslateService translateService
+	TwitterService twitterService
 
     boolean transactional = true
 
@@ -177,6 +178,8 @@ class FeedService {
                             blog.save()
 							
                             try {
+	
+								twitterService.sendTweet("${be.title} -- ${be.link} -- ${blog.title}")
 
                                 if (ConfigurationHolder.config.thumbnail.enabled) {
                                     // be.thumbnail = thumbnailService.fetchThumbnail(be.link)
