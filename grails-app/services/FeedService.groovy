@@ -179,7 +179,9 @@ class FeedService {
 							
                             try {
 	
-								twitterService.sendTweet("${be.title} -- ${be.link} -- ${blog.title}")
+								if (ConfigurationHolder.config.twitter.enabled) {
+									twitterService.sendTweet("${be.title} -- ${be.link} -- ${blog.title}")
+								}
 
                                 if (ConfigurationHolder.config.thumbnail.enabled) {
                                     // be.thumbnail = thumbnailService.fetchThumbnail(be.link)
