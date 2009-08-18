@@ -49,13 +49,13 @@ class AccountController  {
 
     def signup = {
         def account = new Account()
-        account.properties['userId', 'password', 'email'] = params
+        account.properties['userid', 'password', 'email'] = params
         return ['account':account]
     }
 
     def register = {
         def account = new Account()
-        account.properties['userId', 'password', 'email'] = params
+        account.properties['userid', 'password', 'email'] = params
         account.registered = new Date()
         account.status = "active"
         account.password = params.password.encodeAsSHA1Bytes().encodeBase64()
