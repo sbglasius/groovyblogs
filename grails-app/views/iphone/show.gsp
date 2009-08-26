@@ -25,12 +25,14 @@
                     <img alt="no thumb" src="${g.createLink(controller: 'thumbnail', action: 'show', id: entry.id)}" style="float: left;"/>
                 </g:link>
 				-->
+				<div style="padding: 5px;">
+ 	               <g:summariseEntry description="${entry.description}"/><br/><br/>
 
-                <g:summariseEntry description="${entry.description}"/><br/><br/>
+	                <g:link controller="entries" action="jump" id="${entry.id}" style="color: gray;">
+	                    Visit &raquo;
+	                </g:link>
 
-                <g:link controller="entries" action="jump" id="${entry.id}">
-                    Visit &raquo;
-                </g:link>
+				</div>
 
             </iphone:section>
 

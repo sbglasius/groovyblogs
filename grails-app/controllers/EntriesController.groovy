@@ -15,7 +15,7 @@ class EntriesController {
         def entries = entriesService.getRecentEntries()			
 			
         return [
-            entries: entriesService.limitEntries(entries),
+            entries: entries, // entriesService.limitEntries(entries),
             pageTitle : 'Recent Entries (Last 7 Days)',
             thumbnails: grailsApplication.config.thumbnail.enabled
         ]

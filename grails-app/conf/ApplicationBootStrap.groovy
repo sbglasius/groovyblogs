@@ -24,18 +24,7 @@ class ApplicationBootStrap {
      }
 
     def createConfigurationIfRequired() {
-        def defaultProps = [
-            'mail.host' : 'localhost',
-            'mail.from' : 'root@localhost'
-        ]
-        defaultProps.each { key, value ->
-            def setting = Setting.findByName(key)
-            if (!setting) {
-                println "Setting default property for: ${key}"
-                new Setting(name: key, value: value).save()
-            }
-
-        }
+        
 
     }
 
