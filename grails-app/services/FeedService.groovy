@@ -148,7 +148,7 @@ class FeedService {
 
             log.debug("Looking for $entry.link")
             //def existing = existingEntries.find { entry.link == it.link }
-            def existing = BlogEntry.findByHash(entry.description.encodeAsMD5()) || BlogEntry.findByLink(entry.link)
+            def existing = BlogEntry.findByHash(entry.description.encodeAsMD5().toString()) || BlogEntry.findByLink(entry.link)
             log.debug("Existing? " + existing)
             ///if (!BlogEntry.findByLink(entry.link)) {
             if (!existing) {
@@ -338,8 +338,6 @@ class FeedService {
 
 
     def updateTweets() {
-
-
 
         def tweetFeed = getFeedInfo(ConfigurationHolder.config.tweets.url, false)
 

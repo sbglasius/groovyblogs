@@ -29,6 +29,11 @@
           <img src="${createLinkTo(dir:'images',file:'feed-icon-16x16.jpg')}" alt="RSS"/>
           RSS </a>
       </li>
+	<li>
+        <a href="http://twitter.com/groovyblogs" class="feedLink">
+          <img src="${createLinkTo(dir:'images',file:'twitter-icon-16x16.png')}" alt="Twitter"/>
+          Twitter </a>
+      </li>
     </ul>
     <g:feedburner/>
   </div>

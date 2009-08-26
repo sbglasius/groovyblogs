@@ -14,7 +14,7 @@
 // from services: ConfigurationHolder.config.my.custom.data
 // import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
-grails.config.locations = [ "classpath:groovyblogs-config.properties" ]
+grails.config.locations = [ "file:/opt/groovyblogs/groovyblogs-config.properties" ]
 
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 
