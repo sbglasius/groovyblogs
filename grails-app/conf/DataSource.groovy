@@ -49,7 +49,7 @@ environments {
     production {
         dataSource {
             dbCreate = "update"
-            jndiName = "jdbc/groovyblogs"
+            jndiName = "java:comp/env/jdbc/groovyblogs"
         }
     }
 }
