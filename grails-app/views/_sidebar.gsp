@@ -3,12 +3,24 @@
   <div class="niceBoxBody">
     groovyblogs.org was developed by
     <a href="http://blogs.bytecode.com.au/glen">Glen Smith</a>.
-    <!--
-                    Graciously hosted by <a href="http://www.contegix.com/">Contegix</a>.
-    -->
     This site is running groovyblogs version
     <g:meta name="app.version"/> on
     Grails <g:meta name="app.grails.version"/>
+
+  </div>
+
+</div>
+
+<div class="niceBox">
+  <div class="niceBoxHd">News</div>
+  <div class="niceBoxBody">
+    We are now available on <a href="http://www.twitter.com/groovyblogs">twitter</a> and
+	via the <a href="<g:createLink controller='iphone'/>">iphone</a>. 
+	Now hosting reliably thanks to:
+	
+	<a href="http://www.contegix.com/">
+		<img src="${createLinkTo(dir:'images',file:'contegix_logo_tag.jpg')}" alt="Contegix" style="margin: 12px;"/>
+	</a>
 
   </div>
 

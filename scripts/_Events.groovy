@@ -14,7 +14,7 @@ if (Environment.current == Environment.PRODUCTION) {
                 'description'('The JNDI Database resource for groovyblogs')
                 'res-ref-name'('jdbc/groovyblogs')
                 'res-type'('javax.sql.DataSource')
-                'res-auth'('Application')
+                'res-auth'('Container')
             }
         }
     
