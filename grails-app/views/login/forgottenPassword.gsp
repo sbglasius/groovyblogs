@@ -10,15 +10,10 @@
            <h1>Forgotten Password</h1>
            
            
-           <p>
+           <p style="margin: 8px;">
            If you've fogotten your password, we can generate a new one for you
            and email it to the address that you registered with us originally.
            All we need to get started is your groovyblogs.org user id.
-           </p>
-           <p>
-           (PS. If you've forgotten your user id, you might want to look it
-           up in your email archives. We emailed it to you in a message
-           from groovyblogs.org)
            </p>
  
            <g:form action="forgottenPassword" method="post" >
@@ -27,7 +22,7 @@
 
                        
                        
-                                  <tr class='prop'><td valign='top' class='name'><label for='userid'>Userid:</label></td><td valign='top' class='value ${hasErrors(bean:account,field:'userid','errors')}'><input type='text' name='userid' value='${account?.userid}' /></td></tr>
+                                  <tr class='prop'><td valign='top' class='name'><label for='userid'>User Id: </label></td><td valign='top' class='value ${hasErrors(bean:account,field:'userid','errors')}'><input type='text' name='userid' value='${account?.userid}' /></td></tr>
                         
                </table>
                </div>

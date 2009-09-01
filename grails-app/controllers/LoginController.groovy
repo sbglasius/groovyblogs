@@ -39,7 +39,7 @@ class LoginController {
                     genPw += PW_POOL[new Random().nextInt(PW_POOL.size() -1)]
 
                 }
-                account.password = genPw..encodeAsSHA1Bytes().encodeBase64()
+                account.password = genPw.encodeAsSHA1Bytes().encodeBase64()
                 def msg = """
 		        	<h1>groovyblogs.org Password Reset</h1>
 		        	<p>
@@ -58,7 +58,7 @@ class LoginController {
                     body msg
                 }
                 flash.message = "A new password has been generated and emailed to your account"
-                redirect(controller: 'login')
+                redirect(controller: 'entries')
             } else {
                 flash.message = "Could not locate your account."
             }
