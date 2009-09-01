@@ -61,7 +61,11 @@ class AccountController  {
         account.password = params.password.encodeAsSHA1Bytes().encodeBase64()
 
         if(account.save()) {
-            session.account = account
+            
+			def authToken = new UsernamePasswordToken(params.userid, params.password)
+
+	        this.jsecSecurityManager.login(authToken)
+
             redirect(action:'edit')
             //render(view: 'addfeed', model: ['account':account ])
             return
