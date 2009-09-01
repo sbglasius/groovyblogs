@@ -1,7 +1,11 @@
-import org.jsecurity.*
+import org.jsecurity.authc.AuthenticationException
+import org.jsecurity.authc.UsernamePasswordToken
+import org.jsecurity.SecurityUtils
 import javax.servlet.http.Cookie
 
 class AccountController  {
+	
+	def jsecSecurityManager
 
     FeedService feedService
 
@@ -60,7 +64,7 @@ class AccountController  {
         account.status = "active"
         account.password = params.password.encodeAsSHA1Bytes().encodeBase64()
 
-        if(account.save()) {
+        if(account.save(flush: true)) {
             
 			def authToken = new UsernamePasswordToken(params.userid, params.password)
 

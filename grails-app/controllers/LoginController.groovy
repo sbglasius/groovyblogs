@@ -1,3 +1,7 @@
+import org.jsecurity.authc.AuthenticationException
+import org.jsecurity.authc.UsernamePasswordToken
+import org.jsecurity.SecurityUtils
+
 class LoginController {
 	
     def index = {
