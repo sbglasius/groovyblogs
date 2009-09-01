@@ -36,8 +36,7 @@ beans = {
         timeToLive = 900
     }
 
-    chartCache(MemcacheMap) {
-        client = memCache
+    chartCache(EhCacheFactoryBean) {
         timeToLive = 3600
     }
 
@@ -45,13 +44,11 @@ beans = {
         timeToLive = 60
     }
 
-    recentBlogsCache(MemcacheMap) {
-        client = memCache
+    recentBlogsCache(EhCacheFactoryBean) {
         timeToLive = 900
     }
 
-    recentStatsCache(MemcacheMap) {
-        client = memCache
+    recentStatsCache(EhCacheFactoryBean) {
         timeToLive = 3600
     }
 
