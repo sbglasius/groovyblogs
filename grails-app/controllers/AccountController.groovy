@@ -5,7 +5,7 @@ import javax.servlet.http.Cookie
 
 class AccountController  {
 	
-	def jsecSecurityManager
+    def jsecSecurityManager
 
     FeedService feedService
 
@@ -66,9 +66,9 @@ class AccountController  {
 
         if(account.save(flush: true)) {
             
-			def authToken = new UsernamePasswordToken(params.userid, params.password)
+            def authToken = new UsernamePasswordToken(params.userid, params.password)
 
-	        this.jsecSecurityManager.login(authToken)
+            this.jsecSecurityManager.login(authToken)
 
             redirect(action:'edit')
             //render(view: 'addfeed', model: ['account':account ])
@@ -106,7 +106,7 @@ class AccountController  {
 
 
             def blog = new Blog()
-            blog.properties['feedUrl'] = params
+            blog.feedUrl = params.feedUrl
             def feedInfo = feedService.getFeedInfo(params.feedUrl)
 
             blog.title = feedInfo.title ? feedInfo.title : ""
@@ -114,9 +114,10 @@ class AccountController  {
             blog.description = feedInfo.description ? feedInfo.description : ""
             blog.description = blog.description.length() > 250 ? blog.description[0..249] : blog.description
 
-            blog.account = getCurrentUser()
-            if (blog.save()) {
-
+            def account = getCurrentUser()
+            blog.account = account
+            if (blog.validate()) {
+                blog.save()
                 if (grailsApplication.config.feeds.moderate) {
                     blog.status = "PENDING"
                     try {
@@ -138,7 +139,7 @@ class AccountController  {
                     """
                         }
 
-                    } catch (Exception e) { e.printStackTrace() }
+                    } catch (Exception e) { log.error "Could not add feed" , e }
                     flash.message = "Successfully added new feed: ${feedInfo.title}. Your Feed needs to be approved by a moderator to become visible"
 
                 } else {
@@ -147,7 +148,7 @@ class AccountController  {
                     flash.message = "Successfully added new feed: ${feedInfo.title}"
                 }
             } else {
-                flash.message = "Error adding feed: ${blog.errors.allErrors[0].defaultMessage}"
+                flash.message = "Error adding feed: ${blog?.errors}"
             }
 
 
