@@ -14,7 +14,7 @@ class FeedService {
     def tweetCache
     ThumbnailService thumbnailService
     TranslateService translateService
-	TwitterService twitterService
+    TwitterService twitterService
 
     boolean transactional = true
 
@@ -148,7 +148,7 @@ class FeedService {
 
             log.debug("Looking for $entry.link")
             //def existing = existingEntries.find { entry.link == it.link }
-            def existing = BlogEntry.findByHash(entry.description.encodeAsMD5().toString()) || BlogEntry.findByLink(entry.link)
+            def existing = BlogEntry.findByHash(entry.summary.encodeAsMD5().toString()) || BlogEntry.findByLink(entry.link)
             log.debug("Existing? " + existing)
             ///if (!BlogEntry.findByLink(entry.link)) {
             if (!existing) {
@@ -179,13 +179,13 @@ class FeedService {
 							
                             try {
 	
-								if (ConfigurationHolder.config.twitter.enabled) {
-									twitterService.sendTweet("${be.title} -- ${be.link} -- ${blog.title}")
-								}
+                                if (ConfigurationHolder.config.twitter.enabled) {
+                                    twitterService.sendTweet("${be.title} -- ${be.link} -- ${blog.title}")
+                                }
 
                                 if (ConfigurationHolder.config.thumbnail.enabled) {
                                     // be.thumbnail = thumbnailService.fetchThumbnail(be.link)
-									// log.debug "Adding to pending thumbs cache: ${be?.link}"
+                                    // log.debug "Adding to pending thumbs cache: ${be?.link}"
                                     //pendingCache.put( new Element(be.link, be.id))
                                 }
                             } catch (Exception e) {
