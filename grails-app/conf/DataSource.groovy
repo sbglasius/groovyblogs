@@ -40,7 +40,7 @@ environments {
     test {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:hsqldb:mem:testDb"
+            url = "jdbc:hsqldb:mem:testDB"
             driverClassName = "org.hsqldb.jdbcDriver"
             username = "sa"
             password = ""

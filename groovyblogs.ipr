@@ -10,7 +10,7 @@
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="libraryTable">
-    <library name="Grails 1.2-M2">
+    <library name="Grails 1.2-M4">
       <CLASSES>
         <root url="jar:///opt/grails/lib/ant-1.7.1.jar!/" />
 
@@ -20,13 +20,15 @@
 
 <root url="jar:///opt/grails/lib/ant-nodeps-1.7.1.jar!/" />
 
-<root url="jar:///opt/grails/lib/ant-trax.jar!/" />
+<root url="jar:///opt/grails/lib/ant-trax-1.7.1.jar!/" />
 
 <root url="jar:///opt/grails/lib/antlr-2.7.6.jar!/" />
 
 <root url="jar:///opt/grails/lib/aopalliance-1.0.jar!/" />
 
-<root url="jar:///opt/grails/lib/backport-util-concurrent-3.0.jar!/" />
+<root url="jar:///opt/grails/lib/aspectjrt-1.6.2.jar!/" />
+
+<root url="jar:///opt/grails/lib/aspectjweaver-1.6.2.jar!/" />
 
 <root url="jar:///opt/grails/lib/cglib-nodep-2.1_3.jar!/" />
 
@@ -48,33 +50,35 @@
 
 <root url="jar:///opt/grails/lib/commons-lang-2.4.jar!/" />
 
-<root url="jar:///opt/grails/lib/commons-pool-1.5.2.jar!/" />
+<root url="jar:///opt/grails/lib/commons-pool-1.5.3.jar!/" />
 
 <root url="jar:///opt/grails/lib/commons-validator-1.3.1.jar!/" />
 
+<root url="jar:///opt/grails/lib/dom4j-1.6.1.jar!/" />
+
 <root url="jar:///opt/grails/lib/ehcache-1.6.1.jar!/" />
 
-<root url="jar:///opt/grails/lib/ejb3-persistence-3.3.0.jar!/" />
+<root url="jar:///opt/grails/lib/ejb3-persistence-1.0.2.GA.jar!/" />
 
 <root url="jar:///opt/grails/lib/gant_groovy1.6-1.6.0.jar!/" />
 
-<root url="jar:///opt/grails/lib/groovy-all-1.6.4.jar!/" />
+<root url="jar:///opt/grails/lib/GParallelizer-0.8.3.jar!/" />
 
-<root url="jar:///opt/grails/lib/hibernate-annotations-3.4.0.jar!/" />
+<root url="jar:///opt/grails/lib/groovy-all-1.6.5.jar!/" />
 
-<root url="jar:///opt/grails/lib/hibernate-commons-annotations-3.4.0.jar!/" />
+<root url="jar:///opt/grails/lib/hibernate-annotations-3.4.0.GA.jar!/" />
 
-<root url="jar:///opt/grails/lib/hibernate3-3.3.1.jar!/" />
+<root url="jar:///opt/grails/lib/hibernate-commons-annotations-3.3.0.ga.jar!/" />
+
+<root url="jar:///opt/grails/lib/hibernate-core-3.3.1.GA.jar!/" />
+
+<root url="jar:///opt/grails/lib/hibernate-ehcache-3.3.1.GA.jar!/" />
 
 <root url="jar:///opt/grails/lib/hsqldb-1.8.0.10.jar!/" />
 
 <root url="jar:///opt/grails/lib/ivy-2.0.0.jar!/" />
 
-<root url="jar:///opt/grails/lib/jasper-compiler-5.5.15.jar!/" />
-
-<root url="jar:///opt/grails/lib/jasper-compiler-jdt-5.5.15.jar!/" />
-
-<root url="jar:///opt/grails/lib/jasper-runtime-5.5.15.jar!/" />
+<root url="jar:///opt/grails/lib/javassist-3.4.GA.jar!/" />
 
 <root url="jar:///opt/grails/lib/jcl-over-slf4j-1.5.6.jar!/" />
 
@@ -86,9 +90,7 @@
 
 <root url="jar:///opt/grails/lib/jsr107cache-1.0.jar!/" />
 
-<root url="jar:///opt/grails/lib/jstl-2.3.jar!/" />
-
-<root url="jar:///opt/grails/lib/jstl-2.4.jar!/" />
+<root url="jar:///opt/grails/lib/jstl-1.1.2.jar!/" />
 
 <root url="jar:///opt/grails/lib/jta-1.1.jar!/" />
 
@@ -100,59 +102,59 @@
 
 <root url="jar:///opt/grails/lib/ognl-2.6.9.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.aop-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/ognl-2.7.3.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.asm-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.aop-3.0.0.RC1.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.aspects-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.asm-3.0.0.RC1.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.beans-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.aspects-3.0.0.RC1.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.binding-2.0.3.RELEASE.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.beans-3.0.0.RC1.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.context-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.binding-2.0.8.RELEASE.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.context.support-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.context-3.0.0.RC1.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.core-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.context.support-3.0.0.RC1.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.expression-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.core-3.0.0.RC1.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.instrument-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.expression-3.0.0.RC1.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.instrument.classloading-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.instrument-3.0.0.RC1.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.integration-tests-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.integration-tests-3.0.0.RC1.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.jdbc-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.jdbc-3.0.0.RC1.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.jms-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.jms-3.0.0.RC1.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.js-2.0.3.RELEASE.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.js-2.0.8.RELEASE.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.orm-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.orm-3.0.0.RC1.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.oxm-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.oxm-3.0.0.RC1.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.test-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.test-3.0.0.RC1.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.transaction-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.transaction-3.0.0.RC1.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.web-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.web-3.0.0.RC1.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.web.servlet-3.0.0.M4.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.web.servlet-3.0.0.RC1.jar!/" />
 
-<root url="jar:///opt/grails/lib/org.springframework.webflow-2.0.3.RELEASE.jar!/" />
+<root url="jar:///opt/grails/lib/org.springframework.webflow-2.0.8.RELEASE.jar!/" />
 
 <root url="jar:///opt/grails/lib/oro-2.0.8.jar!/" />
 
 <root url="jar:///opt/grails/lib/oscache-2.4.1.jar!/" />
 
-<root url="jar:///opt/grails/lib/radeox.jar!/" />
+<root url="jar:///opt/grails/lib/radeox-1.0-b2.jar!/" />
 
-<root url="jar:///opt/grails/lib/serializer.jar!/" />
+<root url="jar:///opt/grails/lib/serializer-2.7.1.jar!/" />
 
-<root url="jar:///opt/grails/lib/servlet-api-2.5-6.1.14.jar!/" />
+<root url="jar:///opt/grails/lib/servlet-api-2.5.jar!/" />
 
 <root url="jar:///opt/grails/lib/sitemesh-2.4.jar!/" />
 
@@ -160,37 +162,33 @@
 
 <root url="jar:///opt/grails/lib/slf4j-log4j12-1.5.6.jar!/" />
 
-<root url="jar:///opt/grails/lib/standard-2.3.jar!/" />
+<root url="jar:///opt/grails/lib/standard-1.1.2.jar!/" />
 
-<root url="jar:///opt/grails/lib/standard-2.4.jar!/" />
-
-<root url="jar:///opt/grails/lib/start.jar!/" />
-
-<root url="jar:///opt/grails/lib/svnkit-1.2.0.jar!/" />
+<root url="jar:///opt/grails/lib/svnkit-1.3.1.jar!/" />
 
 <root url="jar:///opt/grails/lib/xpp3_min-1.1.3.4.O.jar!/" />
 
-<root url="jar:///opt/grails/diest/grails-bootstrap-1.2-M2.jar!/" />
+<root url="jar:///opt/grails/dist/grails-bootstrap-1.2-M4.jar!/" />
 
-<root url="jar:///opt/grails/diest/grails-core-1.2-M2.jar!/" />
+<root url="jar:///opt/grails/dist/grails-core-1.2-M4.jar!/" />
 
-<root url="jar:///opt/grails/diest/grails-crud-1.2-M2.jar!/" />
+<root url="jar:///opt/grails/dist/grails-crud-1.2-M4.jar!/" />
 
-<root url="jar:///opt/grails/diest/grails-docs-1.2-M2.jar!/" />
+<root url="jar:///opt/grails/dist/grails-docs-1.2-M4.jar!/" />
 
-<root url="jar:///opt/grails/diest/grails-gorm-1.2-M2.jar!/" />
+<root url="jar:///opt/grails/dist/grails-gorm-1.2-M4.jar!/" />
 
-<root url="jar:///opt/grails/diest/grails-resources-1.2-M2.jar!/" />
+<root url="jar:///opt/grails/dist/grails-resources-1.2-M4.jar!/" />
 
-<root url="jar:///opt/grails/diest/grails-scripts-1.2-M2.jar!/" />
+<root url="jar:///opt/grails/dist/grails-scripts-1.2-M4.jar!/" />
 
-<root url="jar:///opt/grails/diest/grails-spring-1.2-M2.jar!/" />
+<root url="jar:///opt/grails/dist/grails-spring-1.2-M4.jar!/" />
 
-<root url="jar:///opt/grails/diest/grails-test-1.2-M2.jar!/" />
+<root url="jar:///opt/grails/dist/grails-test-1.2-M4.jar!/" />
 
-<root url="jar:///opt/grails/diest/grails-web-1.2-M2.jar!/" />
+<root url="jar:///opt/grails/dist/grails-web-1.2-M4.jar!/" />
 
-<root url="jar:///opt/grails/diest/grails-webflow-1.2-M2.jar!/" />
+<root url="jar:///opt/grails/dist/grails-webflow-1.2-M4.jar!/" />
 
 
       </CLASSES>

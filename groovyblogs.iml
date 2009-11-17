@@ -42,7 +42,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Grails 1.2-M2" level="project" />
+    <orderEntry type="library" name="Grails 1.2-M4" level="project" />
     <orderEntry type="module-library">
       <library name="Grails User Library">
         <CLASSES>
