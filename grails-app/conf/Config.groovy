@@ -87,15 +87,16 @@ http {
 }
 
 lists {
-    groovy="http://www.nabble.com/groovy---user-f11867.xml"
-    grails="http://www.nabble.com/grails---user-f11861.xml"
+    groovy="http://groovy.329449.n5.nabble.com/groovy-user-f329450.xml"
+    grails="http://grails.1312388.n4.nabble.com/Grails-user-f1312389.xml"
 }
 
 tweets.url = "http://feeds.groovytweets.org/latestgroovytweets"
 
 translate {
     enabled=true
-    langUrl="http://www.google.com/uds/GlangDetect?v=1.0&q="
+    langUrl="https://ajax.googleapis.com/ajax/services/language/detect?v=1.0&q="
+    //langUrl="http://www.google.com/uds/GlangDetect?v=1.0&q="
     // apikey = yourkey
     url='http://translate.google.com/translate?hl=${to}&sl=auto&tl=${to}&u=${url}'
     // http://translate.google.com/translate?u=http%3A%2F%2Fgroovy.org.es%2Fhome%2Fstory%2F12&langpair=es%7Cen&hl=en&ie=UTF-8&oe=UTF-8&prev=%2Flanguage_tools

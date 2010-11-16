@@ -25,8 +25,8 @@ class ConfigService {
 	
 	def lists() {
 		return [
-		        	"groovy": "http://www.nabble.com/groovy---user-f11867.xml",
-		        	"grails": "http://www.nabble.com/grails---user-f11861.xml"
+		        	"groovy" : "http://groovy.329449.n5.nabble.com/groovy-user-f329450.xml",
+		        	"grails": "http://grails.1312388.n4.nabble.com/Grails-user-f1312389.xml"
 		        ]	
 		
 	}

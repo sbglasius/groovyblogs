@@ -1,6 +1,6 @@
 import grails.util.Environment
 
-class ApplicationBootStrap {
+class BootStrap {
 	
      def init = { servletContext ->
 
@@ -29,6 +29,18 @@ class ApplicationBootStrap {
     }
 
     def createAdminUserIfRequired() {
+        if (Account.count() == 0) {
+        	
+        	def admin = new Account(userid: "admin", role: "admin",
+        	      status: "ACTIVE", email: "glen@bytecode.com.au")
         
+        	def password =  "admin".encodeAsSHA1Bytes().encodeBase64()
+        	println "Admin password is encoded to ${password}"
+        	admin.password = password
+        	      
+            if (!admin.save()) {
+            	println "Failed to create admin user: ${admin.errors}" 
+            }
+        }
     }
 } 
