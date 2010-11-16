@@ -33,7 +33,8 @@ class BlogEntry {
 	
     def isGroovyRelated() {
 	
-        def keywords = [ 'groovy', 'grails', 'griffon', 'gorm', 'gr8', 'gant', 'gradle', 'builder', 'gsp' ]
+        def keywords = [ 'groovy', 'grails', 'griffon', 'gorm', 'gr8', 'gant', 'gradle', 'gpars', 'gsp',
+                           'geb', 'spock', 'gaelyk' ]
 		                 
         boolean isGroovy = false
         keywords.each { keyword ->

@@ -24,14 +24,14 @@
       <sourceFolder url="file://$MODULE_DIR$/grails-app/conf/hibernate" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/controllers" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/domain" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/grails-app/jobs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/services" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/taglib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/grails-app/utils" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/integration" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/grails-app/utils" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/grails-app/jobs" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -42,15 +42,6 @@
       <library name="Grails User Library">
         <CLASSES>
           <root url="file://$MODULE_DIR$/lib" />
-          <root url="jar://C:/Users/glen/.ivy2/cache/spy/memcached/jars/memcached-2.3.1.jar!/" />
-          <root url="jar://C:/Users/glen/.ivy2/cache/commons-logging/commons-logging/jars/commons-logging-1.0.4.jar!/" />
-          <root url="jar://C:/Users/glen/.ivy2/cache/commons-httpclient/commons-httpclient/jars/commons-httpclient-3.1.jar!/" />
-          <root url="jar://C:/Users/glen/.ivy2/cache/jdom/jdom/jars/jdom-1.0.jar!/" />
-          <root url="jar://C:/Users/glen/.ivy2/cache/rome/rome/jars/rome-1.0.jar!/" />
-          <root url="jar://C:/Users/glen/.ivy2/cache/net.homeip.yusuke/twitter4j/jars/twitter4j-2.0.10.jar!/" />
-          <root url="jar://C:/Users/glen/.ivy2/cache/jfree/jcommon/jars/jcommon-1.0.8.jar!/" />
-          <root url="jar://C:/Users/glen/.ivy2/cache/jfree/jfreechart/jars/jfreechart-1.0.4.jar!/" />
-          <root url="jar://C:/Users/glen/.ivy2/cache/postgresql/postgresql/jars/postgresql-8.2-507.jdbc3.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

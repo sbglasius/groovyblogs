@@ -15,9 +15,13 @@ class TranslateService {
 
         String url = ConfigurationHolder.config.translate.langUrl +
             text.encodeAsURL() 
-            // + "&key=" + ConfigurationHolder.config.translate.apikey
+             + "&key=" + ConfigurationHolder.config.translate.apikey
 
-        def response =  grails.converters.JSON.parse(url.toURL().text)
+        def translateResponse = url.toURL().text
+
+        log.debug "Google translate responsed: ${translateResponse}"
+
+        def response =  grails.converters.JSON.parse(translateResponse)
         return response.responseData.language
 
     }
