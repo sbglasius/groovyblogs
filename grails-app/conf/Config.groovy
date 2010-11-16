@@ -94,7 +94,7 @@ lists {
 tweets.url = "http://feeds.groovytweets.org/latestgroovytweets"
 
 translate {
-    enabled=true
+    enabled=false
     langUrl="https://ajax.googleapis.com/ajax/services/language/detect?v=1.0&q="
     //langUrl="http://www.google.com/uds/GlangDetect?v=1.0&q="
     // apikey = yourkey
