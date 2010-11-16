@@ -230,7 +230,7 @@ class FeedService {
         log.info("Now polling: [$blog.title]")
         FeedInfo fi
         try {
-            fi = getFeedInfo(blog.feedUrl)
+            fi = getFeedInfo(blog.feedUrl, ConfigurationHolder.config.translate.enabled)
         } catch (Exception e) {
             log.warn("Could not parse feed [$blog.feedUrl]", e)
             blog.lastError = "Error parsing [$blog.feedUrl] " + e.message
