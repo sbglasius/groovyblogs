@@ -4,18 +4,23 @@
     <facet type="web" name="GrailsWeb">
       <configuration>
         <webroots>
-          <root url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/google-chart-0.5.1/web-app" relative="/" />
-          <root url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/web-app" relative="/" />
-          <root url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/iwebkit-0.2/web-app" relative="/" />
-          <root url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/web-app" relative="/" />
-          <root url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/runtime-logging-0.3/web-app" relative="/" />
-          <root url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1/web-app" relative="/" />
-          <root url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/google-chart-0.5.1/web-app" relative="/" />
-          <root url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/web-app" relative="/" />
-          <root url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/iwebkit-0.2/web-app" relative="/" />
-          <root url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/web-app" relative="/" />
-          <root url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/runtime-logging-0.3/web-app" relative="/" />
-          <root url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/google-chart-0.5.1/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/iwebkit-0.2/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/runtime-logging-0.3/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/google-chart-0.5.1/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/iwebkit-0.2/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/runtime-logging-0.3/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/grails-app/views" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/google-chart-0.5.1/grails-app/views" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/iwebkit-0.2/grails-app/views" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/runtime-logging-0.3/grails-app/views" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/mail-0.7.1/grails-app/views" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -23,42 +28,70 @@
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/google-chart-0.5.1">
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/google-chart-0.5.1/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/google-chart-0.5.1/grails-app/taglib" isTestSource="false" />
+    <content url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/google-chart-0.5.1">
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/google-chart-0.5.1/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/google-chart-0.5.1/grails-app/taglib" isTestSource="false" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/google-chart-0.5.1/target/classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/google-chart-0.5.1/target/test-classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/google-chart-0.5.1/web-app/plugins" />
     </content>
-    <content url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/hibernate-1.3.5" />
-    <content url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/iwebkit-0.2">
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/iwebkit-0.2/grails-app/taglib" isTestSource="false" />
+    <content url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/hibernate-1.3.5">
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/hibernate-1.3.5/target/classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/hibernate-1.3.5/target/test-classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/hibernate-1.3.5/web-app/plugins" />
     </content>
-    <content url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1">
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/src/java" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/grails-app/controllers" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/grails-app/taglib" isTestSource="false" />
+    <content url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/iwebkit-0.2">
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/iwebkit-0.2/grails-app/taglib" isTestSource="false" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/iwebkit-0.2/target/classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/iwebkit-0.2/target/test-classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/iwebkit-0.2/web-app/plugins" />
     </content>
-    <content url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/mail-0.7.1">
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/mail-0.7.1/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/mail-0.7.1/grails-app/services" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/mail-0.7.1/grails-app/taglib" isTestSource="false" />
+    <content url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1">
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/src/java" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/grails-app/controllers" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/grails-app/taglib" isTestSource="false" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/target/classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/target/test-classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/web-app/plugins" />
     </content>
-    <content url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1">
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1/src/java" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1/grails-app/services" isTestSource="false" />
+    <content url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/mail-0.7.1">
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/mail-0.7.1/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/mail-0.7.1/grails-app/services" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/mail-0.7.1/grails-app/taglib" isTestSource="false" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/mail-0.7.1/target/classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/mail-0.7.1/target/test-classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/mail-0.7.1/web-app/plugins" />
     </content>
-    <content url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/runtime-logging-0.3">
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/runtime-logging-0.3/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/runtime-logging-0.3/grails-app/controllers" isTestSource="false" />
+    <content url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1">
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1/src/java" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1/grails-app/services" isTestSource="false" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1/target/classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1/target/test-classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1/web-app/plugins" />
     </content>
-    <content url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5">
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/src/java" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/grails-app/controllers" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/grails-app/services" isTestSource="false" />
+    <content url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/runtime-logging-0.3">
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/runtime-logging-0.3/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/runtime-logging-0.3/grails-app/controllers" isTestSource="false" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/runtime-logging-0.3/target/classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/runtime-logging-0.3/target/test-classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/runtime-logging-0.3/web-app/plugins" />
     </content>
-    <content url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/tomcat-1.3.5">
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/tomcat-1.3.5/src/groovy" isTestSource="false" />
+    <content url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5">
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/src/java" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/grails-app/controllers" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/grails-app/services" isTestSource="false" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/target/classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/target/test-classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/web-app/plugins" />
+    </content>
+    <content url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/tomcat-1.3.5">
+      <sourceFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/tomcat-1.3.5/src/groovy" isTestSource="false" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/tomcat-1.3.5/target/classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/tomcat-1.3.5/target/test-classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/tomcat-1.3.5/web-app/plugins" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -66,11 +99,11 @@
     <orderEntry type="module-library" exported="">
       <library name="Grails User Library">
         <CLASSES>
-          <root url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/mail-0.7.1/lib" />
-          <root url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/lib" />
-          <root url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/tomcat-1.3.5/lib" />
-          <root url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/lib" />
-          <root url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1/lib" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/mail-0.7.1/lib" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/lib" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/tomcat-1.3.5/lib" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/lib" />
+          <root url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1/lib" />
           <root url="jar://$USER_HOME$/.ivy2/cache/spy/memcached/jars/memcached-2.3.1.jar!/" />
           <root url="jar://$USER_HOME$/.ivy2/cache/commons-logging/commons-logging/jars/commons-logging-1.0.4.jar!/" />
           <root url="jar://$USER_HOME$/.ivy2/cache/commons-httpclient/commons-httpclient/jars/commons-httpclient-3.1.jar!/" />
@@ -83,14 +116,15 @@
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/lib" recursive="false" />
-        <jarDirectory url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/mail-0.7.1/lib" recursive="false" />
-        <jarDirectory url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1/lib" recursive="false" />
-        <jarDirectory url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/lib" recursive="false" />
-        <jarDirectory url="file://$USER_HOME_GRAILS$/1.3.5/projects/groovyblogs/plugins/tomcat-1.3.5/lib" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/jsecurity-0.4.1/lib" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/mail-0.7.1/lib" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/quartz-0.4.1/lib" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/searchable-0.5.5/lib" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/.grails/1.3.5/projects/groovyblogs/plugins/tomcat-1.3.5/lib" recursive="false" />
       </library>
     </orderEntry>
     <orderEntry type="library" scope="PROVIDED" name="grails-1.3.5" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="grails-1.3.5" level="project" />
   </component>
 </module>
 

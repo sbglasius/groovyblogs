@@ -28,6 +28,14 @@ class SecurityFilters {
             }
         }
 
+        configScaffold(controller: "systemConfig", action: "*") {
+            before = {
+                accessControl(auth: false) {
+                    role("admin")
+                }
+            }
+        }
+
         loggingStuff(controller: "runtimeLogging", action: "*") {
             before = {
                 accessControl(auth: false) {
