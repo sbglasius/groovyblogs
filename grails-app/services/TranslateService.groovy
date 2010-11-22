@@ -14,7 +14,7 @@ class TranslateService {
         }
 
         String url = ConfigurationHolder.config.translate.langUrl +
-            text.encodeAsURL().toString() + "&key=" + ConfigurationHolder.config.translate.apikey
+            text.encodeAsURL().toString() + "&key=" + SystemConfig.findBySettingName("translate.apikey")?.settingValue //ConfigurationHolder.config.translate.apikey
 
         def translateResponse = url.toURL().text
 
