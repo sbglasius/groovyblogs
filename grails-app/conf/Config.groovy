@@ -66,10 +66,12 @@ cache {
 feeds {
     ignoreFeedEntriesOlderThan = 30 // days
     moderate = true
+    moderator_email = "glen@bytecode.com.au"
     // moderator_email = you@yourhost.com
 }
 
-
+grails.mail.host =  "localhost"
+grails.mail.default.from = "glen@bytecode.com.au"
 
 http {
 	/*
@@ -94,7 +96,7 @@ lists {
 tweets.url = "http://feeds.groovytweets.org/latestgroovytweets"
 
 translate {
-    enabled=false
+    enabled=true
     langUrl="https://ajax.googleapis.com/ajax/services/language/detect?v=1.0&q="
     //langUrl="http://www.google.com/uds/GlangDetect?v=1.0&q="
     // apikey = yourkey

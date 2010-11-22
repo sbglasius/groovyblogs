@@ -28,15 +28,10 @@ class BootStrap {
         if (SystemConfig.count() == 0) {
 
             def defaultConfig = [
-                "grails.mail.host" : "localhost",
-                "grails.mail.default.from" : "you@yourhost.com",
                 "thumbnail.user" : "1234",
-
                 "thumbnail.apiKey" : "yourkey",
-                "translate.apikey" : "yourKey",
 
-                "feeds.moderator_email" : "you@yourhost.com",
-                "feeds.moderate" : "true",
+                "translate.apikey" : "yourKey",
 
                 "twitter.enabled" : "true",
                 "twitter.user" : "youruser",

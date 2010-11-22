@@ -49,8 +49,8 @@ public class ThumbnailService {
         sdf.setTimeZone(tz)
         def date = sdf.format(new Date())
 
-        def user = ConfigurationHolder.config.thumbnail.user
-        def apiKey = ConfigurationHolder.config.thumbnail.apiKey
+        def user = SystemConfig.findBySettingName("thumbnail.user")?.settingValue // ConfigurationHolder.config.thumbnail.user
+        def apiKey = SystemConfig.findBySettingName("thumbnail.apiKey")?.settingValue // ConfigurationHolder.config.thumbnail.apiKey
         log.debug("Setting date to ${date}")
         
         def stringToHash = "${date}${url}${apiKey}"

@@ -7,8 +7,8 @@ class TwitterService {
 
     def sendTweet(String tweet) {
 	
-		def user = ConfigurationHolder.config.twitter.user
-        def pw = ConfigurationHolder.config.twitter.password
+		def user = SystemConfig.findBySettingName("twitter.user")?.settingValue // ConfigurationHolder.config.twitter.user
+        def pw =  SystemConfig.findBySettingName("twitter.password")?.settingValue // ConfigurationHolder.config.twitter.password
 		
 		Twitter twitter = new Twitter(user, pw)
 		log.info "Sending tweet: [${tweet}] for user [${user}]"
