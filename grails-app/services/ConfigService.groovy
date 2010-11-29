@@ -1,7 +1,5 @@
 class ConfigService {
-	
-	boolean transactional = false
-		
+
 	def mail() {
 		return [ 
 		         "host": "latte", 

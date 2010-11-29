@@ -3,8 +3,6 @@ import net.sf.ehcache.Element
 
 class EntriesService {
 
-    boolean transactional = false
-
     def entriesCache
 
     // suppress when more than three entries from same author

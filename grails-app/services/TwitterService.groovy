@@ -3,7 +3,7 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 class TwitterService {
 
-    boolean transactional = false
+    static transactional = false
 
     def sendTweet(String tweet) {
 	
