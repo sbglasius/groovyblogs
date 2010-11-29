@@ -5,7 +5,7 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder
 // at http://blogs.bytecode.com.au/glen/2009/07/30/getting-groovy-with-google-language-translation-apis.html
 class TranslateService {
 
-    boolean transactional = false
+    static transactional = false
 
     def getLanguage(String text) {
 

@@ -16,9 +16,6 @@ class FeedService {
     TranslateService translateService
     TwitterService twitterService
 
-    boolean transactional = true
-
-
 
     // Returns the HTML for the supplied URL
     String getHtmlForUrl(url) {
@@ -174,8 +171,8 @@ class FeedService {
                                 log.warn(it)
                             }
                         } else {
-                            be.save()
-                            blog.save()
+                            be.save(flush: true)
+                            blog.save(flush: true)
 							
                             try {
 	
@@ -219,7 +216,7 @@ class FeedService {
                 log.warn(it)
             }
         } else {
-            log.debug("Updated poll time for blog: " + blog.save())
+            log.debug("Updated poll time for blog: " + blog.save(flush: true))
         }
         log.debug("Next poll of [$blog.title] at $blog.nextPoll")
 
