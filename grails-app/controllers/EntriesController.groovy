@@ -11,12 +11,20 @@ class EntriesController {
     def index = { redirect(action:'recent',params:params) }
 
     def recent = {
+
+        int days = EntriesService.DEFAULT_DAYS_TO_REPORT // default to 7 days
+        if (params.id) {
+            days = Integer.parseInt(params.id) // override for longer periods
+            if (days > 60) {
+                days = 60
+            }
+        }
 			
-        def entries = entriesService.getRecentEntries()			
+        def entries = entriesService.getRecentEntries(days)
 			
         return [
             entries: entries, // entriesService.limitEntries(entries),
-            pageTitle : 'Recent Entries (Last 7 Days)',
+            pageTitle : "Recent Entries (Last ${days} Days)",
             thumbnails: grailsApplication.config.thumbnail.enabled
         ]
     }
