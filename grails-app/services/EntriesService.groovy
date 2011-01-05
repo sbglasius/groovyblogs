@@ -3,6 +3,8 @@ import net.sf.ehcache.Element
 
 class EntriesService {
 
+    protected static final int DEFAULT_DAYS_TO_REPORT = 7
+
     def entriesCache
 
     // suppress when more than three entries from same author
@@ -42,19 +44,21 @@ class EntriesService {
     }
 
 
-    def getRecentEntries() {
+    def getRecentEntries(int days = DEFAULT_DAYS_TO_REPORT) {
 
         def entries = entriesCache.get("recentList")?.value
-        if (!entries) {
+        if (!entries || days != DEFAULT_DAYS_TO_REPORT) {
 	
-			log.debug "Recent cache empty. Reading from db."
+			log.debug "Recent cache empty. Reading from db"
 
-            def aWhileAgo = new Date().minus(7) // 7 days ago
+            def aWhileAgo = new Date().minus(days) // 7 days ago is the default
 
             entries = BlogEntry.findAllByDateAddedGreaterThan(
                 aWhileAgo, [ sort: 'dateAdded', order: "desc" ] )
             entries = entries.findAll { entry -> entry.isGroovyRelated() }
-            entriesCache.put(new Element("recentList", entries))
+            if (days == DEFAULT_DAYS_TO_REPORT) {
+                entriesCache.put(new Element("recentList", entries))
+            }
         } else {
 				log.debug "Reading recent entries from cache"
 		}
@@ -69,7 +73,7 @@ class EntriesService {
 
 			log.debug "Popular cache empty. Reading from db."
 			
-            def aWhileAgo = new Date().minus(7) // 7 days ago
+            def aWhileAgo = new Date().minus(DEFAULT_DAYS_TO_REPORT) // 7 days ago
 
             entries = BlogEntry.findAllByDateAddedGreaterThanAndHitCountGreaterThan(
                 aWhileAgo, 0, [ sort: 'hitCount', order: "desc" ] )
