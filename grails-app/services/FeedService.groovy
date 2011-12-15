@@ -127,7 +127,7 @@ class FeedService {
 
 
     // takes a URL and returns ROME feed info
-    def getFeedInfo(feedUrlStr, boolean translate = true) {
+    def getFeedInfo(feedUrlStr, boolean translate = false) {
 
         def feedStr = getHtmlForUrl(feedUrlStr)
         return getFeedInfoFromHtml(feedStr, translate)
