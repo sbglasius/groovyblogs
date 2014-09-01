@@ -5,13 +5,13 @@ import org.jsecurity.SecurityUtils
 class AuthController {
     def jsecSecurityManager
 
-    def index = { redirect(action: 'login', params: params) }
+    def index(def it = null) { redirect(action: 'login', params: params) }
 
-    def login = {
+    def login() {
         return [ username: params.username, rememberMe: (params.rememberMe != null), targetUri: params.targetUri ]
     }
 
-    def signIn = {
+    def signIn() {
         def authToken = new UsernamePasswordToken(params.username, params.password)
 
         // Support for "remember me"
@@ -55,7 +55,7 @@ class AuthController {
         }
     }
 
-    def signOut = {
+    def signOut() {
         // Log the user out of the application.
         SecurityUtils.subject?.logout()
 
@@ -63,7 +63,7 @@ class AuthController {
         redirect(uri: '/')
     }
 
-    def unauthorized = {
+    def unauthorized() {
         render 'You do not have permission to access this page.'
     }
 }

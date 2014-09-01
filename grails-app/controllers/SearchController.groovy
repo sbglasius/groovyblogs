@@ -1,10 +1,10 @@
 class SearchController {
 	
-    def index = {
+    def index () {
         redirect(action:search,params:params)
     }
 
-    def search = {
+    def search () {
         def query = params.query
 
         if (!query) {

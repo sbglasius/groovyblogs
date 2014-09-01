@@ -1,6 +1,3 @@
-import net.sf.ehcache.Ehcache
-import net.sf.ehcache.Element
-
 class EntriesController {
 
     FeedService feedService
@@ -8,9 +5,9 @@ class EntriesController {
     
     def entriesCache
 	
-    def index = { redirect(action:'recent',params:params) }
+    def index() { redirect(action:'recent',params:params) }
 
-    def recent = {
+    def recent() {
 
         int days = EntriesService.DEFAULT_DAYS_TO_REPORT // default to 7 days
         if (params.id) {
@@ -52,7 +49,7 @@ class EntriesController {
     }
 
 	
-    def popular = {
+    def popular() {
 
         def entries = entriesService.getPopularEntries()
 			
@@ -63,18 +60,18 @@ class EntriesController {
         )
     }
 	
-    def lists = {
+    def lists() {
         def entries = feedService.getCachedListEntries()
         render(view: 'lists',
             model: ['entries': entries] )
     }
 
-    def tweets = {
+    def tweets() {
         def entries = feedService.getCachedTweetEntries()
         [ entries : entries ]
     }
 	
-    def jump = {
+    def jump() {
 			
         BlogEntry be = BlogEntry.get(params.id)
         if (be) {
@@ -89,7 +86,7 @@ class EntriesController {
 			
     }
 	
-    def jumpTranslate = {
+    def jumpTranslate() {
 			
         BlogEntry be = BlogEntry.get(params.id)
         def lang = params.lang

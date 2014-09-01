@@ -1,6 +1,8 @@
-import com.sun.syndication.feed.synd.*
+import com.sun.syndication.feed.synd.SyndContentImpl
+import com.sun.syndication.feed.synd.SyndEntryImpl
+import com.sun.syndication.feed.synd.SyndFeed
+import com.sun.syndication.feed.synd.SyndFeedImpl
 import com.sun.syndication.io.SyndFeedOutput
-import net.sf.ehcache.Ehcache
 import net.sf.ehcache.Element
 
 class FeedController {
@@ -10,7 +12,7 @@ class FeedController {
     def supportedFormats = [ "rss_0.90", "rss_0.91", "rss_0.92", "rss_0.93", "rss_0.94", "rss_1.0", "rss_2.0", "atom_0.3", "atom_1.0"]
 
 	          	           
-    def index = {
+    def index() {
 			
         redirect(action: 'atom')
 			
@@ -31,7 +33,7 @@ class FeedController {
         return false
     }
 	                     	
-    def rss = {
+    def rss() {
      	
     	if (useFeedburner()) {
             response.sendRedirect(grailsApplication.config.http.feedburner_rss)
@@ -41,7 +43,7 @@ class FeedController {
     	
     }
              
-    def atom = {
+    def atom() {
         if (useFeedburner()) {
             response.sendRedirect(grailsApplication.config.http.feedburner_atom)
     	} else {         		
@@ -50,7 +52,7 @@ class FeedController {
     }
 
     // or specify your own feed type
-    def all = {
+    def all() {
         def format = params.id
         if (supportedFormats.contains(format)) {
             render(text: getFeed(format), contentType:"text/xml", encoding:"UTF-8")
@@ -60,7 +62,7 @@ class FeedController {
     }
          	
          	
-    def getFeed(feedType) {
+    private getFeed(feedType) {
          	
 		
         SyndFeed feed = feedCache.get("romeFeed-" + feedType)?.value

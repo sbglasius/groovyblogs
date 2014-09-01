@@ -1,14 +1,10 @@
-import org.jsecurity.authc.AuthenticationException
-import org.jsecurity.authc.UsernamePasswordToken
-import org.jsecurity.SecurityUtils
-
 class LoginController {
 	
-    def index = {
+    def index() {
         render(view:'login')
     }
 	
-    def login = {
+    def login() {
         if (params.userid && params.password) {
             def user = Account.findByUseridAndStatus(params.userid, "active")
 	    		
@@ -29,7 +25,7 @@ class LoginController {
         }
     }
 	
-    def forgottenPassword = {
+    def forgottenPassword() {
 	
         if (params.userid) {
 			
@@ -72,7 +68,7 @@ class LoginController {
     }
 	
     
-    def logout = {
+    def logout() {
     		
         session.account = null
         flash.message = "You have successfully logged out"

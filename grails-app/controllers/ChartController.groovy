@@ -1,26 +1,24 @@
-import org.jfree.chart.*;
-
-import org.jfree.chart.plot.*;
-import org.jfree.chart.axis.*;
-import org.jfree.data.category.*
-import org.jfree.data.xy.*
-import org.jfree.chart.title.*
-
-import org.jfree.chart.encoders.*
-
-import org.jfree.ui.*
+import net.sf.ehcache.Element
+import org.jfree.chart.ChartFactory
+import org.jfree.chart.JFreeChart
+import org.jfree.chart.axis.CategoryAxis
+import org.jfree.chart.axis.CategoryLabelPositions
+import org.jfree.chart.axis.NumberAxis
+import org.jfree.chart.encoders.KeypointPNGEncoderAdapter
+import org.jfree.chart.plot.CategoryPlot
+import org.jfree.chart.plot.PlotOrientation
+import org.jfree.chart.title.TextTitle
+import org.jfree.data.category.DefaultCategoryDataset
 
 import java.awt.*
-import java.awt.image.*
-import net.sf.ehcache.Ehcache
-import net.sf.ehcache.Element
+import java.awt.image.BufferedImage
 
 
 class ChartController {
 
     def chartCache
 		
-    def index = { redirect(action:siteStats, params:params) }
+    def index() { redirect(action:siteStats, params:params) }
     
     
     private byte[] buildChart() {
@@ -98,7 +96,7 @@ class ChartController {
     	
     }
 
-    def siteStats = {
+    def siteStats() {
     	
     	// grab chart bytes from cache if possible
         def cb = chartCache.get("siteStats")?.value

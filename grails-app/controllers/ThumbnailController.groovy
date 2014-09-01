@@ -1,10 +1,8 @@
-import net.sf.ehcache.Ehcache
-
 class ThumbnailController {
 	
     ThumbnailService thumbnailService
 
-    def index = {
+    def index() {
         redirect(action: show)
     }
 
@@ -18,13 +16,13 @@ class ThumbnailController {
 		
     }
 	
-    def show = {
+    def show() {
 
         writeImage(response, "small")
 		
     }
 	
-    def showLarge = {
+    def showLarge() {
 
         writeImage(response, "large")
 		

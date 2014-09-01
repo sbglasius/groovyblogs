@@ -1,4 +1,3 @@
-import org.codehaus.groovy.grails.commons.ApplicationHolder
 
 class SecurityFilters {
     

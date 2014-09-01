@@ -14,75 +14,72 @@ class AccountController  {
         return Account.findByUserid(subject.principal)
     }
 
-    def index = { redirect(action:'edit',params:params) }
+    def index() { redirect(action: 'edit', params: params) }
 
 
-    def edit = {
+    def edit() {
         def account = getCurrentUser() // Account.findByUserid( session.account.id )
 
-        if(!account) {
+        if (!account) {
             flash.message = "Account not found with id ${account.id}"
-            redirect(action:'list')
-        }
-        else {
-            return [ account : account ]
+            redirect(action: 'list')
+        } else {
+            return [account: account]
         }
     }
 
-    def update = {
-        def account = Account.get( params.id )
-        if(account.id == getCurrentUser()?.id) {
+    def update() {
+        def account = Account.get(params.id)
+        if (account.id == getCurrentUser()?.id) {
             //account.properties = params
-            bindData(account, params, ['id', 'password'] ) // don't bind id
+            bindData(account, params, ['id', 'password']) // don't bind id
             if (params.password)
-            account.password = params.password.encodeAsSHA1Bytes().encodeBase64()
+                account.password = params.password.encodeAsSHA1Bytes().encodeBase64()
 
-            if(account.save()) {
-            	flash.message = "Updated successfully"
-                redirect(action:'edit', model:[account:account])
+            if (account.save()) {
+                flash.message = "Updated successfully"
+                redirect(action: 'edit', model: [account: account])
+            } else {
+                render(view: 'edit', model: [account: account])
             }
-            else {
-                render(view:'edit',model:[account:account])
-            }
-        }
-        else {
+        } else {
             flash.message = "Account not found with id ${params.id}"
-            redirect(action:'edit',id:params.id)
+            redirect(action: 'edit', id: params.id)
         }
     }
 
-    def signup = {
+    def signup() {
         def account = new Account()
         account.properties['userid', 'password', 'email'] = params
-        return ['account':account]
+        return ['account': account]
     }
 
-    def register = {
+    def register() {
         def account = new Account()
         account.properties['userid', 'password', 'email'] = params
         account.registered = new Date()
         account.status = "active"
         account.password = params.password.encodeAsSHA1Bytes().encodeBase64()
 
-        if(account.save(flush: true)) {
-            
+        if (account.save(flush: true)) {
+
             def authToken = new UsernamePasswordToken(params.userid, params.password)
 
             this.jsecSecurityManager.login(authToken)
 
-            redirect(action:'edit')
+            redirect(action: 'edit')
             //render(view: 'addfeed', model: ['account':account ])
             return
         } else {
             account.password = params.password
-            render(view:'signup',model:[account:account])
+            render(view: 'signup', model: [account: account])
         }
     }
 
 
-    def deleteFeed = {
-        def blog = Blog.get( params.id )
-        if(blog) {
+    def deleteFeed() {
+        def blog = Blog.get(params.id)
+        if (blog) {
             if (blog.account.id == getCurrentUser()?.id) {
 
                 blog.delete()
@@ -98,7 +95,7 @@ class AccountController  {
         redirect(action: 'edit')
     }
 
-    def addFeed = {
+    def addFeed() {
 
         def feedUrl = params.feedUrl
         log.info("Adding Feed: [$feedUrl]")
@@ -139,7 +136,9 @@ class AccountController  {
                     """
                         }
 
-                    } catch (Exception e) { log.error "Could not add feed" , e }
+                    } catch (Exception e) {
+                        log.error "Could not add feed", e
+                    }
                     flash.message = "Successfully added new feed: ${feedInfo.title}. Your Feed needs to be approved by a moderator to become visible"
 
                 } else {
@@ -159,7 +158,7 @@ class AccountController  {
     }
 
 
-    def updateFeed = {
+    def updateFeed() {
         def blog = Blog.get(params.id)
 
         if (blog && blog.status == "ACTIVE") {
@@ -173,11 +172,11 @@ class AccountController  {
 
     }
 
-    def testFeed = {
+    def testFeed() {
 
-    	def feedUrl = params.feedUrl
-    	log.debug("Testing Feed: [$feedUrl]")
-    	if (feedUrl) {
+        def feedUrl = params.feedUrl
+        log.debug("Testing Feed: [$feedUrl]")
+        if (feedUrl) {
             def feedInfo = feedService.getFeedInfo(feedUrl)
             log.debug("Returned $feedInfo.title $feedInfo.description $feedInfo.type")
             def writer = new StringWriter()
@@ -189,19 +188,19 @@ class AccountController  {
                     p(style: 'margin-top: 3px; margin-bottom: 3px') {
 
                         img(src: "../images/accept.png",
-                            alt: "This is a groovy related post")
+                                alt: "This is a groovy related post")
                         span("Groovy/Grails Post ")
                         img(src: "../images/cancel.png",
-                            alt: "Not a groovy related post",
-                            style: "margin-left: 5px;")
+                                alt: "Not a groovy related post",
+                                style: "margin-left: 5px;")
                         span("Non Groovy/Grails Post (won't be aggregated) ")
                     }
                 }
 
                 div(id: "blogInfo") {
                     div(id: "blogTitle") { p(feedInfo?.title) }
-                    div(id: "blogDesc")  { p(feedInfo?.description) }
-                    div(id: "blogType")  { p(feedInfo?.type) }
+                    div(id: "blogDesc") { p(feedInfo?.description) }
+                    div(id: "blogType") { p(feedInfo?.type) }
                     div(id: "blogEntries") {
                         for (e in feedInfo?.entries) {
                             div(class: "blogEntry") {
@@ -210,9 +209,9 @@ class AccountController  {
                                     p {
                                         def isGroovyRelated = new BlogEntry(title: e.title, description: e.description).isGroovyRelated()
                                         img(src:
-                                            isGroovyRelated ? "../images/accept.png" : "../images/cancel.png",
-                                            alt:
-                                            isGroovyRelated ? "This is a groovy related post" : "Not a groovy related post",
+                                                isGroovyRelated ? "../images/accept.png" : "../images/cancel.png",
+                                                alt:
+                                                        isGroovyRelated ? "This is a groovy related post" : "Not a groovy related post",
                                         )
 
                                         span(e?.title)
@@ -232,13 +231,13 @@ class AccountController  {
             render(writer.toString())
 
 
-    	} else {
+        } else {
             render "You need to provide a URL for me"
-    	}
+        }
 
     }
 
-    def approveFeed = {
+    def approveFeed() {
         Blog blog = Blog.get(params.id)
         if (blog) {
             blog.status = "ACTIVE"
@@ -249,7 +248,7 @@ class AccountController  {
         }
     }
 
-    def removeFeed = {
+    def removeFeed() {
 
         Blog blog = Blog.get(params.id)
         if (blog) {
@@ -262,7 +261,7 @@ class AccountController  {
 
     }
 
-    def preferredLang = {
+    def preferredLang() {
 
         def prefLang = params.id
         if (prefLang == "en") {

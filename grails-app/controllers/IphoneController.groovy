@@ -1,11 +1,8 @@
-import net.sf.ehcache.Ehcache
-import net.sf.ehcache.Element
-
 class IphoneController {
 
     EntriesService entriesService
 
-    def index = { redirect(action:'recent',params:params) }
+    def index() { redirect(action:'recent',params:params) }
 
     // suppress when more than three entries from same author
     public static def limitEntries(entries) {
@@ -30,20 +27,20 @@ class IphoneController {
     }
 
 
-    def recent = {
+    def recent() {
 
         def entries = entriesService.getRecentEntries()
 
         return [ entries: entriesService.limitEntries(entries) ]
     }
 
-    def show = {
+    def show() {
 
         [ entry: BlogEntry.get(params.id) ]
 
     }
 
-    def pc = {
+    def pc() {
         // For now, redirect back to the home page.
         redirect(uri: '/')
     }

@@ -1,21 +1,21 @@
 class SystemConfigController {
 
-    def index = {
+    def index () {
         redirect(action: "list", params: params)
     }
 
-    def list = {
+    def list () {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [systemConfigInstanceList: SystemConfig.list(params), systemConfigInstanceTotal: SystemConfig.count()]
     }
 
-    def create = {
+    def create () {
         def systemConfigInstance = new SystemConfig()
         systemConfigInstance.properties = params
         return [systemConfigInstance: systemConfigInstance]
     }
 
-    def save = {
+    def save () {
         def systemConfigInstance = new SystemConfig(params)
         if (systemConfigInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'systemConfig.label', default: 'SystemConfig'), systemConfigInstance.id])}"
@@ -26,7 +26,7 @@ class SystemConfigController {
         }
     }
 
-    def show = {
+    def show () {
         def systemConfigInstance = SystemConfig.get(params.id)
         if (!systemConfigInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemConfig.label', default: 'SystemConfig'), params.id])}"
@@ -37,7 +37,7 @@ class SystemConfigController {
         }
     }
 
-    def edit = {
+    def edit () {
         def systemConfigInstance = SystemConfig.get(params.id)
         if (!systemConfigInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'systemConfig.label', default: 'SystemConfig'), params.id])}"
@@ -48,7 +48,7 @@ class SystemConfigController {
         }
     }
 
-    def update = {
+    def update () {
         def systemConfigInstance = SystemConfig.get(params.id)
         if (systemConfigInstance) {
             if (params.version) {
@@ -75,7 +75,7 @@ class SystemConfigController {
         }
     }
 
-    def delete = {
+    def delete () {
         def systemConfigInstance = SystemConfig.get(params.id)
         if (systemConfigInstance) {
             try {
