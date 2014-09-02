@@ -1,8 +1,7 @@
 package org.groovyblogs
 
-import org.springframework.beans.factory.config.AbstractFactoryBean
-import net.spy.memcached.MemcachedClient
 import net.sf.ehcache.Element
+import net.spy.memcached.MemcachedClient
 
 /**
  * A Caching map backed by Memcache
@@ -24,8 +23,8 @@ class MemcacheMap {
             value = new Element(key, value)
         }
         return value
-    
+
     }
-	
+
 }
 

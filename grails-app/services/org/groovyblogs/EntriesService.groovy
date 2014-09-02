@@ -1,7 +1,6 @@
 package org.groovyblogs
 
 import net.sf.ehcache.Element
-import org.groovyblogs.BlogEntry
 
 class EntriesService {
 
@@ -12,8 +11,8 @@ class EntriesService {
     // suppress when more than three entries from same author
     public static def limitEntries(entries) {
 
-        def authorHash = [ : ] // count by blog
-        def limitEntries = [ ] // limit to three entries
+        def authorHash = [:] // count by blog
+        def limitEntries = [] // limit to three entries
 
         entries.each { entry ->
             def key = entry.blog.feedUrl
@@ -22,8 +21,8 @@ class EntriesService {
             authorHash[key] = entryCount
             if (entryCount <= 3) {
                 if (entryCount == 3)
-                entry.info = "Reached limit of 3 displayed entries shown for ${entry.blog.title}. " +
-   						"<a href='../blog/show/${entry.blog.id}'>Read more...</a>"
+                    entry.info = "Reached limit of 3 displayed entries shown for ${entry.blog.title}. " +
+                            "<a href='../blog/show/${entry.blog.id}'>Read more...</a>"
                 limitEntries << entry
             }
         }
@@ -50,20 +49,20 @@ class EntriesService {
 
         def entries = entriesCache.get("recentList")?.value
         if (!entries || days != DEFAULT_DAYS_TO_REPORT) {
-	
-			log.debug "Recent cache empty. Reading from db"
+
+            log.debug "Recent cache empty. Reading from db"
 
             def aWhileAgo = new Date().minus(days) // 7 days ago is the default
 
             entries = BlogEntry.findAllByDateAddedGreaterThan(
-                aWhileAgo, [ sort: 'dateAdded', order: "desc" ] )
+                    aWhileAgo, [sort: 'dateAdded', order: "desc"])
             entries = entries.findAll { entry -> entry.isGroovyRelated() }
             if (days == DEFAULT_DAYS_TO_REPORT) {
                 entriesCache.put(new Element("recentList", entries))
             }
         } else {
-				log.debug "Reading recent entries from cache"
-		}
+            log.debug "Reading recent entries from cache"
+        }
         return entries
 
     }
@@ -73,18 +72,18 @@ class EntriesService {
         def entries = entriesCache.get("popularList")?.value
         if (!entries) {
 
-			log.debug "Popular cache empty. Reading from db."
-			
+            log.debug "Popular cache empty. Reading from db."
+
             def aWhileAgo = new Date().minus(DEFAULT_DAYS_TO_REPORT) // 7 days ago
 
             entries = BlogEntry.findAllByDateAddedGreaterThanAndHitCountGreaterThan(
-                aWhileAgo, 0, [ sort: 'hitCount', order: "desc" ] )
+                    aWhileAgo, 0, [sort: 'hitCount', order: "desc"])
             entries = entries.findAll { entry -> entry.isGroovyRelated() }
 
             entriesCache.put(new Element("popularList", entries))
         } else {
-			log.debug "Reading popular entries from cache"
-		}
+            log.debug "Reading popular entries from cache"
+        }
         return entries
 
     }

@@ -17,7 +17,7 @@ class ThumbnailServiceTests extends GrailsUnitTestCase {
 
     void testImageFetch() {
 
-      mockConfig('''
+        mockConfig('''
 
 
 thumbnail {
@@ -29,12 +29,12 @@ thumbnail {
 }
 
 ''')
-      ThumbnailService ts = new ThumbnailService()
-      ts.thumbCache = new Expando()
-      ts.thumbCache.put = { elementToCache ->
-        println "Cached stuff"
-      }
-      ts.fetchThumbnailsToCache 1, "http://blogs.bytecode.com.au/glen"
+        ThumbnailService ts = new ThumbnailService()
+        ts.thumbCache = new Expando()
+        ts.thumbCache.put = { elementToCache ->
+            println "Cached stuff"
+        }
+        ts.fetchThumbnailsToCache 1, "http://blogs.bytecode.com.au/glen"
 
 
     }

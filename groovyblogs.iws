@@ -1,64 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ddf281e1-0c79-465c-ba31-01d9f0f56721" name="Default" comment="Refactoring - moving everything into package org.groovyblog">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/groovyblogs/BlogTagLibTests.groovy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/groovyblogs/ThumbnailServiceTests.groovy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/groovyblogs/TranslateServiceTests.groovy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/services/org/groovyblogs/TwitterService.groovy" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/grails-app/services/TwitterService.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/BlogEntryTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/BlogTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/CacheServiceTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/EntriesControllerTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/FeedControllerTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/FeedServiceServiceTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/FeedServiceTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/UpdateFeedsJobTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/UpdateIndexJobTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/UserTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/unit/BlogTagLibTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/unit/ThumbnailServiceTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/unit/TranslateServiceTests.groovy" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/controllers/AccountController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/AccountController.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/controllers/AuthController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/AuthController.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/controllers/BlogController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/BlogController.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/controllers/ChartController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/ChartController.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/controllers/EntriesController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/EntriesController.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/controllers/FeedController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/FeedController.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/controllers/IphoneController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/IphoneController.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/controllers/LoginController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/LoginController.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/controllers/SearchController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/SearchController.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/controllers/SystemConfigController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/SystemConfigController.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/controllers/ThumbnailController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/ThumbnailController.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/domain/Blog.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/org/groovyblogs/Blog.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/domain/BlogEntry.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/org/groovyblogs/BlogEntry.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/domain/Role.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/org/groovyblogs/Role.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/domain/SystemConfig.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/org/groovyblogs/SystemConfig.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/domain/User.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/org/groovyblogs/User.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/domain/UserRole.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/org/groovyblogs/UserRole.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/jobs/UpdateFeedsJob.groovy" afterPath="$PROJECT_DIR$/grails-app/jobs/org/groovyblogs/UpdateFeedsJob.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/jobs/UpdateListsJob.groovy" afterPath="$PROJECT_DIR$/grails-app/jobs/org/groovyblogs/UpdateListsJob.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/jobs/UpdateThumbsJob.groovy" afterPath="$PROJECT_DIR$/grails-app/jobs/org/groovyblogs/UpdateThumbsJob.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/jobs/UpdateTweetsJob.groovy" afterPath="$PROJECT_DIR$/grails-app/jobs/org/groovyblogs/UpdateTweetsJob.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/services/ConfigService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/org/groovyblogs/ConfigService.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/services/EntriesService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/org/groovyblogs/EntriesService.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/services/FeedService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/org/groovyblogs/FeedService.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/services/ThumbnailService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/org/groovyblogs/ThumbnailService.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/services/TranslateService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/org/groovyblogs/TranslateService.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/taglib/BlogTagLib.groovy" afterPath="$PROJECT_DIR$/grails-app/taglib/org/groovyblogs/BlogTagLib.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/taglib/SearchTagLib.groovy" afterPath="$PROJECT_DIR$/grails-app/taglib/org/groovyblogs/SearchTagLib.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/groovy/FeedEntry.groovy" afterPath="$PROJECT_DIR$/src/groovy/org/groovyblogs/FeedEntry.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/groovy/FeedInfo.groovy" afterPath="$PROJECT_DIR$/src/groovy/org/groovyblogs/FeedInfo.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/groovy/MemcacheFactoryBean.groovy" afterPath="$PROJECT_DIR$/src/groovy/org/groovyblogs/MemcacheFactoryBean.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/groovy/MemcacheMap.groovy" afterPath="$PROJECT_DIR$/src/groovy/org/groovyblogs/MemcacheMap.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/groovy/OffsetCollector.groovy" afterPath="$PROJECT_DIR$/src/groovy/org/groovyblogs/OffsetCollector.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/groovy/SearchResult.groovy" afterPath="$PROJECT_DIR$/src/groovy/org/groovyblogs/SearchResult.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/groovy/SearchResults.groovy" afterPath="$PROJECT_DIR$/src/groovy/org/groovyblogs/SearchResults.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/realms/JsecGroovyBlogsRealm.groovy" afterPath="$PROJECT_DIR$/grails-app/realms/JsecGroovyBlogsRealm.groovy" />
+    <list default="true" id="ddf281e1-0c79-465c-ba31-01d9f0f56721" name="Default" comment="Refactoring - Code format and import optimization">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/integration/org/groovyblogs/BlogEntryTests.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/integration/org/groovyblogs/BlogTests.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/integration/org/groovyblogs/CacheServiceTests.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/integration/org/groovyblogs/EntriesControllerTests.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/integration/org/groovyblogs/FeedControllerTests.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/integration/org/groovyblogs/FeedServiceServiceTests.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/integration/org/groovyblogs/FeedServiceTests.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/integration/org/groovyblogs/UpdateFeedsJobTests.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/integration/org/groovyblogs/UpdateIndexJobTests.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/integration/org/groovyblogs/UserTests.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/AccountController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/AccountController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/AuthController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/AuthController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/org/groovyblogs/Blog.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/org/groovyblogs/Blog.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/BlogController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/BlogController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/org/groovyblogs/BlogEntry.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/org/groovyblogs/BlogEntry.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/taglib/org/groovyblogs/BlogTagLib.groovy" afterPath="$PROJECT_DIR$/grails-app/taglib/org/groovyblogs/BlogTagLib.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/unit/groovyblogs/BlogTagLibTests.groovy" afterPath="$PROJECT_DIR$/test/unit/groovyblogs/BlogTagLibTests.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/ChartController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/ChartController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/org/groovyblogs/ConfigService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/org/groovyblogs/ConfigService.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/EntriesController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/EntriesController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/org/groovyblogs/EntriesService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/org/groovyblogs/EntriesService.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/FeedController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/FeedController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/groovy/org/groovyblogs/FeedEntry.groovy" afterPath="$PROJECT_DIR$/src/groovy/org/groovyblogs/FeedEntry.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/groovy/org/groovyblogs/FeedInfo.groovy" afterPath="$PROJECT_DIR$/src/groovy/org/groovyblogs/FeedInfo.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/org/groovyblogs/FeedService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/org/groovyblogs/FeedService.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/IphoneController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/IphoneController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/LoginController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/LoginController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/groovy/org/groovyblogs/MemcacheFactoryBean.groovy" afterPath="$PROJECT_DIR$/src/groovy/org/groovyblogs/MemcacheFactoryBean.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/groovy/org/groovyblogs/MemcacheMap.groovy" afterPath="$PROJECT_DIR$/src/groovy/org/groovyblogs/MemcacheMap.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/groovy/org/groovyblogs/OffsetCollector.groovy" afterPath="$PROJECT_DIR$/src/groovy/org/groovyblogs/OffsetCollector.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/org/groovyblogs/Role.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/org/groovyblogs/Role.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/SearchController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/SearchController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/groovy/org/groovyblogs/SearchResult.groovy" afterPath="$PROJECT_DIR$/src/groovy/org/groovyblogs/SearchResult.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/groovy/org/groovyblogs/SearchResults.groovy" afterPath="$PROJECT_DIR$/src/groovy/org/groovyblogs/SearchResults.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/taglib/org/groovyblogs/SearchTagLib.groovy" afterPath="$PROJECT_DIR$/grails-app/taglib/org/groovyblogs/SearchTagLib.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/org/groovyblogs/SystemConfig.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/org/groovyblogs/SystemConfig.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/SystemConfigController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/SystemConfigController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/unit/groovyblogs/SystemConfigControllerTests.groovy" afterPath="$PROJECT_DIR$/test/unit/groovyblogs/SystemConfigControllerTests.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/ThumbnailController.groovy" afterPath="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/ThumbnailController.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/org/groovyblogs/ThumbnailService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/org/groovyblogs/ThumbnailService.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/unit/groovyblogs/ThumbnailServiceTests.groovy" afterPath="$PROJECT_DIR$/test/unit/groovyblogs/ThumbnailServiceTests.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/org/groovyblogs/TranslateService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/org/groovyblogs/TranslateService.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/unit/groovyblogs/TranslateServiceTests.groovy" afterPath="$PROJECT_DIR$/test/unit/groovyblogs/TranslateServiceTests.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/services/org/groovyblogs/TwitterService.groovy" afterPath="$PROJECT_DIR$/grails-app/services/org/groovyblogs/TwitterService.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/jobs/org/groovyblogs/UpdateFeedsJob.groovy" afterPath="$PROJECT_DIR$/grails-app/jobs/org/groovyblogs/UpdateFeedsJob.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/jobs/org/groovyblogs/UpdateListsJob.groovy" afterPath="$PROJECT_DIR$/grails-app/jobs/org/groovyblogs/UpdateListsJob.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/jobs/org/groovyblogs/UpdateThumbsJob.groovy" afterPath="$PROJECT_DIR$/grails-app/jobs/org/groovyblogs/UpdateThumbsJob.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/jobs/org/groovyblogs/UpdateTweetsJob.groovy" afterPath="$PROJECT_DIR$/grails-app/jobs/org/groovyblogs/UpdateTweetsJob.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/domain/org/groovyblogs/UserRole.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/org/groovyblogs/UserRole.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/groovyblogs.iws" afterPath="$PROJECT_DIR$/groovyblogs.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/spring/resources.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/spring/resources.groovy" />
     </list>
     <ignored path="$USER_HOME$/.griffon/" />
     <ignored path="$USER_HOME$/.grails/" />
@@ -117,58 +110,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="User.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/org/groovyblogs/User.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
+      <file leaf-file-name="AccountController.groovy" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/AccountController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.8" vertical-offset="30" max-vertical-offset="795">
-              <caret line="18" column="28" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="zipdistro.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/zipdistro.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="960">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_Events.groovy" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/_Events.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.52587646" vertical-offset="0" max-vertical-offset="599">
-              <caret line="21" column="61" selection-start-line="21" selection-start-column="61" selection-end-line="21" selection-end-column="61" />
-              <folding>
-                <element signature="e#0#40#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SecurityFilters.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/conf/SecurityFilters.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="196" max-vertical-offset="795">
-              <caret line="24" column="41" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Config.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1724" max-vertical-offset="2385">
-              <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.37366548" vertical-offset="75" max-vertical-offset="4365">
+              <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -215,6 +161,7 @@
         <option value="$PROJECT_DIR$/grails-app/conf/SecurityFilters.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
         <option value="$PROJECT_DIR$/grails-app/domain/org/groovyblogs/User.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/AccountController.groovy" />
       </list>
     </option>
   </component>
@@ -293,6 +240,7 @@
     <property name="dynamic.classpath" value="false" />
     <property name="SearchEverywhereHistoryKey" value="Config.gro&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/Config.groovy&#10;BuConf&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/BuildConfig.groovy" />
     <property name="LayoutCode.rearrangeEntriesGroovy" value="false" />
+    <property name="LayoutCode.rearrangeEntries" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -555,7 +503,7 @@
       <created>1289870702327</created>
       <updated>1289870702327</updated>
       <workItem from="1409613169789" duration="1918000" />
-      <workItem from="1409615093755" duration="2111000" />
+      <workItem from="1409615093755" duration="2334000" />
     </task>
     <task id="LOCAL-00001" summary="Made dependencies in build work">
       <created>1409614570707</created>
@@ -577,11 +525,15 @@
       <created>1409617390169</created>
       <updated>1409617390169</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Refactoring - moving everything into package org.groovyblog">
+      <created>1409617841586</created>
+      <updated>1409617841586</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4029000" />
+    <option name="totallyTimeSpent" value="4252000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1680" height="1024" extended-state="6" />
@@ -595,7 +547,7 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32832617" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32832617" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -606,7 +558,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32725322" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32725322" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32905984" sideWeight="0.67192984" order="2" side_tool="false" content_ui="tabs" />
@@ -644,7 +596,8 @@
     <MESSAGE value="All controller closures made to methods for Grails 2.x" />
     <MESSAGE value="Replaced ConfigurationHolder (deprecated) with grails.util.Holders" />
     <MESSAGE value="Refactoring security to use Spring-Security-Plugin&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring security to use Spring-Security-Plugin&#10;" />
+    <MESSAGE value="Refactoring - moving everything into package org.groovyblog" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring - moving everything into package org.groovyblog" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -954,14 +907,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/AccountController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.65217394" vertical-offset="0" max-vertical-offset="4395">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="521" max-vertical-offset="1050">
@@ -974,9 +919,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.32274246" vertical-offset="92" max-vertical-offset="840">
           <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-          <folding>
-            <element signature="e#25#51#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1016,9 +959,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.45588234" vertical-offset="877" max-vertical-offset="2415">
           <caret line="75" column="34" selection-start-line="75" selection-start-column="34" selection-end-line="75" selection-end-column="34" />
-          <folding>
-            <element signature="e#25#51#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1032,7 +973,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/conf/Config.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1724" max-vertical-offset="2385">
+        <state vertical-scroll-proportion="0.95042735" vertical-offset="1724" max-vertical-offset="2385">
           <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
           <folding />
         </state>
@@ -1061,11 +1002,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/_Events.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52587646" vertical-offset="0" max-vertical-offset="599">
-          <caret line="21" column="61" selection-start-line="21" selection-start-column="61" selection-end-line="21" selection-end-column="61" />
+        <state vertical-scroll-proportion="0.6020067" vertical-offset="0" max-vertical-offset="598">
+          <caret line="24" column="85" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/AccountController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37366548" vertical-offset="75" max-vertical-offset="4365">
+          <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>

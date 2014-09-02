@@ -1,14 +1,12 @@
 package org.groovyblogs
 
-import org.groovyblogs.BlogEntry
-
 class SearchController {
-	
-    def index () {
-        redirect(action:search,params:params)
+
+    def index() {
+        redirect(action: search, params: params)
     }
 
-    def search () {
+    def search() {
         def query = params.query
 
         if (!query) {
@@ -17,7 +15,7 @@ class SearchController {
 
         try {
             def searchResult = BlogEntry.search(query, params)
-		    println "\n\n\n${searchResult.dump()}\n\n\n"
+            println "\n\n\n${searchResult.dump()}\n\n\n"
             return [searchResult: searchResult]
         } catch (Exception e) {
             return [searchError: true]

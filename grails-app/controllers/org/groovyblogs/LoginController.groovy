@@ -1,46 +1,44 @@
 package org.groovyblogs
 
-import org.groovyblogs.User
-
 class LoginController {
-	
+
     def index() {
-        render(view:'login')
+        render(view: 'login')
     }
-	
+
     def login() {
         if (params.userid && params.password) {
             def user = User.findByUsernameAndStatus(params.userid, "active")
-	    		
+
             String calcPassword = params.password.encodeAsSHA1Bytes().encodeBase64()
-            if (user != null && user.password == calcPassword)  {
+            if (user != null && user.password == calcPassword) {
                 session.account = user
                 user.lastLogin = new Date()
                 user.save()
                 flash.message = "Welcome ${user.username}"
                 if (session.returnController) {
-                    redirect(controller:session.returnController, action:session.returnAction)
+                    redirect(controller: session.returnController, action: session.returnAction)
                 } else {
-                    redirect(controller:'entries', action:'recent')
+                    redirect(controller: 'entries', action: 'recent')
                 }
             } else {
                 flash.message = "Invalid username or password. Please try again."
             }
         }
     }
-	
+
     def forgottenPassword() {
-	
+
         if (params.userid) {
-			
+
             def account = User.findByUsername(params.userid)
             if (account && account.email) {
-    			
+
                 def PW_POOL = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ"
                 def genPw = ""
                 8.times {
 
-                    genPw += PW_POOL[new Random().nextInt(PW_POOL.size() -1)]
+                    genPw += PW_POOL[new Random().nextInt(PW_POOL.size() - 1)]
 
                 }
                 account.password = genPw.encodeAsSHA1Bytes().encodeBase64()
@@ -66,18 +64,18 @@ class LoginController {
             } else {
                 flash.message = "Could not locate your account."
             }
-			
+
         }
-			
+
     }
-	
-    
+
+
     def logout() {
-    		
+
         session.account = null
         flash.message = "You have successfully logged out"
-        redirect(controller: 'entries', action:'recent')
-    		
+        redirect(controller: 'entries', action: 'recent')
+
     }
 }
 

@@ -1,9 +1,7 @@
 package org.groovyblogs
 
-import org.groovyblogs.FeedService
-
 class UpdateFeedsJob {
-	
+
     FeedService feedService
 
     def concurrent = false

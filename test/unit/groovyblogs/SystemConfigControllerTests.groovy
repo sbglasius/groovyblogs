@@ -1,6 +1,6 @@
 package groovyblogs
 
-import grails.test.*
+import grails.test.ControllerUnitTestCase
 
 class SystemConfigControllerTests extends ControllerUnitTestCase {
     protected void setUp() {

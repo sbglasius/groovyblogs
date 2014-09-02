@@ -1,8 +1,8 @@
 package org.groovyblogs
 
+import org.jsecurity.SecurityUtils
 import org.jsecurity.authc.AuthenticationException
 import org.jsecurity.authc.UsernamePasswordToken
-import org.jsecurity.SecurityUtils
 
 class AuthController {
     def jsecSecurityManager
@@ -10,7 +10,7 @@ class AuthController {
     def index(def it = null) { redirect(action: 'login', params: params) }
 
     def login() {
-        return [ username: params.username, rememberMe: (params.rememberMe != null), targetUri: params.targetUri ]
+        return [username: params.username, rememberMe: (params.rememberMe != null), targetUri: params.targetUri]
     }
 
     def signIn() {
@@ -21,7 +21,7 @@ class AuthController {
             authToken.rememberMe = true
         }
 
-        try{
+        try {
             // Perform the actual login. An AuthenticationException
             // will be thrown if the username is unrecognised or the
             // password is incorrect.
@@ -34,7 +34,7 @@ class AuthController {
             log.info "Redirecting to '${targetUri}'."
             redirect(uri: targetUri)
         }
-        catch (AuthenticationException ex){
+        catch (AuthenticationException ex) {
             // Authentication failed, so display the appropriate message
             // on the login page.
             log.info "Authentication failure for user '${params.username}'."
@@ -42,7 +42,7 @@ class AuthController {
 
             // Keep the username and "remember me" setting so that the
             // user doesn't have to enter them again.
-            def m = [ username: params.username ]
+            def m = [username: params.username]
             if (params.rememberMe) {
                 m['rememberMe'] = true
             }

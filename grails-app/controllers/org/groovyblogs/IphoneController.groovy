@@ -1,18 +1,16 @@
 package org.groovyblogs
 
-import org.groovyblogs.BlogEntry
-
 class IphoneController {
 
     EntriesService entriesService
 
-    def index() { redirect(action:'recent',params:params) }
+    def index() { redirect(action: 'recent', params: params) }
 
     // suppress when more than three entries from same author
     public static def limitEntries(entries) {
 
-        def authorHash = [ : ] // count by blog
-        def limitEntries = [ ] // limit to three entries
+        def authorHash = [:] // count by blog
+        def limitEntries = [] // limit to three entries
 
         entries.each { entry ->
             def key = entry.blog.feedUrl
@@ -21,8 +19,8 @@ class IphoneController {
             authorHash[key] = entryCount
             if (entryCount <= 3) {
                 if (entryCount == 3)
-                entry.info = "Reached limit of 3 displayed entries shown for ${entry.blog.title}. " +
-   						"<a href='../blog/show/${entry.blog.id}'>Read more...</a>"
+                    entry.info = "Reached limit of 3 displayed entries shown for ${entry.blog.title}. " +
+                            "<a href='../blog/show/${entry.blog.id}'>Read more...</a>"
                 limitEntries << entry
             }
         }
@@ -35,12 +33,12 @@ class IphoneController {
 
         def entries = entriesService.getRecentEntries()
 
-        return [ entries: entriesService.limitEntries(entries) ]
+        return [entries: entriesService.limitEntries(entries)]
     }
 
     def show() {
 
-        [ entry: BlogEntry.get(params.id) ]
+        [entry: BlogEntry.get(params.id)]
 
     }
 

@@ -1,14 +1,9 @@
 package org.groovyblogs
 
-import org.groovyblogs.Blog
-import org.groovyblogs.BlogEntry
-import org.groovyblogs.User
-import org.jsecurity.authc.UsernamePasswordToken
-import org.jsecurity.SecurityUtils
 import javax.servlet.http.Cookie
 
-class AccountController  {
-	
+class AccountController {
+
     def jsecSecurityManager
 
     FeedService feedService
@@ -286,7 +281,6 @@ class AccountController  {
         redirect(uri: "/")
 
     }
-
 
 
 }

@@ -10,13 +10,13 @@ class FeedEntry {
     String info // used for whatever you want to put there
     Date publishedDate
     String language
-  
+
     public static String summarize(String longForm) {
-		
+
         def summary = longForm ? longForm : ""
         summary = longForm.replaceAll("</?[^>]+>", "")
         summary = summary.length() > 200 ? summary[0..199] + "..." : summary
-				
+
     }
 
     /*

@@ -1,6 +1,6 @@
 package groovyblogs
 
-import grails.test.*
+import grails.test.GrailsUnitTestCase
 import org.groovyblogs.TranslateService
 
 class TranslateServiceTests extends GrailsUnitTestCase {
@@ -16,7 +16,7 @@ class TranslateServiceTests extends GrailsUnitTestCase {
 
     void testTranslate() {
 
-      mockConfig('''
+        mockConfig('''
 
 translate {
     enabled=false
@@ -26,9 +26,9 @@ translate {
 }
 
 ''')
-      TranslateService translateService = new TranslateService()
-      def lang = translateService.getLanguage("http://www.groovy.org.es/")
-      assertEquals "es", lang
+        TranslateService translateService = new TranslateService()
+        def lang = translateService.getLanguage("http://www.groovy.org.es/")
+        assertEquals "es", lang
 
     }
 }

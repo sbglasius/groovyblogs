@@ -14,7 +14,6 @@ class FeedService {
     TranslateService translateService
     TwitterService twitterService
 
-
     // Returns the HTML for the supplied URL
     String getHtmlForUrl(url) {
 
@@ -32,13 +31,13 @@ class FeedService {
 
         if (Holders.config.http.useragent) {
             clientParams.setParameter(org.apache.commons.httpclient.params.HttpClientParams.USER_AGENT,
-                Holders.config.http.useragent)
+                    Holders.config.http.useragent)
         }
 
         if (Holders.config.http.timeout) {
 
             clientParams.setParameter(org.apache.commons.httpclient.params.HttpClientParams.SO_TIMEOUT,
-                Holders.config.http.timeout)
+                    Holders.config.http.timeout)
         }
 
         def mthd = new GetMethod(url)
@@ -55,7 +54,6 @@ class FeedService {
 
     }
 
-
     // takes html and returns a org.groovyblogs.FeedInfo object
     def getFeedInfoFromHtml(feedStr, translate) {
 
@@ -70,8 +68,8 @@ class FeedService {
 
 
         def feedInfo = new FeedInfo(title: sf.title,
-            description: sf.description ? sf.description : "",
-            author: sf.author, type: sf.feedType)
+                description: sf.description ? sf.description : "",
+                author: sf.author, type: sf.feedType)
 
         for (e in sf.entries) {
             String title = e.title
@@ -93,9 +91,9 @@ class FeedService {
             }
 
             def feedEntry = new FeedEntry(title: title, link: link, publishedDate: publishedDate,
-                description: description ? description : "",
-                summary: summary ? summary : "",
-                author: e.author ? e.author : "")
+                    description: description ? description : "",
+                    summary: summary ? summary : "",
+                    author: e.author ? e.author : "")
 
             //TODO ignore stuff older than X days
             def trimEntriesOlderThanXdays = Holders.config.feeds.ignoreFeedEntriesOlderThan
@@ -111,7 +109,7 @@ class FeedService {
 
             if (feedEntry) {
                 if (translate)
-                feedEntry.language = translateService.getLanguage(description)
+                    feedEntry.language = translateService.getLanguage(description)
                 log.debug("Found entry with title [$title] and link [$link]")
                 feedInfo.entries.add(feedEntry)
             }
@@ -121,8 +119,6 @@ class FeedService {
         return feedInfo
 
     }
-
-
 
     // takes a URL and returns ROME feed info
     def getFeedInfo(feedUrlStr, boolean translate = false) {
@@ -139,7 +135,7 @@ class FeedService {
         //def existingEntries = blog.blogEntries
 
         // we iterate in reverse to ensure newest entries have the newest timestamps
-        fi?.entries?.reverseEach {entry ->
+        fi?.entries?.reverseEach { entry ->
 
             log.debug("Looking for $entry.link")
             //def existing = existingEntries.find { entry.link == it.link }
@@ -151,9 +147,9 @@ class FeedService {
                 //log.debug("Creating entry with title [$entry.title] and link [$entry.link]")
 
                 BlogEntry be = new BlogEntry(title: entry.title, link: entry.link,
-                    description: entry.description,
-                    summary: entry.summary, language: entry.language,
-                    hash: entry.summary.encodeAsMD5())
+                        description: entry.description,
+                        summary: entry.summary, language: entry.language,
+                        hash: entry.summary.encodeAsMD5())
 
 
                 if (be.isGroovyRelated()) {
@@ -171,9 +167,9 @@ class FeedService {
                         } else {
                             be.save(flush: true)
                             blog.save(flush: true)
-							
+
                             try {
-	
+
                                 if (Holders.config.twitter.enabled) {
                                     twitterService.sendTweet("${be.title} -- ${be.link} -- ${blog.title}")
                                 }
@@ -187,7 +183,7 @@ class FeedService {
                                 log.debug "Error during thumbnail collection", e
 
                             }
-							
+
                         }
 
                     } catch (Throwable t) {
@@ -195,8 +191,6 @@ class FeedService {
                     }
 
                     log.debug("Saved entry with title [$be.title]")
-
-
 
 
                 } else {
@@ -263,7 +257,7 @@ class FeedService {
             feedsToUpdate = feedsToUpdate[0..Holders.config.http.maxpollsperminute - 1]
         }
 
-        feedsToUpdate.each {blog ->
+        feedsToUpdate.each { blog ->
             updateFeed(blog)
         }
 
@@ -277,7 +271,7 @@ class FeedService {
 
         def allEntries = []
 
-        Holders.config.lists.each {name, url ->
+        Holders.config.lists.each { name, url ->
 
             log.info("Updating list [$name] from [$url]")
             def feed = getFeedInfo(url, false)
@@ -287,14 +281,14 @@ class FeedService {
             def filter = new Date().minus(1) // 1 days ago
 
             // Add 8 hours from Nabble feed time...
-            def rightDates = feed.entries.collect {entry ->
+            def rightDates = feed.entries.collect { entry ->
                 def diff = entry.publishedDate.time + 1000 * 60 * 60 * 7
                 entry.publishedDate = new Date(diff)
                 return entry
             }
-            def feedEntries = rightDates.findAll {entry -> entry.publishedDate.after(filter) }
+            def feedEntries = rightDates.findAll { entry -> entry.publishedDate.after(filter) }
             log.info("Filtered original entries from " + feed.entries.size() + " to " + feedEntries.size())
-            feedEntries.each {entry ->
+            feedEntries.each { entry ->
 
                 entry.info = name
                 allEntries << entry
@@ -303,7 +297,7 @@ class FeedService {
         }
 
         // sort in date desc
-        allEntries = allEntries.sort {e1, e2 ->
+        allEntries = allEntries.sort { e1, e2 ->
 
             if (e1.publishedDate == e2.publishedDate) {
                 return 0
@@ -331,7 +325,6 @@ class FeedService {
     }
 
 
-
     def updateTweets() {
 
         def tweetFeed = getFeedInfo(Holders.config.tweets.url, false)
@@ -349,7 +342,6 @@ class FeedService {
         return allEntries
 
     }
-
 
 
     def getCachedTweetEntries() {

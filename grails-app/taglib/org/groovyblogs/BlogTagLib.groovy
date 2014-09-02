@@ -1,9 +1,6 @@
 package org.groovyblogs
 
 import net.sf.ehcache.Element
-import org.groovyblogs.Blog
-import org.groovyblogs.BlogEntry
-import org.groovyblogs.FeedEntry
 
 class BlogTagLib {
 
@@ -114,7 +111,7 @@ class BlogTagLib {
         } else {
 
             def maxEntries = attrs.max ? attrs.max : 5
-            def recentBlogs = Blog.listOrderByRegistered(max:5, order:"desc")
+            def recentBlogs = Blog.listOrderByRegistered(max: 5, order: "desc")
 
             def sw = new StringWriter()
             def outs = new PrintWriter(sw)
@@ -159,7 +156,7 @@ class BlogTagLib {
 
     }
 
-    def recentChart =  { attrs ->
+    def recentChart = { attrs ->
 
         def entryCount = recentStatsCache.get("recentChart")?.value
         if (!entryCount) {
@@ -186,26 +183,24 @@ class BlogTagLib {
         def fmt = new java.text.SimpleDateFormat("EEE")
 
         out << g.barChart(
-                    title: "Entries Last 7 Days",
-                    titleAttrs: ["000000", "12"],
-                    type: "bvs",
-                    size: [170,150],
-                    axes: "x,y",
-                    gridLines: "100,20",
-                    colors: ['df8a8a'],
-                    fill: "bg,s,ccffbf|c,s,c0c0c0",
-                    dataType: "simple",
-                    axesLabels: [
-                        0: entryCount.keySet().collect { fmt.format(it) } ,
-                        1: [ 0, entryCount.values().max() ]
-                    ],
-                    data: entryCount.values().asList()
-                 )
-
+                title: "Entries Last 7 Days",
+                titleAttrs: ["000000", "12"],
+                type: "bvs",
+                size: [170, 150],
+                axes: "x,y",
+                gridLines: "100,20",
+                colors: ['df8a8a'],
+                fill: "bg,s,ccffbf|c,s,c0c0c0",
+                dataType: "simple",
+                axesLabels: [
+                        0: entryCount.keySet().collect { fmt.format(it) },
+                        1: [0, entryCount.values().max()]
+                ],
+                data: entryCount.values().asList()
+        )
 
 
     }
-
 
 
     def feedburner = { attr ->

@@ -15,8 +15,8 @@ class BlogTagLibTests extends GroovyTestCase {
         btl.niceDate(date: now)
 
         assertEquals(
-            new java.text.SimpleDateFormat("EEE, d MMM yyyy HH:mm").format(now),
-            out.toString()
+                new java.text.SimpleDateFormat("EEE, d MMM yyyy HH:mm").format(now),
+                out.toString()
         )
 
     }
