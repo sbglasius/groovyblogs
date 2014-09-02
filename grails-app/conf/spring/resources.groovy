@@ -1,3 +1,5 @@
+import org.groovyblogs.MemcacheFactoryBean
+import org.groovyblogs.MemcacheMap
 import org.springframework.cache.ehcache.EhCacheFactoryBean
 
 beans = {

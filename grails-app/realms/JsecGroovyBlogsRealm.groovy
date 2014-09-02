@@ -1,3 +1,4 @@
+import org.groovyblogs.User
 import org.jsecurity.authc.AccountException
 import org.jsecurity.authc.IncorrectCredentialsException
 import org.jsecurity.authc.UnknownAccountException

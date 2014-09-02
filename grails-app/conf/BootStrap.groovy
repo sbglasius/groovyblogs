@@ -1,4 +1,6 @@
 import grails.util.Environment
+import org.groovyblogs.SystemConfig
+import org.groovyblogs.User
 
 class BootStrap {
 	
