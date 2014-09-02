@@ -1,5 +1,6 @@
 package org.groovyblogs
 
+import grails.util.Holders
 import net.sf.ehcache.Element
 
 class BlogTagLib {
@@ -205,10 +206,10 @@ class BlogTagLib {
 
     def feedburner = { attr ->
 
-        if (ConfigurationHolder.config.http.usefeedburner) {
+        if (Holders.config.http.usefeedburner) {
             out << """
 			<p style='margin-top: 5px'>
-					<img src="${ConfigurationHolder.config.http.feedburner_stats_url}" height="26" width="88" style="border:0" alt="Feedburner Stats" />
+					<img src="${Holders.config.http.feedburner_stats_url}" height="26" width="88" style="border:0" alt="Feedburner Stats" />
 			</p>
 			"""
         }

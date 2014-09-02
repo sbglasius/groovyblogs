@@ -40,6 +40,7 @@ grails.project.dependency.resolution = {
         mavenLocal()
         grailsCentral()
         mavenCentral()
+        mavenRepo "http://repo.grails.org/grails/core"
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -55,7 +56,7 @@ grails.project.dependency.resolution = {
         compile 'rome:rome:1.0'
         compile 'commons-httpclient:commons-httpclient:3.1'
         compile 'com.google.code.maven-play-plugin.spy:memcached:2.4.2'
-        compile 'org.compass-project:compass:2.2.0'
+//        compile 'org.compass-project:compass:2.2.0'
                 //        runtime 'postgresql:postgresql:8.2-507.jdbc3'
 
         test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
@@ -74,7 +75,7 @@ grails.project.dependency.resolution = {
         compile ":google-chart:0.5.2"
         compile ":mail:1.0.7"
         compile ":runtime-logging:0.4"
-        compile ":searchable:0.6.9"
+//        compile ":searchable:0.6.9"
         compile ":iwebkit:0.5"
 
         // plugins needed at runtime but not for compilation
@@ -82,16 +83,12 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
 
-
-
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"
         //compile ":less-asset-pipeline:1.10.0"
         //compile ":coffee-asset-pipeline:1.8.0"
         //compile ":handlebars-asset-pipeline:1.3.0.3"
 
-//        plugins.iwebkit=0.2
-//        plugins.jsecurity=0.4.1
 
 
     }

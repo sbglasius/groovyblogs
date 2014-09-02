@@ -4,15 +4,15 @@ import org.springframework.cache.ehcache.EhCacheFactoryBean
 
 beans = {
 
-    memCache(MemcacheFactoryBean) {
-        host = "localhost"
-        port = 11211
-    }
-
-    thumbCache(MemcacheMap) {
-        client = memCache
-        timeToLive = 60*60*24*14 // 14 days
-    }
+//    memCache(MemcacheFactoryBean) {
+//        host = "localhost"
+//        port = 11211
+//    }
+//
+//    thumbCache(MemcacheMap) {
+//        client = memCache
+//        timeToLive = 60*60*24*14 // 14 days
+//    }
 
     feedCache(EhCacheFactoryBean) {
         timeToLive = 60

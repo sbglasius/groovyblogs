@@ -1,7 +1,7 @@
 package org.groovyblogs
 
 import org.apache.log4j.Logger
-import org.apache.lucene.search.HitCollector
+//import org.apache.lucene.search.HitCollector
 
 /**
  * Provides a simple Collector that allows you to extract an offset
@@ -10,8 +10,10 @@ import org.apache.lucene.search.HitCollector
  *
  * @author Glen Smith (glen@bytecode.com.au)
  *
+ * TODO: Replace with elasticsearch
+ *
  */
-class OffsetCollector extends HitCollector {
+class OffsetCollector { //} extends HitCollector {
 
     def log = Logger.getLogger(this.class.name)
 
@@ -85,7 +87,7 @@ class OffsetCollector extends HitCollector {
 /**
  * Sorts a TreeMap in descending order.
  */
-class DescendingComparitor implements java.util.Comparator {
+class DescendingComparitor implements Comparator {
 
     public int compare(Object num1,
                        Object num2) {
