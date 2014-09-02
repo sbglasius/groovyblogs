@@ -1,5 +1,4 @@
 import twitter4j.*
-import org.codehaus.groovy.grails.commons.ConfigurationHolder
 
 class TwitterService {
 

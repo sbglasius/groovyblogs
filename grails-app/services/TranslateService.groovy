@@ -1,5 +1,4 @@
-import org.codehaus.groovy.grails.commons.ConfigurationHolder
-
+import grails.util.Holders
 
 // A simple translation service that uses Google APIs. Read about it
 // at http://blogs.bytecode.com.au/glen/2009/07/30/getting-groovy-with-google-language-translation-apis.html
@@ -13,7 +12,7 @@ class TranslateService {
             text = text[0..<200]
         }
 
-        String url = ConfigurationHolder.config.translate.langUrl +
+        String url = Holders.config.translate.langUrl +
             text.encodeAsURL().toString() + "&key=" + SystemConfig.findBySettingName("translate.apikey")?.settingValue //ConfigurationHolder.config.translate.apikey
 
         def translateResponse = url.toURL().text

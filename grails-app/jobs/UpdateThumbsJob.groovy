@@ -1,5 +1,4 @@
-
-import org.codehaus.groovy.grails.commons.ConfigurationHolder
+import grails.util.Holders
 import net.sf.ehcache.Ehcache
 
 class UpdateThumbsJob {
@@ -18,7 +17,7 @@ class UpdateThumbsJob {
 
     def execute() {
 
-        if (!ConfigurationHolder.config.thumbnail.enabled) {
+        if (!Holders.config.thumbnail.enabled) {
             // service disabled
             return
         }

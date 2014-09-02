@@ -1,5 +1,3 @@
-import org.codehaus.groovy.grails.commons.ConfigurationHolder
-import net.sf.ehcache.Ehcache
 import net.sf.ehcache.Element
 
 class BlogTagLib {
@@ -80,7 +78,7 @@ class BlogTagLib {
 
     def translate = { attrs ->
 
-        if (ConfigurationHolder.config.translate.enabled) {
+        if (Holders.config.translate.enabled) {
 
             def entry = attrs.entry
 
