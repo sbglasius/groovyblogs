@@ -62,9 +62,9 @@ class AccountController {
 
         if (account.save(flush: true)) {
 
-            def authToken = new UsernamePasswordToken(params.userid, params.password)
+//            def authToken = new UsernamePasswordToken(params.userid, params.password)
 
-            this.jsecSecurityManager.login(authToken)
+//            this.jsecSecurityManager.login(authToken)
 
             redirect(action: 'edit')
             //render(view: 'addfeed', model: ['account':account ])
