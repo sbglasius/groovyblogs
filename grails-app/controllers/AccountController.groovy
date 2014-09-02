@@ -1,4 +1,3 @@
-import org.jsecurity.authc.AuthenticationException
 import org.jsecurity.authc.UsernamePasswordToken
 import org.jsecurity.SecurityUtils
 import javax.servlet.http.Cookie
@@ -9,9 +8,9 @@ class AccountController  {
 
     FeedService feedService
 
-    private Account getCurrentUser() {
+    private User getCurrentUser() {
         def subject = SecurityUtils.getSubject();
-        return Account.findByUserid(subject.principal)
+        return User.findByUsername(subject.principal)
     }
 
     def index() { redirect(action: 'edit', params: params) }
@@ -29,7 +28,7 @@ class AccountController  {
     }
 
     def update() {
-        def account = Account.get(params.id)
+        def account = User.get(params.id)
         if (account.id == getCurrentUser()?.id) {
             //account.properties = params
             bindData(account, params, ['id', 'password']) // don't bind id
@@ -49,14 +48,14 @@ class AccountController  {
     }
 
     def signup() {
-        def account = new Account()
-        account.properties['userid', 'password', 'email'] = params
+        def account = new User()
+        account.properties['username', 'password', 'email'] = params
         return ['account': account]
     }
 
     def register() {
-        def account = new Account()
-        account.properties['userid', 'password', 'email'] = params
+        def account = new User()
+        account.properties['username', 'password', 'email'] = params
         account.registered = new Date()
         account.status = "active"
         account.password = params.password.encodeAsSHA1Bytes().encodeBase64()

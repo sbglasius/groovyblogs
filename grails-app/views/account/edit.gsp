@@ -23,7 +23,7 @@
                     <div class="dialog">
                         <table>
 
-                            <tr class='prop'><td valign='top' class='name'><label for='userid'>User Id:</label></td><td valign='top' class='value ${hasErrors(bean:account,field:'userid','errors')}'>${account.userid}</td></tr>
+                            <tr class='prop'><td valign='top' class='name'><label for='userid'>User Id:</label></td><td valign='top' class='value ${hasErrors(bean:account,field:'username','errors')}'>${account.username}</td></tr>
 
                             <tr class='prop'><td valign='top' class='name'><label for='password'>Password:</label></td><td valign='top' class='value ${hasErrors(bean:account,field:'password','errors')}'><input type="password" name='password' /></td></tr>
 

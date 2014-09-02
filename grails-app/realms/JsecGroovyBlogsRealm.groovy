@@ -20,12 +20,12 @@ class JsecGroovyBlogsRealm {
         // Get the user with the given username. If the user is not
         // found, then they don't have an account and we throw an
         // exception.
-        def user = Account.findByUserid(username)
+        def user = User.findByUsername(username)
         if (!user) {
             throw new UnknownAccountException("No account found for user [${username}]")
         }
 
-        log.info "Found user '${user.userid}' in DB"
+        log.info "Found user '${user.username}' in DB"
 
         // Now check the user's password against the hashed value stored
         // in the database.
@@ -43,7 +43,7 @@ class JsecGroovyBlogsRealm {
     }
 
     def hasRole(principal, roleName) {
-        return Account.findByUseridAndRole(principal, roleName)
+        return User.findByUsernameAndRole(principal, roleName)
     }
 
     def hasAllRoles(principal, roles) {

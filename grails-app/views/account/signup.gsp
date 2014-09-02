@@ -20,7 +20,7 @@
                 <table>
 
                        
-                     <tr class='prop'><td valign='top' class='name'><label for='userid'>Userid:</label></td><td valign='top' class='value ${hasErrors(bean:account,field:'userid','errors')}'><input type='text' name='userid' value='${account?.userid}' /></td></tr>
+                     <tr class='prop'><td valign='top' class='name'><label for='userid'>Userid:</label></td><td valign='top' class='value ${hasErrors(bean:account,field:'username','errors')}'><input type='text' name='userid' value='${account?.username}' /></td></tr>
                      
                      <tr class='prop'><td valign='top' class='name'><label for='password'>Password:</label></td><td valign='top' class='value ${hasErrors(bean:account,field:'password','errors')}'><input type="password" name='password' value='${account?.password}' /></td></tr>                       
 

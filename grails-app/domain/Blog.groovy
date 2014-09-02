@@ -10,8 +10,8 @@ class Blog {
     String status = "PENDING"
     String lastError
 	
-    Account account
-    static belongsTo = Account
+    User account
+    static belongsTo = User
 	
     // def optionals = [ "title", "description", "pollFrequency", "status", "lastError", ]
 	              	

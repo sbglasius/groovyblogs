@@ -6,14 +6,14 @@ class LoginController {
 	
     def login() {
         if (params.userid && params.password) {
-            def user = Account.findByUseridAndStatus(params.userid, "active")
+            def user = User.findByUsernameAndStatus(params.userid, "active")
 	    		
             String calcPassword = params.password.encodeAsSHA1Bytes().encodeBase64()
             if (user != null && user.password == calcPassword)  {
                 session.account = user
                 user.lastLogin = new Date()
                 user.save()
-                flash.message = "Welcome ${user.userid}"
+                flash.message = "Welcome ${user.username}"
                 if (session.returnController) {
                     redirect(controller:session.returnController, action:session.returnAction)
                 } else {
@@ -29,7 +29,7 @@ class LoginController {
 	
         if (params.userid) {
 			
-            def account = Account.findByUserid(params.userid)
+            def account = User.findByUsername(params.userid)
             if (account && account.email) {
     			
                 def PW_POOL = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ"
@@ -43,7 +43,7 @@ class LoginController {
                 def msg = """
 		        	<h1>groovyblogs.org Password Reset</h1>
 		        	<p>
-		            Hi ${account.userid}, we've reset your password to: <b>${genPw}</b>.
+		            Hi ${account.username}, we've reset your password to: <b>${genPw}</b>.
 					You need to type in the letters in upper case. 
 					Once you've logged on you can change it to something you prefer
 					by going into the "My Blogs" tab.

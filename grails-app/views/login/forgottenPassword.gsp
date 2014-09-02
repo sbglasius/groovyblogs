@@ -22,7 +22,7 @@
 
                        
                        
-                                  <tr class='prop'><td valign='top' class='name'><label for='userid'>User Id: </label></td><td valign='top' class='value ${hasErrors(bean:account,field:'userid','errors')}'><input type='text' name='userid' value='${account?.userid}' /></td></tr>
+                                  <tr class='prop'><td valign='top' class='name'><label for='userid'>User Id: </label></td><td valign='top' class='value ${hasErrors(bean:account,field:'username','errors')}'><input type='text' name='userid' value='${account?.userid}' /></td></tr>
                         
                </table>
                </div>

@@ -48,9 +48,9 @@ class BootStrap {
     }
 
     def createAdminUserIfRequired() {
-        if (Account.count() == 0) {
+        if (User.count() == 0) {
         	
-        	def admin = new Account(userid: "admin", role: "admin",
+        	def admin = new User(username: "admin", role: "admin",
         	      status: "ACTIVE", email: "glen@bytecode.com.au")
         
         	def password =  "admin".encodeAsSHA1Bytes().encodeBase64()
