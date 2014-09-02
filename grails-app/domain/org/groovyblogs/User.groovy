@@ -8,9 +8,12 @@ class User {
     String password
     String email
     String status
-    String role = "user"
+    boolean enabled = true
     Date lastLogin = new Date()
     Date registered = new Date()
+    boolean accountExpired
+    boolean accountLocked
+    boolean passwordExpired
 
     static hasMany = [blogs: Blog]
     static transients = ['springSecurityService']
@@ -20,7 +23,6 @@ class User {
         password nullable: false
         email email: true, nullable: false
         status nullable: true
-        role nullable: true
     }
 
     static mapping = {

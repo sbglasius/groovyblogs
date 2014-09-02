@@ -1,9 +1,12 @@
 import grails.util.Environment
+import org.groovyblogs.Role
 import org.groovyblogs.SystemConfig
 import org.groovyblogs.User
+import org.groovyblogs.UserRole
 
 class BootStrap {
-	
+	 def grailsApplication
+
      def init = { servletContext ->
 
         switch (Environment.current) {
@@ -50,14 +53,19 @@ class BootStrap {
     }
 
     def createAdminUserIfRequired() {
-        if (User.count() == 0) {
-        	
-        	def admin = new User(username: "admin", password: "admin", role: "admin",
-        	      status: "ACTIVE", email: "glen@bytecode.com.au")
-        
-            if (!admin.save()) {
-            	println "Failed to create admin user: ${admin.errors}" 
-            }
-        }
+        def config = grailsApplication.config.org.groovyblogs
+
+        def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true, failOnError: true)
+        def userRole = new Role(authority: 'ROLE_USER').save(flush: true, failOnError: true)
+
+
+        def adminUser = new User(username: config.adminUser, password: config.adminPassword, email: "admin@groovyblogs.org")
+        adminUser.save(flush: true, failOnError: true)
+
+        UserRole.create adminUser, adminRole, true
+
+        assert User.count() == 1
+        assert Role.count() == 2
+        assert UserRole.count() == 1
     }
 } 

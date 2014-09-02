@@ -77,6 +77,7 @@ grails.project.dependency.resolution = {
         compile ":runtime-logging:0.4"
 //        compile ":searchable:0.6.9"
         compile ":iwebkit:0.5"
+        compile ":scaffolding:2.1.2"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.5.5" // or ":hibernate:3.6.10.17"

@@ -5,8 +5,10 @@ import com.sun.syndication.feed.synd.SyndEntryImpl
 import com.sun.syndication.feed.synd.SyndFeed
 import com.sun.syndication.feed.synd.SyndFeedImpl
 import com.sun.syndication.io.SyndFeedOutput
+import grails.plugin.springsecurity.annotation.Secured
 import net.sf.ehcache.Element
 
+@Secured(['permitAll'])
 class FeedController {
 
     def feedCache

@@ -87,7 +87,7 @@
         </span>
       </g:form>
       <p>
-      <g:link controller='login' action="forgottenPassword">Forgotten your password?</g:link><p/>
+      <g:link controller='forgotPassword' action="forgottenPassword">Forgotten your password?</g:link><p/>
       <g:link controller='account' action="signup">Need to Sign Up?</g:link>
 
     </div>

@@ -1,36 +1,13 @@
 package org.groovyblogs
 
-class LoginController {
+import grails.plugin.springsecurity.annotation.Secured
 
-    def index() {
-        render(view: 'login')
-    }
-
-    def login() {
-        if (params.userid && params.password) {
-            def user = User.findByUsernameAndStatus(params.userid, "active")
-
-            String calcPassword = params.password.encodeAsSHA1Bytes().encodeBase64()
-            if (user != null && user.password == calcPassword) {
-                session.account = user
-                user.lastLogin = new Date()
-                user.save()
-                flash.message = "Welcome ${user.username}"
-                if (session.returnController) {
-                    redirect(controller: session.returnController, action: session.returnAction)
-                } else {
-                    redirect(controller: 'entries', action: 'recent')
-                }
-            } else {
-                flash.message = "Invalid username or password. Please try again."
-            }
-        }
-    }
+@Secured(['permitAll'])
+class ForgotPasswordController {
 
     def forgottenPassword() {
 
         if (params.userid) {
-
             def account = User.findByUsername(params.userid)
             if (account && account.email) {
 
@@ -66,15 +43,6 @@ class LoginController {
             }
 
         }
-
-    }
-
-
-    def logout() {
-
-        session.account = null
-        flash.message = "You have successfully logged out"
-        redirect(controller: 'entries', action: 'recent')
 
     }
 }

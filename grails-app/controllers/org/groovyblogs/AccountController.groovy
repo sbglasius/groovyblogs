@@ -1,16 +1,18 @@
 package org.groovyblogs
 
+import grails.plugin.springsecurity.annotation.Secured
+
 import javax.servlet.http.Cookie
 
+@Secured(['ROLE_USER'])
 class AccountController {
 
-    def jsecSecurityManager
+    def springSecurityService
 
     FeedService feedService
 
     private User getCurrentUser() {
-        def subject = SecurityUtils.getSubject();
-        return User.findByUsername(subject.principal)
+        springSecurityService.currentUser
     }
 
     def index() { redirect(action: 'edit', params: params) }
@@ -236,6 +238,7 @@ class AccountController {
 
     }
 
+    @Secured(['ROLE_ADMIN'])
     def approveFeed() {
         Blog blog = Blog.get(params.id)
         if (blog) {
@@ -247,6 +250,7 @@ class AccountController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def removeFeed() {
 
         Blog blog = Blog.get(params.id)

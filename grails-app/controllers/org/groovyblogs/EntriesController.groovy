@@ -1,5 +1,8 @@
 package org.groovyblogs
 
+import grails.plugin.springsecurity.annotation.Secured
+
+@Secured(['permitAll'])
 class EntriesController {
 
     FeedService feedService

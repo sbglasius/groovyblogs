@@ -1,5 +1,6 @@
 package org.groovyblogs
 
+import grails.plugin.springsecurity.annotation.Secured
 import net.sf.ehcache.Element
 import org.jfree.chart.ChartFactory
 import org.jfree.chart.JFreeChart
@@ -15,11 +16,12 @@ import org.jfree.data.category.DefaultCategoryDataset
 import java.awt.*
 import java.awt.image.BufferedImage
 
+@Secured(['permitAll'])
 class ChartController {
 
     def chartCache
 
-    def index() { redirect(action: siteStats, params: params) }
+    def index() { redirect(action: 'siteStats', params: params) }
 
 
     private byte[] buildChart() {
