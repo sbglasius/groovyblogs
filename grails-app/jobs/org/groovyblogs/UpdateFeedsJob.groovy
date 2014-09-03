@@ -5,9 +5,10 @@ class UpdateFeedsJob {
     FeedService feedService
 
     def concurrent = false
+    static triggers = {
+        simple name:'updateFeedJobTrigger', repeatInterval: 1000 * 60, startDelay: 1000 * 60
+    }
 
-    def startDelay = 1000 * 60 * 1  // wait 1 mins
-    def timeout = 1000 * 60 // update every minute
 
     def execute() {
 

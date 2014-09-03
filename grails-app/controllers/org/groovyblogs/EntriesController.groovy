@@ -23,7 +23,7 @@ class EntriesController {
         }
 
         def entries = entriesService.getRecentEntries(days)
-
+        println entries
         return [
                 entries   : entries, // entriesService.limitEntries(entries),
                 pageTitle : "Recent Entries (Last ${days} Days)",

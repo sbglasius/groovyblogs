@@ -7,8 +7,9 @@ class UpdateTweetsJob {
     def concurrent = false
 
     // Update the tweets every 15 minutes
-    def cronExpression = "15 0,15,30,45 * * * ?"
-
+    static triggers = {
+        cron name:'updateTweetsJobTrigger', startDelay:10000, cronExpression:  "0 0,15,30,45 * * * ?"
+    }
 
     def execute() {
 

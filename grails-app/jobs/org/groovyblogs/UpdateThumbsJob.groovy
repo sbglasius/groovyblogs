@@ -10,11 +10,9 @@ class UpdateThumbsJob {
     ThumbnailService thumbnailService
     Ehcache pendingCache
 
-    def startDelay = 1000 * 30 // wait 30 secs
-    def timeout = 1000 * 60 // update every minute
-
-    // Update the lists every 15 minutes, 1,16,31,46
-    // def cronExpression = "30 * * * * ?"
+    static triggers = {
+        simple name:'updateThumbsJobTrigger', repeatInterval: 1000 * 60, startDelay: 1000 * 30
+    }
 
 
     def execute() {

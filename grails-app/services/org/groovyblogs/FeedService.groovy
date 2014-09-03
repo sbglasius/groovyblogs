@@ -78,7 +78,7 @@ class FeedService {
                 description = e.contents[0]?.value
             }
             // trim to 4k-ish size for db storage
-            if (description.length() > 4000) {
+            if (description?.length() > 4000) {
                 description = description[0..3999]
             }
             String link = e.link

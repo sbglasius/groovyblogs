@@ -1,5 +1,5 @@
 <div class="entry ${entry.language?.startsWith('en') ? 'english' : 'nonenglish'}">
-  <table>
+    <table>
     <tr>
     <g:if test="${thumbnails}">
       <td style="padding-right: 60px">

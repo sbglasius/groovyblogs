@@ -18,13 +18,11 @@ beans = {
         timeToLive = 60
     }
 
-    /*
     thumbCache(EhCacheFactoryBean) {
         eternal = true
 		overflowToDisk = false
 		maxElementsInMemory = 1000
     }
-    */
 
     pendingCache(EhCacheFactoryBean) {
         timeToLive = 90
