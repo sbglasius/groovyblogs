@@ -52,13 +52,13 @@
 </div>
 
 
-<jsec:user>
+<sec:ifLoggedIn>
 
   <div class="niceBox">
     <div class="niceBoxHd">User Info</div>
     <div class="niceBoxBody">
       <p><a href="<g:createLink controller='account' action='edit'/>">
-          <jsec:principal/>
+          <sec:username/>
         </a></p>
       <g:link controller="auth" action="signOut">Logout</g:link>
 
@@ -67,8 +67,8 @@
   </div>
 
 
-</jsec:user>
-<jsec:notUser>
+</sec:ifLoggedIn>
+<sec:ifNotLoggedIn>
   <div class="niceBox">
     <div class="niceBoxHd">Login</div>
     <div class="niceBoxBody">
@@ -93,7 +93,7 @@
     </div>
 
   </div>
-</jsec:notUser>
+</sec:ifNotLoggedIn>
 
 
 <div class="niceBox">

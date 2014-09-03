@@ -35,19 +35,19 @@ pageTracker._trackPageview();
      			  <li id="${request.forwardURI =~ /entries\/popular/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='entries' action='popular'/>">Popular</a></li>
      			  <li id="${request.forwardURI =~ /entries\/lists/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='entries' action='lists'/>">The Lists</a></li>
      			  <!-- <li id="${request.forwardURI =~ /entries\/tweets/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='entries' action='tweets'/>">Tweets</a></li> -->
-				<jsec:hasRole name="admin">
-     			  <li id="${request.forwardURI =~ /blog\/list/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='blog' action='list'/>">All Blogs</a></li>
-				</jsec:hasRole>
+				<sec:ifAnyGranted roles="ROLE_ADMIN">
+     			  <li id="${request.forwardURI =~ /blog\/index/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='blog' action='index'/>">All Blogs</a></li>
+				</sec:ifAnyGranted>
 
                           <li id="${request.forwardURI =~ /account/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='account' action='edit'/>">My Blogs</a></li>
 
-                          <jsec:user>
+                          <sec:ifLoggedIn>
 			      	<li id="${request.forwardURI =~ /login/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='auth' action='signOut'/>">Logout</a></li>
-			  </jsec:user>
+			  </sec:ifLoggedIn>
 
-                          <jsec:notUser>
+                          <sec:ifNotLoggedIn>
 			      <li id="${request.forwardURI =~ /login/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='auth' action='login'/>">Login</a></li>
-			  </jsec:notUser>
+			  </sec:ifNotLoggedIn>
 			      <g:if test="${request.forwardURI =~ /search/}">
 				      <li id="current"><a href="<g:createLink controller='search' action='search'/>">Search</a></li>
 			      </g:if>
