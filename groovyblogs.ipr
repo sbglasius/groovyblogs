@@ -29,16 +29,29 @@
     </annotationProcessing>
   </component>
   <component name="CopyrightManager" default="" />
-  <component name="DataSourceManagerImpl" format="xml" hash="3130412252">
-    <data-source source="LOCAL" name="groovyblogs dev" uuid="0a86ed1f-a2ab-4946-a679-8a21eed6c3fb">
-      <driver-ref>postgresql</driver-ref>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost/groovyblogs</jdbc-url>
-      <user-name>glen</user-name>
-      <user-password>dfdadfcbdfd9dfd9dfdddfc5dfd8dfce</user-password>
+  <component name="DataSourceManagerImpl" format="xml" hash="146335223">
+    <data-source source="LOCAL" name="MySQL - groovyblogs-dev@localhost" uuid="0ac16cae-cb25-447c-ae05-beeae77fe70d">
+      <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/groovyblogs-dev</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfd8dfc5dfc5dfde</user-password>
+      <driver-properties>
+        <property name="zeroDateTimeBehavior" value="convertToNull" />
+        <property name="tinyInt1isBit" value="false" />
+      </driver-properties>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="groovyblogs dev" uuid="40a4f284-d833-4fc7-8b13-405c588e83af">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/groovyblogs-dev</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfd8dfc5dfc5dfde</user-password>
       <libraries>
         <library>
-          <url>file://$USER_HOME$/.ivy2/cache/postgresql/postgresql/jars/postgresql-8.2-507.jdbc3.jar</url>
+          <url>file://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.29/mysql-connector-java-5.1.29.jar</url>
         </library>
       </libraries>
     </data-source>
@@ -188,6 +201,13 @@
         <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
       </item>
     </group>
+  </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="sbg">
+      <words>
+        <w>userid</w>
+      </words>
+    </dictionary>
   </component>
   <component name="ProjectModuleManager">
     <modules>

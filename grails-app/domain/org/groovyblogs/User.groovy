@@ -26,6 +26,7 @@ class User {
     }
 
     static mapping = {
+        table name: 'account'
         username index: 'User_Id_Idx'
     }
 

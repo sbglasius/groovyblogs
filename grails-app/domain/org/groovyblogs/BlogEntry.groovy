@@ -66,6 +66,7 @@ class BlogEntry {
     }
 
     static mapping = {
+        description sqlType: 'LONGTEXT'
         link index: 'Link_Idx'
         hash index: 'Hash_Idx'
     }
