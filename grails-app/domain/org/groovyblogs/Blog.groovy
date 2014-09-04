@@ -9,7 +9,8 @@ class Blog {
     Date lastPolled = new Date()
     Date nextPoll = new Date()
     Date registered = new Date()
-    String status = "PENDING"
+    BlogStatus status = BlogStatus.PENDING
+    int errorCount = 0
     String lastError
 
     User account
@@ -34,7 +35,7 @@ class Blog {
     }
 
     static mapping = {
-        nextPolled index: 'Next_Poll_Idx'
+        nextPoll index: 'Next_Poll_Idx'
     }
 
 }	

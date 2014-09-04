@@ -26,7 +26,7 @@ class BlogEntry {
 
     static def constraints = {
         title(size: 0..255)
-        description(size: 0..4096)
+        description(nullable: false)
         language(nullable: true)
         link(unique: true)
         hash(nullable: true)

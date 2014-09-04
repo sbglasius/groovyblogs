@@ -6,7 +6,7 @@ class UpdateFeedsJob {
 
     def concurrent = false
     static triggers = {
-        simple name:'updateFeedJobTrigger', repeatInterval: 1000 * 60, startDelay: 1000 * 60
+        simple name:'updateFeedJobTrigger', repeatInterval: 1000 * 60, startDelay: 1000 * 15
     }
 
 

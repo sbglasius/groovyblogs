@@ -1,5 +1,4 @@
 package org.groovyblogs
-
 import grails.plugin.springsecurity.annotation.Secured
 
 import javax.servlet.http.Cookie
@@ -49,12 +48,14 @@ class AccountController {
         }
     }
 
+    @Secured(['permitAll'])
     def signup() {
         def account = new User()
         account.properties['username', 'password', 'email'] = params
         return ['account': account]
     }
 
+    @Secured(['permitAll'])
     def register() {
         def account = new User()
         account.properties['username', 'password', 'email'] = params
@@ -67,7 +68,6 @@ class AccountController {
 //            def authToken = new UsernamePasswordToken(params.userid, params.password)
 
 //            this.jsecSecurityManager.login(authToken)
-
             redirect(action: 'edit')
             //render(view: 'addfeed', model: ['account':account ])
             return
@@ -117,7 +117,7 @@ class AccountController {
             if (blog.validate()) {
                 blog.save()
                 if (grailsApplication.config.feeds.moderate) {
-                    blog.status = "PENDING"
+                    blog.status = BlogStatus.PENDING
                     try {
                         sendMail {
                             to grailsApplication.config.feeds.moderator_email
@@ -144,7 +144,7 @@ class AccountController {
 
                 } else {
                     feedService.updateFeed(blog)
-                    blog.status = "ACTIVE"
+                    blog.status = BlogStatus.ACTIVE
                     flash.message = "Successfully added new feed: ${feedInfo.title}"
                 }
             } else {
@@ -162,7 +162,7 @@ class AccountController {
     def updateFeed() {
         def blog = Blog.get(params.id)
 
-        if (blog && blog.status == "ACTIVE") {
+        if (blog && blog.status == BlogStatus.ACTIVE) {
             log.info("Updating Feed: [${blog?.feedUrl}]")
             def feedInfo = feedService.updateFeed(blog)
             flash.message = "Successfully updated ${blog.title}"
@@ -242,7 +242,7 @@ class AccountController {
     def approveFeed() {
         Blog blog = Blog.get(params.id)
         if (blog) {
-            blog.status = "ACTIVE"
+            blog.status = BlogStatus.ACTIVE
             log.warn "Approving blog: ${blog.title} - ${blog.id}"
             render "<h1>Approval all good for ${blog.title} - ${blog.id}</h1>"
         } else {

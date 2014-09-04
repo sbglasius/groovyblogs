@@ -23,21 +23,21 @@ class FeedService {
         def clientParams = client.getParams()
         clientParams.setParameter(org.apache.commons.httpclient.params.HttpClientParams.HTTP_CONTENT_CHARSET, "UTF-8");
 
-        if (Holders.config.http.useproxy) {
+        if (config.http.useproxy) {
             def hostConfig = client.getHostConfiguration()
-            hostConfig.setProxy(Holders.config.http.host, Holders.config.http.port as int)
-            log.warn("Setting proxy to [" + Holders.config.http.host + "]")
+            hostConfig.setProxy(config.http.host, config.http.port as int)
+            log.warn("Setting proxy to [" + config.http.host + "]")
         }
 
-        if (Holders.config.http.useragent) {
+        if (config.http.useragent) {
             clientParams.setParameter(org.apache.commons.httpclient.params.HttpClientParams.USER_AGENT,
-                    Holders.config.http.useragent)
+                    config.http.useragent)
         }
 
-        if (Holders.config.http.timeout) {
+        if (config.http.timeout) {
 
             clientParams.setParameter(org.apache.commons.httpclient.params.HttpClientParams.SO_TIMEOUT,
-                    Holders.config.http.timeout)
+                    config.http.timeout)
         }
 
         def mthd = new GetMethod(url)
@@ -96,7 +96,7 @@ class FeedService {
                     author: e.author ? e.author : "")
 
             //TODO ignore stuff older than X days
-            def trimEntriesOlderThanXdays = Holders.config.feeds.ignoreFeedEntriesOlderThan
+            def trimEntriesOlderThanXdays = config.feeds.ignoreFeedEntriesOlderThan
             if (trimEntriesOlderThanXdays) {
                 def trimTime = new Date().minus(trimEntriesOlderThanXdays) // X days ago
                 if (publishedDate && publishedDate < trimTime) {
@@ -170,11 +170,11 @@ class FeedService {
 
                             try {
 
-                                if (Holders.config.twitter.enabled) {
+                                if (config.twitter.enabled) {
                                     twitterService.sendTweet("${be.title} -- ${be.link} -- ${blog.title}")
                                 }
 
-                                if (Holders.config.thumbnail.enabled) {
+                                if (config.thumbnail.enabled) {
                                     // be.thumbnail = thumbnailService.fetchThumbnail(be.link)
                                     // log.debug "Adding to pending thumbs cache: ${be?.link}"
                                     //pendingCache.put( new Element(be.link, be.id))
@@ -219,14 +219,18 @@ class FeedService {
         log.info("Now polling: [$blog.title]")
         FeedInfo fi
         try {
-            fi = getFeedInfo(blog.feedUrl, Holders.config.translate.enabled)
+            fi = getFeedInfo(blog.feedUrl, config.translate.enabled)
         } catch (Exception e) {
             log.warn("Could not parse feed [$blog.feedUrl]", e)
-            blog.lastError = "Error parsing [$blog.feedUrl] " + e.message
+            markBlogWithError(blog, e)
         }
         updateFeed(blog, fi)
 
 
+    }
+
+    protected ConfigObject getConfig() {
+        Holders.config
     }
 
     void updateFeedFromHtml(String blogId, String feedHtml) {
@@ -238,7 +242,7 @@ class FeedService {
             fi = getFeedInfoFromHtml(feedHtml)
         } catch (Exception e) {
             log.warn("Could not parse feed [$blog.feedUrl]", e)
-            blog.lastError = "Error parsing [$blog.feedUrl] " + e.message
+            markBlogWithError(blog, e)
         }
         updateFeed(blog, fi)
 
@@ -246,32 +250,54 @@ class FeedService {
 
     void updateFeeds() {
 
-        log.info("org.groovyblogs.FeedService starting polled update")
-        def feedsToUpdate = Blog.findAllByStatusAndNextPollLessThan("ACTIVE", new Date())
+        log.info("FeedService starting polled update")
+        def feedsToUpdate = Blog.findAllByStatusAndNextPollLessThan(BlogStatus.ACTIVE, new Date())
         log.info("${feedsToUpdate.size()} to update")
 
         // Limit to 5 updated blogs per minute. Could probably up this significantly
         // by going multithreaded...
-        if (feedsToUpdate.size() > Holders.config.http.maxpollsperminute) {
-            log.warn("${feedsToUpdate.size()} exceeds max for this minute. Limiting update to ${Holders.config.http.maxpollsperminute}.")
-            feedsToUpdate = feedsToUpdate[0..Holders.config.http.maxpollsperminute - 1]
+        if (feedsToUpdate.size() > config.http.maxpollsperminute) {
+            log.warn("${feedsToUpdate.size()} exceeds max for this minute. Limiting update to ${config.http.maxpollsperminute}.")
+            feedsToUpdate = feedsToUpdate[0..config.http.maxpollsperminute - 1]
         }
 
         feedsToUpdate.each { blog ->
-            updateFeed(blog)
+            try {
+                updateFeed(blog)
+                markBlogUpdateSuccess(blog)
+            } catch (e) {
+                log.warn("FeedService failed to update $blog",e)
+                markBlogWithError(blog, e)
+            }
         }
 
 
 
-        log.info("org.groovyblogs.FeedService finished polled update")
+        log.info("FeedService finished polled update")
     }
 
+    def markBlogWithError(Blog blog, Exception e) {
+        blog.lastError = "Error parsing [$blog.feedUrl] " + e.message
+        blog.errorCount ++
+        log.warn("Encountered error in [$blog.feedUrl]. This is error number $blog.errorCount" )
+        if(blog.errorCount > config.groovyblogs.maxErrors ?: 10) {
+            log.info("FeedService marked blog $blog with ERROR")
+            blog.status = BlogStatus.ERROR
+        }
+        blog.save()
+    }
+
+    void markBlogUpdateSuccess(Blog blog) {
+        log.info("FeedService marked blog $blog ACTIVE")
+        blog.status = BlogStatus.ACTIVE
+        blog.errorCount = 0
+    }
 
     def updateLists() {
 
         def allEntries = []
 
-        Holders.config.lists.each { name, url ->
+        config.lists.each { name, url ->
 
             log.info("Updating list [$name] from [$url]")
             def feed = getFeedInfo(url, false)
@@ -326,8 +352,10 @@ class FeedService {
 
 
     def updateTweets() {
-
-        def tweetFeed = getFeedInfo(Holders.config.tweets.url, false)
+        if(!config.tweets.enable) {
+            return
+        }
+        def tweetFeed = getFeedInfo(config.tweets.url, false)
 
         def allEntries = tweetFeed.entries.collect { entry ->
             // entry.description = entry.description.replaceFirst("[^:]+:\\s*", "")
