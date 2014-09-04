@@ -22,7 +22,7 @@
             The new GroovyBlogs are run by the team behind <a href="http://gr8conf.org">GR8Conf</a> and the hosting is sponsored by <a href="http://easyspeedy.com">EasySpeedy</a>
         </p>
         <h3 class="text-center">Please stay tuned while we get the rest of the site working again</h3>
-        <p>For questions and to give moral support write <a href="mailto:sbglasius@gr8conf.org">sbglasius@gr8conf.org</a>.</p>
+        <p>For questions and to give moral support write <a href="mailto:sbglasius(at)gr8conf.org">sbglasius<i class="fa fa-at"></i>gr8conf.org</a>.</p>
     </div>
 
 	</body>

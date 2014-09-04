@@ -85,7 +85,7 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
         runtime ':twitter-bootstrap:3.2.0.2'
-        runtime ':font-awesome-resources:4.1.0.2'
+        runtime ':font-awesome-resources:4.2-SNAPSHOT'
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"

@@ -15,7 +15,7 @@
           <root url="file://$MODULE_DIR$/target/work/plugins/mail-1.0.7/grails-app/views" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/runtime-logging-0.4/grails-app/views" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/twitter-bootstrap-3.2.0.2/web-app" relative="/" />
-          <root url="file://$MODULE_DIR$/target/work/plugins/font-awesome-resources-4.1.0.2/web-app" relative="/" />
+          <root url="file://$MODULE_DIR$/target/work/plugins/font-awesome-resources-4.2-SNAPSHOT/web-app" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -47,8 +47,8 @@
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/database-migration-1.4.0/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/database-migration-1.4.0/grails-app/controllers" isTestSource="false" />
     </content>
-    <content url="file://$MODULE_DIR$/target/work/plugins/font-awesome-resources-4.1.0.2">
-      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/font-awesome-resources-4.1.0.2/grails-app/i18n" isTestSource="false" />
+    <content url="file://$MODULE_DIR$/target/work/plugins/font-awesome-resources-4.2-SNAPSHOT">
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/font-awesome-resources-4.2-SNAPSHOT/grails-app/i18n" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/geolocation-0.1">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/geolocation-0.1/grails-app/controllers" isTestSource="false" />
