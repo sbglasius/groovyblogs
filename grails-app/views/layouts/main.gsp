@@ -1,91 +1,63 @@
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>groovyblogs.org - <g:layoutTitle default="Welcome" /></title>
-		<link rel="stylesheet" href="${createLinkTo(dir:'css',file:'reset-fonts-grids.css')}"/>
-		<link rel="stylesheet" href="${createLinkTo(dir:'css',file:'groovyblogs.css')}"/>
-		<link rel="shortcut icon" href="${createLinkTo(file:'favicon.ico')}" />
-		<g:layoutHead />
-		<g:javascript library="application" />
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><g:layoutTitle default="Groovy Blogs"/></title>
+    <asset:stylesheet src="application.css"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <g:layoutHead/>
+</head>
 
-		
-		<meta name="description" content="groovyblogs.org is a groovy and grails blog aggregator" />
-		<meta name="keywords" content="groovy,grails,blogs" />
-		<meta name="robots" content="index,follow" />
+<body>
+<!-- Fixed navbar -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Project name</a>
+        </div>
 
-                <script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-1038671-2");
-pageTracker._trackPageview();
-} catch(err) {}</script>
-					
-	</head>
-	<body>
-	<div id="doc3" class="yui-t4"> 
-	    <div id="hd">
-			<img id="logo" src="${createLinkTo(dir:'images',file:'headerlogo.png')}" alt="gZone Logo"/>
-			
-			  <div id="tabs">
-			    <ul>
-			      <!-- <li class="${request.forwardURI =~ /home/ ? 'current' : 'notcurrent'}"><a href="<g:createLinkTo dir=''/>" >home</a></li> -->
-			      <li id="${request.forwardURI =~ /entries\/recent/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='entries' action='recent'/>">Just In</a></li>
-     			  <li id="${request.forwardURI =~ /entries\/popular/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='entries' action='popular'/>">Popular</a></li>
-     			  <li id="${request.forwardURI =~ /entries\/lists/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='entries' action='lists'/>">The Lists</a></li>
-     			  <!-- <li id="${request.forwardURI =~ /entries\/tweets/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='entries' action='tweets'/>">Tweets</a></li> -->
-				<sec:ifAnyGranted roles="ROLE_ADMIN">
-     			  <li id="${request.forwardURI =~ /blog\/index/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='blog' action='index'/>">All Blogs</a></li>
-				</sec:ifAnyGranted>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../navbar/">Default</a></li>
+                <li><a href="../navbar-static-top/">Static top</a></li>
+                <li class="active"><a href="./">Fixed top</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
 
-                          <li id="${request.forwardURI =~ /account/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='account' action='edit'/>">My Blogs</a></li>
-
-                          <sec:ifLoggedIn>
-			      	<li id="${request.forwardURI =~ /login/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='auth' action='signOut'/>">Logout</a></li>
-			  </sec:ifLoggedIn>
-
-                          <sec:ifNotLoggedIn>
-			      <li id="${request.forwardURI =~ /login/ ? 'current' : 'notcurrent'}"><a href="<g:createLink controller='auth' action='login'/>">Login</a></li>
-			  </sec:ifNotLoggedIn>
-			      <g:if test="${request.forwardURI =~ /search/}">
-				      <li id="current"><a href="<g:createLink controller='search' action='search'/>">Search</a></li>
-			      </g:if>
-
-			      
-			      
-			    </ul>
-			    <g:searchBox noCombo="true" query="${params.query}" fields="title,description" controller="search" action="search"/>
-			  </div>
-			
-		</div>  
-	   <div id="bd"> <!-- start body -->
-	   
-	  		<div id="yui-main"> 
-	        	<div class="yui-b">
-	        		<g:if test="${flash.message}">
-	        			<div id="flash">
-	        				${flash.message}
-	        			</div>
-	        		</g:if>
-	        	
-		        	<g:layoutBody />		
-	        	</div> 
-	      	</div> 
-	      	<div class="yui-b">
-             
-	      		<g:render template="/sidebar"/>
-	      	
-	      	</div> 
-	   
-
-
-	   </div>  <!-- end body -->
-	   <div id="ft">
-	   		All article content copyright by respective authors. groovyblogs.org by <a href="http://blogs.bytecode.com.au/glen">Glen Smith</a>.
-	   </div>  
-	</div> 
-		
-	</body>	
-
+<div class="container">
+    <g:layoutBody/>
+</div>
+<asset:javascript src="application.js"/>
+</body>
 </html>

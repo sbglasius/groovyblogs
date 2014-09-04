@@ -100,6 +100,12 @@
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-jasper/7.0.55/tomcat-embed-jasper-7.0.55.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-catalina-ant/7.0.55/tomcat-catalina-ant-7.0.55.jar!/" />
           <root url="file://$MODULE_DIR$/lib" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/json/json/20090211/json-20090211.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils/1.8.3/commons-beanutils-1.8.3.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/antlr/antlr-runtime/3.4/antlr-runtime-3.4.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/github/sommeri/less4j/1.6.0/less4j-1.6.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/ro/isdc/wro4j/rhino/1.7R5-20130223-1/rhino-1.7R5-20130223-1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/github/sommeri/less4j-javascript/0.0.1/less4j-javascript-0.0.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>

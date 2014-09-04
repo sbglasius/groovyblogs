@@ -14,6 +14,8 @@
           <root url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.1/web-app" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/mail-1.0.7/grails-app/views" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/runtime-logging-0.4/grails-app/views" relative="/" />
+          <root url="file://$MODULE_DIR$/target/work/plugins/twitter-bootstrap-3.2.0.2/web-app" relative="/" />
+          <root url="file://$MODULE_DIR$/target/work/plugins/font-awesome-resources-4.1.0.2/web-app" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -45,6 +47,9 @@
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/database-migration-1.4.0/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/database-migration-1.4.0/grails-app/controllers" isTestSource="false" />
     </content>
+    <content url="file://$MODULE_DIR$/target/work/plugins/font-awesome-resources-4.1.0.2">
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/font-awesome-resources-4.1.0.2/grails-app/i18n" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/geolocation-0.1">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/geolocation-0.1/grails-app/controllers" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/geolocation-0.1/grails-app/domain" isTestSource="false" />
@@ -66,6 +71,9 @@
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.1/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.1/grails-app/services" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-1.11.1/grails-app/taglib" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/target/work/plugins/less-asset-pipeline-1.10.0">
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/less-asset-pipeline-1.10.0/src/groovy" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/mail-1.0.7">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/mail-1.0.7/src/groovy" isTestSource="false" />
@@ -96,6 +104,10 @@
     <content url="file://$MODULE_DIR$/target/work/plugins/tomcat-7.0.55">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/tomcat-7.0.55/src/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/tomcat-7.0.55/src/groovy" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/target/work/plugins/twitter-bootstrap-3.2.0.2">
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/twitter-bootstrap-3.2.0.2/grails-app/i18n" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/twitter-bootstrap-3.2.0.2/grails-app/taglib" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/webxml-1.4.1">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/webxml-1.4.1/src/groovy" isTestSource="false" />
@@ -150,6 +162,12 @@
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-el/7.0.55/tomcat-embed-el-7.0.55.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-jasper/7.0.55/tomcat-embed-jasper-7.0.55.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-catalina-ant/7.0.55/tomcat-catalina-ant-7.0.55.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/json/json/20090211/json-20090211.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils/1.8.3/commons-beanutils-1.8.3.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/antlr/antlr-runtime/3.4/antlr-runtime-3.4.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/github/sommeri/less4j/1.6.0/less4j-1.6.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/ro/isdc/wro4j/rhino/1.7R5-20130223-1/rhino-1.7R5-20130223-1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/github/sommeri/less4j-javascript/0.0.1/less4j-javascript-0.0.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
