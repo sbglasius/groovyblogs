@@ -1,0 +1,38 @@
+@import "bootstrap.less";
+
+body {
+  padding-top: 110px;
+
+  .container-logo {
+    position: relative;
+    width: 185px;
+    margin: 0 auto;
+    padding: 0px 0px 0px 0px;
+    opacity: 1;
+    .logo {
+      margin: 0 auto;
+      position: fixed;
+      top: 0px;
+      z-index: 5999;
+
+      text-align: center;
+      a {
+        background: url("../top-arrow.png");
+        display: block;
+        width: 185px;
+        height: 120px;
+        .groovy-logo, .groovy-blogs {
+          padding: 0;
+          vertical-align: top;
+        }
+        .groovy-blogs {
+        }
+      }
+      span {
+        position: absolute;
+        top: -5000px;
+      }
+    }
+
+  }
+}
