@@ -1,7 +1,9 @@
 package org.groovyblogs
 
+import grails.transaction.Transactional
 import net.sf.ehcache.Element
 
+@Transactional(readOnly = true)
 class EntriesService {
 
     protected static final int DEFAULT_DAYS_TO_REPORT = 7
@@ -86,5 +88,15 @@ class EntriesService {
         }
         return entries
 
+    }
+
+    @Transactional(readOnly = false)
+    BlogEntry getEntry(long id) {
+        def blogEntry = BlogEntry.get(id)
+        if(blogEntry) {
+            blogEntry.hitCount++
+            blogEntry.save()
+        }
+        return blogEntry
     }
 }

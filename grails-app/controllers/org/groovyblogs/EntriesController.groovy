@@ -8,24 +8,14 @@ class EntriesController {
     FeedService feedService
     EntriesService entriesService
 
-    def entriesCache
-
     def index() { redirect(action: 'recent', params: params) }
 
-    def recent() {
-
-        int days = EntriesService.DEFAULT_DAYS_TO_REPORT // default to 7 days
-        if (params.id) {
-            days = Integer.parseInt(params.id) // override for longer periods
-            if (days > 60) {
-                days = 60
-            }
-        }
+    def recent(Integer days) {
+        days = Math.min(days ?: EntriesService.DEFAULT_DAYS_TO_REPORT, 60) // default to 7 days and max 60 days
 
         def entries = entriesService.getRecentEntries(days)
-        println entries
         return [
-                entries   : entries, // entriesService.limitEntries(entries),
+                entries   : entries,
                 pageTitle : "Recent Entries (Last ${days} Days)",
                 thumbnails: grailsApplication.config.thumbnail.enabled
         ]
@@ -76,13 +66,9 @@ class EntriesController {
         [entries: entries]
     }
 
-    def jump() {
-
-        BlogEntry be = BlogEntry.get(params.id)
+    def jump(Long id) {
+        BlogEntry be = entriesService.getEntry(id)
         if (be) {
-            //TODO should be transactional
-            be.hitCount++
-            be.save()
             response.sendRedirect(be.link)
         } else {
             flash.message = "Could not find link for blogEntry id $params.id"
@@ -91,15 +77,11 @@ class EntriesController {
 
     }
 
-    def jumpTranslate() {
+    def jumpTranslate(Long id) {
 
-        BlogEntry be = BlogEntry.get(params.id)
+        BlogEntry be = entriesService.getEntry(id)
         def lang = params.lang
         if (be && lang) {
-            //TODO should be transactional
-            be.hitCount++
-            be.save()
-
             def engine = new groovy.text.SimpleTemplateEngine()
             def template = engine.createTemplate(grailsApplication.config.translate.url)
             def binding = [

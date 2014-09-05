@@ -76,14 +76,15 @@ grails.project.dependency.resolution = {
         compile ":google-chart:0.5.2"
         compile ":mail:1.0.7"
         compile ":runtime-logging:0.4"
-//        compile ":searchable:0.6.9"
+        compile ":searchable:0.6.9"
         compile ":iwebkit:0.5"
         compile ":scaffolding:2.1.2"
         compile ":google-analytics:2.3.3"
 
 
         // plugins needed at runtime but not for compilation
-        runtime ":hibernate4:4.3.5.5" // or ":hibernate:3.6.10.17"
+//        runtime ":hibernate4:4.3.5.5"
+        runtime ":hibernate:3.6.10.17"
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
         runtime ':twitter-bootstrap:3.2.0.2'

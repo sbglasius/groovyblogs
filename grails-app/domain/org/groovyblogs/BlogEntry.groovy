@@ -1,10 +1,9 @@
 package org.groovyblogs
 
 class BlogEntry {
-    // TODO: Use elastic search instead
-//    static searchable = {
-//        only = ['title', 'description']
-//    }
+    static searchable = {
+        only = ['title', 'description']
+    }
 
     String title
     String description

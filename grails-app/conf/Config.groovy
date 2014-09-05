@@ -199,6 +199,7 @@ grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'org.groovyblog
 grails.plugin.springsecurity.authority.className = 'org.groovyblogs.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         '/'              : ['permitAll'],
+        '/searchable/**' : ['permitAll'],
         '/index'         : ['permitAll'],
         '/index.gsp'     : ['permitAll'],
         '/assets/**'     : ['permitAll'],
@@ -213,6 +214,8 @@ grails.plugin.springsecurity.roleHierarchy = '''
    ROLE_ADMIN > ROLE_MODERATOR
    ROLE_MODERATOR > ROLE_USER
 '''
+
+grails.plugins.twitterbootstrap.fixtaglib = true
 
 grails.assets.less.compile = 'less4j'
 grails.assets.plugin."twitter-bootstrap".excludes = ["**/*.less"]
