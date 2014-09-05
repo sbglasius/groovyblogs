@@ -31,7 +31,7 @@ class EntriesController {
         ]
     }
 
-    def endless = {
+    def endless() {
 
         params.offset = 0
         params.max = 3
@@ -42,10 +42,10 @@ class EntriesController {
         ]
     }
 
-    def endlessNext = {
+    def endlessNext() {
 
         params.max = 3
-        def entries = entriesServices.getEndlessEntries(params)
+        def entries = entriesService.getEndlessEntries(params)
         //TODO return fragment
         render(template: 'entry', model: [
                 entries   : entriesService.limitEntries(entries),
@@ -86,7 +86,7 @@ class EntriesController {
             response.sendRedirect(be.link)
         } else {
             flash.message = "Could not find link for blogEntry id $params.id"
-            redirect(action: recent)
+            redirect(action: 'recent')
         }
 
     }
@@ -112,7 +112,7 @@ class EntriesController {
             response.sendRedirect(jumpTranslateUrl)
         } else {
             flash.message = "Could not find link for blogEntry id $params.id"
-            redirect(action: recent)
+            redirect(action: 'recent')
         }
 
     }

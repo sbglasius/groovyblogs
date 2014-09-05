@@ -1,11 +1,16 @@
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
 
+def catalinaBase = System.properties.getProperty('catalina.base')
+
+
 grails.config.locations = ["classpath:${appName}-config.properties",
                            "classpath:${appName}-config.groovy",
                            "file:${userHome}/.grails/${appName}-config.properties",
                            "file:${userHome}/.grails/${appName}-config.groovy",
                            "file://${catalinaBase}/conf/${appName}-config.groovy"]
+
+println "Expected config locations: ${grails.config.locations}"
 
 // if(System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
@@ -213,4 +218,6 @@ grails.assets.less.compile = 'less4j'
 grails.assets.plugin."twitter-bootstrap".excludes = ["**/*.less"]
 grails.assets.plugin."twitter-bootstrap".includes = ["bootstrap.less"]
 grails.assets.plugin."font-awesome-resources".excludes = ['**/*.less']
+grails.assets.plugin."font-awesome-resources".includes = ['**/font-awesome.less']
 
+google.analytics.webPropertyID = "UA-54496952-1"

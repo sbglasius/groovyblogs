@@ -4,6 +4,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><g:layoutTitle default="Groovy Blogs"/></title>
+    <link rel="shortcut icon" href="${assetPath(src: 'favicon.png')}" type="image/png">
+
     <asset:stylesheet src="application.css"/>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -80,5 +82,6 @@
     </div>
 </div>
 <asset:javascript src="application.js"/>
+<ga:trackPageview />
 </body>
 </html>
