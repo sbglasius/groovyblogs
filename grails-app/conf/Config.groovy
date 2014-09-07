@@ -198,16 +198,17 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'org.groovyblogs.U
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'org.groovyblogs.UserRole'
 grails.plugin.springsecurity.authority.className = 'org.groovyblogs.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-        '/'              : ['permitAll'],
-        '/searchable/**' : ['permitAll'],
-        '/index'         : ['permitAll'],
-        '/index.gsp'     : ['permitAll'],
-        '/assets/**'     : ['permitAll'],
-        '/**/js/**'      : ['permitAll'],
-        '/**/css/**'     : ['permitAll'],
-        '/**/images/**'  : ['permitAll'],
-        '/**/favicon.ico': ['permitAll'],
-        '/dbconsole/**'  : ['ROLE_ADMIN'],
+        '/'                 : ['permitAll'],
+        '/searchable/**'    : ['permitAll'],
+        '/index'            : ['permitAll'],
+        '/index.gsp'        : ['permitAll'],
+        '/assets/**'        : ['permitAll'],
+        '/**/js/**'         : ['permitAll'],
+        '/**/css/**'        : ['permitAll'],
+        '/**/images/**'     : ['permitAll'],
+        '/**/favicon.ico'   : ['permitAll'],
+        '/dbconsole/**'     : ['ROLE_ADMIN'],
+        '/runtimeLogging/**': ['ROLE_ADMIN']
 
 ]
 grails.plugin.springsecurity.roleHierarchy = '''
