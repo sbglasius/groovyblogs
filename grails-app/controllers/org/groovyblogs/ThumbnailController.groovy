@@ -1,6 +1,7 @@
 package org.groovyblogs
-
 import grails.plugin.springsecurity.annotation.Secured
+
+import javax.servlet.http.HttpServletResponse
 
 @Secured(['permitAll'])
 class ThumbnailController {
@@ -8,28 +9,32 @@ class ThumbnailController {
     ThumbnailService thumbnailService
 
     def index() {
-        redirect(action: show)
+        redirect(action: 'show')
     }
 
 
-    private void writeImage(def response, String imgSize) {
+    private void writeImage(String id, String imgSize) {
 
-        byte[] b = thumbnailService.getFile(params.id, imgSize)
-        response.setContentType("image/jpeg")
-        response.setContentLength(b.length)
-        response.getOutputStream().write(b)
-
-    }
-
-    def show() {
-
-        writeImage(response, "small")
+        byte[] b = thumbnailService.getFile(id, imgSize)
+        if(b?.size() > 0) {
+            response.setContentType("image/jpeg")
+            response.setContentLength(b.length)
+            response.getOutputStream().write(b)
+        } else {
+            response.sendError HttpServletResponse.SC_NOT_FOUND
+        }
 
     }
 
-    def showLarge() {
+    def show(String id) {
 
-        writeImage(response, "large")
+        writeImage(id,  "small")
+
+    }
+
+    def showLarge(String id) {
+
+        writeImage(id, "large")
 
     }
 

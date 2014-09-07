@@ -87,5 +87,6 @@
 </div>
 <asset:javascript src="application.js"/>
 <ga:trackPageview />
+<asset:deferredScripts/>
 </body>
 </html>

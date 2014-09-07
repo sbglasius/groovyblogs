@@ -95,7 +95,7 @@ class EntriesService {
         def blogEntry = BlogEntry.get(id)
         if(blogEntry) {
             blogEntry.hitCount++
-            blogEntry.save()
+            blogEntry.save(failOnError: true)
         }
         return blogEntry
     }

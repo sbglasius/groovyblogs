@@ -2,7 +2,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'thumbs.css')}"/>
     <title>${pageTitle}</title>
 
 %{--
@@ -22,11 +21,11 @@
 <div class="body">
     <h1>${pageTitle}</h1>
     <g:each in="${entries}" var="entry">
-
         <g:render template="entry" model="[entry: entry, thumbnails: thumbnails]"/>
-
     </g:each>
-
+    <asset:script>
+        $('*[data-thumbnail]').fetchThumbnail();
+    </asset:script>
 </div>
 </body>
 </html>
