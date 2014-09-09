@@ -3,5 +3,8 @@ package org.groovyblogs
 public enum BlogStatus {
     PENDING,
     ACTIVE,
-    ERROR
+    INACTIVE,
+    ERROR,
+    DELETE,
+    UNLUCKY
 }

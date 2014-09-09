@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ddf281e1-0c79-465c-ba31-01d9f0f56721" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/java/resources/no-thumb.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/org/groovyblogs/BlogEntryTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/org/groovyblogs/BlogTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/org/groovyblogs/CacheServiceTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/org/groovyblogs/EntriesControllerTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/org/groovyblogs/FeedControllerTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/org/groovyblogs/FeedServiceServiceTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/org/groovyblogs/FeedServiceTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/org/groovyblogs/UpdateFeedsJobTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/org/groovyblogs/UpdateIndexJobTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/integration/org/groovyblogs/UserTests.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/unit/groovyblogs/SystemConfigControllerTests.groovy" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/unit/groovyblogs/BlogTagLibTests.groovy" afterPath="$PROJECT_DIR$/test/unit/groovyblogs/BlogTagLibTests.groovy" />
+    <list default="true" id="ddf281e1-0c79-465c-ba31-01d9f0f56721" name="Default" comment="Show/edit views for blogs">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/_fields/default/_field.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/_fields/byte;/_input.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/_fields/number/_input.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/_fields/string/_input.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/blog/create.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/blog/edit.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/blog/index.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/blog/show.gsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/groovy/org/groovyblogs/BlogStatus.groovy" afterPath="$PROJECT_DIR$/src/groovy/org/groovyblogs/BlogStatus.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/groovyblogs-grailsPlugins.iml" afterPath="$PROJECT_DIR$/groovyblogs-grailsPlugins.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/groovyblogs.iws" afterPath="$PROJECT_DIR$/groovyblogs.iws" />
     </list>
     <ignored path="$USER_HOME$/.griffon/" />
@@ -77,41 +75,71 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BlogTagLibTests.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/unit/groovyblogs/BlogTagLibTests.groovy">
+      <file leaf-file-name="index.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/blog/index.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810">
-              <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+            <state vertical-scroll-proportion="-15.638298" vertical-offset="0" max-vertical-offset="1110">
+              <caret line="49" column="125" selection-start-line="49" selection-start-column="125" selection-end-line="49" selection-end-column="125" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JMeterTests.jmx" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/integration/JMeterTests.jmx">
+      <file leaf-file-name="show.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/blog/show.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1755">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="-4.4468083" vertical-offset="331" max-vertical-offset="855">
+              <caret line="36" column="49" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ThumbnailServiceTests.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/unit/groovyblogs/ThumbnailServiceTests.groovy">
+      <file leaf-file-name="create.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/blog/create.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="690">
-              <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+            <state vertical-scroll-proportion="-7.638298" vertical-offset="121" max-vertical-offset="645">
+              <caret line="32" column="64" selection-start-line="32" selection-start-column="64" selection-end-line="32" selection-end-column="64" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TranslateServiceTests.groovy" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test/unit/groovyblogs/TranslateServiceTests.groovy">
+      <file leaf-file-name="edit.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/blog/edit.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.06637168" vertical-offset="0" max-vertical-offset="904">
-              <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+            <state vertical-scroll-proportion="-9.574468" vertical-offset="75" max-vertical-offset="690">
+              <caret line="35" column="50" selection-start-line="35" selection-start-column="50" selection-end-line="35" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_field.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/_fields/default/_field.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.2765957" vertical-offset="0" max-vertical-offset="285">
+              <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BlogStatus.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/groovy/org/groovyblogs/BlogStatus.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
+              <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BuildConfig.groovy" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.33333334" vertical-offset="716" max-vertical-offset="1620">
+              <caret line="61" column="108" selection-start-line="61" selection-start-column="70" selection-end-line="61" selection-end-column="70" />
               <folding />
             </state>
           </provider>
@@ -135,12 +163,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/FeedController.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/IphoneController.groovy" />
-        <option value="$PROJECT_DIR$/src/groovy/org/groovyblogs/script/ImportPostgresSql.groovy" />
-        <option value="$PROJECT_DIR$/../ImportGroovyBlogs/src/groovy/main/ImportPostgresSql.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/conf/BootStrap.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/BlogController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/spring/resources.groovy" />
         <option value="$PROJECT_DIR$/grails-app/jobs/org/groovyblogs/UpdateListsJob.groovy" />
         <option value="$PROJECT_DIR$/grails-app/jobs/org/groovyblogs/UpdateTweetsJob.groovy" />
@@ -151,7 +173,6 @@
         <option value="$PROJECT_DIR$/grails-app/domain/org/groovyblogs/Blog.groovy" />
         <option value="$PROJECT_DIR$/grails-app/jobs/org/groovyblogs/UpdateFeedsJob.groovy" />
         <option value="$PROJECT_DIR$/grails-app/services/org/groovyblogs/FeedService.groovy" />
-        <option value="$PROJECT_DIR$/src/groovy/org/groovyblogs/BlogStatus.groovy" />
         <option value="$PROJECT_DIR$/grails-app/assets/stylesheets/custom-bootstrap.less.css" />
         <option value="$PROJECT_DIR$/grails-app/assets/stylesheets/variables.less" />
         <option value="$PROJECT_DIR$/grails-app/assets/stylesheets/custom-bootstrap.less" />
@@ -180,12 +201,19 @@
         <option value="$PROJECT_DIR$/grails-app/views/searchable/index.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/entries/_entry.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
         <option value="$PROJECT_DIR$/grails-app/jobs/org/groovyblogs/UpdateThumbsJob.groovy" />
         <option value="$PROJECT_DIR$/grails-app/conf/Searchable.groovy" />
         <option value="$PROJECT_DIR$/test/unit/groovyblogs/BlogTagLibTests.groovy" />
         <option value="$PROJECT_DIR$/test/integration/org/groovyblogs/BlogEntryTests.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/_fields/default/_display.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/blog/show.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/blog/create.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/blog/edit.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/_fields/default/_field.gsp" />
+        <option value="$PROJECT_DIR$/src/groovy/org/groovyblogs/BlogStatus.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/blog/index.gsp" />
       </list>
     </option>
   </component>
@@ -235,7 +263,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -246,7 +274,216 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovy" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grails-app" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grails-app" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="blog" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grails-app" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_fields" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grails-app" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_fields" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="default" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grails-app" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_fields" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="byte;" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grails-app" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grails-app" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="domain" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovyblogs" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
@@ -262,7 +499,7 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="dynamic.classpath" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="Config&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/Config.groovy&#10;BuCon&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/BuildConfig.groovy&#10;Thumb&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/jobs/org/groovyblogs/UpdateThumbsJob.groovy&#10;ThSe&#9;RUN_CONFIGURATION&#9;ThumbnailServiceTests&#10;main&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/views/layouts/main.gsp&#10;th&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/assets/javascripts/thumbs-fetcher.js&#10;Account&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/controllers/org/groovyblogs/AccountController.groovy&#10;app&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/assets/javascripts/application.js&#10;cus&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/assets/less/custom-bootstrap.less&#10;url&#9;null&#9;null&#10;DaS&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/DataSource.groovy&#10;DataSou&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/DataSource.groovy&#10;Config.groo&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/Config.groovy&#10;BuC&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/BuildConfig.groovy&#10;app.css&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/assets/stylesheets/application.css&#10;app.js&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/assets/javascripts/application.js&#10;blog&#9;null&#9;null&#10;User&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/domain/org/groovyblogs/User.groovy&#10;buildcon&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/BuildConfig.groovy&#10;DataS&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/DataSource.groovy&#10;Config.gr&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/Config.groovy&#10;Boot&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/BootStrap.groovy&#10;SearchablePl&#9;null&#9;null&#10;Config.gro&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/Config.groovy&#10;BuConf&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/BuildConfig.groovy" />
+    <property name="SearchEverywhereHistoryKey" value="Bu&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/BuildConfig.groovy&#10;Config&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/Config.groovy&#10;BuCon&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/BuildConfig.groovy&#10;Thumb&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/jobs/org/groovyblogs/UpdateThumbsJob.groovy&#10;ThSe&#9;RUN_CONFIGURATION&#9;ThumbnailServiceTests&#10;main&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/views/layouts/main.gsp&#10;th&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/assets/javascripts/thumbs-fetcher.js&#10;Account&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/controllers/org/groovyblogs/AccountController.groovy&#10;app&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/assets/javascripts/application.js&#10;cus&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/assets/less/custom-bootstrap.less&#10;url&#9;null&#9;null&#10;DaS&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/DataSource.groovy&#10;DataSou&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/DataSource.groovy&#10;Config.groo&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/Config.groovy&#10;BuC&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/BuildConfig.groovy&#10;app.css&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/assets/stylesheets/application.css&#10;app.js&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/assets/javascripts/application.js&#10;blog&#9;null&#9;null&#10;User&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/domain/org/groovyblogs/User.groovy&#10;buildcon&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/BuildConfig.groovy&#10;DataS&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/DataSource.groovy&#10;Config.gr&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/Config.groovy&#10;Boot&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/BootStrap.groovy&#10;SearchablePl&#9;null&#9;null&#10;Config.gro&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/Config.groovy&#10;BuConf&#9;FILE&#9;file:///Users/sbg/projects/github/groovyblogs/grails-app/conf/BuildConfig.groovy" />
     <property name="LayoutCode.rearrangeEntriesGroovy" value="false" />
     <property name="LayoutCode.rearrangeEntries" value="false" />
     <property name="last_opened_file_path" value="$USER_HOME$/.grails/groovyblogs-config.groovy" />
@@ -293,21 +530,21 @@
       <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/grails-app/views/_fields" />
       <recent name="$PROJECT_DIR$/grails-app/views/searchable" />
       <recent name="$PROJECT_DIR$/grails-app/assets/stylesheets" />
       <recent name="$PROJECT_DIR$/grails-app/views" />
       <recent name="$PROJECT_DIR$/web-app/WEB-INF" />
-      <recent name="$PROJECT_DIR$/grails-app/domain" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.groovyblogs" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="org.groovyblogs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/grails-app/views/search" />
       <recent name="$PROJECT_DIR$/grails-app/assets/less" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="org.groovyblogs" />
     </key>
   </component>
   <component name="RunManager" selected="Grails.Grails:groovyblogs">
@@ -613,7 +850,7 @@
       <workItem from="1409875411773" duration="15805000" />
       <workItem from="1409983908454" duration="13549000" />
       <workItem from="1410272825730" duration="2465000" />
-      <workItem from="1410290489075" duration="1709000" />
+      <workItem from="1410290489075" duration="4684000" />
     </task>
     <task id="LOCAL-00001" summary="Made dependencies in build work">
       <created>1409614570707</created>
@@ -723,43 +960,51 @@
       <created>1410290536064</created>
       <updated>1410290536064</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Fixing tests and removing obsolete">
+      <created>1410296828409</created>
+      <updated>1410296828409</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Show/edit views for blogs">
+      <created>1410300588328</created>
+      <updated>1410300588328</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82989000" />
+    <option name="totallyTimeSpent" value="85964000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1680" height="1024" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32939914" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32939914" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32967034" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32967034" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33261803" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Grails View" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21428572" sideWeight="0.67192984" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32832617" sideWeight="0.0" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32939914" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33798283" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24908425" sideWeight="0.6587436" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31759655" sideWeight="0.9864007" order="17" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33261803" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21428572" sideWeight="0.67192984" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33798283" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.6587436" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24908425" sideWeight="0.6587436" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31759655" sideWeight="0.9864007" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32832617" sideWeight="0.0" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -786,8 +1031,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Made dependencies in build work" />
-    <MESSAGE value="All controller closures made to methods for Grails 2.x" />
     <MESSAGE value="Replaced ConfigurationHolder (deprecated) with grails.util.Holders" />
     <MESSAGE value="Refactoring security to use Spring-Security-Plugin&#10;" />
     <MESSAGE value="Refactoring - moving everything into package org.groovyblog" />
@@ -811,7 +1054,9 @@
     <MESSAGE value="Improved menu" />
     <MESSAGE value="Improved layout for _entry and mailinglists" />
     <MESSAGE value="Release of entries and search functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="Release of entries and search functionality" />
+    <MESSAGE value="Fixing tests and removing obsolete" />
+    <MESSAGE value="Show/edit views for blogs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Show/edit views for blogs" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -890,6 +1135,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1020" max-vertical-offset="1770">
           <caret line="68" column="12" selection-start-line="68" selection-start-column="12" selection-end-line="68" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -919,13 +1165,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.083333" vertical-offset="463" max-vertical-offset="1350">
           <caret line="47" column="10" selection-start-line="47" selection-start-column="10" selection-end-line="47" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/groovyblogs.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.95149255" vertical-offset="0" max-vertical-offset="4485">
-          <caret line="34" column="6" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -961,6 +1200,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-118.695656" vertical-offset="0" max-vertical-offset="4395">
           <caret line="184" column="56" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -985,6 +1225,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.0" vertical-offset="0" max-vertical-offset="1185">
           <caret line="10" column="66" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1058,14 +1299,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="764" max-vertical-offset="1620">
-          <caret line="74" column="36" selection-start-line="74" selection-start-column="36" selection-end-line="74" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/services/org/groovyblogs/ThumbnailService.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="35" max-vertical-offset="2280">
@@ -1095,7 +1328,7 @@
         <state vertical-scroll-proportion="0.39823008" vertical-offset="165" max-vertical-offset="2610">
           <caret line="35" column="89" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1150,8 +1383,80 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/unit/groovyblogs/TranslateServiceTests.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06637168" vertical-offset="0" max-vertical-offset="904">
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
+          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/org/groovyblogs/BlogController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.826087" vertical-offset="0" max-vertical-offset="270">
+          <caret line="12" column="22" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/_fields/default/_display.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.2340426" vertical-offset="0" max-vertical-offset="225">
+          <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/blog/show.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.4468083" vertical-offset="331" max-vertical-offset="855">
+          <caret line="36" column="49" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/blog/create.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.638298" vertical-offset="121" max-vertical-offset="645">
+          <caret line="32" column="64" selection-start-line="32" selection-start-column="64" selection-end-line="32" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/blog/edit.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.574468" vertical-offset="75" max-vertical-offset="690">
+          <caret line="35" column="50" selection-start-line="35" selection-start-column="50" selection-end-line="35" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/_fields/default/_field.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.2765957" vertical-offset="0" max-vertical-offset="285">
+          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/groovy/org/groovyblogs/BlogStatus.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
+          <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/blog/index.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.638298" vertical-offset="0" max-vertical-offset="1110">
+          <caret line="49" column="125" selection-start-line="49" selection-start-column="125" selection-end-line="49" selection-end-column="125" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="716" max-vertical-offset="1620">
+          <caret line="61" column="108" selection-start-line="61" selection-start-column="70" selection-end-line="61" selection-end-column="70" />
           <folding />
         </state>
       </provider>
@@ -1163,8 +1468,8 @@
         <entry key="groovyblogs">
           <value>
             <GrailsSettings>
-              <option name="buildConfigCrc" value="-1353464050" />
-              <option name="pluginDependenciesCrc" value="1943475162" />
+              <option name="buildConfigCrc" value="1684921143" />
+              <option name="pluginDependenciesCrc" value="1643120927" />
               <option name="properties">
                 <map>
                   <entry key="grails.global.plugins.dir" value="$USER_HOME$/.grails/2.4.3/global-plugins" />
