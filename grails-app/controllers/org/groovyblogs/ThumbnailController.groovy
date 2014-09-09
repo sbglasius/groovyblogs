@@ -16,7 +16,7 @@ class ThumbnailController {
     private void writeImage(String id, String imgSize) {
 
         byte[] b = thumbnailService.getFile(id, imgSize)
-        if(b?.size() > 0) {
+        if(b?.size() > 10) {
             response.setContentType("image/jpeg")
             response.setContentLength(b.length)
             response.getOutputStream().write(b)

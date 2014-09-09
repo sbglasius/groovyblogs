@@ -10,11 +10,16 @@
             <div class="col-md-12">
                 <h4><g:link controller="entries" action="jump" id="${entry.id}">
                     ${entry.title}
+                    <sec:ifNotGranted roles="['ROLE_ADMIN']">
+                        <small>
+                            ${entry.blog?.title}
+                        </small>
+                    </sec:ifNotGranted>
                 </g:link></h4>
                 <g:translate entry="${entry}"/>
 
                 <h5>
-                    <sec:ifAllGranted roles="[ROLE_ADMIN]">
+                    <sec:ifAllGranted roles="['ROLE_ADMIN']">
                     <g:link controller="blog" action="show" id="${entry.blog.id}" style="">${entry.blog.title}</g:link>
                     </sec:ifAllGranted>
                     <small>

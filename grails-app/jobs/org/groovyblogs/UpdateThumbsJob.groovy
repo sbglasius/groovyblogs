@@ -31,13 +31,22 @@ class UpdateThumbsJob {
             }
 
             urlsToFetch.each { url ->
-                long id = pendingCache.get(url)?.value
-                log.info "Refreshing pending cache for ${url} on blog ${id}"
-                //Thread.start {
-                thumbnailService.fetchThumbnailsToCache(id, url)
+                try {
+                    def value = pendingCache.get(url)?.value
+                    if(!value) {
+                        pendingCache.remove(url)
+                    } else {
+                        long id = value
+                        log.info "Refreshing pending cache for ${url} on blog ${id}"
+                        //Thread.start {
+                        thumbnailService.fetchThumbnailsToCache(id, url)
+                    }
 
-                // pendingCache.remove(url)
-                //}
+                    // pendingCache.remove(url)
+                    //}
+                } catch (exception) {
+                    pendingCache.remove(url)
+                }
             }
 
 

@@ -3,11 +3,11 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="groovyblogs.org is a groovy and grails blog aggregator" />
-    <meta name="keywords" content="groovy,grails,blogs" />
-    <meta name="robots" content="index,follow" />
+    <meta name="description" content="groovyblogs.org is a groovy and grails blog aggregator"/>
+    <meta name="keywords" content="groovy,grails,blogs"/>
+    <meta name="robots" content="index,follow"/>
 
-    <title>groovyblogs.org - <g:layoutTitle default="Welcome" /></title>
+    <title>groovyblogs.org - <g:layoutTitle default="Welcome"/></title>
     <link rel="shortcut icon" href="${assetPath(src: 'favicon.png')}" type="image/png">
 
     <asset:stylesheet src="application.css"/>
@@ -49,35 +49,25 @@
 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-%{--
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
---}%
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">The lists<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><g:link controller='entries' action='recent'>Latest Blogs</g:link></li>
                             <li><g:link controller='entries' action='popular'>Popular Blogs</g:link></li>
                             <li><g:link controller='entries' action='lists'>Mailing Lists</g:link></li>
-                            <li class="divider"></li>
-                            <li class="dropdown-header">Nav header</li>
-                            <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>
                         </ul>
                     </li>
                 </ul>
                 <g:form url='[controller: "searchable", action: "index"]' id="searchableForm" name="searchableForm" method="get" class="navbar-form navbar-right">
                     <g:textField name="q" value="${params.q}" size="25" class="form-control" placeholder="Search the blogs..."/>
                 </g:form>
-
+                %{--
                 <ul class="nav navbar-nav navbar-right">
-%{--
                     <li><a href="../navbar/">Default</a></li>
                     <li><a href="../navbar-static-top/">Static top</a></li>
                     <li class="active"><a href="./">Fixed top</a></li>
---}%
                 </ul>
+                --}%
             </div><!--/.nav-collapse -->
         </div>
     </div>
@@ -90,7 +80,7 @@
     </div>
 </div>
 <asset:javascript src="application.js"/>
-<ga:trackPageview />
+<ga:trackPageview/>
 <asset:deferredScripts/>
 </body>
 </html>

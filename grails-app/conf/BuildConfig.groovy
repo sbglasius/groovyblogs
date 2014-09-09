@@ -72,6 +72,7 @@ grails.project.dependency.resolution = {
         compile ":asset-pipeline:1.9.6"
         compile ":less-asset-pipeline:1.10.0"
         compile ":quartz:1.0.2"
+        compile ":quartz-monitor:1.0"
         compile ":spring-security-core:2.0-RC4"
         compile ":google-chart:0.5.2"
         compile ":mail:1.0.7"

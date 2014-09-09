@@ -12,6 +12,7 @@
         this._defaults = defaults;
         this._name = pluginName;
         this.url = this.$element.data('thumbnail');
+        this.count = 0;
         this.init();
     }
 
@@ -33,9 +34,13 @@
                 self.$element.replaceWith(img);
             }).fail(function (error) {
                 // if the image is not loaded, retry in a little bit.
+                if(self.count++ > 2) {
+                    console.debug(self.count, $('i',self.$element));
+                   $('i',self.$element).removeClass('fa-circle-o-notch fa-spin').addClass('fa-picture-o')
+                }
                 setTimeout(function () {
-                    self.tryFetch.call(self, 1000);
-                })
+                    self.tryFetch.call(self);
+                },1000*(self.count))
             })
         }
     });
