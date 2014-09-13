@@ -415,7 +415,7 @@ class FeedService {
             if (hasGroovyContent) {
                 blog.status = BlogStatus.LOOKS_GOOD
             } else {
-                blog.status = BlogStatus.LOOKS_BAD
+                blog.status = BlogStatus.NO_GROOVY
             }
 
             blog.save()
