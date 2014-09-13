@@ -34,33 +34,16 @@ class BlogEntry {
 
     def isGroovyRelated() {
 
-        def keywords = ['groovy', 'grails', 'griffon', 'gorm', 'gr8', 'gant', 'gradle', 'gpars', 'gsp',
-                        'geb', 'spock', 'gaelyk']
+        def keywords = Tag.findAllByApproved(true)*.tag
 
-        boolean isGroovy = false
-        keywords.each { keyword ->
+        return keywords.any { keyword ->
             keyword = /\b${keyword}\b/
-            if (title?.toLowerCase() =~ keyword) {
-                isGroovy = true
-                return
-            }
-
-
-
-            if (description?.toLowerCase() =~ keyword) {
-                isGroovy = true
-                return
-            }
-
-
+            return title?.toLowerCase() =~ keyword || description?.toLowerCase() =~ keyword
         }
-        return isGroovy
     }
 
     String toThumbnailPath() {
-
-        def sdf = new java.text.SimpleDateFormat("yyyy/MM/dd")
-        return sdf.format(dateAdded) + "/"
+        return dateAdded.format('yyyy/MM/dd') + "/"
 
     }
 

@@ -63,6 +63,21 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="sass-stdlib" url="file://$PROJECT_DIR$/target/work/plugins/font-awesome-resources-4.2-SNAPSHOT/web-app/sass/font-awesome/_bordered-pulled.scss" />
+    <file type="sass-stdlib" url="file://$PROJECT_DIR$/target/work/plugins/font-awesome-resources-4.2-SNAPSHOT/web-app/sass/font-awesome/_core.scss" />
+    <file type="sass-stdlib" url="file://$PROJECT_DIR$/target/work/plugins/font-awesome-resources-4.2-SNAPSHOT/web-app/sass/font-awesome/_fixed-width.scss" />
+    <file type="sass-stdlib" url="file://$PROJECT_DIR$/target/work/plugins/font-awesome-resources-4.2-SNAPSHOT/web-app/sass/font-awesome/_icons.scss" />
+    <file type="sass-stdlib" url="file://$PROJECT_DIR$/target/work/plugins/font-awesome-resources-4.2-SNAPSHOT/web-app/sass/font-awesome/_larger.scss" />
+    <file type="sass-stdlib" url="file://$PROJECT_DIR$/target/work/plugins/font-awesome-resources-4.2-SNAPSHOT/web-app/sass/font-awesome/_list.scss" />
+    <file type="sass-stdlib" url="file://$PROJECT_DIR$/target/work/plugins/font-awesome-resources-4.2-SNAPSHOT/web-app/sass/font-awesome/_mixins.scss" />
+    <file type="sass-stdlib" url="file://$PROJECT_DIR$/target/work/plugins/font-awesome-resources-4.2-SNAPSHOT/web-app/sass/font-awesome/_path.scss" />
+    <file type="sass-stdlib" url="file://$PROJECT_DIR$/target/work/plugins/font-awesome-resources-4.2-SNAPSHOT/web-app/sass/font-awesome/_rotated-flipped.scss" />
+    <file type="sass-stdlib" url="file://$PROJECT_DIR$/target/work/plugins/font-awesome-resources-4.2-SNAPSHOT/web-app/sass/font-awesome/_spinning.scss" />
+    <file type="sass-stdlib" url="file://$PROJECT_DIR$/target/work/plugins/font-awesome-resources-4.2-SNAPSHOT/web-app/sass/font-awesome/_stacked.scss" />
+    <file type="sass-stdlib" url="file://$PROJECT_DIR$/target/work/plugins/font-awesome-resources-4.2-SNAPSHOT/web-app/sass/font-awesome/_variables.scss" />
+    <file type="sass-stdlib" url="file://$PROJECT_DIR$/target/work/plugins/font-awesome-resources-4.2-SNAPSHOT/web-app/sass/font-awesome/font-awesome.scss" />
+  </component>
   <component name="IdProvider" IDEtalkID="8A840071AB1880AE4F2B1636234A0283" />
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />
@@ -205,9 +220,11 @@
   <component name="ProjectDictionaryState">
     <dictionary name="sbg">
       <words>
+        <w>bais</w>
         <w>blogs</w>
         <w>endif</w>
         <w>groovyblogs</w>
+        <w>infos</w>
         <w>userid</w>
       </words>
     </dictionary>

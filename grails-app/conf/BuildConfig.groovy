@@ -82,6 +82,7 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.1.2"
         compile ":google-analytics:2.3.3"
         compile ":fields:1.3"
+        compile ":executor:0.3"
 
         // plugins needed at runtime but not for compilation
 //        runtime ":hibernate4:4.3.5.5"

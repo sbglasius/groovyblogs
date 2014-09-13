@@ -1,10 +1,17 @@
 package org.groovyblogs
 
+import com.sun.syndication.io.ParsingFeedException
+import com.sun.syndication.io.SyndFeedInput
+import com.sun.syndication.io.XmlReader
+import grails.transaction.NotTransactional
+import grails.transaction.Transactional
 import grails.util.Holders
 import net.sf.ehcache.Element
 import org.apache.commons.httpclient.HttpClient
 import org.apache.commons.httpclient.methods.GetMethod
+import org.apache.commons.httpclient.params.HttpClientParams
 
+@Transactional()
 class FeedService {
 
     def listCache
@@ -15,13 +22,14 @@ class FeedService {
     TwitterService twitterService
 
     // Returns the HTML for the supplied URL
+    @NotTransactional
     String getHtmlForUrl(url) {
 
         log.info("Trying to fetch [$url]")
 
         def client = new HttpClient()
         def clientParams = client.getParams()
-        clientParams.setParameter(org.apache.commons.httpclient.params.HttpClientParams.HTTP_CONTENT_CHARSET, "UTF-8");
+        clientParams.setParameter(HttpClientParams.HTTP_CONTENT_CHARSET, "UTF-8");
 
         if (config.http.useproxy) {
             def hostConfig = client.getHostConfiguration()
@@ -30,13 +38,13 @@ class FeedService {
         }
 
         if (config.http.useragent) {
-            clientParams.setParameter(org.apache.commons.httpclient.params.HttpClientParams.USER_AGENT,
+            clientParams.setParameter(HttpClientParams.USER_AGENT,
                     config.http.useragent)
         }
 
         if (config.http.timeout) {
 
-            clientParams.setParameter(org.apache.commons.httpclient.params.HttpClientParams.SO_TIMEOUT,
+            clientParams.setParameter(HttpClientParams.SO_TIMEOUT,
                     config.http.timeout)
         }
 
@@ -55,14 +63,15 @@ class FeedService {
     }
 
     // takes html and returns a org.groovyblogs.FeedInfo object
-    def getFeedInfoFromHtml(feedStr, translate) {
+    @NotTransactional
+    FeedInfo getFeedInfoFromHtml(String feedStr, boolean translate) {
 
-        def sfi = new com.sun.syndication.io.SyndFeedInput()
+        def sfi = new SyndFeedInput()
         // def feedReader = new StringReader(feedStr)
 
         // need this to handle UTF8 encoding correctly
         def bais = new ByteArrayInputStream(feedStr.getBytes("UTF-8"))
-        def feedReader = new com.sun.syndication.io.XmlReader(bais)
+        def feedReader = new XmlReader(bais, true)
 
         def sf = sfi.build(feedReader)
 
@@ -83,7 +92,7 @@ class FeedService {
             }
             String link = e.link
             Date publishedDate = e.publishedDate
-            def summary
+            def summary = null
             if (description) {
                 // strip html for the summary, then truncate
                 summary = description.replaceAll("</?[^>]+>", "")
@@ -121,12 +130,11 @@ class FeedService {
     }
 
     // takes a URL and returns ROME feed info
+    @NotTransactional
     def getFeedInfo(feedUrlStr, boolean translate = false) {
 
         def feedStr = getHtmlForUrl(feedUrlStr)
         return getFeedInfoFromHtml(feedStr, translate)
-
-
     }
 
 
@@ -148,7 +156,7 @@ class FeedService {
 
                 BlogEntry be = new BlogEntry(title: entry.title, link: entry.link,
                         description: entry.description,
-                        summary: entry.summary, language: entry.language,
+                        language: entry.language,
                         hash: entry.summary.encodeAsMD5())
 
 
@@ -266,7 +274,7 @@ class FeedService {
                 updateFeed(blog)
                 markBlogUpdateSuccess(blog)
             } catch (e) {
-                log.warn("FeedService failed to update $blog",e)
+                log.warn("FeedService failed to update $blog", e)
                 markBlogWithError(blog, e)
             }
         }
@@ -278,9 +286,9 @@ class FeedService {
 
     def markBlogWithError(Blog blog, Exception e) {
         blog.lastError = "Error parsing [$blog.feedUrl] " + e.message
-        blog.errorCount ++
-        log.warn("Encountered error in [$blog.feedUrl]. This is error number $blog.errorCount" )
-        if(blog.errorCount > config.groovyblogs.maxErrors ?: 10) {
+        blog.errorCount++
+        log.warn("Encountered error in [$blog.feedUrl]. This is error number $blog.errorCount")
+        if (blog.errorCount > config.groovyblogs.maxErrors ?: 10) {
             log.info("FeedService marked blog $blog with ERROR")
             blog.status = BlogStatus.ERROR
         }
@@ -352,7 +360,7 @@ class FeedService {
 
 
     def updateTweets() {
-        if(!config.tweets.enable) {
+        if (!config.tweets.enable) {
             return
         }
         def tweetFeed = getFeedInfo(config.tweets.url, false)
@@ -379,9 +387,39 @@ class FeedService {
             tweetEntries = updateTweets()
         }
         return tweetEntries
-
-
     }
 
+    @Transactional(noRollbackFor=[ParsingFeedException])
+    void checkPendingBlogs(List<Blog> blogs) {
+
+        Map<Blog, FeedInfo> feedInfos = blogs.collectEntries { Blog it ->
+            try {
+                [it, getFeedInfo(it.feedUrl)]
+            } catch (e) {
+                it.status = BlogStatus.ERROR
+                it.lastError = "Error parsing [$it.feedUrl] " + e.message
+                it.save()
+                [it, null]
+            }
+        }.findAll { it.value }
+        feedInfos.each { Blog blog, FeedInfo feedInfo ->
+            // Find if any of the blogs entries currently contains something Groovy related
+            log.debug("Checking $blog.title")
+
+            def hasGroovyContent = feedInfo.any { entry ->
+                new BlogEntry(
+                        title: entry.title,
+                        description: entry.description
+                ).isGroovyRelated()
+            }
+            if (hasGroovyContent) {
+                blog.status = BlogStatus.LOOKS_GOOD
+            } else {
+                blog.status = BlogStatus.LOOKS_BAD
+            }
+
+            blog.save()
+        }
+    }
 }
 

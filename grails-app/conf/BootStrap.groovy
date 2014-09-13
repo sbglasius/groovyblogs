@@ -1,8 +1,5 @@
 import grails.util.Environment
-import org.groovyblogs.Role
-import org.groovyblogs.SystemConfig
-import org.groovyblogs.User
-import org.groovyblogs.UserRole
+import org.groovyblogs.*
 
 class BootStrap {
     def grailsApplication
@@ -15,6 +12,7 @@ class BootStrap {
             case Environment.PRODUCTION:
                 createConfigurationIfRequired()
                 createAdminUserIfRequired()
+                createTagsIfRequired()
                 break;
 
         }
@@ -22,12 +20,20 @@ class BootStrap {
 
     }
 
+    void createTagsIfRequired() {
+        if(Tag.count() == 0) {
+            ['groovy', 'grails', 'griffon', 'gorm', 'gr8', 'gant', 'gradle', 'gpars', 'gsp',
+             'geb', 'spock', 'gaelyk'].each {
+                new Tag(tag: it, approved: true).save(failOnError: true)
+            }
+        }
+    }
     def destroy = {
 
 
     }
 
-    def createConfigurationIfRequired() {
+    void createConfigurationIfRequired() {
 
         if (SystemConfig.count() == 0) {
 
@@ -51,7 +57,7 @@ class BootStrap {
 
     }
 
-    def createAdminUserIfRequired() {
+    void createAdminUserIfRequired() {
         def config = grailsApplication.config.org.groovyblogs
         def adminRole = Role.findOrSaveWhere(authority: 'ROLE_ADMIN').save(flush: true, failOnError: true)
         def userRole = Role.findOrSaveWhere(authority: 'ROLE_USER').save(flush: true, failOnError: true)
