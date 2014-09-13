@@ -28,7 +28,7 @@
             <g:sortableColumn property="accountExpired" title="${message(code: 'user.accountExpired.label', default: 'Account Expired')}"/>
 
             <g:sortableColumn property="accountLocked" title="${message(code: 'user.accountLocked.label', default: 'Account Locked')}"/>
-            <h1>Feed count</h1>
+            <th>Feed count</th>
 
         </tr>
         </thead>
@@ -57,7 +57,10 @@
     <div class="pagination">
         <g:paginate total="${userInstanceCount ?: 0}"/>
     </div>
-    <div><g:link class="create" action="create" class="btn btn-primary"><g:message code="default.new.label" args="[entityName]"/></g:link></div>
+    <div>
+        <g:link class="create" action="create" class="btn btn-primary"><g:message code="default.new.label" args="[entityName]"/></g:link>
+        <g:link class="create" action="cleanupUsers" params="${params}" class="btn btn-danger" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+            Remove users with no blogs</g:link></div>
 
 </div>
 </body>

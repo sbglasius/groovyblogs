@@ -58,7 +58,7 @@
             <div>
                 <g:form action="checkPendingBlogs" method="POST">
                     <g:each in="${blogInstanceList}" var="blog" status="i">
-                    <g:hiddenField name="blog.id" value="${blog.id}"/>
+                        <g:hiddenField name="blog.id" value="${blog.id}"/>
                     </g:each>
                     <g:hiddenField name="max" value="${params.max}"/>
                     <g:hiddenField name="offset" value="${params.offset}"/>

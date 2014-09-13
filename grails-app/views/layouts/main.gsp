@@ -57,6 +57,16 @@
                             <li><g:link controller='entries' action='lists'>Mailing Lists</g:link></li>
                         </ul>
                     </li>
+                    <sec:ifAnyGranted roles="ROLE_ADMIN">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><g:link controller='user' action='index'>Users</g:link></li>
+                                <li><g:link controller='blog' action='index'>Blogs</g:link></li>
+                                <li><g:link controller='quartz' action='index'>Quartz control</g:link></li>
+                            </ul>
+                        </li>
+                    </sec:ifAnyGranted>
                 </ul>
                 <g:form url='[controller: "searchable", action: "index"]' id="searchableForm" name="searchableForm" method="get" class="navbar-form navbar-right">
                     <g:textField name="q" value="${params.q}" size="25" class="form-control" placeholder="Search the blogs..."/>
