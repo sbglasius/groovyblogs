@@ -68,6 +68,18 @@
                         </li>
                     </sec:ifAnyGranted>
                 </ul>
+                <ul class="nav navbar-nav navbar-right visible-xs visible-sm">
+                <sec:ifLoggedIn>
+                    <li><g:form controller="logout">
+                        <button class="btn btn-link">Logout</button>
+                    </g:form></li>
+
+                </sec:ifLoggedIn>
+                <sec:ifNotLoggedIn>
+                    <li><g:link controller="blog" action="index">Login</g:link></li>
+                </sec:ifNotLoggedIn>
+                </ul>
+
                 <g:form url='[controller: "searchable", action: "index"]' id="searchableForm" name="searchableForm" method="get" class="navbar-form navbar-right">
                     <g:textField name="q" value="${params.q}" size="25" class="form-control" placeholder="Search the blogs..."/>
                 </g:form>

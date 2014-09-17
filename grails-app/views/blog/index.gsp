@@ -14,7 +14,7 @@
         <div class="message" role="status">${flash.message}</div>
     </g:if>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-lg-10">
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -23,13 +23,15 @@
 
                         <g:sortableColumn property="description" title="${message(code: 'blog.description.label', default: 'Description')}"/>
 
-                        <g:sortableColumn property="feedUrl" title="${message(code: 'blog.feedUrl.label', default: 'Feed Url')}"/>
+                        <sec:ifAllGranted roles="ROLE_ADMIN">
+                            <g:sortableColumn property="feedUrl" title="${message(code: 'blog.feedUrl.label', default: 'Feed Url')}"/>
 
-                        <g:sortableColumn property="pollFrequency" title="${message(code: 'blog.pollFrequency.label', default: 'Poll Frequency')}"/>
+                            <g:sortableColumn property="pollFrequency" title="${message(code: 'blog.pollFrequency.label', default: 'Poll Frequency')}"/>
 
-                        <g:sortableColumn property="status" title="${message(code: 'blog.status.label', default: 'Status')}"/>
+                            <g:sortableColumn property="status" title="${message(code: 'blog.status.label', default: 'Status')}"/>
 
-                        <g:sortableColumn property="lastError" title="${message(code: 'blog.lastError.label', default: 'Last Error')}"/>
+                            <g:sortableColumn property="lastError" title="${message(code: 'blog.lastError.label', default: 'Last Error')}"/>
+                        </sec:ifAllGranted>
 
                     </tr>
                     </thead>
@@ -41,14 +43,15 @@
 
                             <td>${fieldValue(bean: blogInstance, field: "description")}</td>
 
-                            <td style="max-width: 300px;word-wrap: break-word"><a href="${blogInstance.feedUrl}" target="_blank">${fieldValue(bean: blogInstance, field: "feedUrl")}</a></td>
+                            <sec:ifAllGranted roles="ROLE_ADMIN">
+                                <td style="max-width: 300px;word-wrap: break-word"><a href="${blogInstance.feedUrl}" target="_blank">${fieldValue(bean: blogInstance, field: "feedUrl")}</a></td>
 
-                            <td>${fieldValue(bean: blogInstance, field: "pollFrequency")}</td>
+                                <td>${fieldValue(bean: blogInstance, field: "pollFrequency")}</td>
 
-                            <td>${fieldValue(bean: blogInstance, field: "status")}</td>
+                                <td>${fieldValue(bean: blogInstance, field: "status")}</td>
 
-                            <td style="max-width: 300px;word-wrap: break-word">${fieldValue(bean: blogInstance, field: "lastError")}</td>
-
+                                <td style="max-width: 300px;word-wrap: break-word">${fieldValue(bean: blogInstance, field: "lastError")}</td>
+                            </sec:ifAllGranted>
                         </tr>
                     </g:each>
                     </tbody>
