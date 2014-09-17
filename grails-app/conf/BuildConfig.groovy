@@ -50,14 +50,12 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         runtime 'mysql:mysql-connector-java:5.1.29'
-        // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
-         compile 'jfree:jfreechart:1.0.4'
+
+        compile 'jfree:jfreechart:1.0.4'
         compile 'net.homeip.yusuke:twitter4j:2.0.10'
         compile 'rome:rome:1.0'
         compile 'commons-httpclient:commons-httpclient:3.1'
         compile 'com.google.code.maven-play-plugin.spy:memcached:2.4.2'
-//        compile 'org.compass-project:compass:2.2.0'
-                //        runtime 'postgresql:postgresql:8.2-507.jdbc3'
 
         test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
     }
@@ -69,7 +67,9 @@ grails.project.dependency.resolution = {
         // plugins for the compile step
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.7'
-        compile ":asset-pipeline:1.9.6"
+        compile ":cache-ehcache:1.0.1"
+
+        compile ":asset-pipeline:1.9.9"
         compile ":less-asset-pipeline:1.10.0"
         compile ":quartz:1.0.2"
         compile ":quartz-monitor:1.0"
@@ -81,7 +81,7 @@ grails.project.dependency.resolution = {
         compile ":iwebkit:0.5"
         compile ":scaffolding:2.1.2"
         compile ":google-analytics:2.3.3"
-        compile ":fields:1.3"
+        compile ":fields:1.4"
         compile ":executor:0.3"
 
         // plugins needed at runtime but not for compilation

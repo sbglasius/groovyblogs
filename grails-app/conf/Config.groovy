@@ -226,3 +226,18 @@ grails.assets.plugin."font-awesome-resources".excludes = ['**/*.less']
 grails.assets.plugin."font-awesome-resources".includes = ['**/font-awesome.less']
 
 google.analytics.webPropertyID = "UA-54496952-1"
+
+grails.cache.config = {
+    cache {
+        name 'recentList'
+    }
+    cache {
+        name 'popularList'
+    }
+    defaults {
+        maxElementsInMemory 1000
+        eternal false
+        overflowToDisk false
+        maxElementsOnDisk 0
+    }
+}
