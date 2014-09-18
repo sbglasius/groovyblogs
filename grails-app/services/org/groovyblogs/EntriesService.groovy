@@ -1,7 +1,10 @@
 package org.groovyblogs
 
+import grails.plugin.cache.Cacheable
+import grails.transaction.Transactional
 import net.sf.ehcache.Element
 
+@Transactional(readOnly = true)
 class EntriesService {
 
     protected static final int DEFAULT_DAYS_TO_REPORT = 7
@@ -45,46 +48,41 @@ class EntriesService {
     }
 
 
+    @Cacheable('recentList')
     def getRecentEntries(int days = DEFAULT_DAYS_TO_REPORT) {
+        log.debug "Recent cache for recent ${days} days not available. Reading from db"
 
-        def entries = entriesCache.get("recentList")?.value
-        if (!entries || days != DEFAULT_DAYS_TO_REPORT) {
+        def aWhileAgo = new Date().minus(days) // 7 days ago is the default
 
-            log.debug "Recent cache empty. Reading from db"
+        def entries = BlogEntry.findAllByDateAddedGreaterThan(
+                aWhileAgo, [sort: 'dateAdded', order: "desc"])
+        entries = entries.findAll { entry -> entry.isGroovyRelated() }
+        return entries
+    }
 
-            def aWhileAgo = new Date().minus(days) // 7 days ago is the default
+    @Cacheable('popularList')
+    def getPopularEntries() {
 
-            entries = BlogEntry.findAllByDateAddedGreaterThan(
-                    aWhileAgo, [sort: 'dateAdded', order: "desc"])
-            entries = entries.findAll { entry -> entry.isGroovyRelated() }
-            if (days == DEFAULT_DAYS_TO_REPORT) {
-                entriesCache.put(new Element("recentList", entries))
-            }
-        } else {
-            log.debug "Reading recent entries from cache"
-        }
+        log.debug "Popular cache for popularList not available. Reading from db."
+
+        def aWhileAgo = new Date().minus(DEFAULT_DAYS_TO_REPORT) // 7 days ago
+
+        def entries = BlogEntry.findAllByDateAddedGreaterThanAndHitCountGreaterThan(
+                aWhileAgo, 0, [sort: 'hitCount', order: "desc"])
+        entries = entries.findAll { entry -> entry.isGroovyRelated() }
+
+        entriesCache.put(new Element("popularList", entries))
         return entries
 
     }
 
-    def getPopularEntries() {
-
-        def entries = entriesCache.get("popularList")?.value
-        if (!entries) {
-
-            log.debug "Popular cache empty. Reading from db."
-
-            def aWhileAgo = new Date().minus(DEFAULT_DAYS_TO_REPORT) // 7 days ago
-
-            entries = BlogEntry.findAllByDateAddedGreaterThanAndHitCountGreaterThan(
-                    aWhileAgo, 0, [sort: 'hitCount', order: "desc"])
-            entries = entries.findAll { entry -> entry.isGroovyRelated() }
-
-            entriesCache.put(new Element("popularList", entries))
-        } else {
-            log.debug "Reading popular entries from cache"
+    @Transactional(readOnly = false)
+    BlogEntry getEntry(long id) {
+        def blogEntry = BlogEntry.get(id)
+        if (blogEntry) {
+            blogEntry.hitCount++
+            blogEntry.save(failOnError: true)
         }
-        return entries
-
+        return blogEntry
     }
 }

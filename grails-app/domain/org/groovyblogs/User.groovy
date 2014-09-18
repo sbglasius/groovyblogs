@@ -43,6 +43,11 @@ class User {
             encodePassword()
         }
     }
+    def beforeDelete() {
+        UserRole.withNewSession {
+            UserRole.findAllByUser(this)*.delete()
+        }
+    }
 
     protected void encodePassword() {
         password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password

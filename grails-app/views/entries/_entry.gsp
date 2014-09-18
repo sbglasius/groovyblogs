@@ -1,39 +1,39 @@
-<div class="entry ${entry.language?.startsWith('en') ? 'english' : 'nonenglish'}">
-    <table>
-    <tr>
-    <g:if test="${thumbnails}">
-      <td style="padding-right: 60px">
-        <div id="pic">
-          <a class="p1" href="<g:createLink controller='entries' action='jump' id='${entry.id}'/>" title="thumbnail image">
-            <img src="<g:createLink controller='thumbnail' action='show' id='${entry.id}'/>" alt="No Image Available" onmouseover="document.getElementById('large-${entry.id}').src = '<g:createLink controller='thumbnail' action='showLarge' id='${entry.id}'/>'" />
-            <img id="large-${entry.id}" src="" alt="Loading Image..." class="large"  />
-          </a>
-        </div>
-      </td>
-    </g:if>
-    <td valign="top" style="padding-top: 1em">
-      <div class="entryTitle">
-        <g:link controller="entries" action="jump" id="${entry.id}">
-          ${entry.title}
+<div class="row pad-bottom-10 ${entry.language?.startsWith('en') ? 'english' : 'nonenglish'}">
+    <div class="col-md-2 col-xs-3">
+        <g:link controller="entries" action="jump" id="${entry.id}" class="thumbnail img-thumbnail" elementId="thumbnail-${entry.id}" data-thumbnail="${createLink(controller: 'thumbnail', action: 'show', id: entry.id)}">
+            <i class="thumbnail-waiting fa fa-circle-o-notch fa-spin"></i>
         </g:link>
-        <g:translate entry="${entry}"/>
-      </div>
-      <div class="entryDetails">
-        <g:link controller="blog" action="show" id="${entry.blog.id}" style="">${entry.blog.title}</g:link>
-					 [ ${entry.hitCount} clicks ] -
-        <g:dateFromNow date="${entry.dateAdded}"/>
-      </div>
-      <div class="entrySummary">
-        <g:summariseEntry description="${entry.description}"/>
-      </div>
-    <g:if test="${entry.info}">
+    </div>
 
-      <div class="entryInfo">
-        ${entry.info}
-      </div>
+    <div class="col-md-10 col-xs-9">
+        <div class="row">
+            <div class="col-md-12">
+                <h4><g:link controller="entries" action="jump" id="${entry.id}">
+                    ${entry.title}
+                    <sec:ifNotGranted roles="['ROLE_ADMIN']">
+                        <small>
+                            ${entry.blog?.title}
+                        </small>
+                    </sec:ifNotGranted>
+                </g:link></h4>
+                <g:translate entry="${entry}"/>
 
-    </g:if>
-    </td>
-    </tr></table>
+                <h5>
+                    <sec:ifAllGranted roles="['ROLE_ADMIN']">
+                    <g:link controller="blog" action="show" id="${entry.blog.id}" style="">${entry.blog.title}</g:link>
+                    </sec:ifAllGranted>
+                    <small>
+                        ${entry.hitCount} click${entry.hitCount != 1 ? 's':''}, added
+                        <g:dateFromNow date="${entry.dateAdded}"/>
+                    </small>
+                </h5>
 
+            </div>
+
+            <div class="col-md-12">
+                <g:summariseEntry description="${entry.description}"/>
+            </div>
+        </div>
+
+    </div>
 </div>

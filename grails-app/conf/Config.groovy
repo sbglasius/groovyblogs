@@ -1,10 +1,16 @@
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
 
+def catalinaBase = System.properties.getProperty('catalina.base')
+
+
 grails.config.locations = ["classpath:${appName}-config.properties",
                            "classpath:${appName}-config.groovy",
                            "file:${userHome}/.grails/${appName}-config.properties",
-                           "file:${userHome}/.grails/${appName}-config.groovy"]
+                           "file:${userHome}/.grails/${appName}-config.groovy",
+                           "file://${catalinaBase}/conf/${appName}-config.groovy"]
+
+println "Expected config locations: ${grails.config.locations}"
 
 // if(System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
@@ -192,15 +198,18 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'org.groovyblogs.U
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'org.groovyblogs.UserRole'
 grails.plugin.springsecurity.authority.className = 'org.groovyblogs.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-        '/'              : ['permitAll'],
-        '/index'         : ['permitAll'],
-        '/index.gsp'     : ['permitAll'],
-        '/assets/**'     : ['permitAll'],
-        '/**/js/**'      : ['permitAll'],
-        '/**/css/**'     : ['permitAll'],
-        '/**/images/**'  : ['permitAll'],
-        '/**/favicon.ico': ['permitAll'],
-        '/dbconsole/**'  : ['ROLE_ADMIN'],
+        '/'                 : ['permitAll'],
+        '/searchable/**'    : ['permitAll'],
+        '/index'            : ['permitAll'],
+        '/index.gsp'        : ['permitAll'],
+        '/assets/**'        : ['permitAll'],
+        '/**/js/**'         : ['permitAll'],
+        '/**/css/**'        : ['permitAll'],
+        '/**/images/**'     : ['permitAll'],
+        '/**/favicon.ico'   : ['permitAll'],
+        '/dbconsole/**'     : ['ROLE_ADMIN'],
+        '/quartz/**'        : ['ROLE_ADMIN'],
+        '/runtimeLogging/**': ['ROLE_ADMIN']
 
 ]
 grails.plugin.springsecurity.roleHierarchy = '''
@@ -208,4 +217,27 @@ grails.plugin.springsecurity.roleHierarchy = '''
    ROLE_MODERATOR > ROLE_USER
 '''
 
+grails.plugins.twitterbootstrap.fixtaglib = true
 
+grails.assets.less.compile = 'less4j'
+grails.assets.plugin."twitter-bootstrap".excludes = ["**/*.less"]
+grails.assets.plugin."twitter-bootstrap".includes = ["bootstrap.less"]
+grails.assets.plugin."font-awesome-resources".excludes = ['**/*.less']
+grails.assets.plugin."font-awesome-resources".includes = ['**/font-awesome.less']
+
+google.analytics.webPropertyID = "UA-54496952-1"
+
+grails.cache.config = {
+    cache {
+        name 'recentList'
+    }
+    cache {
+        name 'popularList'
+    }
+    defaults {
+        maxElementsInMemory 1000
+        eternal false
+        overflowToDisk false
+        maxElementsOnDisk 0
+    }
+}

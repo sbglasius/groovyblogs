@@ -1,5 +1,7 @@
 package groovyblogs
 
+import org.groovyblogs.BlogTagLib
+
 class BlogTagLibTests extends GroovyTestCase {
 
     void testNiceDate() {

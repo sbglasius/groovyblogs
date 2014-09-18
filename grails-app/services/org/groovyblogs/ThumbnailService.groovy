@@ -119,6 +119,8 @@ public class ThumbnailService {
         try {
 
             pendingCache.put(new Element(entry.link, entry.id))
+
+            if(true) return null
             if (!noThumbAvailablePic) {
                 def noThumbUrl = this.class.getResource("/resources/no-thumb.jpg")
                 log.debug "The noThumb image is ${noThumbUrl}"
