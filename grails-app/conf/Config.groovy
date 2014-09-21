@@ -230,9 +230,13 @@ google.analytics.webPropertyID = "UA-54496952-1"
 grails.cache.config = {
     cache {
         name 'recentList'
+        timeToLiveSeconds 60
+
     }
     cache {
         name 'popularList'
+        timeToLiveSeconds 60
+
     }
     defaults {
         maxElementsInMemory 1000
