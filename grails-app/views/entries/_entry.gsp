@@ -1,11 +1,11 @@
 <div class="row pad-bottom-10 ${entry.language?.startsWith('en') ? 'english' : 'nonenglish'}">
-    <div class="col-md-2 col-xs-3">
+    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-3">
         <g:link controller="entries" action="jump" id="${entry.id}" class="thumbnail img-thumbnail" elementId="thumbnail-${entry.id}" data-thumbnail="${createLink(controller: 'thumbnail', action: 'show', id: entry.id)}">
             <i class="thumbnail-waiting fa fa-circle-o-notch fa-spin"></i>
         </g:link>
     </div>
 
-    <div class="col-md-10 col-xs-9">
+    <div class="col-lg-10 col-md-9 col-sm-8 col-xs-9">
         <div class="row">
             <div class="col-md-12">
                 <h4><g:link controller="entries" action="jump" id="${entry.id}">

@@ -60,6 +60,14 @@ body {
     text-align: center;
     vertical-align: bottom;
   }
+  @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    width: 100px;
+    height: 100px;
+    .thumbnail-waiting {
+      line-height: 100px;
+    }
+  }
+
   @media (max-width: @screen-xs-max) {
     width: 50px;
     height: 50px;
