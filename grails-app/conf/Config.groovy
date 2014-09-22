@@ -188,9 +188,9 @@ log4j = {
             'org.hibernate'
 
     debug 'grails.app.domain.org.groovyblogs',
-            'grails.app.controllers.org.groovyblogs'
-            'grails.app.services.org.groovyblogs'
-            'grails.app.taglibs.org.groovyblogs'
+            'grails.app.controllers.org.groovyblogs',
+            'grails.app.services.org.groovyblogs',
+            'grails.app.taglibs.org.groovyblogs',
             'grails.app.jobs.org.groovyblogs'
 
     // trace  gb: ['org.codehaus.groovy.grails.commons'] // Good for debugging bean creation issues

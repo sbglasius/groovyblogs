@@ -10,7 +10,7 @@
 <body>
 
 <div id="show-blog" class="content scaffold-show" role="main">
-    <h1><g:message code="default.show.label" args="[entityName]"/></h1>
+    <h1><g:link action="index"><i class="fa fa-chevron-circle-left"></i></g:link> <g:message code="default.show.label" args="[entityName]"/></h1>
     <tmpl:/templates/message/>
     <div class="form-horizontal">
         <f:with bean="${blogInstance}">
