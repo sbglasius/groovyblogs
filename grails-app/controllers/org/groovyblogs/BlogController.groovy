@@ -13,5 +13,16 @@ class BlogController {
         flash.message = "Checked ${blogs.size()} blogs"
         redirect(action: 'index', params: [max: params.max ?: 10, offset: params.offset ?: 0, sort: params.sort ?: 'id', order: params.order ?: 'asc'])
     }
+
+    def checkBlogNow(Blog blog) {
+        if(blog) {
+            feedService.updateFeed(blog)
+            flash.message = "Checked $blog.title"
+            redirect(action: 'show', id: blog.id)
+        } else {
+            flash.message = "Blog not found: $params.id"
+            redirect(action: 'index')
+        }
+    }
 }
 

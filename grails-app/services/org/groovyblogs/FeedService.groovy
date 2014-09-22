@@ -210,6 +210,8 @@ class FeedService {
         blog.lastPolled = new Date()
         long nextPollTime = new Date().getTime() + blog.pollFrequency * 60 * 60 * 1000
         blog.nextPoll = new Date(nextPollTime)
+        blog.errorCount = 0
+        blog.lastError = ''
         if (!blog.validate()) {
             log.warn("Validation failed updating blog [$blog.title]")
             blog.errors.allErrors.each {
@@ -297,6 +299,7 @@ class FeedService {
 
     void markBlogUpdateSuccess(Blog blog) {
         log.info("FeedService marked blog $blog ACTIVE")
+        blog.lastError = ''
         blog.status = BlogStatus.ACTIVE
         blog.errorCount = 0
     }

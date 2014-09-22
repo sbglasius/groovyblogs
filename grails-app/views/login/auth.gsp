@@ -20,11 +20,7 @@
 
                 <div class="modal-body">
 
-                    <g:if test='${flash.message}'>
-                        <div class="alert alert-danger">
-                            <div>${flash.message}</div>
-                        </div>
-                    </g:if>
+                    <tmpl:/templates/message/>
 
                     <div class="row pad-bottom-10">
                         <div class="col-xs-12">

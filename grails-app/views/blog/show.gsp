@@ -11,9 +11,7 @@
 
 <div id="show-blog" class="content scaffold-show" role="main">
     <h1><g:message code="default.show.label" args="[entityName]"/></h1>
-    <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
-    </g:if>
+    <tmpl:/templates/message/>
     <div class="form-horizontal">
         <f:with bean="${blogInstance}">
             <f:display property="title"/>
@@ -35,9 +33,10 @@
         </f:with>
     </div>
     <g:form url="[resource: blogInstance, action: 'delete']" method="DELETE">
-            <g:link class="btn btn-primary" action="edit" resource="${blogInstance}"><g:message code="default.button.edit.label" default="Edit"/></g:link>
-            <g:actionSubmit class="btn btn-warning" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
+        <g:link class="btn btn-primary" action="edit" resource="${blogInstance}"><g:message code="default.button.edit.label" default="Edit"/></g:link>
+        <g:link class="btn btn-info" action="checkBlogNow" resource="${blogInstance}"><g:message code='blog.button.checkblog.label' default='Check now'/></g:link>
+        <g:actionSubmit class="btn btn-warning" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
     </g:form>
 </div>
 </body>
