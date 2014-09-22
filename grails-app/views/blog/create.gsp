@@ -10,9 +10,7 @@
 
 <div id="create-blog" class="content scaffold-create" role="main">
     <h1><g:message code="default.create.label" args="[entityName]"/></h1>
-    <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
-    </g:if>
+    <tmpl:/templates/message/>
     <g:hasErrors bean="${blogInstance}">
         <ul class="errors" role="alert">
             <g:eachError bean="${blogInstance}" var="error">
