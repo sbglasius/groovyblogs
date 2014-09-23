@@ -96,10 +96,6 @@ grails.hibernate.pass.readonly = false
 // configure passing read-only to OSIV session by default, requires "singleSession = false" OSIV mode
 grails.hibernate.osiv.readonly = false
 
-mq {
-    enabled = false
-}
-
 thumbnail {
     enabled = true
     // user = your_user_id
@@ -109,10 +105,6 @@ thumbnail {
 
 groovyblogs {
     maxErrors = 10
-}
-
-pdf {
-    dir = System.properties["java.io.tmpdir"]
 }
 
 cache {
