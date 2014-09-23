@@ -1,7 +1,9 @@
 <div class="row pad-bottom-10 ${entry.language?.startsWith('en') ? 'english' : 'nonenglish'}">
     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-3">
-        <g:link controller="entries" action="jump" id="${entry.id}" class="thumbnail img-thumbnail" elementId="thumbnail-${entry.id}" data-thumbnail="${createLink(controller: 'thumbnail', action: 'show', id: entry.id)}">
+        <g:link controller="entries" action="jump" id="${entry.id}"  data-thumbnail="${createLink(controller: 'thumbnail', action: 'show', id: entry.id)}">
+            <div id="thumbnail-${entry.id}" class="thumbnail img-thumbnail">
             <i class="thumbnail-waiting fa fa-circle-o-notch fa-spin"></i>
+            </div>
         </g:link>
     </div>
 

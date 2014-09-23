@@ -31,7 +31,7 @@
             $.get(self.url).done(function (data) {
                 // if the image is loaded, then add an img tag and use the url (it should be cashed by the browser)
                 var img = $('<img/>').attr('src', self.url).addClass('thumbnail','img-img-thumbnail');
-                self.$element.replaceWith(img);
+                self.$element.find('div').replaceWith(img);
             }).fail(function (error) {
                 // if the image is not loaded, retry in a little bit.
                 if(self.count++ > 2) {
