@@ -41,7 +41,7 @@
 
                 <p class="text-justify">
                     It is now run by the crew behind <a href="http://gr8conf.eu" target="_blank">GR8Conf EU</a>.
-                The source code is available on <a href="groovyblogs" target="_blank">GitHub</a> and pull requests are welcomed!
+                The source code is available on <a href="https://github.com/sbglasius/groovyblogs" target="_blank">GitHub</a> and pull requests are welcomed!
                 </p>
             </div>
         </div>
