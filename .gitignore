@@ -6,10 +6,7 @@
 *Db.properties
 *Db.script
 .settings
-stacktrace.log
-/*.zip
-/plugin.xml
-/*.log
+*.log
 /*DB.*
 /cobertura.ser
 .DS_Store

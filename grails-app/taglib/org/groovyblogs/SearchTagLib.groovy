@@ -26,12 +26,11 @@ class SearchTagLib {
 
         out << "<input id='searchField' size='45' name='query' value='${attrs.query}'/> "
 
-
         int selectedMaxHits
         if (params.hitcount) {
-            selectedMaxHits = Integer.parseInt(params.hitcount)
+            selectedMaxHits = params.hitcount as int
         } else if (attrs.hitcount) {
-            selectedMaxHits = Integer.parseInt(attrs.hitcount)
+            selectedMaxHits = attrs.hitcount as int
         } else {
             selectedMaxHits = 10
         }
@@ -49,23 +48,21 @@ class SearchTagLib {
 
         out << "</form>"
         out << "</div>"
-
     }
 
     def searchResults = { attrs ->
 
         def searchResults = attrs.results
-        def titleField = attrs.titleField ? attrs.titleField : "title"
-        def bodyField = attrs.bodyField ? attrs.bodyField : "body"
-
+        def titleField = attrs.titleField ?: "title"
+        def bodyField = attrs.bodyField ?: "body"
 
         for (result in searchResults.resultList) {
 
             out << "<div class='hit'>"
             // build a URI to the original document, we always store class and
             // object id with the index for just this reason
-            //			def hitUrl = request.contextPath + "/" + result.document.get("class").toLowerCase() +
-            //				+ "/show/" + result.document.get("id")
+            //            def hitUrl = request.contextPath + "/" + result.document.get("class").toLowerCase() +
+            //                + "/show/" + result.document.get("id")
             def hitUrl = request.contextPath + "/entries/jump/" + result.document.get("id")
 
             out << "<p class='hitTitle'>"
@@ -77,15 +74,13 @@ class SearchTagLib {
             out << result.document.get("blogTitle")
             out << " / "
 
-            long blogDate = Long.parseLong(result.document.get("dateAdded"))
+            long blogDate = result.document.get("dateAdded") as long
 
             out << new Date(blogDate)
             out << "</p>"
             out << "<p class='hitBody'>" + result.highlight[bodyField] + "</p>"
             out << "</div>"
         }
-
-
     }
 
     def searchCrumbs = { attrs ->
@@ -98,39 +93,34 @@ class SearchTagLib {
         def query = searchResults.queryTerms
 
         int totalPages = totalHits / hitsPerPage
-
-        if (totalPages > 0) {
-            out << "<ul class='searchCrumbs'>"
-            for (p in 0..totalPages) {
-
-                def offset = p * hitsPerPage
-
-                def searchUrl = request.requestURI + "?query=${query}&fields=${fields}&offset=${offset}&hitcount=${hitsPerPage}"
-
-                out << "<li> "
-
-                def liBody
-                def liClass
-
-                if (offset == currentOffset) {
-                    liBody = "${p + 1}"
-                    liClass = "currentPage"
-                } else {
-                    liBody = "<a href='$searchUrl'>${p + 1}</a>"
-                    if (offset < currentOffset) {
-                        liClass = "prevPage"
-                    } else {
-                        liClass = "nextPage"
-                    }
-                }
-
-                out << "<li class='${liClass}'>"
-                out << liBody
-                out << "</li>"
-            }
-            out << "</ul>"
+        if (!totalPages) {
+            return
         }
 
-    }
+        out << "<ul class='searchCrumbs'>"
+        for (p in 0..totalPages) {
 
+            def offset = p * hitsPerPage
+
+            def searchUrl = request.requestURI + "?query=${query}&fields=${fields}&offset=${offset}&hitcount=${hitsPerPage}"
+
+            out << "<li> "
+
+            def liBody
+            def liClass
+
+            if (offset == currentOffset) {
+                liBody = "${p + 1}"
+                liClass = "currentPage"
+            } else {
+                liBody = "<a href='$searchUrl'>${p + 1}</a>"
+                liClass = offset < currentOffset ? "prevPage" : "nextPage"
+            }
+
+            out << "<li class='${liClass}'>"
+            out << liBody
+            out << "</li>"
+        }
+        out << "</ul>"
+    }
 }

@@ -5,28 +5,21 @@ class Blog {
     String feedUrl
     String title
     String description
-    int pollFrequency = 3
+    Integer pollFrequency = 3
     Date lastPolled = new Date()
     Date nextPoll = new Date()
     Date registered = new Date()
     BlogStatus status = BlogStatus.PENDING
-    int errorCount = 0
+    Integer errorCount = 0
     String lastError
 
-    User account
-    static belongsTo = User
-
-    // def optionals = [ "title", "description", "pollFrequency", "status", "lastError", ]
-
-    // Set blogEntries = new HashSet()
-
+    static belongsTo = [account: User]
     static hasMany = [blogEntries: BlogEntry]
 
-    static def constraints = {
+    static constraints = {
         feedUrl(url: true, blank: false, unique: true, validator: { val, obj ->
             return !(val =~ /groovyblogs/)
-        }
-        )
+        })
         pollFrequency(inList: [1, 3, 12, 24])
         title(nullable: true)
         description(nullable: true)
@@ -37,5 +30,4 @@ class Blog {
     static mapping = {
         nextPoll index: 'Next_Poll_Idx'
     }
-
-}	
+}

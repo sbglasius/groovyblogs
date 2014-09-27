@@ -1,38 +1,39 @@
 package org.groovyblogs
 
 class BlogEntry {
-    static searchable = {
-        only = ['title', 'description']
-    }
 
     String title
     String description
     String link
     Date dateAuthored = new Date()
     Date dateAdded = new Date()
-    int hitCount = 0
+    Integer hitCount = 0
     String language
     String info
     String hash
 
+    static searchable = {
+        only = ['title', 'description']
+    }
+
     // info is used for sticking stuff like "Only showing 3 entries for this user"
-    static def transients = ["info"]
-    // static def optionals = [ "language" ]
+    static transients = ["info"]
 
-    Blog blog
+    static belongsTo = [blog: Blog]
 
-    static belongsTo = Blog
-
-    static def constraints = {
-        title(size: 0..255)
-        description(nullable: false)
+    static constraints = {
         language(nullable: true)
         link(unique: true)
         hash(nullable: true)
     }
 
+    static mapping = {
+        description sqlType: 'LONGTEXT'
+        link index: 'Link_Idx'
+        hash index: 'Hash_Idx'
+    }
 
-    def isGroovyRelated() {
+    boolean isGroovyRelated() {
 
         def keywords = Tag.findAllByApproved(true)*.tag
 
@@ -44,13 +45,5 @@ class BlogEntry {
 
     String toThumbnailPath() {
         return dateAdded.format('yyyy/MM/dd') + "/"
-
     }
-
-    static mapping = {
-        description sqlType: 'LONGTEXT'
-        link index: 'Link_Idx'
-        hash index: 'Hash_Idx'
-    }
-
-}	
+}

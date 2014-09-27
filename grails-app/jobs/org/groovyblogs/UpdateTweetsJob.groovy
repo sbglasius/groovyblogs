@@ -11,12 +11,12 @@ class UpdateTweetsJob {
         cron name:'updateTweetsJobTrigger', startDelay:10000, cronExpression:  "0 0,15,30,45 * * * ?"
     }
 
-    def execute() {
+    void execute() {
 
-        log.info("Starting scheduled tweets check at: " + new Date())
+        log.info("Starting scheduled tweets check at: ${new Date()}")
 
         feedService.updateTweets()
 
-        log.info("Finished scheduled tweets check at: " + new Date())
+        log.info("Finished scheduled tweets check at: ${new Date()}")
     }
 }

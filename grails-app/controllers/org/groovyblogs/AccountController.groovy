@@ -14,86 +14,86 @@ class AccountController {
         springSecurityService.currentUser
     }
 
-    def index() { redirect(action: 'edit', params: params) }
-
+    static defaultAction = 'edit'
 
     def edit() {
-        def account = getCurrentUser() // Account.findByUserid( session.account.id )
-
+        def account = getCurrentUser()
         if (!account) {
-            flash.message = "Account not found with id ${account.id}"
+            flash.message = "Account not found with id ${account.id}" // TODO this is going fail with NPE
             redirect(action: 'list')
-        } else {
-            return [account: account]
+            return
         }
+
+        [account: account]
     }
 
-    def update() {
-        def account = User.get(params.id)
-        if (account.id == getCurrentUser()?.id) {
-            //account.properties = params
-            bindData(account, params, ['id', 'password']) // don't bind id
-            if (params.password)
-                account.password = params.password.encodeAsSHA1Bytes().encodeBase64()
-
-            if (account.save()) {
-                flash.message = "Updated successfully"
-                redirect(action: 'edit', model: [account: account])
-            } else {
-                render(view: 'edit', model: [account: account])
-            }
-        } else {
-            flash.message = "Account not found with id ${params.id}"
-            redirect(action: 'edit', id: params.id)
+    def update(Long id, String password) {
+        def account = User.get(id)
+        if (account.id != getCurrentUser()?.id) {
+            flash.message = "Account not found with id ${id}"
+            redirect(action: 'edit', id: id)
+            return
         }
+
+        //account.properties = params
+        bindData(account, params, ['password'])
+        if (password) {
+            account.password = password.encodeAsSHA1Bytes().encodeBase64()
+        }
+
+        if (account.save()) {
+            flash.message = "Updated successfully"
+            redirect(action: 'edit', model: [account: account])
+            return
+        }
+
+        render(view: 'edit', model: [account: account])
     }
 
     @Secured(['permitAll'])
     def signup() {
         def account = new User()
         account.properties['username', 'password', 'email'] = params
-        return ['account': account]
+        [account: account]
     }
 
     @Secured(['permitAll'])
-    def register() {
-        def account = new User()
-        account.properties['username', 'password', 'email'] = params
-        account.registered = new Date()
-        account.status = "active"
-        account.password = params.password.encodeAsSHA1Bytes().encodeBase64()
-
+    def register(String username, String password, String email) {
+        def account = new User(
+            username: username,
+            password: password.encodeAsSHA1Bytes().encodeBase64(),
+            email: email,
+            registered: new Date(),
+            status: "active")
         if (account.save(flush: true)) {
-
 //            def authToken = new UsernamePasswordToken(params.userid, params.password)
-
 //            this.jsecSecurityManager.login(authToken)
             redirect(action: 'edit')
             //render(view: 'addfeed', model: ['account':account ])
             return
-        } else {
-            account.password = params.password
-            render(view: 'signup', model: [account: account])
         }
+
+        account.password = params.password
+        render(view: 'signup', model: [account: account])
     }
 
 
-    def deleteFeed() {
-        def blog = Blog.get(params.id)
-        if (blog) {
-            if (blog.account.id == getCurrentUser()?.id) {
-
-                blog.delete()
-
-                flash.message = "Successfully deleted blog ${blog.title}"
-            } else {
-                flash.message = "You don't have rights to delete that blog"
-            }
-
-        } else {
-            flash.message = "Blog not found with id ${params.id}"
+    def deleteFeed(Long id) {
+        def blog = Blog.get(id)
+        if (!blog) {
+            flash.message = "Blog not found with id ${id}"
+            redirect(action: 'edit')
+            return
         }
-        redirect(action: 'edit')
+
+        if (blog.accountId != getCurrentUser()?.id) {
+            flash.message = "You don't have rights to delete that blog"
+            redirect(action: 'edit')
+            return
+        }
+
+        blog.delete()
+        flash.message = "Successfully deleted blog ${blog.title}"
     }
 
     def addFeed() {
@@ -101,7 +101,6 @@ class AccountController {
         def feedUrl = params.feedUrl
         log.info("Adding Feed: [$feedUrl]")
         if (feedUrl) {
-
 
             def blog = new Blog()
             blog.feedUrl = params.feedUrl

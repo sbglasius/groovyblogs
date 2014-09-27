@@ -11,19 +11,18 @@ import org.apache.log4j.Logger
  * @author Glen Smith (glen@bytecode.com.au)
  *
  * TODO: Replace with elasticsearch
- *
  */
 class OffsetCollector { //} extends HitCollector {
 
-    def log = Logger.getLogger(this.class.name)
+    Logger log = Logger.getLogger(getClass().name)
 
-    def topN = new TreeMap(new DescendingComparitor())   // maps score to docid in desc order
-    int hitCount = 0
+    def topN = new TreeMap(new DescendingComparator())   // maps score to docid in desc order
+    int hitCount
     int maxHits
     int offset
 
     /** Constructor. */
-    public OffsetCollector(int maxHits, int offset) {
+    OffsetCollector(int maxHits, int offset) {
         this.maxHits = maxHits
         this.offset = offset
     }
@@ -37,21 +36,20 @@ class OffsetCollector { //} extends HitCollector {
         while (topN.containsKey(availableKey)) {
             availableKey -= 0.00000001
         }
-        topN.put(availableKey, doc);
-
+        topN[availableKey] = doc
     }
 
     /** The HitCollector interface method. Called by Lucene on each raw hit. */
-    public void collect(int doc, float score) {
+    void collect(int doc, float score) {
         log.debug("Doc $doc is score $score")
         if (topN.size() < maxHits + offset) {
-            placeInMap(score, doc);
+            placeInMap(score, doc)
         } else {
             // TODO docs with same hit score will currently get blatted
             float lowestSoFar = topN.lastKey()
             if (score > lowestSoFar) {
-                topN.remove(lowestSoFar);
-                topN.put(score, doc);
+                topN.remove(lowestSoFar)
+                topN[score] = doc
             }
         }
         hitCount++
@@ -60,7 +58,7 @@ class OffsetCollector { //} extends HitCollector {
     /** Returns an array of DocIds that match the term. */
     def hits() {
 
-        def i = 0
+        int i = 0
         def orderedValues = []
         if (topN.size() <= maxHits) {
             orderedValues = topN.values()
@@ -76,29 +74,11 @@ class OffsetCollector { //} extends HitCollector {
         log.debug("Returning ${orderedValues}")
         return orderedValues
     }
-
-    /** Returns the total hit count. */
-    def hitCount() {
-        return hitCount
-    }
-
 }
 
 /**
  * Sorts a TreeMap in descending order.
  */
-class DescendingComparitor implements Comparator {
-
-    public int compare(Object num1,
-                       Object num2) {
-
-        if (num1 == num2) {
-            return 0;
-        } else if (num1 < num2) {
-            return 1
-        } else {
-            return -1;
-        }
-
-    }
+class DescendingComparator implements Comparator {
+	int compare(num1, num2) { num2 <=> num1 }
 }

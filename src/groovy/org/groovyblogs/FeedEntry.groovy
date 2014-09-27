@@ -11,23 +11,18 @@ class FeedEntry {
     Date publishedDate
     String language
 
-    public static String summarize(String longForm) {
-
-        def summary = longForm ? longForm : ""
-        summary = longForm.replaceAll("</?[^>]+>", "")
-        summary = summary.length() > 200 ? summary[0..199] + "..." : summary
-
+    static String summarize(String longForm) {
+        def summary = (longForm ?: "").replaceAll("</?[^>]+>", "")
+        summary.length() > 200 ? summary[0..199] + "..." : summary
     }
 
     /*
     public String getLanguage() {
-    
+
     def guesser = new org.knallgrau.utils.textcat.TextCategorizer()
     def category = description ? guesser.categorize(description) : ""
     return category
 
     }
      */
-
-
 }

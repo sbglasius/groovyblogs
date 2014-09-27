@@ -22,7 +22,7 @@
             var self = this;
             // Give the page a chance to load then fetch the images
             setTimeout(function () {
-                self.tryFetch.call(self)
+                self.tryFetch.call(self);
             }, 200);
             console.log("xD");
         },
@@ -36,17 +36,17 @@
                 // if the image is not loaded, retry in a little bit.
                 if(self.count++ > 2) {
                     console.debug(self.count, $('i',self.$element));
-                   $('i',self.$element).removeClass('fa-circle-o-notch fa-spin').addClass('fa-picture-o')
+                   $('i',self.$element).removeClass('fa-circle-o-notch fa-spin').addClass('fa-picture-o');
                 }
                 setTimeout(function () {
                     self.tryFetch.call(self);
-                },1000*(self.count))
-            })
+                },1000*(self.count));
+            });
         }
     });
 
     $.fn[ pluginName ] = function (options) {
-        this.each(function () {
+        this.each(function() {
             // Do not add this to elements without a data-thumbnail
             if (!$.data(this, "plugin_" + pluginName) && $(this).data('thumbnail')) {
                 $.data(this, "plugin_" + pluginName, new Plugin(this, options));

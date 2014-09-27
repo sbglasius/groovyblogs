@@ -1,4 +1,5 @@
 package org.groovyblogs
+
 import grails.plugin.springsecurity.annotation.Secured
 
 import javax.servlet.http.HttpServletResponse
@@ -8,10 +9,7 @@ class ThumbnailController {
 
     ThumbnailService thumbnailService
 
-    def index() {
-        redirect(action: 'show')
-    }
-
+    static defaultAction = 'show'
 
     private void writeImage(String id, String imgSize) {
 
@@ -23,21 +21,13 @@ class ThumbnailController {
         } else {
             response.sendError HttpServletResponse.SC_NOT_FOUND
         }
-
     }
 
     def show(String id) {
-
         writeImage(id,  "small")
-
     }
 
     def showLarge(String id) {
-
         writeImage(id, "large")
-
     }
-
-
 }
-

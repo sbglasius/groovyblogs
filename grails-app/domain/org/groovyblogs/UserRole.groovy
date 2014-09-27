@@ -13,14 +13,14 @@ class UserRole implements Serializable {
     static UserRole get(long userId, long roleId) {
         UserRole.where {
             user == User.load(userId) &&
-                    role == Role.load(roleId)
+            role == Role.load(roleId)
         }.get()
     }
 
     static boolean exists(long userId, long roleId) {
         UserRole.where {
             user == User.load(userId) &&
-                    role == Role.load(roleId)
+            role == Role.load(roleId)
         }.count() > 0
     }
 
@@ -35,7 +35,7 @@ class UserRole implements Serializable {
 
         int rowCount = UserRole.where {
             user == User.load(u.id) &&
-                    role == Role.load(r.id)
+            role == Role.load(r.id)
         }.deleteAll()
 
         if (flush) {

@@ -16,12 +16,10 @@ class User {
     boolean passwordExpired
 
     static hasMany = [blogs: Blog]
-    static transients = ['springSecurityService']
 
-    static def constraints = {
-        username nullable: false, unique: true
-        password nullable: false
-        email email: true, nullable: false
+    static constraints = {
+        username unique: true
+        email email: true
         status nullable: true
     }
 
@@ -43,6 +41,7 @@ class User {
             encodePassword()
         }
     }
+
     def beforeDelete() {
         UserRole.withNewSession {
             UserRole.findAllByUser(this)*.delete()
@@ -52,4 +51,4 @@ class User {
     protected void encodePassword() {
         password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
     }
-}	
+}

@@ -1,18 +1,16 @@
 package groovyblogs
 
 import grails.test.GrailsUnitTestCase
+
+import org.codehaus.groovy.grails.plugins.codecs.MD5Codec
 import org.groovyblogs.ThumbnailService
 
 class ThumbnailServiceTests extends GrailsUnitTestCase {
 
     protected void setUp() {
         super.setUp()
-        loadCodec(org.codehaus.groovy.grails.plugins.codecs.MD5Codec)
-        mockLogging(ThumbnailService.class, true)
-    }
-
-    protected void tearDown() {
-        super.tearDown()
+        loadCodec(MD5Codec)
+        mockLogging(ThumbnailService, true)
     }
 
     void testImageFetch() {
@@ -35,7 +33,5 @@ thumbnail {
             println "Cached stuff"
         }
         ts.fetchThumbnailsToCache 1, "http://blogs.bytecode.com.au/glen"
-
-
     }
 }

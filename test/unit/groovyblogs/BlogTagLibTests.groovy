@@ -1,5 +1,7 @@
 package groovyblogs
 
+import java.text.SimpleDateFormat
+
 import org.groovyblogs.BlogTagLib
 
 class BlogTagLibTests extends GroovyTestCase {
@@ -11,16 +13,11 @@ class BlogTagLibTests extends GroovyTestCase {
         BlogTagLib.metaClass.out = out
         BlogTagLib btl = new BlogTagLib()
 
-
         Date now = new Date()
 
         btl.niceDate(date: now)
 
-        assertEquals(
-                new java.text.SimpleDateFormat("EEE, d MMM yyyy HH:mm").format(now),
-                out.toString()
-        )
-
+        assertEquals new SimpleDateFormat("EEE, d MMM yyyy HH:mm").format(now), out.toString()
     }
 
     void testDateFromNow() {
@@ -43,6 +40,5 @@ class BlogTagLibTests extends GroovyTestCase {
         btl.dateFromNow(date: cal.time)
 
         assertEquals "1 hour ago", out.toString()
-
     }
 }
