@@ -3,9 +3,6 @@ import org.hibernate.dialect.MySQL5InnoDBDialect
 dataSource {
     pooled = true
     jmxExport = true
-    driverClassName = "org.h2.Driver"
-    username = "sa"
-    password = ""
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -16,7 +13,6 @@ hibernate {
     flush.mode = 'manual' // OSIV session flush mode outside of transactional context
 }
 
-// environment specific settings
 environments {
     development {
         dataSource {
@@ -31,10 +27,10 @@ environments {
     test {
         dataSource {
             dbCreate = "update"
+            driverClassName = "org.h2.Driver"
+            username = "sa"
+            password = ""
             url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
         }
-    }
-    production {
-        // This is externalized....
     }
 }

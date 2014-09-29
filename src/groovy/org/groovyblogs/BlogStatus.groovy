@@ -1,6 +1,6 @@
 package org.groovyblogs
 
-public enum BlogStatus {
+enum BlogStatus {
     PENDING,
     LOOKS_GOOD,
     NO_GROOVY,

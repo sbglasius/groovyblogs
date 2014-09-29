@@ -1,12 +1,12 @@
 package org.groovyblogs
 
-import grails.util.Holders
 import net.sf.ehcache.Ehcache
 
 class UpdateThumbsJob {
 
     def concurrent = false
 
+    def grailsApplication
     ThumbnailService thumbnailService
     Ehcache pendingCache
 
@@ -14,16 +14,14 @@ class UpdateThumbsJob {
         simple name:'updateThumbsJobTrigger', repeatInterval: 1000 * 60, startDelay: 1000 * 30
     }
 
+    void execute() {
 
-    def execute() {
-
-        if (!Holders.config.thumbnail.enabled) {
+        if (!grailsApplication.config.thumbnail.enabled) {
             // service disabled
             return
         }
 
-
-        log.info("Starting thumbnail updates check at: " + new Date())
+        log.info("Starting thumbnail updates check at: ${new Date()}")
         try {
             def urlsToFetch = pendingCache.getKeys()
             if (urlsToFetch) {
@@ -33,28 +31,24 @@ class UpdateThumbsJob {
             urlsToFetch.each { url ->
                 try {
                     def value = pendingCache.get(url)?.value
-                    if(!value) {
-                        pendingCache.remove(url)
-                    } else {
+                    if (value) {
                         long id = value
                         log.info "Refreshing pending cache for ${url} on blog ${id}"
-                        //Thread.start {
                         thumbnailService.fetchThumbnailsToCache(id, url)
                     }
-
-                    // pendingCache.remove(url)
-                    //}
-                } catch (exception) {
+                    else {
+                        pendingCache.remove(url)
+                    }
+                }
+                catch (e) {
                     pendingCache.remove(url)
                 }
             }
-
-
-        } catch (Throwable t) {
-            log.error("Error in thumbnail check", t)
+        } catch (t) {
+            log.error("Error in thumbnail check: $t.message", t)
         }
 
         pendingCache.removeAll()
-        log.info("Finished thumbnail updates check at: " + new Date())
+        log.info("Finished thumbnail updates check at: ${new Date()}")
     }
 }

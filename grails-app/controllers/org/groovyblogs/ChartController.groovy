@@ -1,7 +1,14 @@
 package org.groovyblogs
 
 import grails.plugin.springsecurity.annotation.Secured
+
+import java.awt.Color
+import java.awt.Font
+import java.awt.image.BufferedImage
+import java.text.SimpleDateFormat
+
 import net.sf.ehcache.Element
+
 import org.jfree.chart.ChartFactory
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.CategoryAxis
@@ -13,25 +20,21 @@ import org.jfree.chart.plot.PlotOrientation
 import org.jfree.chart.title.TextTitle
 import org.jfree.data.category.DefaultCategoryDataset
 
-import java.awt.*
-import java.awt.image.BufferedImage
-
 @Secured(['permitAll'])
 class ChartController {
 
     def chartCache
 
-    def index() { redirect(action: 'siteStats', params: params) }
-
+    static defaultAction = 'siteStats'
 
     private byte[] buildChart() {
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset()
 
-        def fmt = new java.text.SimpleDateFormat("EEE");
+        def fmt = new SimpleDateFormat("EEE")
         def entryCount = [:]
 
-        def lastWeek = new Date().minus(6)
+        def lastWeek = new Date() - 6
 
         // Normalise all post dates to midnight on the day they were posted for charting
         BlogEntry.findAllByDateAddedGreaterThan(lastWeek).each { entry ->
@@ -41,8 +44,7 @@ class ChartController {
             entryKey.set(1900 + entry.dateAdded.year, entry.dateAdded.month, entry.dateAdded.date, 0, 0, 0)
             entryKey.set(Calendar.MILLISECOND, 0)
             def key = entryKey.getTimeInMillis()
-            entryCount[key] = entryCount[key] ? entryCount[key] + 1.0 : 1.0
-
+            entryCount[key] = (entryCount[key] ?: 0) + 1.0
         }
 
         // sort the dates into ascending order
@@ -54,26 +56,24 @@ class ChartController {
         sortedEntries.each { key ->
             log.debug("Set $key to ${entryCount[key]}")
 
-            // dataset.addValue(entryCount[key], "Entries", key);
-            dataset.addValue(entryCount[key], "Entries", fmt.format(key));
-
+            // dataset.addValue(entryCount[key], "Entries", key)
+            dataset.addValue(entryCount[key], "Entries", fmt.format(key))
         }
 
-
         JFreeChart chart = ChartFactory.createBarChart(
-                "entries",             // chart title
-                null,               // domain axis label
-                null,                  // range axis label
+                "entries",                // chart title
+                null,                     // domain axis label
+                null,                     // range axis label
                 dataset,                  // data
                 PlotOrientation.VERTICAL, // orientation
-                false,                     // include legend
-                false,                     // tooltips
+                false,                    // include legend
+                false,                    // tooltips
                 false                     // urls
         )
 
         chart.setTitle(new TextTitle("Entries Last 7 Days", new Font("SansSerif", Font.BOLD, 12)))
 
-        CategoryPlot plot = (CategoryPlot) chart.getPlot()
+        CategoryPlot plot = chart.getPlot()
         plot.setForegroundAlpha(0.5f)
         plot.setBackgroundPaint(Color.lightGray)
         plot.setRangeGridlinePaint(Color.white)
@@ -83,7 +83,7 @@ class ChartController {
         // domainAxis.setLabelFont(new Font("SansSerif", Font.BOLD, 20))
 
         // customise the range axis...
-        NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis()
+        NumberAxis rangeAxis = plot.getRangeAxis()
         rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits())
 
         // From Aaron's tranparency howto
@@ -92,10 +92,7 @@ class ChartController {
         KeypointPNGEncoderAdapter encoder = new KeypointPNGEncoderAdapter()
         encoder.setEncodingAlpha(true)
 
-        def cb = encoder.encode(chart.createBufferedImage(170, 150, BufferedImage.BITMASK, null))
-
-        return cb;
-
+        encoder.encode(chart.createBufferedImage(170, 150, BufferedImage.BITMASK, null))
     }
 
     def siteStats() {
@@ -103,21 +100,16 @@ class ChartController {
         // grab chart bytes from cache if possible
         def cb = chartCache.get("siteStats")?.value
         if (!cb) {
-            cb = buildChart()
-            chartCache.put(new Element("siteStats", cb))
+            chartCache.put(new Element("siteStats", buildChart()))
         }
 
         response.addHeader("Cache-Control", "max-age=60")
 
-        response.setContentType("image/png")
-        response.setContentLength(cb.length)
-        response.getOutputStream().write(cb)
-        response.getOutputStream().flush()
+        response.contentType = "image/png"
+        response.contentLength = cb.length
+        response.outputStream.write(cb)
+        response.outputStream.flush()
 
         // EncoderUtil.writeBufferedImage(chart.createBufferedImage(160, 130), "png", response.getOutputStream(), true)
-        return null;
-
     }
-
-
 }

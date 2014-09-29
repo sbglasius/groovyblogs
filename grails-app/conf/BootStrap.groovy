@@ -2,59 +2,55 @@ import grails.util.Environment
 import org.groovyblogs.*
 
 class BootStrap {
+
+    private static final List<String> TAGS = [
+        'groovy', 'grails', 'griffon', 'gorm', 'gr8', 'gant',
+        'gradle', 'gpars', 'gsp', 'geb', 'spock', 'gaelyk']
+
+    private static final Map DEFAULT_CONFIG = [
+        "thumbnail.user"  : "1234",
+        "thumbnail.apiKey": "yourkey",
+
+        "translate.apikey": "yourKey",
+
+        "twitter.enabled" : "true",
+        "twitter.user"    : "youruser",
+        "twitter.password": "yourpassword"
+    ]
+
     def grailsApplication
 
     def init = { servletContext ->
 
         switch (Environment.current) {
-
             case Environment.DEVELOPMENT:
             case Environment.PRODUCTION:
                 createConfigurationIfRequired()
                 createAdminUserIfRequired()
                 createTagsIfRequired()
-                break;
-
+                break
         }
-
-
     }
 
     void createTagsIfRequired() {
-        if(Tag.count() == 0) {
-            ['groovy', 'grails', 'griffon', 'gorm', 'gr8', 'gant', 'gradle', 'gpars', 'gsp',
-             'geb', 'spock', 'gaelyk'].each {
-                new Tag(tag: it, approved: true).save(failOnError: true)
-            }
+        if (Tag.count()) {
+            return
         }
-    }
-    def destroy = {
 
-
+        for (String tag in TAGS) {
+            new Tag(tag: tag, approved: true).save(failOnError: true)
+        }
     }
 
     void createConfigurationIfRequired() {
 
-        if (SystemConfig.count() == 0) {
-
-            def defaultConfig = [
-                    "thumbnail.user"  : "1234",
-                    "thumbnail.apiKey": "yourkey",
-
-                    "translate.apikey": "yourKey",
-
-                    "twitter.enabled" : "true",
-                    "twitter.user"    : "youruser",
-                    "twitter.password": "yourpassword"
-            ]
-
-            defaultConfig.each { key, value ->
-                new SystemConfig(settingName: key, settingValue: value).save()
-            }
-
-
+        if (SystemConfig.count()) {
+            return
         }
 
+        DEFAULT_CONFIG.each { key, value ->
+            new SystemConfig(settingName: key, settingValue: value).save(failOnError: true)
+        }
     }
 
     void createAdminUserIfRequired() {
@@ -76,4 +72,4 @@ class BootStrap {
             UserRole.create(adminUser, adminRole, true)
         }
     }
-} 
+}

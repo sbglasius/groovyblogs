@@ -20,8 +20,8 @@ beans = {
 
     thumbCache(EhCacheFactoryBean) {
         eternal = true
-		overflowToDisk = false
-		maxElementsInMemory = 1000
+        overflowToDisk = false
+        maxElementsInMemory = 1000
     }
 
     pendingCache(EhCacheFactoryBean) {
@@ -51,7 +51,4 @@ beans = {
     recentStatsCache(EhCacheFactoryBean) {
         timeToLive = 3600
     }
-
-  
-
 }

@@ -1,25 +1,21 @@
 package org.groovyblogs
 
-import grails.util.Holders
+import java.text.SimpleDateFormat
+
 import net.sf.ehcache.Element
 
 class BlogTagLib {
 
+    def grailsApplication
     def recentBlogsCache
     def recentStatsCache
 
     def summariseEntry = { attrs ->
-
-        def description = attrs.description
-
         // strip html for the summary, then truncate
-        def summary = FeedEntry.summarize(description)
-        out << summary
-
+        out << FeedEntry.summarize(attrs.description)
     }
 
-
-    public static String getNiceDate(Date date) {
+    String getNiceDate(Date date) {
 
         def now = new Date()
 
@@ -32,9 +28,7 @@ class BlogTagLib {
 
         def niceTime = ""
 
-        long calc = 0L;
-
-        calc = Math.floor(diff / day)
+        long calc = Math.floor(diff / day)
         if (calc > 0) {
             niceTime += calc + " day" + (calc > 1 ? "s " : " ")
             diff = diff % day
@@ -59,46 +53,26 @@ class BlogTagLib {
         }
 
         return niceTime
-
     }
 
-
     def dateFromNow = { attrs ->
-
-        def date = attrs.date
-
-        out << getNiceDate(date)
-
+        out << getNiceDate(attrs.date)
     }
 
     def niceDate = { attrs ->
-
-        def date = attrs.date
-        def sdf = new java.text.SimpleDateFormat("EEE, d MMM yyyy HH:mm")
-        out << sdf.format(date)
-
+        out << new SimpleDateFormat("EEE, d MMM yyyy HH:mm").format(attrs.date)
     }
 
     def translate = { attrs ->
 
-        if (Holders.config.translate.enabled) {
-
-            def entry = attrs.entry
-
-            if (entry.language && !(entry.language.startsWith('en'))) {
-
-                out << "<span class='translateLink'>"
-                out << "[ <a href='"
-                out << "jumpTranslate/$entry.id?lang=" + entry.language
-                out << "'>Translate</a> ]"
-                out << "</span>"
-
-
-            }
-
+        if (!grailsApplication.config.translate.enabled) {
+            return
         }
 
-
+        def entry = attrs.entry
+        if (entry.language && !entry.language.startsWith('en')) {
+            out << "<span class='translateLink'>[ <a href='jumpTranslate/$entry.id?lang=${entry.language}'>Translate</a> ]</span>"
+        }
     }
 
     // Creates a list of recent bloggers
@@ -106,38 +80,31 @@ class BlogTagLib {
 
         def cacheValue = recentBlogsCache.get("recentBloggers")?.value
         if (cacheValue) {
-
             out << cacheValue
-
-        } else {
-
-            def maxEntries = attrs.max ? attrs.max : 5
-            def recentBlogs = Blog.listOrderByRegistered(max: 5, order: "desc")
-
-            def sw = new StringWriter()
-            def outs = new PrintWriter(sw)
-
-            outs << "<ul id='recentBloggers'>"
-            recentBlogs.each { blog ->
-
-                outs << "<li>"
-                // createLink(controller: 'blog', action: 'show', id: blog.id)
-                outs << "<a href='../blog/show/" + blog.id + "'>"
-                outs << blog.title
-                outs << "</a>"
-
-                outs << "</li>"
-                // <a href="<g:createLink controller='blog' action='show' id='blog.id'>">${blog.title}</a></li>
-            }
-            outs << "</ul>"
-
-            def recentStr = sw.toString()
-            out << recentStr
-            // println "List is: ${recentStr}"
-            recentBlogsCache.put(new Element("recentBloggers", recentStr))
-
+            return
         }
 
+        def maxEntries = attrs.max ?: 5
+        def recentBlogs = Blog.listOrderByRegistered(max: 5, order: "desc")
+
+        def sw = new StringWriter()
+        def outs = new PrintWriter(sw)
+
+        outs << "<ul id='recentBloggers'>"
+        recentBlogs.each { blog ->
+
+            outs << "<li>"
+            // createLink(controller: 'blog', action: 'show', id: blog.id)
+            outs << "<a href='../blog/show/$blog.id'>$blog.title</a>"
+            outs << "</li>"
+            // <a href="<g:createLink controller='blog' action='show' id='blog.id'>">${blog.title}</a></li>
+        }
+        outs << "</ul>"
+
+        def recentStr = sw.toString()
+        out << recentStr
+        // println "List is: ${recentStr}"
+        recentBlogsCache.put(new Element("recentBloggers", recentStr))
     }
 
     def recentStats = { attrs ->
@@ -145,43 +112,37 @@ class BlogTagLib {
         def cacheStats = recentStatsCache.get("recentStats")?.value
         if (cacheStats) {
             out << cacheStats
-        } else {
-            def newStats = """
-                <p>${Blog.count()} Blogs Aggregated</p>
-                <p>${BlogEntry.count()} Entries Indexed</p>
-                <p>${BlogEntry.findAllByDateAddedGreaterThan(new Date().minus(1)).size()} Entries Last 24 hours</p>
-			"""
-            out << newStats
-            recentStatsCache.put(new Element("recentStats", newStats))
+            return
         }
 
+        def newStats = """
+            <p>${Blog.count()} Blogs Aggregated</p>
+            <p>${BlogEntry.count()} Entries Indexed</p>
+            <p>${BlogEntry.findAllByDateAddedGreaterThan(new Date() - 1).size()} Entries Last 24 hours</p>
+        """
+        out << newStats
+        recentStatsCache.put(new Element("recentStats", newStats))
     }
 
     def recentChart = { attrs ->
 
-        def entryCount = recentStatsCache.get("recentChart")?.value
+        def entryCount = recentStatsCache.get("recentChart")?.value ?: new TreeMap()
         if (!entryCount) {
-
-            entryCount = new TreeMap()
-
-            def lastWeek = new Date().minus(6)
+            def lastWeek = new Date() - 6
 
             // Normalise all post dates to midnight on the day they were posted for charting
             BlogEntry.findAllByDateAddedGreaterThan(lastWeek).each { entry ->
-
                 //def key = fmt.format(entry.dateAdded)
                 def entryKey = Calendar.getInstance()
                 entryKey.set(1900 + entry.dateAdded.year, entry.dateAdded.month, entry.dateAdded.date, 0, 0, 0)
                 entryKey.set(Calendar.MILLISECOND, 0)
                 def key = entryKey.getTimeInMillis()
-                entryCount[key] = entryCount[key] ? entryCount[key] + 1 : 1
-
+                entryCount[key] = (entryCount[key] ?: 0) + 1
             }
             recentStatsCache.put(new Element("recentChart", entryCount))
-
-
         }
-        def fmt = new java.text.SimpleDateFormat("EEE")
+
+        def fmt = new SimpleDateFormat("EEE")
 
         out << g.barChart(
                 title: "Entries Last 7 Days",
@@ -199,23 +160,19 @@ class BlogTagLib {
                 ],
                 data: entryCount.values().asList()
         )
-
-
     }
 
 
     def feedburner = { attr ->
 
-        if (Holders.config.http.usefeedburner) {
-            out << """
-			<p style='margin-top: 5px'>
-					<img src="${Holders.config.http.feedburner_stats_url}" height="26" width="88" style="border:0" alt="Feedburner Stats" />
-			</p>
-			"""
+        if (!grailsApplication.config.http.usefeedburner) {
+            return
         }
 
-
+        out << """
+        <p style='margin-top: 5px'>
+                <img src="${grailsApplication.config.http.feedburner_stats_url}" height="26" width="88" style="border:0" alt="Feedburner Stats" />
+        </p>
+        """
     }
-
-
 }

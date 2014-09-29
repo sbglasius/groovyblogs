@@ -12,14 +12,14 @@ class EntriesService {
     def entriesCache
 
     // suppress when more than three entries from same author
-    public static def limitEntries(entries) {
+    def limitEntries(entries) {
 
         def authorHash = [:] // count by blog
         def limitEntries = [] // limit to three entries
 
         entries.each { entry ->
             def key = entry.blog.feedUrl
-            int entryCount = authorHash[key] ? authorHash[key] : 0
+            int entryCount = authorHash[key] ?: 0
             entryCount++
             authorHash[key] = entryCount
             if (entryCount <= 3) {
@@ -30,9 +30,7 @@ class EntriesService {
             }
         }
         return limitEntries
-
     }
-
 
     def getEndlessEntries(params) {
 
@@ -40,24 +38,19 @@ class EntriesService {
         if (!entries) {
             params.order = "desc"
             entries = BlogEntry.listOrderByDateAdded(params)
-            entries = entries.findAll { entry -> entry.isGroovyRelated() }
+            entries = entries.findAll { it.isGroovyRelated() }
             entriesCache.put(new Element("endlessList=${params.offset}", entries))
         }
         return entries
-
     }
-
 
     @Cacheable('recentList')
     def getRecentEntries(int days = DEFAULT_DAYS_TO_REPORT) {
         log.debug "Recent cache for recent ${days} days not available. Reading from db"
 
-        def aWhileAgo = new Date().minus(days) // 7 days ago is the default
+        def aWhileAgo = new Date() - days // 7 days ago is the default
 
-        def entries = BlogEntry.findAllByDateAddedGreaterThan(
-                aWhileAgo, [sort: 'dateAdded', order: "desc"])
-        entries = entries.findAll { entry -> entry.isGroovyRelated() }
-        return entries
+        BlogEntry.findAllByDateAddedGreaterThan(aWhileAgo, [sort: 'dateAdded', order: "desc"]).findAll { it.isGroovyRelated() }
     }
 
     @Cacheable('popularList')
@@ -65,18 +58,16 @@ class EntriesService {
 
         log.debug "Popular cache for popularList not available. Reading from db."
 
-        def aWhileAgo = new Date().minus(DEFAULT_DAYS_TO_REPORT) // 7 days ago
+        def aWhileAgo = new Date() - DEFAULT_DAYS_TO_REPORT // 7 days ago
 
-        def entries = BlogEntry.findAllByDateAddedGreaterThanAndHitCountGreaterThan(
-                aWhileAgo, 0, [sort: 'hitCount', order: "desc"])
-        entries = entries.findAll { entry -> entry.isGroovyRelated() }
+        def entries = BlogEntry.findAllByDateAddedGreaterThanAndHitCountGreaterThan(aWhileAgo, 0, [sort: 'hitCount', order: "desc"])
+        entries = entries.findAll { it.isGroovyRelated() }
 
         entriesCache.put(new Element("popularList", entries))
         return entries
-
     }
 
-    @Transactional(readOnly = false)
+    @Transactional()
     BlogEntry getEntry(long id) {
         def blogEntry = BlogEntry.get(id)
         if (blogEntry) {

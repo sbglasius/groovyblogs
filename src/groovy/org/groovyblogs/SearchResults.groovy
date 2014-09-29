@@ -2,20 +2,19 @@ package org.groovyblogs
 
 class SearchResults {
 
-    // list of org.groovyblogs.SearchResult objects
-    def resultList
+    List<SearchResult> resultList
 
     // total number of hits returned from Lucene
-    def totalHitCount
+    int totalHitCount
 
     // number of hits we returned to the user (could be paging through them)
-    def returnedHitCount
+    int returnedHitCount
 
     // max hits requested by the user
-    def maxHitsRequested
+    int maxHitsRequested
 
     // offset into total hits for starting our list of documents
-    def totalHitsOffset
+    int totalHitsOffset
 
     // original query terms
     def queryTerms
@@ -24,9 +23,9 @@ class SearchResults {
     def fields
 
     // time (in ms) the query took to execute
-    def queryTime
+    int queryTime
 
     // total number of documents in index
-    def totalDocsInIndex
+    int totalDocsInIndex
 
 }
