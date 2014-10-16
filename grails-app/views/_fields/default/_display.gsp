@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row pad-bottom-5">
     <div class="col-sm-4">
 
     <label class="control-label">${label}</label>

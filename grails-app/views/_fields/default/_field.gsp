@@ -1,4 +1,4 @@
-<div class="row ${invalid ? 'has-error' : ''}">
+<div class="row ${invalid ? 'has-error' : ''} pad-bottom-5">
     <div class="col-sm-4" >
     <label for="${field}" class="control-label">${label} <g:if test="${required}">*</g:if></label>
     </div>

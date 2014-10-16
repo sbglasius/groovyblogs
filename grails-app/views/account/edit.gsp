@@ -3,14 +3,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="layout" content="main" />
-        <title>Edit Account</title>
-        <g:javascript library="scriptaculous" />
+        <title>My Account</title>
 
     </head>
     <body>
 
         <div class="body">
-            <h1>Edit Account</h1>
+            <h1>My Account</h1>
 
             <div class="pad-bottom-10"><g:hasErrors bean="${account}">
                 <div class="errors">
@@ -47,7 +46,7 @@
                             </div>
                         </g:hasErrors>
 
-                        <table class="blogTable">
+                        <table class="table table-bordered table-striped">
                             <tr>
                                 <td>Blog</td>
                                 <td>Description</td>

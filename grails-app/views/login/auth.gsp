@@ -41,11 +41,16 @@
                         <div class="col-xs-12">
                             <input type='password' class='form-control' name='j_password' id='password'/>
                         </div>
+                        <div class="col-xs-12 text-right">
+                            <g:link controller="forgotPassword"><small>Forgot password?</small></g:link>
+
+                        </div>
 
                     </div>
                 </div>
 
                 <div class="modal-footer">
+
                     <g:link controller="entries" class="btn btn-warning">Cancel</g:link>
                     <input type='submit' id="submit" class="btn btn-primary" value='${message(code: "springSecurity.login.button")}'/>
                 </div>

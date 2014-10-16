@@ -21,8 +21,8 @@ class ResetPasswordCommand {
         }
         token nullable: false
         newPassword nullable: false, minSize: 8, password: true
-        repeatPassword nullable: false, password: true, validator: { val, obj ->
-            if(val != obj.repeatPassword) {
+        repeatPassword nullable: true, password: true, validator: { val, obj ->
+            if(val != obj.newPassword) {
                 ['passwords-does-not-match']
             }
         }
