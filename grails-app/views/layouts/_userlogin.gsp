@@ -36,7 +36,7 @@
                             <button class="btn btn-primary btn-xs">Login</button>
                         </div>
                         <div class="col-xs-12">
-                            <g:link action="forgottenPassword"><small>Forgot password</small></g:link>
+                            <g:link controller="forgotPassword"><small>Forgot password</small></g:link>
                         </div>
                         <div class="col-xs-12">
                             <g:link controller='account' action="signup"><small>Sign Up</small></g:link>

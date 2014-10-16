@@ -16,7 +16,7 @@ class ForgotPasswordController {
 
             if (account) {
                 if(account.email) {
-                    userService.resetPassword(account)
+                    userService.requestResetPassword(account)
                 } else {
                     flash.message = "There is not email address associated with your account. Please contact info@groovyblogs.org for help"
                 }
@@ -39,9 +39,15 @@ class ForgotPasswordController {
         }
         if(request.post) {
             if(command.hasErrors()) {
-                render(view: '/forgotPassword/changePassword', model: [command: command])
+                render(view: '/forgotPassword/resetPassword', model: [command: command])
             } else {
-                render('ok')
+                if(userService.resetPassword(command)) {
+                    flash.message = "Your password was reset."
+                    redirect(controller: 'login')
+                } else {
+                    flash.message = "That did not work go right. You should try one more time."
+                    redirect(controller: 'forgotPassword')
+                }
             }
         } else {
             command.clearErrors()
