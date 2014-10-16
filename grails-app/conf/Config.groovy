@@ -1,3 +1,6 @@
+// locations to search for config files that get merged into the main config
+// config files can either be Java properties files or ConfigSlurper scripts
+
 def catalinaBase = System.properties.getProperty('catalina.base')
 
 grails.config.locations = [
@@ -81,7 +84,6 @@ feeds {
     // moderator_email = you@yourhost.com
 }
 
-
 http {
     /*
     useproxy=true
@@ -158,7 +160,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         '/**/favicon.ico'   : ['permitAll'],
         '/dbconsole/**'     : ['ROLE_ADMIN'],
         '/quartz/**'        : ['ROLE_ADMIN'],
-        '/runtimeLogging/**': ['ROLE_ADMIN']
+        '/runtimeLogging/**': ['ROLE_ADMIN'],
+        '/greenmail/**'     : ['ROLE_ADMIN']
 
 ]
 grails.plugin.springsecurity.roleHierarchy = '''
@@ -187,10 +190,30 @@ grails.cache.config = {
         timeToLiveSeconds 60
 
     }
+
+    cache {
+        name 'passwordTokens'
+        timeToLiveSeconds 24 * 60 * 60
+    }
+
     defaults {
         maxElementsInMemory 1000
         eternal false
         overflowToDisk false
         maxElementsOnDisk 0
+    }
+}
+
+environments {
+    development {
+        grails.mail.port = com.icegreen.greenmail.util.ServerSetupTest.SMTP.port
+    }
+    test {
+
+    }
+    production {
+        grails.mail.host = "localhost"
+        grails.mail.default.from = "glen@bytecode.com.au"
+        greenmail.disabled=true
     }
 }

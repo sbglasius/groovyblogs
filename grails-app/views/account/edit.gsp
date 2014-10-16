@@ -12,31 +12,25 @@
         <div class="body">
             <h1>Edit Account</h1>
 
-            <g:hasErrors bean="${account}">
+            <div class="pad-bottom-10"><g:hasErrors bean="${account}">
                 <div class="errors">
-                    <g:renderErrors bean="${account}" as="list" />
+                    <g:renderErrors bean="${account}" as="list"/>
                 </div>
             </g:hasErrors>
-            <div style="margin: 1em; padding: 1em; border: 1px solid;">
-                <g:form controller="account" action="update" method="post" >
-                    <input type="hidden" name="id" value="${account?.id}" />
-                    <div class="dialog">
-                        <table>
+            <g:form controller="account" action="update" method="post">
+                <f:with bean="account">
+                    <input type="hidden" name="id" value="${account?.id}"/>
+                    <f:display property="username"/>
+                    <f:field property="password">
+                        <g:passwordField name="${property}" class="form-control"/>
+                    </f:field>
+                    <f:field property="email"/>
+                </f:with>
+                <div class="buttons">
+                    <g:actionSubmit class="btn btn-primary" value="Update"/>
+                </div>
 
-                            <tr class='prop'><td valign='top' class='name'><label for='userid'>User Id:</label></td><td valign='top' class='value ${hasErrors(bean:account,field:'username','errors')}'>${account.username}</td></tr>
-
-                            <tr class='prop'><td valign='top' class='name'><label for='password'>Password:</label></td><td valign='top' class='value ${hasErrors(bean:account,field:'password','errors')}'><input type="password" name='password' /></td></tr>
-
-                            <tr class='prop'><td valign='top' class='name'><label for='email'>Email:</label></td><td valign='top' class='value ${hasErrors(bean:account,field:'email','errors')}'><input type='text' name='email' value='${account?.email}' /></td></tr>
-
-                        </table>
-                    </div>
-                    <div class="buttons">
-                        <span class="button"><g:actionSubmit value="Update" /></span>
-                    </div>
-
-                </g:form>
-            </div>
+            </g:form></div>
 
 
             <g:form action="addFeed" method="post" >
@@ -88,7 +82,7 @@
 
                     </div>
                 </g:if>
-                <div id="newFeed" style="margin: 1em; padding: 1em; border: 1px solid black; background-color: lightgray;">
+                <div id="newFeed" class="well well-lg">
 
                     <p style="margin-bottom: 5px; ">
                         groovyblogs.org hosts <a href="http://groovy.codehaus.org">Groovy</a> and
@@ -98,7 +92,7 @@
                         All feed creation is moderated, so your blog won't appear right away.
                     </p>
 
-                    <label for='feedUrl'>Add New Feed:</label><input type="text" name='feedUrl' style="width: 400px;" value="${blog?.feedUrl?.encodeAsHTML()}"></input>
+                    <label for='feedUrl'>Add New Feed:</label><input type="text" name='feedUrl' style="width: 400px;" value="${blog?.feedUrl?.encodeAsHTML()}">
                     <g:submitToRemote url="[action: 'testFeed', controller: 'account']" update="feedResults"
                                onLoading="showSpinner();" onLoaded="hideSpinner();"
                                onComplete="appearDiv();" value="Test Feed"/>
@@ -120,7 +114,7 @@
             <script language="javascript">
 
                 function showSpinner() {
-                    document.all.spinner.style.display = "inline"
+                    document.all.spinner.style.display = "inline";
                     // new Effect.Fade('feedResults');
                 }
 

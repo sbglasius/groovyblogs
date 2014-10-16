@@ -1,52 +1,52 @@
 package org.groovyblogs
-
 import grails.plugin.springsecurity.annotation.Secured
 
 @Secured(['permitAll'])
 class ForgotPasswordController {
+    def userService
 
-    private static final String PW_POOL = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ"
+    static defaultAction = "forgottenPassword"
 
-    def forgottenPassword() {
-
-        if (!params.userid) {
+    def forgottenPassword(String identity) {
+        if (!request.post) {
             return
         }
+        if (identity) {
+            def account = User.findByUsernameOrEmail(identity, identity)
 
-        def account = User.findByUsername(params.userid)
-        if (!account || !account.email) {
-            flash.message = "Could not locate your account."
-            redirect(controller: 'entries')
+            if (account) {
+                if(account.email) {
+                    userService.resetPassword(account)
+                } else {
+                    flash.message = "There is not email address associated with your account. Please contact info@groovyblogs.org for help"
+                }
+
+             }
+            flash.message = "If we found your account you should now have email. Go ahead, check your inbox - or your spam-folder"
+            redirect(controller: 'entries', action:"recent")
+        } else {
+            flash.message = "Please enter your account name or email address."
+            redirect(action: 'forgottenPassword')
+        }
+    }
+
+    def resetPassword(ResetPasswordCommand command) {
+        def fieldsWithErrors = command.errors.fieldErrors*.field
+        if(fieldsWithErrors.any {it in ['username','token']}) {
+            flash.message = "That's not right... did you tamper with the token? If not, please try and request a new password change."
+            redirect(controller: 'entries', action:"recent")
             return
         }
-
-        def random = new Random()
-        int length = PW_POOL.size() - 1
-        StringBuilder genPw = new StringBuilder()
-        8.times {
-            genPw.append PW_POOL[random.nextInt(length)]
+        if(request.post) {
+            if(command.hasErrors()) {
+                render(view: '/forgotPassword/changePassword', model: [command: command])
+            } else {
+                render('ok')
+            }
+        } else {
+            command.clearErrors()
+            [command: command]
         }
-        String password = genPw.toString()
-
-        account.password = password.encodeAsSHA1Bytes().encodeBase64()
-        String msg = """
-            <h1>groovyblogs.org Password Reset</h1>
-            <p>
-            Hi ${account.username}, we've reset your password to: <b>${password}</b>.
-            You need to type in the letters in upper case.
-            Once you've logged on you can change it to something you prefer
-            by going into the "My Blogs" tab.
-            </p>
-            <p>
-            Glen Smith - groovyblogs.org
-            </p>
-            """
-        sendMail {
-            to account.email
-            subject "groovyblogs.org Password Reset"
-            body msg
-        }
-        flash.message = "A new password has been generated and emailed to your account"
-        redirect(controller: 'entries')
     }
 }
+

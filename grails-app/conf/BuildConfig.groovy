@@ -11,8 +11,6 @@ grails.project.dependency.resolution = {
     legacyResolve false
 
     repositories {
-        inherits true
-
         grailsPlugins()
         grailsHome()
         mavenLocal()
@@ -47,6 +45,7 @@ grails.project.dependency.resolution = {
         compile ":spring-security-core:2.0-RC4"
         compile ":google-chart:0.5.2"
         compile ":mail:1.0.7"
+        compile ":greenmail:1.3.4"
         compile ":runtime-logging:0.4"
         compile ":searchable:0.6.9"
         compile ":iwebkit:0.5"

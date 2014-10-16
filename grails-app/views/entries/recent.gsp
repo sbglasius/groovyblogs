@@ -20,6 +20,7 @@
 <body>
 <div class="body">
     <h1>${pageTitle}</h1>
+    <tmpl:/templates/message/>
     <g:each in="${entries}" var="entry">
         <g:render template="entry" model="[entry: entry, thumbnails: thumbnails]"/>
     </g:each>

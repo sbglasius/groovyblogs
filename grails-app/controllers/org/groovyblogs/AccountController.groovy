@@ -1,5 +1,6 @@
 package org.groovyblogs
 import grails.plugin.springsecurity.annotation.Secured
+import groovy.xml.MarkupBuilder
 
 import javax.servlet.http.Cookie
 
@@ -11,7 +12,7 @@ class AccountController {
     FeedService feedService
 
     private User getCurrentUser() {
-        springSecurityService.currentUser
+        springSecurityService.currentUser as User
     }
 
     static defaultAction = 'edit'
@@ -61,13 +62,11 @@ class AccountController {
     def register(String username, String password, String email) {
         def account = new User(
             username: username,
-            password: password.encodeAsSHA1Bytes().encodeBase64(),
+            password: password,
             email: email,
             registered: new Date(),
             status: "active")
         if (account.save(flush: true)) {
-//            def authToken = new UsernamePasswordToken(params.userid, params.password)
-//            this.jsecSecurityManager.login(authToken)
             redirect(action: 'edit')
             //render(view: 'addfeed', model: ['account':account ])
             return
@@ -163,7 +162,7 @@ class AccountController {
 
         if (blog && blog.status == BlogStatus.ACTIVE) {
             log.info("Updating Feed: [${blog?.feedUrl}]")
-            def feedInfo = feedService.updateFeed(blog)
+            feedService.updateFeed(blog)
             flash.message = "Successfully updated ${blog.title}"
         } else {
             flash.message = "Unapproved blog, or could not determine blog id"
@@ -180,7 +179,7 @@ class AccountController {
             def feedInfo = feedService.getFeedInfo(feedUrl)
             log.debug("Returned $feedInfo.title $feedInfo.description $feedInfo.type")
             def writer = new StringWriter()
-            def html = new groovy.xml.MarkupBuilder(writer)
+            def html = new MarkupBuilder(writer)
 
             // Could do all this directly in a render() call but it's harder to debug
             html.div {

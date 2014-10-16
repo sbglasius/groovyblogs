@@ -11,6 +11,9 @@
         </asset:script>
     </g:if>
 </g:if>
+<g:elseif test="${constraints.password}">
+    <g:passwordField name="${property}" class="form-control"/>
+</g:elseif>
 <g:else>
     <g:textField name="${property}" value="${value}" class="form-control"/>
 </g:else>

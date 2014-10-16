@@ -46,7 +46,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <input type='submit' id="submit" class="btn btn-default" value='${message(code: "springSecurity.login.button")}'/>
+                    <g:link controller="entries" class="btn btn-warning">Cancel</g:link>
+                    <input type='submit' id="submit" class="btn btn-primary" value='${message(code: "springSecurity.login.button")}'/>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -58,7 +59,6 @@
     $(function () {
         $('#j_username').focus();
         $('#login').modal('show')
-        console.debug($('#login'))
     });
 </asset:script>
 </body>
