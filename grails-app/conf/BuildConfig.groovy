@@ -53,6 +53,7 @@ grails.project.dependency.resolution = {
         compile ":google-analytics:2.3.3"
         compile ":fields:1.4"
         compile ":executor:0.3"
+        compile ":i18n-enums:1.0.7"
 
 //        runtime ":hibernate4:4.3.5.5"
         runtime ":hibernate:3.6.10.17"

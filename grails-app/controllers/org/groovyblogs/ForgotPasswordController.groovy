@@ -31,10 +31,8 @@ class ForgotPasswordController {
     }
 
     def resetPassword(ResetPasswordCommand command) {
-        println command.errors
-        def fieldsWithErrors = command.errors.fieldErrors*.field
-        if(fieldsWithErrors.any {it in ['username','token']}) {
-            flash.message = "That's not right... did you tamper with the token? If not, please try and request a new password change."
+        if(command.hasTokenError()) {
+            flash.message = "That's not right... The token was not found. Remember the token only lives 24 hours. Perhaps you could try again."
             redirect(controller: 'entries', action:"recent")
             return
         }

@@ -9,46 +9,48 @@ class AccountController {
 
     def springSecurityService
 
-    FeedService feedService
+    def feedService
+    def userService
 
     private User getCurrentUser() {
-        springSecurityService.currentUser as User
+        springSecurityService.loadCurrentUser() as User
     }
 
     static defaultAction = 'edit'
 
     def edit() {
-        def account = getCurrentUser()
-        if (!account) {
-            flash.message = "Account not found with id ${account.id}" // TODO this is going fail with NPE
-            redirect(action: 'list')
-            return
-        }
-
-        [account: account]
+        editModel
     }
 
-    def update(Long id, String password) {
-        def account = User.get(id)
-        if (account.id != getCurrentUser()?.id) {
-            flash.message = "Account not found with id ${id}"
-            redirect(action: 'edit', id: id)
-            return
+    def update(UpdateAccountCommand command) {
+        if(!command.hasErrors()) {
+            def status = userService.updateUser(currentUser, command)
+            flash.message = g.message(message: status)
+        }
+        render(view: 'edit', model: [account: currentUser, command: command, blog: new Blog()])
+    }
+
+    def resendConfirm() {
+        userService.sendConfirmEmail(currentUser)
+        flash.message = "Check your email! our message could be in your spam folder..."
+        redirect(action: 'edit')
+
+    }
+
+    @Secured(['permitAll'])
+    def confirmEmail(TokenCommand command) {
+        if(command.hasTokenError()) {
+            flash.message = "That's not right... The token was not found. Remember the token only lives 24 hours. Perhaps you could try again."
+        } else {
+            userService.confirmEmail(command)
+            flash.message = "Your email address was confirmed. Thank you."
+        }
+        if(currentUser) {
+            redirect(action: 'edit')
+        } else {
+            redirect(controller: 'entries')
         }
 
-        //account.properties = params
-        bindData(account, params, ['password'])
-        if (password) {
-            account.password = password.encodeAsSHA1Bytes().encodeBase64()
-        }
-
-        if (account.save()) {
-            flash.message = "Updated successfully"
-            redirect(action: 'edit', model: [account: account])
-            return
-        }
-
-        render(view: 'edit', model: [account: account])
     }
 
     @Secured(['permitAll'])
@@ -64,8 +66,7 @@ class AccountController {
             username: username,
             password: password,
             email: email,
-            registered: new Date(),
-            status: "active")
+            registered: new Date())
         if (account.save(flush: true)) {
             redirect(action: 'edit')
             //render(view: 'addfeed', model: ['account':account ])
@@ -283,6 +284,12 @@ class AccountController {
         redirect(uri: "/")
 
     }
+
+    private LinkedHashMap<String, GroovyObjectSupport> getEditModel() {
+        [account: getCurrentUser(), command: new UpdateAccountCommand(email: getCurrentUser().unconfirmedEmail ?: getCurrentUser().email), blog: new Blog()]
+    }
+
+
 
 
 }

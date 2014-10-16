@@ -1,14 +1,16 @@
+import org.groovyblogs.UserService
+
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
 
 def catalinaBase = System.properties.getProperty('catalina.base')
 
 grails.config.locations = [
-    "classpath:${appName}-config.properties",
-    "classpath:${appName}-config.groovy",
-    "file:${userHome}/.grails/${appName}-config.properties",
-    "file:${userHome}/.grails/${appName}-config.groovy",
-    "file://${catalinaBase}/conf/${appName}-config.groovy"]
+        "classpath:${appName}-config.properties",
+        "classpath:${appName}-config.groovy",
+        "file:${userHome}/.grails/${appName}-config.properties",
+        "file:${userHome}/.grails/${appName}-config.groovy",
+        "file://${catalinaBase}/conf/${appName}-config.groovy"]
 
 println "Expected config locations: ${grails.config.locations}"
 
@@ -26,19 +28,19 @@ grails.mail.host = "localhost"
 grails.mail.default.from = "glen@bytecode.com.au"
 grails.mime.disable.accept.header.userAgents = ['Gecko', 'WebKit', 'Presto', 'Trident']
 grails.mime.types = [
-    all           : '*/*',
-    atom          : 'application/atom+xml',
-    css           : 'text/css',
-    csv           : 'text/csv',
-    form          : 'application/x-www-form-urlencoded',
-    html          : ['text/html', 'application/xhtml+xml'],
-    js            : 'text/javascript',
-    json          : ['application/json', 'text/json'],
-    multipartForm : 'multipart/form-data',
-    rss           : 'application/rss+xml',
-    text          : 'text/plain',
-    hal           : ['application/hal+json', 'application/hal+xml'],
-    xml           : ['text/xml', 'application/xml']
+        all          : '*/*',
+        atom         : 'application/atom+xml',
+        css          : 'text/css',
+        csv          : 'text/csv',
+        form         : 'application/x-www-form-urlencoded',
+        html         : ['text/html', 'application/xhtml+xml'],
+        js           : 'text/javascript',
+        json         : ['application/json', 'text/json'],
+        multipartForm: 'multipart/form-data',
+        rss          : 'application/rss+xml',
+        text         : 'text/plain',
+        hal          : ['application/hal+json', 'application/hal+xml'],
+        xml          : ['text/xml', 'application/xml']
 ]
 grails.project.groupId = appName
 grails.scaffolding.templates.domainSuffix = 'Instance'
@@ -125,21 +127,21 @@ log4j = {
 
     appenders {
         rollingFile name: "gb",
-                    file: "groovyblogs.log",
-                    maxFileSize: "10MB",
-                    layout: pattern(conversionPattern: '%d %p %c{2} %m%n')
+                file: "groovyblogs.log",
+                maxFileSize: "10MB",
+                layout: pattern(conversionPattern: '%d %p %c{2} %m%n')
 
     }
 
     error 'org.codehaus.groovy.grails',
-          'org.springframework',
-          'org.hibernate'
+            'org.springframework',
+            'org.hibernate'
 
     debug 'grails.app.domain.org.groovyblogs',
-          'grails.app.controllers.org.groovyblogs',
-          'grails.app.services.org.groovyblogs',
-          'grails.app.taglibs.org.groovyblogs',
-          'grails.app.jobs.org.groovyblogs'
+            'grails.app.controllers.org.groovyblogs',
+            'grails.app.services.org.groovyblogs',
+            'grails.app.taglibs.org.groovyblogs',
+            'grails.app.jobs.org.groovyblogs'
 
     // trace  gb: ['org.codehaus.groovy.grails.commons'] // Good for debugging bean creation issues
 
@@ -161,7 +163,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         '/dbconsole/**'     : ['ROLE_ADMIN'],
         '/quartz/**'        : ['ROLE_ADMIN'],
         '/runtimeLogging/**': ['ROLE_ADMIN'],
-        '/greenmail/**'     : ['ROLE_ADMIN']
+        '/greenmail/**'     : ['permitAll']
 
 ]
 grails.plugin.springsecurity.roleHierarchy = '''
@@ -192,7 +194,7 @@ grails.cache.config = {
     }
 
     cache {
-        name 'passwordTokens'
+        name UserService.TOKENS_CACHE
         timeToLiveSeconds 24 * 60 * 60
     }
 
@@ -207,13 +209,18 @@ grails.cache.config = {
 environments {
     development {
         grails.mail.port = com.icegreen.greenmail.util.ServerSetupTest.SMTP.port
+        quartz {
+            autoStartup = false
+        }
     }
     test {
-
+        quartz {
+            autoStartup = false
+        }
     }
     production {
         grails.mail.host = "localhost"
         grails.mail.default.from = "glen@bytecode.com.au"
-        greenmail.disabled=true
+        greenmail.disabled = true
     }
 }

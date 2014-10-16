@@ -7,7 +7,7 @@ class User {
     String username
     String password
     String email
-    String status
+    String unconfirmedEmail
     boolean enabled = true
     Date lastLogin = new Date()
     Date registered = new Date()
@@ -20,7 +20,7 @@ class User {
     static constraints = {
         username unique: true
         email email: true
-        status nullable: true
+        unconfirmedEmail email: true
     }
 
     static mapping = {

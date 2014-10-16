@@ -29,7 +29,6 @@
                             <g:hiddenField name="token" value="${command.token}"/>
 
                             <f:field property="newPassword"/>
-                            <br/>
                             <f:field property="repeatPassword"/>
                         </f:with></div>
                 </div>

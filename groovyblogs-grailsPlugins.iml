@@ -22,6 +22,7 @@
           <root url="file://$MODULE_DIR$/target/work/plugins/fields-1.4/grails-app/views" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/font-awesome-resources-4.2.0.0/web-app" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/greenmail-1.3.4/grails-app/views" relative="/" />
+          <root url="file://$MODULE_DIR$/target/work/plugins/i18n-enums-1.0.7/web-app" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -89,6 +90,9 @@
     </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/hibernate-3.6.10.17">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/hibernate-3.6.10.17/src/java" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/target/work/plugins/i18n-enums-1.0.7">
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/i18n-enums-1.0.7/src/groovy" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/iwebkit-0.5">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/iwebkit-0.5/grails-app/i18n" isTestSource="false" />
