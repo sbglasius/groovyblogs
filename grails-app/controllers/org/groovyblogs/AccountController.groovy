@@ -13,6 +13,7 @@ class AccountController {
 
     def feedService
     def userService
+    RecaptchaService recaptchaService
 
     private User getCurrentUser() {
         springSecurityService.loadCurrentUser() as User
@@ -61,7 +62,6 @@ class AccountController {
         bindData(command, params)
         [command: command]
     }
-    RecaptchaService recaptchaService
 
     @Secured(['permitAll'])
     def register(RegisterAccountCommand command) {
@@ -74,7 +74,7 @@ class AccountController {
         } else {
             if(userService.createAccount(command)) {
                 flash.message = "Welcome to groovyblogs.org!"
-                redirect(action: 'edit', params: [tab: 'newblog'])
+                redirect(action: 'edit', fragment: 'newblog')
             } else {
                 command.errors.reject("Could not create your account. Contact info@groovyblogs.org and we will help you.")
                 render(view: 'signup', model: [command: command])

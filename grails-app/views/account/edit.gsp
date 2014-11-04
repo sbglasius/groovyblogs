@@ -12,7 +12,7 @@
 <tmpl:/templates/message/>
 
 <!-- Nav tabs -->
-<ul class="nav nav-tabs" role="tablist">
+<ul id="tabs" class="nav nav-tabs" role="tablist">
     <li class="active"><a href="#account" role="tab" data-toggle="tab">Profile</a></li>
     <li><a href="#blogs" role="tab" data-toggle="tab">Blogs</a></li>
     <li><a href="#newblog" role="tab" data-toggle="tab">New blog</a></li>
@@ -33,25 +33,12 @@
        <tmpl:addBlog/>
     </div>
 </div>
-
-
-<script language="javascript">
-
-    function showSpinner() {
-        document.all.spinner.style.display = "inline";
-        // new Effect.Fade('feedResults');
+<asset:script>
+    if(window.location.hash) {
+        console.debug($('#tabs a[href="#'+window.location.hash+'"]'))
+        $('#tabs a[href="'+window.location.hash+'"]').tab('show');
     }
-
-    function hideSpinner() {
-        document.all.spinner.style.display = "none"
-    }
-
-    function appearDiv() {
-        new Effect.Appear('feedResults');
-    }
-
-
-</script>
+</asset:script>
 
 </body>
 </html>
