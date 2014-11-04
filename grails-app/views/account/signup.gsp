@@ -8,57 +8,26 @@
     </head>
     <body>
         <div id="content">
+            <div class="well well-lg">
            <h1>Signup</h1>
-           
-           <g:hasErrors bean="${account}">
-                <div class="errors">
-                    <g:renderErrors bean="${account}" as="list" />
-                </div>
-           </g:hasErrors>
+                <p>Running a blog related to the Groovy ecosystem? Start by signing up here:</p>
            <g:form action="register" method="post" >
-               <div class="dialog">
-                <table>
+               <f:with bean="${command}">
+                   <f:field property="username"/>
+                   <f:field property="password"/>
+                   <f:field property="email"/>
+                   <f:field property="recaptcha">
+                   <recaptcha:ifEnabled>
+                       <recaptcha:recaptcha theme="blackglass"/>
+                   </recaptcha:ifEnabled>
+                   </f:field>
 
-                       
-                     <tr class='prop'><td valign='top' class='name'><label for='userid'>Userid:</label></td><td valign='top' class='value ${hasErrors(bean:account,field:'username','errors')}'><input type='text' name='userid' value='${account?.username}' /></td></tr>
-                     
-                     <tr class='prop'><td valign='top' class='name'><label for='password'>Password:</label></td><td valign='top' class='value ${hasErrors(bean:account,field:'password','errors')}'><input type="password" name='password' value='${account?.password}' /></td></tr>                       
-
-                     <tr class='prop'><td valign='top' class='name'><label for='email'>Email:</label></td><td valign='top' class='value ${hasErrors(bean:account,field:'email','errors')}'><input type='text' name='email' value='${account?.email}' /></td></tr>
-                                 
-
-               </table>
-               </div>
-               <div class="buttons">
-               
-                     <span class="formButton">
-                        <input type="submit" value="Create"></input>
-                     </span>
+               </f:with>
+               <div class="text-right">
+                   <g:submitButton class="btn btn-default" name="submit" value="Create account"/>
                </div>
             </g:form>
-            <script type="text/javascript">
-            
-            	function hideSpinner() {
-            		document.getElementById("spinner").visibility = hidden;
-            	}
-            	
-            	function showSpinner() {
-	            	document.getElementById("spinner").visibility = visible;
-            	}
-            	
-            	function appearDiv() {
-            		//Element.hide('feedresults');
-            		alert("Appear");
-	            	new Effect.Appear('feedresults');
-	            	$("spinner").display = none;
-            	}
-            	
-            	function fadeDiv() {
-            		alert("Fade");
-            		new Effect.Fade('feedresults');
-            	}
-            
-            </script>
+            </div>
             <div id="feedresults"></div>
             
         </div>

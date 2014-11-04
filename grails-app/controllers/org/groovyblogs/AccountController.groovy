@@ -1,4 +1,6 @@
 package org.groovyblogs
+
+import com.megatome.grails.RecaptchaService
 import grails.plugin.springsecurity.annotation.Secured
 import groovy.xml.MarkupBuilder
 
@@ -55,27 +57,32 @@ class AccountController {
 
     @Secured(['permitAll'])
     def signup() {
-        def account = new User()
-        account.properties['username', 'password', 'email'] = params
-        [account: account]
+        def command = new RegisterAccountCommand()
+        bindData(command, params)
+        [command: command]
     }
+    RecaptchaService recaptchaService
 
     @Secured(['permitAll'])
-    def register(String username, String password, String email) {
-        def account = new User(
-            username: username,
-            password: password,
-            email: email,
-            registered: new Date())
-        if (account.save(flush: true)) {
-            redirect(action: 'edit')
-            //render(view: 'addfeed', model: ['account':account ])
-            return
+    def register(RegisterAccountCommand command) {
+        if(!recaptchaService.verifyAnswer(session, request.getRemoteAddr(), params)) {
+            command.errors.rejectValue('recaptcha','recaptcha-not-valid')
+        }
+        if(command.hasErrors()) {
+            println command.errors
+            render(view: 'signup', model: [command: command])
+        } else {
+            if(userService.createAccount(command)) {
+                flash.message = "Welcome to groovyblogs.org!"
+                redirect(action: 'edit', params: [tab: 'newblog'])
+            } else {
+                command.errors.reject("Could not create your account. Contact info@groovyblogs.org and we will help you.")
+                render(view: 'signup', model: [command: command])
+            }
         }
 
-        account.password = params.password
-        render(view: 'signup', model: [account: account])
     }
+
 
 
     def deleteFeed(Long id) {
@@ -284,6 +291,7 @@ class AccountController {
         redirect(uri: "/")
 
     }
+
 
     private LinkedHashMap<String, GroovyObjectSupport> getEditModel() {
         [account: getCurrentUser(), command: new UpdateAccountCommand(email: getCurrentUser().unconfirmedEmail ?: getCurrentUser().email), blog: new Blog()]

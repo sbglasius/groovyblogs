@@ -17,6 +17,7 @@ grails.project.dependency.resolution = {
         grailsCentral()
         mavenCentral()
         mavenRepo "http://repo.grails.org/grails/core"
+        mavenRepo "http://maven.jahia.org/maven2"
     }
 
     dependencies {
@@ -28,14 +29,14 @@ grails.project.dependency.resolution = {
         compile 'commons-httpclient:commons-httpclient:3.1'
         compile 'com.google.code.maven-play-plugin.spy:memcached:2.4.2'
 
-        test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
+        test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
     }
 
     plugins {
         build ":tomcat:7.0.55"
 
         compile ":scaffolding:2.1.2"
-        compile ':cache:1.1.7'
+        compile ':cache:1.1.8'
         compile ":cache-ehcache:1.0.1"
 
         compile ":asset-pipeline:1.9.9"
@@ -54,9 +55,10 @@ grails.project.dependency.resolution = {
         compile ":fields:1.4"
         compile ":executor:0.3"
         compile ":i18n-enums:1.0.7"
+        compile ":recaptcha:0.6.9"
 
 //        runtime ":hibernate4:4.3.5.5"
-        runtime ":hibernate:3.6.10.17"
+        runtime ":hibernate:3.6.10.18"
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
         runtime ':twitter-bootstrap:3.2.0.2'

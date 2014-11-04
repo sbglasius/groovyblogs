@@ -12,6 +12,7 @@ class UserService {
     def groovyPageRenderer
     def grailsLinkGenerator
     def grailsCacheManager
+    def springSecurityService
 
     int bulkDeleteUsers(List<User> users) {
         int count = users.size()
@@ -114,5 +115,14 @@ class UserService {
     private Cache getCache() {
         def cache = grailsCacheManager.getCache(TOKENS_CACHE)
         return cache
+    }
+
+    boolean createAccount(RegisterAccountCommand command) {
+        log.info("Creating user $command.username")
+        def user = new User(username: command.username, password: command.password, enabled: true, email: command.email, unconfirmedEmail: command.email).save(flush: true, failOnError: true)
+        UserRole.create(user, Role.findByAuthority('ROLE_USER'), true)
+        sendConfirmEmail(user)
+        springSecurityService.reauthenticate(command.username, command.password)
+        return true
     }
 }
