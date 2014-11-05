@@ -228,6 +228,7 @@
         <JAVADOC />
         <SOURCES>
           <root url="jar://$USER_HOME$/.ideaLibSources/spring-security-core-3.2.3.RELEASE-sources.jar!/" />
+          <root url="jar://$USER_HOME$/.ideaLibSources/rome-1.0-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>

@@ -1,6 +1,7 @@
 package org.groovyblogs
 
 class FeedInfo {
+    String feedUrl
     String title
     String description
     String author

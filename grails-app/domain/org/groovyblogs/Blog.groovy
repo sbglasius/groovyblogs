@@ -3,6 +3,7 @@ package org.groovyblogs
 class Blog {
 
     String feedUrl
+    String type
     String title
     String description
     Integer pollFrequency = 3
@@ -17,14 +18,15 @@ class Blog {
     static hasMany = [blogEntries: BlogEntry]
 
     static constraints = {
-        feedUrl(url: true, blank: false, unique: true, validator: { val, obj ->
+        feedUrl url: true, blank: false, unique: true, validator: { val, obj ->
             return !(val =~ /groovyblogs/)
-        })
-        pollFrequency(inList: [1, 3, 12, 24])
-        title(nullable: true)
-        description(nullable: true)
-        status(nullable: true)
-        lastError(nullable: true)
+        }
+        type nullable: true
+        pollFrequency inList: [1, 3, 12, 24]
+        title nullable: true
+        description nullable: true
+        status nullable: true
+        lastError nullable: true
     }
 
     static mapping = {

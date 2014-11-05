@@ -1,10 +1,9 @@
 package org.groovyblogs
-
 import com.megatome.grails.RecaptchaService
 import grails.plugin.springsecurity.annotation.Secured
-import groovy.xml.MarkupBuilder
 
 import javax.servlet.http.Cookie
+import javax.servlet.http.HttpServletResponse
 
 @Secured(['ROLE_USER'])
 class AccountController {
@@ -103,23 +102,14 @@ class AccountController {
         flash.message = "Successfully deleted blog ${blog.title}"
     }
 
-    def addFeed() {
+    def addFeed(String feedUrl) {
 
-        def feedUrl = params.feedUrl
         log.info("Adding Feed: [$feedUrl]")
         if (feedUrl) {
 
-            def blog = new Blog()
-            blog.feedUrl = params.feedUrl
-            def feedInfo = feedService.getFeedInfo(params.feedUrl)
-
-            blog.title = feedInfo.title ? feedInfo.title : ""
-            blog.title = blog.title.length() > 250 ? blog.title[0..249] : blog.title
-            blog.description = feedInfo.description ? feedInfo.description : ""
-            blog.description = blog.description.length() > 250 ? blog.description[0..249] : blog.description
-
             def account = getCurrentUser()
-            blog.account = account
+
+            Blog blog = feedService.createBlog(feedUrl, account)
             if (blog.validate()) {
                 blog.save()
                 if (grailsApplication.config.feeds.moderate) {
@@ -127,10 +117,10 @@ class AccountController {
                     try {
                         sendMail {
                             to grailsApplication.config.feeds.moderator_email
-                            subject "groovyblogs: Feed approval for ${feedInfo.title}"
+                            subject "groovyblogs: Feed approval for ${blog.title}"
                             body """
                         <p>
-                        Request to approve URL: ${feedInfo.title} at url <a href="${params.feedUrl}">${params.feedUrl}</a>
+                        Request to approve URL: ${blot.title} at url <a href="${params.feedUrl}">${params.feedUrl}</a>
                         </p>
                         <p>
                         <a href="http://www.groovyblogs.org/account/approveFeed/${blog.id}?password=${grailsApplication.config.feeds.approval_password}">Approve</a>
@@ -146,12 +136,12 @@ class AccountController {
                     } catch (Exception e) {
                         log.error "Could not add feed", e
                     }
-                    flash.message = "Successfully added new feed: ${feedInfo.title}. Your Feed needs to be approved by a moderator to become visible"
+                    flash.message = "Successfully added new feed: ${blog.title}. Your Feed needs to be approved by a moderator to become visible"
 
                 } else {
                     feedService.updateFeed(blog)
                     blog.status = BlogStatus.ACTIVE
-                    flash.message = "Successfully added new feed: ${feedInfo.title}"
+                    flash.message = "Successfully added new feed: ${blog.title}"
                 }
             } else {
                 flash.message = "Error adding feed: ${blog?.errors}"
@@ -163,6 +153,8 @@ class AccountController {
         }
         redirect(action: 'edit')
     }
+
+
 
 
     def updateFeed() {
@@ -179,68 +171,76 @@ class AccountController {
 
     }
 
-    def testFeed() {
+    def testFeedModal() {
 
-        def feedUrl = params.feedUrl
+    }
+
+    def testFeed(String feedUrl) {
+
         log.debug("Testing Feed: [$feedUrl]")
         if (feedUrl) {
-            def feedInfo = feedService.getFeedInfo(feedUrl)
-            log.debug("Returned $feedInfo.title $feedInfo.description $feedInfo.type")
-            def writer = new StringWriter()
-            def html = new MarkupBuilder(writer)
-
-            // Could do all this directly in a render() call but it's harder to debug
-            html.div {
-                div(id: "iconDeets") {
-                    p(style: 'margin-top: 3px; margin-bottom: 3px') {
-
-                        img(src: "../images/accept.png",
-                                alt: "This is a groovy related post")
-                        span("Groovy/Grails Post ")
-                        img(src: "../images/cancel.png",
-                                alt: "Not a groovy related post",
-                                style: "margin-left: 5px;")
-                        span("Non Groovy/Grails Post (won't be aggregated) ")
-                    }
-                }
-
-                div(id: "blogInfo") {
-                    div(id: "blogTitle") { p(feedInfo?.title) }
-                    div(id: "blogDesc") { p(feedInfo?.description) }
-                    div(id: "blogType") { p(feedInfo?.type) }
-                    div(id: "blogEntries") {
-                        for (e in feedInfo?.entries) {
-                            div(class: "blogEntry") {
-                                div(class: "blogEntryTitle") {
-
-                                    p {
-                                        def isGroovyRelated = new BlogEntry(title: e.title, description: e.description).isGroovyRelated()
-                                        img(src:
-                                                isGroovyRelated ? "../images/accept.png" : "../images/cancel.png",
-                                                alt:
-                                                        isGroovyRelated ? "This is a groovy related post" : "Not a groovy related post",
-                                        )
-
-                                        span(e?.title)
-                                    }
-                                }
-                                div(class: "blogEntryDesc") { p(e?.summary) }
-                            }
-                        }
-
-                    }
-                }
-
-            }
-
-            log.debug(writer.toString())
-
-            render(writer.toString())
-
-
+            def blog = feedService.testFeed(feedUrl)
+            log.debug("Returned blog title: $blog.title description: $blog.description, type: $blog.type, related: ${blog.blogEntries?.count { it.groovyRelated }}, non-related:  ${blog.blogEntries?.count { !it.groovyRelated }}  ")
+            [blog: blog]
         } else {
-            render "You need to provide a URL for me"
+            response.sendError(HttpServletResponse.SC_NOT_FOUND)
+            [:]
         }
+//            def writer = new StringWriter()
+//            def html = new MarkupBuilder(writer)
+//
+//            // Could do all this directly in a render() call but it's harder to debug
+//            html.div {
+//                div(id: "iconDeets") {
+//                    p(style: 'margin-top: 3px; margin-bottom: 3px') {
+//
+//                        img(src: "../images/accept.png",
+//                                alt: "This is a groovy related post")
+//                        span("Groovy/Grails Post ")
+//                        img(src: "../images/cancel.png",
+//                                alt: "Not a groovy related post",
+//                                style: "margin-left: 5px;")
+//                        span("Non Groovy/Grails Post (won't be aggregated) ")
+//                    }
+//                }
+//
+//                div(id: "blogInfo") {
+//                    div(id: "blogTitle") { p(blog?.title) }
+//                    div(id: "blogDesc") { p(blog?.description) }
+//                    div(id: "blogType") { p(blog?.type) }
+//                    div(id: "blogEntries") {
+//                        for (e in blog?.entries) {
+//                            div(class: "blogEntry") {
+//                                div(class: "blogEntryTitle") {
+//
+//                                    p {
+//                                        def isGroovyRelated = new BlogEntry(title: e.title, description: e.description).isGroovyRelated()
+//                                        img(src:
+//                                                isGroovyRelated ? "../images/accept.png" : "../images/cancel.png",
+//                                                alt:
+//                                                        isGroovyRelated ? "This is a groovy related post" : "Not a groovy related post",
+//                                        )
+//
+//                                        span(e?.title)
+//                                    }
+//                                }
+//                                div(class: "blogEntryDesc") { p(e?.summary) }
+//                            }
+//                        }
+//
+//                    }
+//                }
+//
+//            }
+//
+//            log.debug(writer.toString())
+//
+//            render(writer.toString())
+//
+//
+//        } else {
+//            render "You need to provide a URL for me"
+//        }
 
     }
 

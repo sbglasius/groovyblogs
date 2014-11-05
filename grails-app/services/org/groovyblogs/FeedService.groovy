@@ -1,5 +1,7 @@
 package org.groovyblogs
 
+import com.sun.syndication.feed.synd.SyndEntry
+import com.sun.syndication.feed.synd.SyndFeed
 import com.sun.syndication.io.ParsingFeedException
 import com.sun.syndication.io.SyndFeedInput
 import com.sun.syndication.io.XmlReader
@@ -56,35 +58,29 @@ class FeedService {
         new String(responseBody)
     }
 
-    // takes html and returns a org.groovyblogs.FeedInfo object
+    // takes a URL and returns ROME feed info
     @NotTransactional
-    FeedInfo getFeedInfoFromHtml(String feedStr, boolean translate) {
-
-        def sfi = new SyndFeedInput()
-        // def feedReader = new StringReader(feedStr)
-
-        // need this to handle UTF8 encoding correctly
+    FeedInfo getFeedInfo(String feedUrlStr, boolean translate = false) {
+        def feedStr = getHtmlForUrl(feedUrlStr)
+        def syndFeedInput = new SyndFeedInput()
         def bais = new ByteArrayInputStream(feedStr.getBytes("UTF-8"))
         def feedReader = new XmlReader(bais, true)
-
-        def sf = sfi.build(feedReader)
-
-        def feedInfo = new FeedInfo(title: sf.title,
-                description: sf.description ?: "",
-                author: sf.author, type: sf.feedType)
-
-        for (e in sf.entries) {
-            String title = e.title
-            String description = e.description?.value
+        SyndFeed syndFeed = syndFeedInput.build(feedReader)
+        def feedInfo = new FeedInfo(feedUrl: feedUrlStr, title: syndFeed.title,
+                description: syndFeed.description ?: "",
+                author: syndFeed.author, type: syndFeed.feedType)
+        for (SyndEntry entry in syndFeed.entries) {
+            String title = entry.title
+            String description = entry.description?.value
             if (!description) {  // mustn't be rss... could be atom
-                description = e.contents[0]?.value
+                description = entry.contents[0]?.value
             }
             // trim to 4k-ish size for db storage
             if (description?.length() > 4000) {
                 description = description[0..3999]
             }
-            String link = e.link
-            Date publishedDate = e.publishedDate
+            String link = entry.link
+            Date publishedDate = entry.publishedDate
             def summary
             if (description) {
                 // strip html for the summary, then truncate
@@ -95,7 +91,7 @@ class FeedService {
             def feedEntry = new FeedEntry(title: title, link: link, publishedDate: publishedDate,
                     description: description ?: "",
                     summary: summary ?: "",
-                    author: e.author ?: "")
+                    author: entry.author ?: "")
 
             //TODO ignore stuff older than X days
             def trimEntriesOlderThanXdays = config.feeds.ignoreFeedEntriesOlderThan
@@ -115,16 +111,7 @@ class FeedService {
                 feedInfo.entries.add(feedEntry)
             }
         }
-
-        // return "Author $sf.author Title $sf.title Desc $sf.description Feedtype $sf.feedType"
         return feedInfo
-    }
-
-    // takes a URL and returns ROME feed info
-    @NotTransactional
-    def getFeedInfo(feedUrlStr, boolean translate = false) {
-        def feedStr = getHtmlForUrl(feedUrlStr)
-        return getFeedInfoFromHtml(feedStr, translate)
     }
 
     void updateFeed(Blog blog, FeedInfo fi) {
@@ -222,19 +209,6 @@ class FeedService {
         grailsApplication.config
     }
 
-    void updateFeedFromHtml(String blogId, String feedHtml) {
-
-        Blog blog = Blog.get(blogId)
-        log.info("Now updating: [$blog.title]")
-        FeedInfo fi
-        try {
-            fi = getFeedInfoFromHtml(feedHtml)
-        } catch (e) {
-            log.warn("Could not parse feed [$blog.feedUrl]", e)
-            markBlogWithError(blog, e)
-        }
-        updateFeed(blog, fi)
-    }
 
     void updateFeeds() {
 
@@ -369,4 +343,46 @@ class FeedService {
             blog.save()
         }
     }
+
+    /**
+     * Will return an unsaved Blog with accompanying BlogEntries
+     * @param feedUrl
+     * @return
+     */
+    Blog testFeed(String feedUrl) {
+        def feedInfo = getFeedInfo(feedUrl)
+
+        def blog = createBlogFromFeedInfo(feedInfo)
+        feedInfo.entries.each {
+            blog.addToBlogEntries(title: it.title, description: it.description)
+        }
+
+        return blog
+    }
+
+    /**
+     * Create a blog from the feed url
+     * @param feedUrl
+     * @param account
+     * @return
+     */
+    Blog createBlog(String feedUrl, User account = null) {
+        def feedInfo = getFeedInfo(feedUrl)
+
+        return createBlogFromFeedInfo(feedInfo, account)
+    }
+
+    private Blog createBlogFromFeedInfo(FeedInfo feedInfo, User account = null) {
+        def blog = new Blog()
+        blog.feedUrl = feedInfo.feedUrl
+        blog.type = feedInfo.type
+        blog.title = feedInfo.title ? feedInfo.title : ""
+        blog.title = blog.title.length() > 250 ? blog.title[0..249] : blog.title
+        blog.description = feedInfo.description ? feedInfo.description : ""
+        blog.description = blog.description.length() > 250 ? blog.description[0..249] : blog.description
+
+        blog.account = account
+        return blog
+    }
+
 }
