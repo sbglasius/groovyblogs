@@ -25,7 +25,11 @@
         event.preventDefault();
         $('#feed-modal').load('${createLink(action: 'testFeedModal')}', function() {
             $(this).on('shown.bs.modal', function() {
-                $('#feed-result').load('${createLink(action: 'testFeed')}', {feedUrl: $('input[name="feedUrl"]').val()})
+                $('#feed-result').load('${createLink(action: 'testFeed')}', {feedUrl: $('input[name="feedUrl"]').val()}, function() {
+                    $('#modal-add-feed').removeClass('disabled').on('click', function() {
+                        $('input[name="submit"]').trigger('click');
+                    });
+                })
             }).modal('show');
         })
     });

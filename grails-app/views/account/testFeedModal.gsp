@@ -13,7 +13,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add feed</button>
+                <button id="modal-add-feed" type="button" class="btn btn-primary disabled">Add feed</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

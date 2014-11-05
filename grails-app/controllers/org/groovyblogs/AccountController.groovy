@@ -110,41 +110,10 @@ class AccountController {
             def account = getCurrentUser()
 
             Blog blog = feedService.createBlog(feedUrl, account)
-            if (blog.validate()) {
-                blog.save()
-                if (grailsApplication.config.feeds.moderate) {
-                    blog.status = BlogStatus.PENDING
-                    try {
-                        sendMail {
-                            to grailsApplication.config.feeds.moderator_email
-                            subject "groovyblogs: Feed approval for ${blog.title}"
-                            body """
-                        <p>
-                        Request to approve URL: ${blot.title} at url <a href="${params.feedUrl}">${params.feedUrl}</a>
-                        </p>
-                        <p>
-                        <a href="http://www.groovyblogs.org/account/approveFeed/${blog.id}?password=${grailsApplication.config.feeds.approval_password}">Approve</a>
-
-                        for ${blog.account.email} or
-
-                        <a href="http://www.groovyblogs.org/account/removeFeed/${blog.id}?password=${grailsApplication.config.feeds.approval_password}">Delete</a>
-                        </p>
-
-                    """
-                        }
-
-                    } catch (Exception e) {
-                        log.error "Could not add feed", e
-                    }
-                    flash.message = "Successfully added new feed: ${blog.title}. Your Feed needs to be approved by a moderator to become visible"
-
-                } else {
-                    feedService.updateFeed(blog)
-                    blog.status = BlogStatus.ACTIVE
-                    flash.message = "Successfully added new feed: ${blog.title}"
-                }
+            if (blog.validate() && feedService.saveBlog(blog)) {
+                flash.message = "Successfully added new feed: ${blog.title}. ${blog.status != BlogStatus.ACTIVE ? 'Your blog needs moderation before it becomes active.':''}"
             } else {
-                flash.message = "Error adding feed: ${blog?.errors}"
+                flash.message = "Error adding feed. ${blog.errors.hasFieldErrors('feedUrl') ? 'This feed already exists in Groovy Blogs':''}"
             }
 
 
@@ -186,87 +155,31 @@ class AccountController {
             response.sendError(HttpServletResponse.SC_NOT_FOUND)
             [:]
         }
-//            def writer = new StringWriter()
-//            def html = new MarkupBuilder(writer)
-//
-//            // Could do all this directly in a render() call but it's harder to debug
-//            html.div {
-//                div(id: "iconDeets") {
-//                    p(style: 'margin-top: 3px; margin-bottom: 3px') {
-//
-//                        img(src: "../images/accept.png",
-//                                alt: "This is a groovy related post")
-//                        span("Groovy/Grails Post ")
-//                        img(src: "../images/cancel.png",
-//                                alt: "Not a groovy related post",
-//                                style: "margin-left: 5px;")
-//                        span("Non Groovy/Grails Post (won't be aggregated) ")
-//                    }
-//                }
-//
-//                div(id: "blogInfo") {
-//                    div(id: "blogTitle") { p(blog?.title) }
-//                    div(id: "blogDesc") { p(blog?.description) }
-//                    div(id: "blogType") { p(blog?.type) }
-//                    div(id: "blogEntries") {
-//                        for (e in blog?.entries) {
-//                            div(class: "blogEntry") {
-//                                div(class: "blogEntryTitle") {
-//
-//                                    p {
-//                                        def isGroovyRelated = new BlogEntry(title: e.title, description: e.description).isGroovyRelated()
-//                                        img(src:
-//                                                isGroovyRelated ? "../images/accept.png" : "../images/cancel.png",
-//                                                alt:
-//                                                        isGroovyRelated ? "This is a groovy related post" : "Not a groovy related post",
-//                                        )
-//
-//                                        span(e?.title)
-//                                    }
-//                                }
-//                                div(class: "blogEntryDesc") { p(e?.summary) }
-//                            }
-//                        }
-//
-//                    }
-//                }
-//
-//            }
-//
-//            log.debug(writer.toString())
-//
-//            render(writer.toString())
-//
-//
-//        } else {
-//            render "You need to provide a URL for me"
-//        }
-
     }
 
     @Secured(['ROLE_ADMIN'])
-    def approveFeed() {
-        Blog blog = Blog.get(params.id)
+    def approveFeed(Blog blog) {
         if (blog) {
             blog.status = BlogStatus.ACTIVE
             log.warn "Approving blog: ${blog.title} - ${blog.id}"
-            render "<h1>Approval all good for ${blog.title} - ${blog.id}</h1>"
+            flash.message = "Approved blog: ${blog.title} - ${blog.id}"
         } else {
-            render "<h1>Missing blog</h1>"
+            flash.message = "Blog with id ${params.id} was not found..."
         }
+        redirect(controller: 'entries', action: 'recent')
     }
 
     @Secured(['ROLE_ADMIN'])
-    def removeFeed() {
+    def removeFeed(Blog blog) {
 
-        Blog blog = Blog.get(params.id)
         if (blog) {
-            blog.delete()
-            log.warn "Deleting blog: ${blog.title} - ${blog.id}"
-            render "<h1>Delete all good for ${blog.title} - ${blog.id}</h1>"
+            blog.delete(flush: true)
+            log.warn "Deleted blog: ${blog.title} - ${blog.id}"
+            flash.message =  "Deleted blog: ${blog.title} - ${blog.id}"
         } else {
-            render "<h1>Missing blog</h1>"
+            flash.message = "Blog with id ${params.id} was not found..."
         }
+        redirect(controller: 'entries', action: 'recent')
 
     }
 

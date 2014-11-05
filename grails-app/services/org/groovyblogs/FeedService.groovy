@@ -22,6 +22,9 @@ class FeedService {
     ThumbnailService thumbnailService
     TranslateService translateService
     TwitterService twitterService
+    def mailService
+    def groovyPageRenderer
+    def grailsLinkGenerator
 
     // Returns the HTML for the supplied URL
     @NotTransactional
@@ -107,7 +110,7 @@ class FeedService {
                 if (translate) {
                     feedEntry.language = translateService.getLanguage(description)
                 }
-                log.debug("Found entry with title [$title] and link [$link]")
+                log.debug("Read entry with title [$title] and link [$link]")
                 feedInfo.entries.add(feedEntry)
             }
         }
@@ -318,7 +321,7 @@ class FeedService {
         tweetCache.get("tweetEntries")?.value ?: updateTweets()
     }
 
-    @Transactional(noRollbackFor=[ParsingFeedException])
+    @Transactional(noRollbackFor = [ParsingFeedException])
     void checkPendingBlogs(List<Blog> blogs) {
 
         Map<Blog, FeedInfo> feedInfos = blogs.collectEntries { Blog it ->
@@ -385,4 +388,29 @@ class FeedService {
         return blog
     }
 
+    boolean saveBlog(Blog blog) {
+        blog.save(flush: true)
+        if (grailsApplication.config.feeds.moderate) {
+            blog.status = BlogStatus.PENDING
+            try {
+                def approve = grailsLinkGenerator.link(controller: 'account', action: 'approveFeed', id: blog.id, absolute: true)
+                def reject = grailsLinkGenerator.link(controller: 'account', action: 'removeFeed', id: blog.id, absolute: true)
+                mailService.sendMail {
+                    to grailsApplication.config.feeds.moderator_email
+                    subject "groovyblogs: Feed approval for ${blog.title}"
+                    body groovyPageRenderer.render(template: '/mailtemplates/moderateFeed', model: [blog: blog, approve: approve, reject: reject])
+                }
+
+            } catch (Exception e) {
+                log.error "Could not add feed", e
+                blog.delete()
+                return false
+            }
+        } else {
+            updateFeed(blog)
+            blog.status = BlogStatus.ACTIVE
+        }
+
+        return blog.save(failOnError: true)
+    }
 }

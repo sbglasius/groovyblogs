@@ -4,10 +4,12 @@
         <f:display property="description"/>
         <f:display property="type"/>
     </f:with>
+    Entries:
+    <small><i class="fa fa-thumbs-o-up text-success"></i> Is Groovy related. <i class="fa fa-thumbs-o-down text-danger"></i> Is <strong>not</strong> Groovy related.</small>
     <g:if test="${blog.blogEntries}">
             <g:each in="${blog.blogEntries}" var="blogEntry">
                 <div>
-                    <i class="fa  fa-thumbs-o-${blogEntry.groovyRelated ? 'up':'down'}"></i>  ${blogEntry.title}
+                    <i class="fa fa-2x fa-thumbs-o-${blogEntry.groovyRelated ? 'up text-success':'down text-danger'} "></i>  ${blogEntry.title}
                 </div>
             </g:each>
         <g:if test="${blog.blogEntries.every { !it.groovyRelated}}">

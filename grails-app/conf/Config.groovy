@@ -25,7 +25,7 @@ grails.hibernate.osiv.readonly = false
 grails.hibernate.pass.readonly = false
 grails.json.legacy.builder = false
 grails.mail.host = "localhost"
-grails.mail.default.from = "glen@bytecode.com.au"
+grails.mail.default.from = "info@groovyblogs.org"
 grails.mime.disable.accept.header.userAgents = ['Gecko', 'WebKit', 'Presto', 'Trident']
 grails.mime.types = [
         all          : '*/*',
@@ -82,7 +82,7 @@ cache {
 feeds {
     ignoreFeedEntriesOlderThan = 30 // days
     moderate = true
-    moderator_email = "glen@bytecode.com.au"
+    moderator_email = "sbglasius@groovyblogs.org"
     // moderator_email = you@yourhost.com
 }
 
@@ -220,7 +220,7 @@ environments {
     }
     production {
         grails.mail.host = "localhost"
-        grails.mail.default.from = "glen@bytecode.com.au"
+        grails.mail.default.from = "sbglasius@groovyblogs.org"
         greenmail.disabled = true
     }
 }
