@@ -73,6 +73,7 @@ thumbnail {
 
 groovyblogs {
     maxErrors = 10
+    login = false
 }
 
 cache {

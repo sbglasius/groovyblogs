@@ -1,3 +1,4 @@
+<g:ifEnabled config="groovyblogs.login">
 <div class="col-xs-12">
     <div class="panel panel-info">
         <div class="panel-heading">
@@ -48,3 +49,4 @@
         </div>
     </div>
 </div>
+</g:ifEnabled>
