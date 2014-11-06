@@ -22,9 +22,8 @@
 
             <g:sortableColumn property="lastLogin" title="${message(code: 'user.lastLogin.label', default: 'Last Login')}"/>
 
-            <g:sortableColumn property="accountExpired" title="${message(code: 'user.accountExpired.label', default: 'Account Expired')}"/>
+            <th><g:message code='user.status.label' default= 'Status'/></th>
 
-            <g:sortableColumn property="accountLocked" title="${message(code: 'user.accountLocked.label', default: 'Account Locked')}"/>
             <th>Feed count</th>
 
         </tr>
@@ -40,9 +39,12 @@
 
                 <td>${fieldValue(bean: userInstance, field: "lastLogin")}</td>
 
-                <td><g:formatBoolean boolean="${userInstance.accountExpired}"/></td>
+                <td>
+                    <i class="fa ${userInstance.accountExpired ? ' fa-times-circle':'fa-dot-circle-o'}" title="${userInstance.accountExpired ? 'Account expired':'Account active'}" ></i>
+                    <i class="fa ${userInstance.accountLocked ? ' fa-lock':'fa-unlock-alt'}" title="${userInstance.accountLocked ? 'Account locked':'Account unlocked'}" ></i>
 
-                <td><g:formatBoolean boolean="${userInstance.accountLocked}"/></td>
+                </td>
+
                 <td>${userInstance.blogs?.size()}</td>
 
             </tr>

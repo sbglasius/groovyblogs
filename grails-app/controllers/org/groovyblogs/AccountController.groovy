@@ -1,4 +1,5 @@
 package org.groovyblogs
+
 import com.megatome.grails.RecaptchaService
 import grails.plugin.springsecurity.annotation.Secured
 
@@ -14,10 +15,6 @@ class AccountController {
     def userService
     RecaptchaService recaptchaService
 
-    private User getCurrentUser() {
-        springSecurityService.loadCurrentUser() as User
-    }
-
     static defaultAction = 'edit'
 
     def edit() {
@@ -25,9 +22,9 @@ class AccountController {
     }
 
     def update(UpdateAccountCommand command) {
-        if(!command.hasErrors()) {
+        if (!command.hasErrors()) {
             def status = userService.updateUser(currentUser, command)
-            flash.message = status.collect {g.message(message: it) }.join(' ')
+            flash.message = status.collect { g.message(message: it) }.join(' ')
         }
         render(view: 'edit', model: [account: currentUser, command: command, blog: new Blog()])
     }
@@ -41,13 +38,13 @@ class AccountController {
 
     @Secured(['permitAll'])
     def confirmEmail(TokenCommand command) {
-        if(command.hasTokenError()) {
-            flash.message = "That's not right... The token was not found. Remember the token only lives 24 hours. Perhaps you could try again."
+        if (command.hasTokenError()) {
+            flash.message = "That's not right... The token was not found. Remember the token only lives 24 hours. Perhaps you should try again."
         } else {
             userService.confirmEmail(command)
             flash.message = "Your email address was confirmed. Thank you."
         }
-        if(currentUser) {
+        if (currentUser) {
             redirect(action: 'edit')
         } else {
             redirect(controller: 'entries')
@@ -64,14 +61,14 @@ class AccountController {
 
     @Secured(['permitAll'])
     def register(RegisterAccountCommand command) {
-        if(!recaptchaService.verifyAnswer(session, request.getRemoteAddr(), params)) {
-            command.errors.rejectValue('recaptcha','recaptcha-not-valid')
+        if (!recaptchaService.verifyAnswer(session, request.getRemoteAddr(), params)) {
+            command.errors.rejectValue('recaptcha', 'recaptcha-not-valid')
         }
-        if(command.hasErrors()) {
+        if (command.hasErrors()) {
             println command.errors
             render(view: 'signup', model: [command: command])
         } else {
-            if(userService.createAccount(command)) {
+            if (userService.createAccount(command)) {
                 flash.message = "Welcome to groovyblogs.org!"
                 redirect(action: 'edit', fragment: 'newblog')
             } else {
@@ -82,8 +79,6 @@ class AccountController {
 
     }
 
-
-
     def deleteFeed(Long id) {
         def blog = Blog.get(id)
         if (!blog) {
@@ -92,7 +87,7 @@ class AccountController {
             return
         }
 
-        if (blog.accountId != getCurrentUser()?.id) {
+        if (blog.accountId != currentUser?.id) {
             flash.message = "You don't have rights to delete that blog"
             redirect(action: 'edit')
             return
@@ -102,18 +97,17 @@ class AccountController {
         flash.message = "Successfully deleted blog ${blog.title}"
     }
 
+
     def addFeed(String feedUrl) {
 
         log.info("Adding Feed: [$feedUrl]")
         if (feedUrl) {
 
-            def account = getCurrentUser()
-
-            Blog blog = feedService.createBlog(feedUrl, account)
+            Blog blog = feedService.createBlog(feedUrl, currentUser)
             if (blog.validate() && feedService.saveBlog(blog)) {
-                flash.message = "Successfully added new feed: ${blog.title}. ${blog.status != BlogStatus.ACTIVE ? 'Your blog needs moderation before it becomes active.':''}"
+                flash.message = "Successfully added new feed: ${blog.title}. ${blog.status != BlogStatus.ACTIVE ? 'Your blog needs moderation before it becomes active.' : ''}"
             } else {
-                flash.message = "Error adding feed. ${blog.errors.hasFieldErrors('feedUrl') ? 'This feed already exists in Groovy Blogs':''}"
+                flash.message = "Error adding feed. ${blog.errors.hasFieldErrors('feedUrl') ? 'This feed already exists in Groovy Blogs' : ''}"
             }
 
 
@@ -122,9 +116,6 @@ class AccountController {
         }
         redirect(action: 'edit')
     }
-
-
-
 
     def updateFeed() {
         def blog = Blog.get(params.id)
@@ -139,6 +130,7 @@ class AccountController {
         redirect(action: 'edit')
 
     }
+
 
     def testFeedModal() {
 
@@ -157,7 +149,7 @@ class AccountController {
         }
     }
 
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_MODERATOR'])
     def approveFeed(Blog blog) {
         if (blog) {
             blog.status = BlogStatus.ACTIVE
@@ -169,13 +161,13 @@ class AccountController {
         redirect(controller: 'entries', action: 'recent')
     }
 
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_MODERATOR'])
     def removeFeed(Blog blog) {
 
         if (blog) {
             blog.delete(flush: true)
             log.warn "Deleted blog: ${blog.title} - ${blog.id}"
-            flash.message =  "Deleted blog: ${blog.title} - ${blog.id}"
+            flash.message = "Deleted blog: ${blog.title} - ${blog.id}"
         } else {
             flash.message = "Blog with id ${params.id} was not found..."
         }
@@ -205,12 +197,12 @@ class AccountController {
 
     }
 
-
     private LinkedHashMap<String, GroovyObjectSupport> getEditModel() {
         [account: getCurrentUser(), command: new UpdateAccountCommand(email: getCurrentUser().unconfirmedEmail ?: getCurrentUser().email), blog: new Blog()]
     }
 
 
-
-
+    private User getCurrentUser() {
+        springSecurityService.loadCurrentUser() as User
+    }
 }

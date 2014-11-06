@@ -1,3 +1,4 @@
+import org.groovyblogs.AuthenticationSuccessEventListener
 import org.groovyblogs.MemcacheFactoryBean
 import org.groovyblogs.MemcacheMap
 import org.springframework.cache.ehcache.EhCacheFactoryBean
@@ -51,4 +52,6 @@ beans = {
     recentStatsCache(EhCacheFactoryBean) {
         timeToLive = 3600
     }
+
+    authenticationSuccessEventListener(AuthenticationSuccessEventListener)
 }

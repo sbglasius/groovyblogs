@@ -14,8 +14,9 @@
     <tmpl:/templates/message/>
     <f:with bean="${userInstance}">
         <f:display property="username"/>
+        %{--<f:display property="name"/>--}%
+        %{--<f:display property="twitter"/>--}%
         <f:display property="email"/>
-        <f:display property="status"/>
         <f:display property="accountExpired"/>
         <f:display property="accountLocked"/>
         <f:display property="passwordExpired"/>
