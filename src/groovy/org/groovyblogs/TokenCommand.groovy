@@ -21,6 +21,6 @@ class TokenCommand {
     }
 
     boolean hasTokenError() {
-        this.errors.fieldErrors.field.any {it in ['username','token']}
+        this.errors?.fieldErrors?.field?.any {it in ['username','token']}
     }
 }

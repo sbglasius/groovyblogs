@@ -27,7 +27,7 @@ class UserService {
 
         def passwordToken = RandomStringUtils.randomAlphanumeric(64)
         cache.put(passwordToken, user)
-        def link = grailsLinkGenerator.link(controller: 'forgotPassword', action: 'resetPassword', params:  [username: user.username, token: passwordToken], absolute: true)
+        def link = grailsLinkGenerator.link(controller: 'forgotPassword', action: 'resetPassword', params: [username: user.username, token: passwordToken], absolute: true)
         mailService.sendMail {
             to user.email
             subject "groovyblogs.org Password Reset"
@@ -37,14 +37,14 @@ class UserService {
 
     boolean resetPassword(ResetPasswordCommand command) {
         def user = pullUserFromTokenCache(command.token, command.username, true)
-        if(user) {
+        if (user) {
             user.password = command.newPassword
             user.passwordExpired = false
             user.save(failOnError: true)
             // If no role for a given user, add it now...
-            if(!UserRole.findByUser(user)) {
+            if (!UserRole.findByUser(user)) {
                 def role = Role.findByAuthority('ROLE_USER')
-                UserRole.create(user,role)
+                UserRole.create(user, role)
             }
             log.info("Password for $user.username was changed!")
             return true
@@ -60,36 +60,44 @@ class UserService {
      */
     User pullUserFromTokenCache(String token, String username, boolean remove = false) {
         def user = cache.get(token, User)
-        if(user?.username == username) {
-            if(remove) {
+        if (user?.username == username) {
+            if (remove) {
                 cache.evict(token)
             }
             return user.attach()
         }
+        return null
     }
 
-    UpdateUserStatus updateUser(User user, UpdateAccountCommand command) {
-        def status = UpdateUserStatus.NONE
+    Collection<UpdateUserStatus> updateUser(User user, UpdateAccountCommand command) {
+        def status = [] as HashSet
 
-        if(user.email != command.email) {
+        if (user.email != command.email) {
             user.unconfirmedEmail = command.email
             user.save(failOnError: true, flush: true)
             sendConfirmEmail(user)
-            status = UpdateUserStatus.NEW_EMAIL
+            status << UpdateUserStatus.NEW_EMAIL
         }
-        if(command.newPassword) {
+        if (command.newPassword) {
             user.password = command.newPassword
-            user.save(failOnError: true)
-            status = status == UpdateUserStatus.NONE ? UpdateUserStatus.PASSWORD_UPDATED : UpdateUserStatus.BOTH
+            status << UpdateUserStatus.PASSWORD_UPDATED
         }
+        if (user.name != command.name) {
+            user.name = command.name
+            status << UpdateUserStatus.DATA_UPDATED
+        }
+        if (user.twitter != command.twitter) {
+            user.twitter = command.twitter
+            status << UpdateUserStatus.DATA_UPDATED
+        }
+        user.save()
         return status
     }
 
 
-
     boolean confirmEmail(TokenCommand command) {
         def user = pullUserFromTokenCache(command.token, command.username, true)
-        if(user) {
+        if (user) {
             user.email = user.unconfirmedEmail
             user.unconfirmedEmail = ''
             user.save(failOnError: true)
@@ -124,5 +132,20 @@ class UserService {
         sendConfirmEmail(user)
         springSecurityService.reauthenticate(command.username, command.password)
         return true
+    }
+
+    void emailAoutNewGroovyBlogs(Collection<User> users) {
+        log.info("Mailing ${users.size()} about new GroovyBlogs")
+        users.each { user ->
+            def passwordToken = RandomStringUtils.randomAlphanumeric(64)
+            cache.put(passwordToken, user)
+            def link = grailsLinkGenerator.link(controller: 'forgotPassword', action: 'resetPassword', params: [username: user.username, token: passwordToken], absolute: true)
+            mailService.sendMail {
+                to user.email
+                subject "groovyblogs.org Welcome Back"
+                html groovyPageRenderer.render(template: '/mailtemplates/newGroovyblogs', model: [username: user.username, blogs: user.blogs.findAll { it.status == BlogStatus.ACTIVE }, link: link])
+            }
+
+        }
     }
 }

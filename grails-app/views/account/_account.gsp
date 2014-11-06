@@ -7,6 +7,8 @@
     <f:with bean="account">
         <input type="hidden" name="id" value="${account?.id}"/>
         <f:display property="username"/>
+        <f:field property="name"/>
+        <f:field property="twitter"/>
     </f:with>
     <f:with bean="command">
         <f:field property="newPassword"/>

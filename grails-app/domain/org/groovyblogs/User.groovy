@@ -5,6 +5,8 @@ class User {
     transient springSecurityService
 
     String username
+    String name
+    String twitter
     String password
     String email
     String unconfirmedEmail
@@ -19,6 +21,8 @@ class User {
 
     static constraints = {
         username unique: true
+        name nullable: true
+        twitter nullable: true, unique: true
         email email: true
         unconfirmedEmail nullable: true, email: true
     }
@@ -42,9 +46,10 @@ class User {
         }
     }
 
+    @SuppressWarnings("UnnecessaryQualifiedReference")
     def beforeDelete() {
         UserRole.withNewSession {
-            UserRole.findAllByUser(this)*.delete()
+            UserRole.findAllByUser(this)*.delete(flush: true)
         }
     }
 

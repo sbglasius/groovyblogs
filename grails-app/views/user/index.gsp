@@ -21,7 +21,6 @@
             <g:sortableColumn property="email" title="${message(code: 'user.email.label', default: 'Email')}"/>
 
             <g:sortableColumn property="lastLogin" title="${message(code: 'user.lastLogin.label', default: 'Last Login')}"/>
-            <g:sortableColumn property="status" title="${message(code: 'user.status.label', default: 'Status')}"/>
 
             <g:sortableColumn property="accountExpired" title="${message(code: 'user.accountExpired.label', default: 'Account Expired')}"/>
 
@@ -40,7 +39,6 @@
                 <td>${fieldValue(bean: userInstance, field: "email")}</td>
 
                 <td>${fieldValue(bean: userInstance, field: "lastLogin")}</td>
-                <td>${fieldValue(bean: userInstance, field: "status")}</td>
 
                 <td><g:formatBoolean boolean="${userInstance.accountExpired}"/></td>
 
@@ -56,8 +54,8 @@
         <g:paginate total="${userInstanceCount ?: 0}"/>
     </div>
     <div>
-        <g:link class="create" action="create" class="btn btn-primary"><g:message code="default.new.label" args="[entityName]"/></g:link>
-        <g:link class="create" action="cleanupUsers" params="${params}" class="btn btn-danger" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+        <g:link action="create" class="btn btn-primary"><g:message code="default.new.label" args="[entityName]"/></g:link>
+        <g:link action="cleanupUsers" params="${params}" class="btn btn-danger" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
             Remove users with no blogs</g:link></div>
 
 </div>

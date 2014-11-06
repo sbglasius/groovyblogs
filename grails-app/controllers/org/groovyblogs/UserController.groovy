@@ -15,4 +15,12 @@ class UserController {
         flash.message = "Removed ${count} users"
         redirect(action: 'index', params: params)
     }
+
+    def emailAboutNewGroovyblogs() {
+        def usersWithActiveBlogs = User.list().findAll { it.blogs?.any {it.status == BlogStatus.ACTIVE}}
+
+        userService.emailAoutNewGroovyBlogs(usersWithActiveBlogs)
+        redirect(action: 'index')
+
+    }
 }

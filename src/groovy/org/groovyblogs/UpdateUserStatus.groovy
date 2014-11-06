@@ -7,6 +7,5 @@ import grails.plugin.i18nEnums.annotations.I18nEnum
 public enum UpdateUserStatus {
     NEW_EMAIL,
     PASSWORD_UPDATED,
-    BOTH,
-    NONE
+    DATA_UPDATED
 }

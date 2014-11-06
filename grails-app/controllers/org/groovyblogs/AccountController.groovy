@@ -27,7 +27,7 @@ class AccountController {
     def update(UpdateAccountCommand command) {
         if(!command.hasErrors()) {
             def status = userService.updateUser(currentUser, command)
-            flash.message = g.message(message: status)
+            flash.message = status.collect {g.message(message: it) }.join(' ')
         }
         render(view: 'edit', model: [account: currentUser, command: command, blog: new Blog()])
     }
