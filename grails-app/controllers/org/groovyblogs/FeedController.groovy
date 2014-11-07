@@ -62,7 +62,7 @@ class FeedController {
 
     private String getFeed(feedType) {
 
-        SyndFeed feed = feedCache.get("romeFeed-" + feedType)?.value
+        SyndFeed feed = feedCache.get("romeFeed-$feedType")?.value
 
         if (!feed) {
             // def blogEntries = BlogEntry.listOrderByDateAdded(max: 30, order: "desc")
