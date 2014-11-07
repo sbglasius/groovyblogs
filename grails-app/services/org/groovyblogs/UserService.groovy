@@ -134,16 +134,19 @@ class UserService {
         return true
     }
 
-    void emailAoutNewGroovyBlogs(Collection<User> users) {
+    void emailAboutNewGroovyBlogs(Collection<User> users) {
         log.info("Mailing ${users.size()} about new GroovyBlogs")
         users.each { user ->
             def passwordToken = RandomStringUtils.randomAlphanumeric(64)
             cache.put(passwordToken, user)
             def link = grailsLinkGenerator.link(controller: 'forgotPassword', action: 'resetPassword', params: [username: user.username, token: passwordToken], absolute: true)
+            def content = groovyPageRenderer.render(template: '/mailtemplates/aboutNewGroovyblogs', model: [username: user.username, blogs: user.blogs.findAll { it.status == BlogStatus.ACTIVE }, link: link])
+
             mailService.sendMail {
                 to user.email
                 subject "groovyblogs.org Welcome Back"
-                html groovyPageRenderer.render(template: '/mailtemplates/newGroovyblogs', model: [username: user.username, blogs: user.blogs.findAll { it.status == BlogStatus.ACTIVE }, link: link])
+
+                html content
             }
 
         }

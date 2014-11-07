@@ -25,7 +25,7 @@ class UserController {
     def emailAboutNewGroovyblogs() {
         def usersWithActiveBlogs = User.list().findAll { it.blogs?.any {it.status == BlogStatus.ACTIVE}}
 
-        userService.emailAoutNewGroovyBlogs(usersWithActiveBlogs)
+        userService.emailAboutNewGroovyBlogs(usersWithActiveBlogs)
         redirect(action: 'index')
 
     }
