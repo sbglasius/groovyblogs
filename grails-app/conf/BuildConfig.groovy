@@ -49,7 +49,6 @@ grails.project.dependency.resolution = {
         compile ":greenmail:1.3.4"
         compile ":runtime-logging:0.4"
         compile ":searchable:0.6.9"
-        compile ":iwebkit:0.5"
         compile ":scaffolding:2.1.2"
         compile ":google-analytics:2.3.3"
         compile ":fields:1.4"

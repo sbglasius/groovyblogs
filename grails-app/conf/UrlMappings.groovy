@@ -8,5 +8,6 @@ class UrlMappings {
         "/about"(view: '/about')
         "/"(controller: "entries")
         "500"(view:'/error')
+        "404"(view:'/notFound')
     }
 }

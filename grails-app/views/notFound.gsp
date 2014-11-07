@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Not Authorized</title>
+    <title>404 Not Found</title>
 </head>
 
 <body>
@@ -10,10 +10,10 @@
         <asset:image src="500.jpg" style="width: 100%"/>
     </div>
     <div class="col-md-9">
-        <h1>Why are you here??</h1>
-        <h4>This is a highly restricted area!!</h4>
+        <h1>Whops... it's not here.</h1>
+        <h4>Perhaps it never was? who knows?</h4>
         <p>If you feel like talking to someone about it, just ping us at info<i class="fa fa-at"></i>groovyblogs.org... </p>
-        <p>Otherwise go away!</p>
+        <p>Otherwise keep searching...</p>
     </div>
 </div>
 
