@@ -73,7 +73,7 @@ thumbnail {
 
 groovyblogs {
     maxErrors = 10
-    login = false
+    login = true
 }
 
 cache {
@@ -153,6 +153,7 @@ grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'org.groovyblog
 grails.plugin.springsecurity.authority.className = 'org.groovyblogs.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         '/'                 : ['permitAll'],
+        '/about'            : ['permitAll'],
         '/searchable/**'    : ['permitAll'],
         '/index'            : ['permitAll'],
         '/index.gsp'        : ['permitAll'],
@@ -191,8 +192,13 @@ grails.cache.config = {
     cache {
         name 'popularList'
         timeToLiveSeconds 60
-
     }
+
+    cache {
+        name 'chart'
+        timeToLiveSeconds 60
+    }
+
 
     cache {
         name UserService.TOKENS_CACHE

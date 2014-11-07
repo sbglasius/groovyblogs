@@ -322,7 +322,7 @@ class FeedService {
     }
 
     @Transactional(noRollbackFor = [ParsingFeedException])
-    void checkPendingBlogs(List<Blog> blogs) {
+    int checkPendingBlogs(List<Blog> blogs) {
 
         Map<Blog, FeedInfo> feedInfos = blogs.collectEntries { Blog it ->
             try {
@@ -345,6 +345,8 @@ class FeedService {
             blog.status = hasGroovyContent ? BlogStatus.LOOKS_GOOD : BlogStatus.NO_GROOVY
             blog.save()
         }
+
+        feedInfos.size()
     }
 
     /**

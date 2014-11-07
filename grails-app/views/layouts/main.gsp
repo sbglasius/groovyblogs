@@ -100,12 +100,12 @@
             <g:layoutBody/>
         </div>
         <div class="col-md-3 col-lg-2 hidden-xs hidden-sm ">
-            <tmpl:/layouts/facts/>
+            <tmpl:/layouts/sidebar/>
         </div>
     </div>
     <div class="row">
         <div class="visible-xs visible-sm col-sm-12">
-            <tmpl:/layouts/facts/>
+            <tmpl:/layouts/sidebar/>
         </div>
     </div>
 </div>
