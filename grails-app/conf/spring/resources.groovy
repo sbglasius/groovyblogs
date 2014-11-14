@@ -1,6 +1,5 @@
 import org.groovyblogs.AuthenticationSuccessEventListener
-import org.groovyblogs.MemcacheFactoryBean
-import org.groovyblogs.MemcacheMap
+import org.groovyblogs.GroovyBlogsUserDetailsService
 import org.springframework.cache.ehcache.EhCacheFactoryBean
 
 beans = {
@@ -54,4 +53,6 @@ beans = {
     }
 
     authenticationSuccessEventListener(AuthenticationSuccessEventListener)
+    userDetailsService(GroovyBlogsUserDetailsService)
+
 }
