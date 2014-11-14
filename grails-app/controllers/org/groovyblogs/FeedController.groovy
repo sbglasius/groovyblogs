@@ -73,9 +73,6 @@ class FeedController {
 
             blogEntries = blogEntries.findAll { it.isGroovyRelated() }
 
-            // limit entries in feed?
-            //blogEntries = entriesService.limitEntries(blogEntries)
-
             def feedEntries = []
             blogEntries.each { blogEntry ->
                 def desc = new SyndContentImpl(type: "text/plain", value: FeedEntry.summarize(blogEntry.description))

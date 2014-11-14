@@ -11,6 +11,9 @@ class BlogEntry {
     String language
     String info
     String hash
+    SortedSet<Date> visits
+
+    static hasMany = [visits: Date]
 
     static searchable = {
         only = ['title', 'description']
@@ -31,6 +34,7 @@ class BlogEntry {
         description sqlType: 'LONGTEXT'
         link index: 'Link_Idx'
         hash index: 'Hash_Idx'
+        visits cascade: "all-delete-orphan"
     }
 
     boolean isGroovyRelated() {

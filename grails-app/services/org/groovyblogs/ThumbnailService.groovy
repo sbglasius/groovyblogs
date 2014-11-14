@@ -22,7 +22,6 @@ class ThumbnailService {
     def grailsApplication
     def thumbCache
     Ehcache pendingCache
-    byte[] noThumbAvailablePic
 
     void fetchThumbnailsToCache(long id, String url) {
 
@@ -33,12 +32,6 @@ class ThumbnailService {
         byte[] large = fetchThumbnail(url, "medium2")
         String largeCacheEntry = "${id}-large"
         thumbCache.put(new Element(largeCacheEntry, large))
-
-        /*
-        byte[] iphone = fetchThumbnail(url, "small")
-        def iphoneCacheEntry = "${id}-iphone".toString()
-        thumbCache.put(new Element(iphoneCacheEntry, iphone))
-        */
     }
 
     byte[] fetchThumbnail(String url, String imgSize = "large") {
@@ -101,41 +94,18 @@ class ThumbnailService {
             return new byte[0]
         }
 
-        log.info "Fetching thumbnail for id $id"
 
         String cacheEntry = "${id}-${thumbSize}"
         byte[] t = thumbCache.get(cacheEntry)?.value
         if (t && t.length > 10) {  // Could be "Bad Hash"
-            log.debug "Found file in the cache..."
             return t
         }
 
         BlogEntry entry = BlogEntry.get(id)
         //log.debug entry.dump()
-        def image
-        try {
+        pendingCache.put(new Element(entry.link, entry.id))
 
-            pendingCache.put(new Element(entry.link, entry.id))
-
-            if (true) return null
-
-            if (!noThumbAvailablePic) {
-                def noThumbUrl = getClass().getResource("/resources/no-thumb.jpg")
-                log.debug "The noThumb image is ${noThumbUrl}"
-                noThumbAvailablePic = new File(noThumbUrl.toURI()).readBytes()
-            }
-            image = noThumbAvailablePic
-
-            switch (thumbSize) {
-                case "small":  image = scale(image, 170, 124); break
-                case "large":  image = scale(image, 512, 373); break
-                case "iphone": image = scale(image, 80, 60);   break
-            }
-        } catch (e) {
-            log.warn "Thumb retrieval failed for ${id}", e
-            image = new byte[0]
-        }
         // thumbCache.put(new Element(cacheEntry, image))
-        return image
+        return null
     }
 }

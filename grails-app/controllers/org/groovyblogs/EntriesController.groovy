@@ -3,52 +3,46 @@ package org.groovyblogs
 import grails.plugin.springsecurity.annotation.Secured
 import groovy.text.SimpleTemplateEngine
 
+import javax.servlet.http.HttpServletResponse
+
 @Secured(['permitAll'])
 class EntriesController {
 
+    static final LinkedHashMap<Serializable, String> DAYS_AVAILABLE = [7: '7 Days', 14: '14 Days', 31: 'Month', 90: '3 Months', 182: '6 Months', 365: 'Year', (99999): 'like forever']
+    static final int PAGE_LENGTH = 7
     FeedService feedService
     EntriesService entriesService
 
     static defaultAction = 'recent'
 
-    def recent(Integer days) {
-        days = Math.min(days ?: EntriesService.DEFAULT_DAYS_TO_REPORT, 60) // default to 7 days and max 60 days
-
-        def entries = entriesService.getRecentEntries(days)
-
-        [entries:    entries,
-         pageTitle: "Recent Entries (Last ${days} Days)",
-         thumbnails: grailsApplication.config.thumbnail.enabled]
+    def recent() {
+        [
+                pageTitle: "Recent Entries",
+        ]
     }
 
-    def endless() {
-        params.offset = 0
-        params.max = 3
-        def entries = entriesService.getEndlessEntries(params)
+    def recentNext(Integer page) {
+        def entries = entriesService.getRecentEntries(PAGE_LENGTH, PAGE_LENGTH * (page ?: 0))
+        render template: 'entries', model: [entries   : entries,
+                                            thumbnails: grailsApplication.config.thumbnail.enabled]
 
-        [entries: entriesService.limitEntries(entries),
-         thumbnails: grailsApplication.config.thumbnail.enabled]
     }
 
-    def endlessNext() {
-
-        params.max = 3
-        def entries = entriesService.getEndlessEntries(params)
-        //TODO return fragment
-        render template: 'entry',
-               model: [
-                   entries: entriesService.limitEntries(entries),
-                   thumbnails: grailsApplication.config.thumbnail.enabled]
-    }
-
-    def popular() {
-
-        def entries = entriesService.getPopularEntries()
-
+    def popular(Integer page, Integer days) {
         render view: 'recent',
-               model: [entries: entries,
-                       pageTitle: 'Popular Entries (Last 7 Days)',
-                       thumbnails: grailsApplication.config.thumbnail.enabled]
+                model: [
+                        days          : days ?: 7,
+                        selectableDays: DAYS_AVAILABLE,
+                        pageTitle     : "Popular Entries (Last ${DAYS_AVAILABLE[days]})"]
+    }
+
+    def popularNext(Integer page, Integer days) {
+        def entries = entriesService.getPopularEntries(days ?: 7, PAGE_LENGTH, PAGE_LENGTH * (page ?: 0))
+        if (entries.size() == 0) {
+            response.setStatus(HttpServletResponse.SC_NO_CONTENT)
+        }
+        render template: 'entries', model: [entries   : entries,
+                                            thumbnails: grailsApplication.config.thumbnail.enabled]
     }
 
     def lists() {
