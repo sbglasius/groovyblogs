@@ -1,3 +1,4 @@
+import com.commsen.jwebthumb.WebThumbService
 import org.groovyblogs.AuthenticationSuccessEventListener
 import org.groovyblogs.GroovyBlogsUserDetailsService
 import org.springframework.cache.ehcache.EhCacheFactoryBean
@@ -54,5 +55,6 @@ beans = {
 
     authenticationSuccessEventListener(AuthenticationSuccessEventListener)
     userDetailsService(GroovyBlogsUserDetailsService)
+    webThumbService(WebThumbService, application.config.jwebthumb.apiKey)
 
 }

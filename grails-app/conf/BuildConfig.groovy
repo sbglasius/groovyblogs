@@ -30,6 +30,7 @@ grails.project.dependency.resolution = {
         compile 'com.google.code.maven-play-plugin.spy:memcached:2.4.2'
 
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
+        compile 'com.commsen:jwebthumb:0.3'
     }
 
     plugins {
@@ -55,6 +56,7 @@ grails.project.dependency.resolution = {
         compile ":executor:0.3"
         compile ":i18n-enums:1.0.7"
         compile ":recaptcha:0.6.9"
+        compile ":platform-core:1.0.0"
 
 //        runtime ":hibernate4:4.3.5.5"
         runtime ":hibernate:3.6.10.18"

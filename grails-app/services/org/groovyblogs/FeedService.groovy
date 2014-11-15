@@ -11,6 +11,7 @@ import net.sf.ehcache.Element
 import org.apache.commons.httpclient.HttpClient
 import org.apache.commons.httpclient.methods.GetMethod
 import org.apache.commons.httpclient.params.HttpClientParams
+import org.grails.plugin.platform.events.EventMessage
 
 @Transactional()
 class FeedService {
@@ -25,6 +26,7 @@ class FeedService {
     def mailService
     def groovyPageRenderer
     def grailsLinkGenerator
+    def grailsEventsPublisher
 
     // Returns the HTML for the supplied URL
     @NotTransactional
@@ -133,35 +135,33 @@ class FeedService {
 
                 //log.debug("Creating entry with title [$entry.title] and link [$entry.link]")
 
-                BlogEntry be = new BlogEntry(title: entry.title, link: entry.link,
+                BlogEntry blogEntry = new BlogEntry(title: entry.title, link: entry.link,
                         description: entry.description,
                         language: entry.language,
                         hash: entry.summary.encodeAsMD5())
 
-                if (be.isGroovyRelated()) {
+                if (blogEntry.isGroovyRelated()) {
                     //log.info("Added new entry: $be.title")
 
                     try {
-                        blog.addToBlogEntries(be)
-                        if (!be.validate()) {
-                            log.warn("Validation failed updating blog entry [$be.title]")
-                            be.errors.allErrors.each {
+                        blog.addToBlogEntries(blogEntry)
+                        if (!blogEntry.validate()) {
+                            log.warn("Validation failed updating blog entry [$blogEntry.title]")
+                            blogEntry.errors.allErrors.each {
                                 log.warn(it)
                             }
                         } else {
-                            be.save(flush: true)
+                            blogEntry.save(flush: true)
                             blog.save(flush: true)
 
                             try {
 
                                 if (config.twitter.enabled) {
-                                    twitterService.sendTweet("${be.title} -- ${be.link} -- ${blog.title}")
+                                    twitterService.sendTweet("${blogEntry.title} -- ${blogEntry.link} -- ${blog.title}")
                                 }
 
                                 if (config.thumbnail.enabled) {
-                                    // be.thumbnail = thumbnailService.fetchThumbnail(be.link)
-                                    // log.debug "Adding to pending thumbs cache: ${be?.link}"
-                                    //pendingCache.put( new Element(be.link, be.id))
+                                    grailsEventsPublisher.event(new EventMessage('requestThumbnail', blogEntry,'thumbnail'))
                                 }
                             } catch (e) {
                                 log.debug "Error during thumbnail collection", e
@@ -171,9 +171,9 @@ class FeedService {
                         log.error t.message, t
                     }
 
-                    log.debug("Saved entry with title [$be.title]")
+                    log.debug("Saved entry with title [$blogEntry.title]")
                 } else {
-                    log.debug("Ignoring non-groovy blog entry: $be.title")
+                    log.debug("Ignoring non-groovy blog entry: $blogEntry.title")
                 }
             }
         }

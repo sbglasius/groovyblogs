@@ -11,23 +11,20 @@ class ThumbnailController {
 
     static defaultAction = 'show'
 
-    private void writeImage(String id, String imgSize) {
-
-        byte[] b = thumbnailService.getFile(id, imgSize)
-        if(b?.size() > 10) {
-            response.setContentType("image/jpeg")
-            response.setContentLength(b.length)
-            response.getOutputStream().write(b)
+    def show(BlogEntry blogEntry) {
+        def image = thumbnailService.serveThumbnail(blogEntry)
+        if (image) {
+            response.contentType = "image/jpeg"
+            response.contentLength = image.length
+            response.outputStream.write(image)
         } else {
-            response.sendError HttpServletResponse.SC_NOT_FOUND
+            response.status = HttpServletResponse.SC_NOT_FOUND
         }
     }
 
-    def show(String id) {
-        writeImage(id,  "small")
-    }
-
-    def showLarge(String id) {
-        writeImage(id, "large")
+    def callback(String id, String key) {
+        log.debug("Got callback for $key with $params")
+        thumbnailService.processThumbnail(id, key)
+        response.status = HttpServletResponse.SC_NOT_FOUND
     }
 }

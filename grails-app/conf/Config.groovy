@@ -65,7 +65,7 @@ grails {
 grails.web.disable.multipart = false
 
 thumbnail {
-    enabled = true
+    enabled = false
     // user = your_user_id
     // apiKey = your_api_key
     endpointurl = "http://webthumb.bluga.net/easythumb.php"
@@ -217,7 +217,7 @@ environments {
     development {
         grails.mail.port = com.icegreen.greenmail.util.ServerSetupTest.SMTP.port
         quartz {
-            autoStartup = false
+            autoStartup = true
         }
     }
     test {

@@ -1,111 +1,98 @@
 package org.groovyblogs
-
-import java.awt.Graphics2D
-import java.awt.geom.AffineTransform
-import java.awt.image.BufferedImage
-import java.text.SimpleDateFormat
-
-import javax.imageio.ImageIO
-
+import com.commsen.jwebthumb.WebThumbFetchRequest
+import com.commsen.jwebthumb.WebThumbJob
+import com.commsen.jwebthumb.WebThumbRequest
+import grails.events.Listener
 import net.sf.ehcache.Ehcache
 import net.sf.ehcache.Element
-
-import org.apache.commons.httpclient.HttpClient
-import org.apache.commons.httpclient.NameValuePair
-import org.apache.commons.httpclient.methods.GetMethod
-
+import org.grails.plugin.platform.events.EventMessage
+import org.springframework.beans.factory.InitializingBean
 /**
  * @author Glen Smith
  */
-class ThumbnailService {
+class ThumbnailService implements InitializingBean {
 
     def grailsApplication
-    def thumbCache
+    def webThumbService
+    def grailsEventsPublisher
+    def grailsLinkGenerator
+
     Ehcache pendingCache
+    private File root
 
-    void fetchThumbnailsToCache(long id, String url) {
+    @Listener(namespace = 'thumbnail')
+    void requestThumbnail(BlogEntry blogEntry) {
+        def key = blogEntry.title.encodeAsMD5()
+        if(pendingCache.get(key)) {
+            return
+        }
+        log.debug("Requesting thumbnail for blogEntry: $blogEntry")
 
-        byte[] small = fetchThumbnail(url, "medium")
-        String smallCacheEntry = "${id}-small"
-        thumbCache.put(new Element(smallCacheEntry, small))
+        def url = grailsApplication.config.jwebthumb.callbackUrl ?: grailsLinkGenerator.link(controller: 'thumbnail', action: 'callback', absolute: true)
 
-        byte[] large = fetchThumbnail(url, "medium2")
-        String largeCacheEntry = "${id}-large"
-        thumbCache.put(new Element(largeCacheEntry, large))
+        WebThumbRequest request = new WebThumbRequest(blogEntry.link, WebThumbRequest.OutputType.jpg)
+        request.notify = "$url?key=${key}"
+
+        WebThumbJob job = webThumbService.sendRequest(request)
+        pendingCache.put(new Element(key, new ThumbRequest(jobId: job.id, blogEntry: blogEntry)))
     }
 
-    byte[] fetchThumbnail(String url, String imgSize = "large") {
-
-        log.debug "Fetching remote thumbnail for ${url} of size ${imgSize}"
-        def sdf = new SimpleDateFormat("yyyyMMdd")
-        sdf.timeZone = TimeZone.getTimeZone("GMT")
-        def date = sdf.format(new Date())
-
-        def user = SystemConfig.findBySettingName("thumbnail.user")?.settingValue // Holders.config.thumbnail.user
-        def apiKey = SystemConfig.findBySettingName("thumbnail.apiKey")?.settingValue // Holders.config.thumbnail.apiKey
-        log.debug("Setting date to ${date}")
-
-        def stringToHash = "${date}${url}${apiKey}"
-        def hash = stringToHash.encodeAsMD5()
-        log.debug("Hash is ${hash} of ${date}${url}${apiKey}")
-
-        GetMethod get = new GetMethod(grailsApplication.config.thumbnail.endpointurl)
-        NameValuePair[] nvp = [
-                new NameValuePair("user", user.toString()),
-                new NameValuePair("url", url.toString()),
-                new NameValuePair("size", imgSize.toString()),
-                new NameValuePair("cache", "7"),
-                new NameValuePair("hash", hash.toString())
-        ]
-        get.setQueryString(nvp)
-
-        HttpClient httpclient = new HttpClient()
-
-        if (grailsApplication.config.http.useproxy) {
-            def hostConfig = httpclient.getHostConfiguration()
-            hostConfig.setProxy(grailsApplication.config.http.host, grailsApplication.config.http.port as int)
-            log.warn("Setting proxy to [$grailsApplication.config.http.host]")
+    void processThumbnail(String jobId, String key) {
+        def thumbRequest = pendingCache.get(key)?.value as ThumbRequest
+        if(thumbRequest?.jobId != jobId) {
+            log.info("Discarding request for jobId: $jobId")
+            pendingCache.remove(key)
+            return
         }
+        def blogEntry = thumbRequest.blogEntry
+        log.debug("Processing thumbnail callback for $blogEntry")
 
-        httpclient.executeMethod(get)
-        byte[] image = get.getResponseBody(1024 * 100)
-        log.debug "Fetch of ${url} complete"
-        return image
+        WebThumbFetchRequest fetchRequest = new WebThumbFetchRequest(jobId, WebThumbFetchRequest.Size.medium2)
+        def image = webThumbService.fetch(fetchRequest)
+        store(blogEntry, image)
+        pendingCache.remove(key)
     }
 
-    // image scaling stuff from http://www.velocityreviews.com/forums/t148931-how-to-resize-a-jpg-image-file.html
-    byte[] scale(byte[] srcFile, int destWidth, int destHeight) throws IOException {
-        BufferedImage src = ImageIO.read(new ByteArrayInputStream(srcFile))
-        BufferedImage dest = new BufferedImage(destWidth, destHeight, BufferedImage.TYPE_INT_RGB)
-        Graphics2D g = dest.createGraphics()
-        AffineTransform at = AffineTransform.getScaleInstance(
-                (double) destWidth / src.getWidth(),
-                (double) destHeight / src.getHeight())
-        g.drawRenderedImage(src, at)
-        ByteArrayOutputStream baos = new ByteArrayOutputStream()
-        ImageIO.write(dest, "JPG", baos)
-        return baos.toByteArray()
+
+    byte[] serveThumbnail(BlogEntry blogEntry) {
+        if(!blogEntry) {
+            return null
+        }
+        def thumb = retrieve(blogEntry)
+        if(!thumb) {
+            grailsEventsPublisher.event(new EventMessage('requestThumbnail', blogEntry, 'thumbnail'))
+            return null
+        }
+        log.trace("Serving image for blogEntry: $blogEntry")
+        return thumb
     }
 
-    byte[] getFile(String id, String thumbSize) {
+    private void store(BlogEntry blogEntry, byte[] bytes) {
+        File file = getThumbFile(blogEntry)
+        file.bytes = bytes
+    }
 
-        if (!grailsApplication.config.thumbnail.enabled) {
-            log.debug("Thumbnail service disabled")
-            return new byte[0]
-        }
+    private byte[] retrieve(BlogEntry blogEntry) {
+        File file = getThumbFile(blogEntry)
+        return file.exists() ? file.bytes : null
 
+    }
 
-        String cacheEntry = "${id}-${thumbSize}"
-        byte[] t = thumbCache.get(cacheEntry)?.value
-        if (t && t.length > 10) {  // Could be "Bad Hash"
-            return t
-        }
+    private File getThumbFile(BlogEntry blogEntry) {
+        def fileName = "${blogEntry.title.encodeAsMD5()}.jpg"
+        File file = new File(root, fileName)
+        return file
+    }
 
-        BlogEntry entry = BlogEntry.get(id)
-        //log.debug entry.dump()
-        pendingCache.put(new Element(entry.link, entry.id))
+    @Override
+    void afterPropertiesSet() throws Exception {
+        root = new File(grailsApplication.config.thumbcache)
+        root.mkdirs()
+        log.info("Thumbs root set to $root.absolutePath")
+    }
 
-        // thumbCache.put(new Element(cacheEntry, image))
-        return null
+    private static class ThumbRequest implements Serializable{
+        String jobId
+        BlogEntry blogEntry
     }
 }
