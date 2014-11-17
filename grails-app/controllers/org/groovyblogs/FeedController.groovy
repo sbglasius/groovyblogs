@@ -1,13 +1,12 @@
 package org.groovyblogs
 
+import com.rometools.rome.feed.synd.SyndContentImpl
+import com.rometools.rome.feed.synd.SyndEntryImpl
+import com.rometools.rome.feed.synd.SyndFeed
+import com.rometools.rome.feed.synd.SyndFeedImpl
+import com.rometools.rome.io.SyndFeedOutput
 import grails.plugin.springsecurity.annotation.Secured
 import net.sf.ehcache.Element
-
-import com.sun.syndication.feed.synd.SyndContentImpl
-import com.sun.syndication.feed.synd.SyndEntryImpl
-import com.sun.syndication.feed.synd.SyndFeed
-import com.sun.syndication.feed.synd.SyndFeedImpl
-import com.sun.syndication.io.SyndFeedOutput
 
 @Secured(['permitAll'])
 class FeedController {

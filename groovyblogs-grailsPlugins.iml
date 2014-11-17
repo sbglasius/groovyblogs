@@ -170,8 +170,6 @@
           <root url="jar://$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.2/commons-codec-1.2.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/jdom/jdom/1.0/jdom-1.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/rome/rome/1.0/rome-1.0.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/net/homeip/yusuke/twitter4j/2.0.10/twitter4j-2.0.10.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/jfree/jcommon/1.0.8/jcommon-1.0.8.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/jfree/jfreechart/1.0.4/jfreechart-1.0.4.jar!/" />
@@ -222,6 +220,9 @@
           <root url="jar://$MAVEN_REPOSITORY$/stax/stax-api/1.0.1/stax-api-1.0.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/simpleframework/simple-xml/2.3.5/simple-xml-2.3.5.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/com/commsen/jwebthumb/0.3/jwebthumb-0.3.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/jdom/jdom/2.0.2/jdom-2.0.2.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/rometools/rome-utils/1.5.0/rome-utils-1.5.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/rometools/rome/1.5.0/rome-1.5.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
@@ -229,6 +230,7 @@
           <root url="jar://$USER_HOME$/.ideaLibSources/rome-1.0-sources.jar!/" />
           <root url="jar://$USER_HOME$/.ideaLibSources/tomcat-embed-core-7.0.55-sources.jar!/" />
           <root url="jar://$USER_HOME$/.ideaLibSources/jwebthumb-0.3-sources.jar!/" />
+          <root url="jar://$USER_HOME$/.ideaLibSources/rome-1.5.0-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>

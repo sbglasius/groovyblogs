@@ -25,7 +25,7 @@ grails.project.dependency.resolution = {
 
         compile 'jfree:jfreechart:1.0.4'
         compile 'net.homeip.yusuke:twitter4j:2.0.10'
-        compile 'rome:rome:1.0'
+        compile 'com.rometools:rome:1.5.0'
         compile 'commons-httpclient:commons-httpclient:3.1'
         compile 'com.google.code.maven-play-plugin.spy:memcached:2.4.2'
 

@@ -1,16 +1,11 @@
 package org.groovyblogs
-
-import com.sun.syndication.feed.synd.SyndEntry
-import com.sun.syndication.feed.synd.SyndFeed
-import com.sun.syndication.io.ParsingFeedException
-import com.sun.syndication.io.SyndFeedInput
-import com.sun.syndication.io.XmlReader
+import com.rometools.rome.feed.synd.SyndEntry
+import com.rometools.rome.feed.synd.SyndFeed
+import com.rometools.rome.io.SyndFeedInput
+import com.rometools.rome.io.XmlReader
 import grails.transaction.NotTransactional
 import grails.transaction.Transactional
 import net.sf.ehcache.Element
-import org.apache.commons.httpclient.HttpClient
-import org.apache.commons.httpclient.methods.GetMethod
-import org.apache.commons.httpclient.params.HttpClientParams
 import org.grails.plugin.platform.events.EventMessage
 
 @Transactional()
@@ -30,48 +25,23 @@ class FeedService {
 
     // Returns the HTML for the supplied URL
     @NotTransactional
-    String getHtmlForUrl(url) {
+    String getHtmlForUrl(String url) {
 
         log.info("Trying to fetch [$url]")
-
-        def client = new HttpClient()
-        def clientParams = client.getParams()
-        clientParams.setParameter(HttpClientParams.HTTP_CONTENT_CHARSET, "UTF-8")
-
-        if (config.http.useproxy) {
-            def hostConfig = client.getHostConfiguration()
-            hostConfig.setProxy(config.http.host, config.http.port as int)
-            log.warn("Setting proxy to [$config.http.host]")
-        }
-
-        if (config.http.useragent) {
-            clientParams.setParameter(HttpClientParams.USER_AGENT, config.http.useragent)
-        }
-
-        if (config.http.timeout) {
-            clientParams.setParameter(HttpClientParams.SO_TIMEOUT, config.http.timeout)
-        }
-
-        def mthd = new GetMethod(url)
-
-        def statusCode = client.executeMethod(mthd)
-        def responseBody = mthd.getResponseBody()
-        mthd.releaseConnection()
+        def html = url.toURL().getText('UTF-8')
 
         log.debug("Fetched [$url] successfully")
-
-        new String(responseBody)
+        return html
     }
 
     // takes a URL and returns ROME feed info
     @NotTransactional
     FeedInfo getFeedInfo(String feedUrlStr, boolean translate = false) {
         try {
-            def feedStr = getHtmlForUrl(feedUrlStr)
             def syndFeedInput = new SyndFeedInput()
             syndFeedInput.xmlHealerOn = true
-            def bais = new ByteArrayInputStream(feedStr.getBytes("UTF-8"))
-            def feedReader = new XmlReader(bais, true,'UTF-8')
+            def url = feedUrlStr.toURL().newInputStream()
+            def feedReader = new XmlReader(url, true,'UTF-8')
             SyndFeed syndFeed = syndFeedInput.build(feedReader)
             def feedInfo = new FeedInfo(feedUrl: feedUrlStr, title: syndFeed.title,
                     description: syndFeed.description ?: "",
@@ -323,7 +293,7 @@ class FeedService {
         tweetCache.get("tweetEntries")?.value ?: updateTweets()
     }
 
-    @Transactional(noRollbackFor = [ParsingFeedException])
+    @Transactional()
     int checkPendingBlogs(List<Blog> blogs) {
 
         Map<Blog, FeedInfo> feedInfos = blogs.collectEntries { Blog it ->
