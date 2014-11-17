@@ -5,11 +5,9 @@ class BlogEntry {
     String title
     String description
     String link
-    Date dateAuthored = new Date()
     Date dateAdded = new Date()
     Integer hitCount = 0
     String language
-    String info
     String hash
     SortedSet<Date> visits
 
@@ -20,7 +18,7 @@ class BlogEntry {
     }
 
     // info is used for sticking stuff like "Only showing 3 entries for this user"
-    static transients = ["info"]
+    static transients = ["groovyRelated"]
 
     static belongsTo = [blog: Blog]
 
@@ -47,7 +45,4 @@ class BlogEntry {
         }
     }
 
-    String toThumbnailPath() {
-        return dateAdded.format('yyyy/MM/dd') + "/"
-    }
 }

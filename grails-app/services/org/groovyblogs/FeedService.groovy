@@ -66,57 +66,64 @@ class FeedService {
     // takes a URL and returns ROME feed info
     @NotTransactional
     FeedInfo getFeedInfo(String feedUrlStr, boolean translate = false) {
-        def feedStr = getHtmlForUrl(feedUrlStr)
-        def syndFeedInput = new SyndFeedInput()
-        def bais = new ByteArrayInputStream(feedStr.getBytes("UTF-8"))
-        def feedReader = new XmlReader(bais, true)
-        SyndFeed syndFeed = syndFeedInput.build(feedReader)
-        def feedInfo = new FeedInfo(feedUrl: feedUrlStr, title: syndFeed.title,
-                description: syndFeed.description ?: "",
-                author: syndFeed.author, type: syndFeed.feedType)
-        for (SyndEntry entry in syndFeed.entries) {
-            String title = entry.title
-            String description = entry.description?.value
-            if (!description) {  // mustn't be rss... could be atom
-                description = entry.contents[0]?.value
-            }
-            // trim to 4k-ish size for db storage
-            if (description?.length() > 4000) {
-                description = description[0..3999]
-            }
-            String link = entry.link
-            Date publishedDate = entry.publishedDate
-            def summary
-            if (description) {
-                // strip html for the summary, then truncate
-                summary = description.replaceAll("</?[^>]+>", "")
-                summary = summary.length() > 200 ? summary[0..199] : summary
-            }
+        try {
+            def feedStr = getHtmlForUrl(feedUrlStr)
+            def syndFeedInput = new SyndFeedInput()
+            syndFeedInput.xmlHealerOn = true
+            def bais = new ByteArrayInputStream(feedStr.getBytes("UTF-8"))
+            def feedReader = new XmlReader(bais, true,'UTF-8')
+            SyndFeed syndFeed = syndFeedInput.build(feedReader)
+            def feedInfo = new FeedInfo(feedUrl: feedUrlStr, title: syndFeed.title,
+                    description: syndFeed.description ?: "",
+                    author: syndFeed.author, type: syndFeed.feedType)
+            for (SyndEntry entry in syndFeed.entries) {
+                String title = entry.title
+                String description = entry.description?.value
+                if (!description) {  // mustn't be rss... could be atom
+                    description = entry.contents[0]?.value
+                }
+                // trim to 4k-ish size for db storage
+                if (description?.length() > 4000) {
+                    description = description[0..3999]
+                }
+                String link = entry.link
+                Date publishedDate = entry.publishedDate
+                def summary
+                if (description) {
+                    // strip html for the summary, then truncate
+                    summary = description.replaceAll("</?[^>]+>", "")
+                    summary = summary.length() > 200 ? summary[0..199] : summary
+                }
 
-            def feedEntry = new FeedEntry(title: title, link: link, publishedDate: publishedDate,
-                    description: description ?: "",
-                    summary: summary ?: "",
-                    author: entry.author ?: "")
+                def feedEntry = new FeedEntry(title: title, link: link, publishedDate: publishedDate,
+                        description: description ?: "",
+                        summary: summary ?: "",
+                        author: entry.author ?: "")
 
-            //TODO ignore stuff older than X days
-            def trimEntriesOlderThanXdays = config.feeds.ignoreFeedEntriesOlderThan
-            if (trimEntriesOlderThanXdays) {
-                def trimTime = new Date() - trimEntriesOlderThanXdays // X days ago
-                if (publishedDate && publishedDate < trimTime) {
-                    log.debug("Skipping old entry: [$title] from [$publishedDate]")
-                    feedEntry = null // too old to include
+                //TODO ignore stuff older than X days
+                def trimEntriesOlderThanXdays = config.feeds.ignoreFeedEntriesOlderThan
+                if (trimEntriesOlderThanXdays) {
+                    def trimTime = new Date() - trimEntriesOlderThanXdays // X days ago
+                    if (publishedDate && publishedDate < trimTime) {
+                        log.debug("Skipping old entry: [$title] from [$publishedDate]")
+                        feedEntry = null // too old to include
+                    }
+                }
+
+                if (feedEntry) {
+                    if (translate) {
+                        feedEntry.language = translateService.getLanguage(description)
+                    }
+                    log.debug("Read entry with title [$title] and link [$link]")
+                    feedInfo.entries.add(feedEntry)
                 }
             }
-
-            if (feedEntry) {
-                if (translate) {
-                    feedEntry.language = translateService.getLanguage(description)
-                }
-                log.debug("Read entry with title [$title] and link [$link]")
-                feedInfo.entries.add(feedEntry)
-            }
+            return feedInfo
+        } catch (e) {
+            log.warn("Error parsing ${feedUrlStr}: ${e.message}",e)
+            return null
         }
-        return feedInfo
+
     }
 
     void updateFeed(Blog blog, FeedInfo fi) {
@@ -142,29 +149,23 @@ class FeedService {
 
                 if (blogEntry.isGroovyRelated()) {
                     //log.info("Added new entry: $be.title")
-
                     try {
-                        blog.addToBlogEntries(blogEntry)
                         if (!blogEntry.validate()) {
                             log.warn("Validation failed updating blog entry [$blogEntry.title]")
                             blogEntry.errors.allErrors.each {
                                 log.warn(it)
                             }
                         } else {
+                            blog.addToBlogEntries(blogEntry)
                             blogEntry.save(flush: true)
                             blog.save(flush: true)
 
-                            try {
+                            if (config.twitter.enabled) {
+                                twitterService.sendTweet("${blogEntry.title} -- ${blogEntry.link} -- ${blog.title}")
+                            }
 
-                                if (config.twitter.enabled) {
-                                    twitterService.sendTweet("${blogEntry.title} -- ${blogEntry.link} -- ${blog.title}")
-                                }
-
-                                if (config.thumbnail.enabled) {
-                                    grailsEventsPublisher.event(new EventMessage('requestThumbnail', blogEntry,'thumbnail'))
-                                }
-                            } catch (e) {
-                                log.debug "Error during thumbnail collection", e
+                            if (config.thumbnail.enabled) {
+                                grailsEventsPublisher.event(new EventMessage('requestThumbnail', blogEntry, 'thumbnail'))
                             }
                         }
                     } catch (t) {
@@ -196,16 +197,14 @@ class FeedService {
     }
 
     void updateFeed(Blog blog) {
-
         log.info("Now polling: [$blog.title]")
-        FeedInfo fi
-        try {
-            fi = getFeedInfo(blog.feedUrl, config.translate.enabled)
-        } catch (e) {
-            log.warn("Could not parse feed [$blog.feedUrl]", e)
+        FeedInfo fi = getFeedInfo(blog.feedUrl, config.translate.enabled)
+        if (fi) {
+            updateFeed(blog, fi)
+        } else {
+            log.warn("Could not parse feed [$blog.feedUrl]: $e.message")
             markBlogWithError(blog, e)
         }
-        updateFeed(blog, fi)
     }
 
     protected ConfigObject getConfig() {
@@ -231,7 +230,7 @@ class FeedService {
                 updateFeed(blog)
                 markBlogUpdateSuccess(blog)
             } catch (e) {
-                log.warn("FeedService failed to update $blog", e)
+                log.warn("FeedService failed to update $blog: $e.message")
                 markBlogWithError(blog, e)
             }
         }
@@ -265,27 +264,29 @@ class FeedService {
 
             log.info("Updating list [$name] from [$url]")
             def feed = getFeedInfo(url, false)
+            if (feed) {
+                Blog listBlog = new Blog(title: feed.title)
 
-            Blog listBlog = new Blog(title: feed.title)
+                def filter = new Date() - 1 // 1 days ago
 
-            def filter = new Date() - 1 // 1 days ago
-
-            // Add 8 hours from Nabble feed time...
-            def rightDates = feed.entries.collect { entry ->
-                def diff = entry.publishedDate.time + 1000 * 60 * 60 * 7
-                entry.publishedDate = new Date(diff)
-                return entry
+                // Add 8 hours from Nabble feed time...
+                def rightDates = feed.entries.collect { entry ->
+                    def diff = entry.publishedDate.time + 1000 * 60 * 60 * 7
+                    entry.publishedDate = new Date(diff)
+                    return entry
+                }
+                def feedEntries = rightDates.findAll { entry -> entry.publishedDate.after(filter) }
+                log.info "Filtered original entries from ${feed.entries.size()} to ${feedEntries.size()}"
+                feedEntries.each { entry ->
+                    entry.info = name
+                    allEntries << entry
+                }
             }
-            def feedEntries = rightDates.findAll { entry -> entry.publishedDate.after(filter) }
-            log.info "Filtered original entries from ${feed.entries.size()} to ${feedEntries.size()}"
-            feedEntries.each { entry ->
-                entry.info = name
-                allEntries << entry
-            }
+
         }
 
         // sort in date desc
-        allEntries = allEntries.sort { e1, e2 -> e2.publishedDate <=> e1.publishedDate }
+        allEntries = allEntries.sort { it.publishedDate }
 
         log.debug("Putting to list cache: ${allEntries.size()}")
 
@@ -304,17 +305,18 @@ class FeedService {
         }
 
         def tweetFeed = getFeedInfo(config.tweets.url, false)
+        if (tweetFeed) {
+            def allEntries = tweetFeed.entries.collect { entry ->
+                // entry.description = entry.description.replaceFirst("[^:]+:\\s*", "")
+                entry
+            }
 
-        def allEntries = tweetFeed.entries.collect { entry ->
-            // entry.description = entry.description.replaceFirst("[^:]+:\\s*", "")
-            entry
+            log.debug("Putting to tweet cache: ${allEntries.size()}")
+
+            tweetCache.put(new Element("tweetEntries", allEntries))
+
+            return allEntries
         }
-
-        log.debug("Putting to tweet cache: ${allEntries.size()}")
-
-        tweetCache.put(new Element("tweetEntries", allEntries))
-
-        return allEntries
     }
 
     def getCachedTweetEntries() {
@@ -356,13 +358,14 @@ class FeedService {
      */
     Blog testFeed(String feedUrl) {
         def feedInfo = getFeedInfo(feedUrl)
+        if (feedInfo) {
+            def blog = createBlogFromFeedInfo(feedInfo)
+            feedInfo.entries.each {
+                blog.addToBlogEntries(title: it.title, description: it.description)
+            }
 
-        def blog = createBlogFromFeedInfo(feedInfo)
-        feedInfo.entries.each {
-            blog.addToBlogEntries(title: it.title, description: it.description)
+            return blog
         }
-
-        return blog
     }
 
     /**
@@ -373,8 +376,10 @@ class FeedService {
      */
     Blog createBlog(String feedUrl, User account = null) {
         def feedInfo = getFeedInfo(feedUrl)
+        if (feedInfo) {
+            return createBlogFromFeedInfo(feedInfo, account)
 
-        return createBlogFromFeedInfo(feedInfo, account)
+        }
     }
 
     private Blog createBlogFromFeedInfo(FeedInfo feedInfo, User account = null) {

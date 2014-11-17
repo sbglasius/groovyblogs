@@ -104,12 +104,11 @@ class AccountController {
         if (feedUrl) {
 
             Blog blog = feedService.createBlog(feedUrl, currentUser)
-            if (blog.validate() && feedService.saveBlog(blog)) {
+            if (blog?.validate() && feedService?.saveBlog(blog)) {
                 flash.message = "Successfully added new feed: ${blog.title}. ${blog.status != BlogStatus.ACTIVE ? 'Your blog needs moderation before it becomes active.' : ''}"
             } else {
-                flash.message = "Error adding feed. ${blog.errors.hasFieldErrors('feedUrl') ? 'This feed already exists in Groovy Blogs' : ''}"
+                flash.message = "Error adding feed. ${blog?.errors?.hasFieldErrors('feedUrl') ? 'This feed already exists in Groovy Blogs' : ''}"
             }
-
 
         } else {
             flash.message = "Could not determine feed url"
