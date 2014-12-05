@@ -26,7 +26,7 @@ grails.project.dependency.resolution = {
         compile 'jfree:jfreechart:1.0.4'
         compile 'net.homeip.yusuke:twitter4j:2.0.10'
         compile 'com.rometools:rome:1.5.0'
-        compile 'commons-httpclient:commons-httpclient:3.1'
+//        compile 'commons-httpclient:commons-httpclient:3.1'
         compile 'com.google.code.maven-play-plugin.spy:memcached:2.4.2'
 
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
@@ -56,6 +56,7 @@ grails.project.dependency.resolution = {
         compile ":i18n-enums:1.0.7"
         compile ":recaptcha:0.6.9"
         compile ":platform-core:1.0.0"
+        compile ":rest-client-builder:2.0.3"
 
 //        runtime ":hibernate4:4.3.5.5"
         runtime ":hibernate:3.6.10.18"

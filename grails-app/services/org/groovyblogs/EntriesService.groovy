@@ -1,6 +1,9 @@
 package org.groovyblogs
 import grails.plugin.cache.Cacheable
+import grails.plugins.rest.client.RestBuilder
+import grails.transaction.NotTransactional
 import grails.transaction.Transactional
+import org.springframework.http.HttpStatus
 
 @Transactional(readOnly = true)
 class EntriesService {
@@ -36,5 +39,13 @@ class EntriesService {
             blogEntry.save(failOnError: true)
         }
         return blogEntry
+    }
+
+    @NotTransactional
+    boolean checkBlogEntrySource(BlogEntry blogEntry) {
+        def rest = new RestBuilder()
+        def resp = rest.get(blogEntry.link)
+        println resp.statusCode
+        return resp.statusCode == HttpStatus.OK
     }
 }

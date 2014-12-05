@@ -17,7 +17,7 @@ environments {
     development {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:mysql://localhost:3306/groovyblogs-dev"
+            url = "jdbc:mysql://localhost:3306/groovyblogs_dev"
             driverClassName = "com.mysql.jdbc.Driver"
             dialect = MySQL5InnoDBDialect
             username = "root"
