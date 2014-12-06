@@ -68,7 +68,6 @@ class EntriesService {
         def resp = rest.head(url)
         if(resp.statusCode in [HttpStatus.TEMPORARY_REDIRECT, HttpStatus.MOVED_PERMANENTLY] && resp.headers['Location']) {
             String redirectUrl = resp.headers['Location'].first()
-            log.debug("Follow redirect from $url to $redirectUrl")
             resp = followUrl(redirectUrl)
         }
         resp

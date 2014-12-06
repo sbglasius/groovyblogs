@@ -122,6 +122,11 @@ translate {
 
 
 }
+environments {
+    development {
+        http.usefeedburner = false
+    }
+}
 
 // log4j configuration
 log4j = {

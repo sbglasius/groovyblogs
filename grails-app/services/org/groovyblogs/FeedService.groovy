@@ -1,10 +1,16 @@
 package org.groovyblogs
+
+import com.rometools.rome.feed.synd.SyndContentImpl
 import com.rometools.rome.feed.synd.SyndEntry
+import com.rometools.rome.feed.synd.SyndEntryImpl
 import com.rometools.rome.feed.synd.SyndFeed
+import com.rometools.rome.feed.synd.SyndFeedImpl
 import com.rometools.rome.io.SyndFeedInput
+import com.rometools.rome.io.SyndFeedOutput
 import com.rometools.rome.io.XmlReader
 import grails.transaction.NotTransactional
 import grails.transaction.Transactional
+import grails.util.Environment
 import net.sf.ehcache.Element
 import org.grails.plugin.platform.events.EventMessage
 
@@ -13,9 +19,8 @@ class FeedService {
 
     def grailsApplication
     def listCache
-    def pendingCache
+    def feedCache
     def tweetCache
-    ThumbnailService thumbnailService
     TranslateService translateService
     TwitterService twitterService
     def mailService
@@ -390,5 +395,38 @@ class FeedService {
         }
 
         return blog.save(failOnError: true)
+    }
+
+    String getFeedData(feedType) {
+
+        SyndFeed feed = feedCache.get("romeFeed-$feedType")?.value
+
+        if (!feed) {
+            // def blogEntries = BlogEntry.listOrderByDateAdded(max: 30, order: "desc")
+            def aWhileAgo = new Date() - 7 // 7 days ago
+
+            def blogEntries = BlogEntry.findAllByDateAddedGreaterThan(
+                    aWhileAgo, [sort: 'dateAdded', order: "desc"])
+
+            blogEntries = blogEntries.findAll { it.groovyRelated && it.sourceAvailable }
+
+            def feedEntries = blogEntries.collect { blogEntry ->
+                def desc = new SyndContentImpl(type: "text/plain", value: FeedEntry.summarize(blogEntry.description))
+                new SyndEntryImpl(title: blogEntry.title,
+                        link: 'http://www.groovyblogs.org/entries/jump?id=' + blogEntry.id,
+                        publishedDate: blogEntry.dateAdded, description: desc, author: blogEntry.blog.title)
+            }
+            feed = new SyndFeedImpl(feedType: feedType, title: 'GroovyBlogs.org',
+                    link: 'http://www.groovyblogs.org', description: 'groovyblogs.org Recent Entries',
+                    entries: feedEntries)
+
+            feedCache.put(new Element("romeFeed-" + feedType, feed))
+        }
+
+        SyndFeedOutput output = new SyndFeedOutput()
+        new StringWriter().withWriter { writer ->
+            output.output(feed, writer, Environment.current == Environment.DEVELOPMENT)
+            return writer.toString()
+        }
     }
 }
