@@ -10,7 +10,7 @@ class BlogEntry {
     String language
     String hash
     SortedSet<Date> visits
-    int sourceStatus
+    int sourceStatus = 200
     Date sourceStatusDate
 
     static hasMany = [visits: Date]
@@ -39,7 +39,7 @@ class BlogEntry {
         visits cascade: "all-delete-orphan"
     }
 
-    boolean isGroovyRelated() {
+    def getGroovyRelated() {
 
         def keywords = Tag.findAllByApproved(true)*.tag
 

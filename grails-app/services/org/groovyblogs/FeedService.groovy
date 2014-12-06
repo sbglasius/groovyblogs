@@ -120,9 +120,11 @@ class FeedService {
                 BlogEntry blogEntry = new BlogEntry(title: entry.title, link: entry.link,
                         description: entry.description,
                         language: entry.language,
-                        hash: entry.summary.encodeAsMD5())
+                        hash: entry.summary.encodeAsMD5(),
+                        sourceStatus: 200,
+                        sourceStatusDate: new Date())
 
-                if (blogEntry.isGroovyRelated()) {
+                if (blogEntry.groovyRelated) {
                     //log.info("Added new entry: $be.title")
                     try {
                         if (!blogEntry.validate()) {
@@ -157,8 +159,6 @@ class FeedService {
         blog.lastPolled = new Date()
         long nextPollTime = System.currentTimeMillis() + blog.pollFrequency * 60 * 60 * 1000
         blog.nextPoll = new Date(nextPollTime)
-        blog.errorCount = 0
-        blog.lastError = ''
         if (!blog.validate()) {
             log.warn("Validation failed updating blog [$blog.title]")
             blog.errors.allErrors.each {
@@ -176,9 +176,10 @@ class FeedService {
         FeedInfo fi = getFeedInfo(blog.feedUrl, config.translate.enabled)
         if (fi) {
             updateFeed(blog, fi)
+            markBlogUpdateSuccess(blog)
         } else {
-            log.warn("Could not parse feed [$blog.feedUrl]: $e.message")
-            markBlogWithError(blog, e)
+            log.warn("Could not parse feed [$blog.feedUrl]")
+            markBlogWithError(blog)
         }
     }
 
@@ -203,7 +204,6 @@ class FeedService {
         feedsToUpdate.each { blog ->
             try {
                 updateFeed(blog)
-                markBlogUpdateSuccess(blog)
             } catch (Exception e) {
                 log.warn("FeedService failed to update $blog: ${e.message}")
                 markBlogWithError(blog, e)
@@ -213,9 +213,9 @@ class FeedService {
         log.info("FeedService finished polled update")
     }
 
-    def markBlogWithError(Blog blog, Exception e) {
-        blog.lastError = "Error parsing [$blog.feedUrl] $e.message"
-        blog.errorCount++
+    def markBlogWithError(Blog blog, Exception e = null) {
+        blog.lastError = "Error parsing [$blog.feedUrl] ${e?.message ?: ''}"
+        blog.errorCount = blog.errorCount + 1
         log.warn("Encountered error in [${blog.feedUrl}]. This is error number ${blog.errorCount}")
         if (blog.errorCount > (config.groovyblogs.maxErrors ?: 10)) {
             log.info("FeedService marked blog $blog with ERROR")
@@ -318,7 +318,9 @@ class FeedService {
             log.debug("Checking $blog.title")
 
             boolean hasGroovyContent = feedInfo.any { entry ->
-                new BlogEntry(title: entry.title, description: entry.description).isGroovyRelated()
+
+                BlogEntry blogEntry = new BlogEntry(title: entry.title, description: entry.description)
+                blogEntry.groovyRelated
             }
             blog.status = hasGroovyContent ? BlogStatus.LOOKS_GOOD : BlogStatus.NO_GROOVY
             blog.save()

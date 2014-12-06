@@ -17,7 +17,7 @@ class EntriesService {
         log.debug "getRecentEntries(max=$max, offset=$offset)"
         def entries = BlogEntry.list([sort: 'dateAdded', order: "desc", max: max, offset: offset])
 
-        entries.findAll { it.isGroovyRelated() }
+        entries.findAll { it.groovyRelated && it.sourceAvailable }
     }
 
     @Cacheable('popularList')
@@ -29,7 +29,7 @@ class EntriesService {
 
         def entries = BlogEntry.findAllByDateAddedGreaterThanAndHitCountGreaterThan(aWhileAgo, 0, [sort: 'hitCount', order: "desc", max: max, offset: offset])
 
-        entries.findAll { it.isGroovyRelated() }
+        entries.findAll { it.groovyRelated && it.sourceAvailable }
     }
 
     @Transactional
