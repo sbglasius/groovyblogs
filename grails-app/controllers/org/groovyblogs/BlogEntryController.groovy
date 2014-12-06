@@ -7,8 +7,8 @@ class BlogEntryController {
     static scaffold = true
     def entriesService
 
-    def checkBlog(BlogEntry blogEntry) {
-        entriesService.checkBlogEntrySource(blogEntry)
+    def checkBlogs() {
+        entriesService.verifyBlogsEntrySources()
         render('ok')
     }
 }

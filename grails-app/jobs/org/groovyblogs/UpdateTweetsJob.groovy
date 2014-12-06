@@ -3,6 +3,7 @@ package org.groovyblogs
 class UpdateTweetsJob {
 
     FeedService feedService
+    def grailsApplication
 
     def concurrent = false
 
@@ -12,7 +13,9 @@ class UpdateTweetsJob {
     }
 
     void execute() {
-
+        if (!grailsApplication.config.tweets.enable) {
+            return
+        }
         log.info("Starting scheduled tweets check at: ${new Date()}")
 
         feedService.updateTweets()

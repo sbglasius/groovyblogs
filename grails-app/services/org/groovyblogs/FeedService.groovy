@@ -199,8 +199,8 @@ class FeedService {
             try {
                 updateFeed(blog)
                 markBlogUpdateSuccess(blog)
-            } catch (e) {
-                log.warn("FeedService failed to update $blog: $e.message")
+            } catch (Exception e) {
+                log.warn("FeedService failed to update $blog: ${e.message}")
                 markBlogWithError(blog, e)
             }
         }
@@ -211,12 +211,12 @@ class FeedService {
     def markBlogWithError(Blog blog, Exception e) {
         blog.lastError = "Error parsing [$blog.feedUrl] $e.message"
         blog.errorCount++
-        log.warn("Encountered error in [$blog.feedUrl]. This is error number $blog.errorCount")
-        if (blog.errorCount > config.groovyblogs.maxErrors ?: 10) {
+        log.warn("Encountered error in [${blog.feedUrl}]. This is error number ${blog.errorCount}")
+        if (blog.errorCount > (config.groovyblogs.maxErrors ?: 10)) {
             log.info("FeedService marked blog $blog with ERROR")
             blog.status = BlogStatus.ERROR
         }
-        blog.save()
+        blog.save(failOnError: true)
     }
 
     void markBlogUpdateSuccess(Blog blog) {
@@ -224,6 +224,7 @@ class FeedService {
         blog.lastError = ''
         blog.status = BlogStatus.ACTIVE
         blog.errorCount = 0
+        blog.save()
     }
 
     def updateLists() {

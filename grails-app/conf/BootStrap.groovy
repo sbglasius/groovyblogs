@@ -1,7 +1,10 @@
 import grails.util.Environment
+import groovy.sql.Sql
 import org.groovyblogs.*
 
 class BootStrap {
+    def grailsApplication
+    def dataSource
 
     private static final List<String> TAGS = [
         'groovy', 'grails', 'griffon', 'gorm', 'gr8', 'gant',
@@ -18,7 +21,6 @@ class BootStrap {
         "twitter.password": "yourpassword"
     ]
 
-    def grailsApplication
 
     def init = { servletContext ->
 
@@ -30,6 +32,12 @@ class BootStrap {
                 createTagsIfRequired()
                 break
         }
+        updateSourceStatus()
+    }
+
+    void updateSourceStatus() {
+        def sql = new Sql(dataSource)
+        sql.execute("UPDATE blog_entry SET SOURCE_STATUS=200 WHERE SOURCE_STATUS=0")
     }
 
     void createTagsIfRequired() {

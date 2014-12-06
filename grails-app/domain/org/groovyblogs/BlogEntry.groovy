@@ -10,6 +10,8 @@ class BlogEntry {
     String language
     String hash
     SortedSet<Date> visits
+    int sourceStatus
+    Date sourceStatusDate
 
     static hasMany = [visits: Date]
 
@@ -18,7 +20,7 @@ class BlogEntry {
     }
 
     // info is used for sticking stuff like "Only showing 3 entries for this user"
-    static transients = ["groovyRelated"]
+    static transients = ["groovyRelated","sourceAvailable"]
 
     static belongsTo = [blog: Blog]
 
@@ -26,6 +28,8 @@ class BlogEntry {
         language(nullable: true)
         link(unique: true)
         hash(nullable: true)
+        sourceStatus nullable: true
+        sourceStatusDate nullable: true
     }
 
     static mapping = {
@@ -43,6 +47,10 @@ class BlogEntry {
             keyword = /\b${keyword}\b/
             return title?.toLowerCase() =~ keyword || description?.toLowerCase() =~ keyword
         }
+    }
+
+    boolean isSourceAvailable() {
+        sourceStatus == 200
     }
 
 }

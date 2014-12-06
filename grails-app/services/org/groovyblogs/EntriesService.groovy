@@ -1,9 +1,11 @@
 package org.groovyblogs
 import grails.plugin.cache.Cacheable
 import grails.plugins.rest.client.RestBuilder
-import grails.transaction.NotTransactional
+import grails.plugins.rest.client.RestResponse
 import grails.transaction.Transactional
 import org.springframework.http.HttpStatus
+
+import javax.servlet.http.HttpServletResponse
 
 @Transactional(readOnly = true)
 class EntriesService {
@@ -30,7 +32,7 @@ class EntriesService {
         entries.findAll { it.isGroovyRelated() }
     }
 
-    @Transactional()
+    @Transactional
     BlogEntry getEntry(long id) {
         def blogEntry = BlogEntry.get(id)
         if (blogEntry) {
@@ -41,11 +43,49 @@ class EntriesService {
         return blogEntry
     }
 
-    @NotTransactional
-    boolean checkBlogEntrySource(BlogEntry blogEntry) {
+    @Transactional
+    void checkBlogEntrySource(BlogEntry blogEntry) {
+        def newSourceStatus
+        try {
+            String url = blogEntry.link
+            RestResponse resp = followUrl(url)
+            newSourceStatus = resp.status
+        } catch (e) {
+            newSourceStatus = HttpServletResponse.SC_INTERNAL_SERVER_ERROR
+        }
+        if(blogEntry.sourceStatus != newSourceStatus) {
+            blogEntry.sourceStatus = newSourceStatus
+            blogEntry.sourceStatusDate = new Date()
+            blogEntry.save(failOnError: true)
+            if(!blogEntry.isSourceAvailable()) {
+                log.info("Blog entry id: ${blogEntry.id} source reported as not available. Code: $newSourceStatus")
+            }
+        }
+    }
+
+    private RestResponse followUrl(String url) {
         def rest = new RestBuilder()
-        def resp = rest.get(blogEntry.link)
-        println resp.statusCode
-        return resp.statusCode == HttpStatus.OK
+        def resp = rest.head(url)
+        if(resp.statusCode in [HttpStatus.TEMPORARY_REDIRECT, HttpStatus.MOVED_PERMANENTLY] && resp.headers['Location']) {
+            String redirectUrl = resp.headers['Location'].first()
+            log.debug("Follow redirect from $url to $redirectUrl")
+            resp = followUrl(redirectUrl)
+        }
+        resp
+    }
+
+    @Transactional
+    void verifyBlogsEntrySources() {
+        def blogEntries = BlogEntry.list(max: 25, sort: 'sourceStatusDate', order: 'asc')
+        assert blogEntries.size() <= 25
+        blogEntries.each {
+            try {
+                log.debug("Checking source of blog entry $it")
+                checkBlogEntrySource(it)
+            } catch (e) {
+                log.warn("Failed to verify blog entry $it.",e)
+            }
+        }
+
     }
 }
