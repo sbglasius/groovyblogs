@@ -399,6 +399,7 @@ class FeedService {
         return blog.save(failOnError: true)
     }
 
+    @Transactional(readOnly = true)
     String getFeedData(feedType) {
 
         SyndFeed feed = feedCache.get("romeFeed-$feedType")?.value
@@ -410,7 +411,7 @@ class FeedService {
             def blogEntries = BlogEntry.findAllByDateAddedGreaterThan(
                     aWhileAgo, [sort: 'dateAdded', order: "desc"])
 
-            blogEntries = blogEntries.findAll { it.groovyRelated && it.sourceAvailable }
+            blogEntries = blogEntries.findAll { it.groovyRelated && it.sourceAvailable && !it.disabled }
 
             def feedEntries = blogEntries.collect { blogEntry ->
                 def desc = new SyndContentImpl(type: "text/plain", value: FeedEntry.summarize(blogEntry.description))

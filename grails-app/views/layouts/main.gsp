@@ -63,6 +63,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><g:link controller='user' action='index'>Users</g:link></li>
                                 <li><g:link controller='blog' action='index'>Blogs</g:link></li>
+                                <li><g:link controller='blogEntry' action='index'>Blog-entries</g:link></li>
                                 <li><g:link controller='quartz' action='index'>Quartz control</g:link></li>
                             </ul>
                         </li>

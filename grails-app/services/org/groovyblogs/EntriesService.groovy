@@ -1,23 +1,24 @@
 package org.groovyblogs
+
 import grails.plugin.cache.Cacheable
 import grails.plugins.rest.client.RestBuilder
 import grails.plugins.rest.client.RestResponse
 import grails.transaction.Transactional
-import org.springframework.http.HttpStatus
 
 import javax.servlet.http.HttpServletResponse
 
 @Transactional(readOnly = true)
 class EntriesService {
-
+    def grailsCacheManager
     protected static final int DEFAULT_DAYS_TO_REPORT = 7
 
     @Cacheable('recentList')
     Collection<BlogEntry> getRecentEntries(Integer max, Long offset) {
         log.debug "getRecentEntries(max=$max, offset=$offset)"
-        def entries = BlogEntry.list([sort: 'dateAdded', order: "desc", max: max, offset: offset])
 
-        entries.findAll { it.groovyRelated && it.sourceAvailable }
+        def entries = BlogEntry.enabledAndSourceAvailable.list([sort: 'dateAdded', order: "desc", max: max, offset: offset])
+
+        entries.findAll { it.groovyRelated }
     }
 
     @Cacheable('popularList')
@@ -27,9 +28,11 @@ class EntriesService {
 
         def aWhileAgo = new Date() - days
 
-        def entries = BlogEntry.findAllByDateAddedGreaterThanAndHitCountGreaterThan(aWhileAgo, 0, [sort: 'hitCount', order: "desc", max: max, offset: offset])
+        def entries = BlogEntry.enabledAndSourceAvailable.dateAddedAfter(aWhileAgo).hasHitCount.list([sort: 'hitCount', order: "desc", max: max, offset: offset])
 
-        entries.findAll { it.groovyRelated && it.sourceAvailable }
+//        def entries = BlogEntry.findAllByDateAddedGreaterThanAndHitCountGreaterThan(aWhileAgo, 0, [sort: 'hitCount', order: "desc", max: max, offset: offset])
+
+        entries.findAll { it.groovyRelated }
     }
 
     @Transactional
@@ -44,7 +47,8 @@ class EntriesService {
     }
 
     @Transactional
-    void checkBlogEntrySource(BlogEntry blogEntry) {
+    void checkBlogEntrySource(Long id) {
+        def blogEntry = BlogEntry.get(id)
         def newSourceStatus
         try {
             String url = blogEntry.link
@@ -53,20 +57,20 @@ class EntriesService {
         } catch (e) {
             newSourceStatus = HttpServletResponse.SC_INTERNAL_SERVER_ERROR
         }
-        if(blogEntry.sourceStatus != newSourceStatus) {
+        if (blogEntry.sourceStatus != newSourceStatus) {
             blogEntry.sourceStatus = newSourceStatus
-            blogEntry.sourceStatusDate = new Date()
-            blogEntry.save(failOnError: true)
-            if(!blogEntry.isSourceAvailable()) {
-                log.info("Blog entry id: ${blogEntry.id} source reported as not available. Code: $newSourceStatus")
-            }
+        }
+        blogEntry.sourceStatusDate = new Date()
+        blogEntry.save(failOnError: true, flush: true)
+        if (!blogEntry.isSourceAvailable()) {
+            log.info("Blog entry id: ${blogEntry.id} source reported as not available. Code: $newSourceStatus")
         }
     }
 
     private RestResponse followUrl(String url) {
         def rest = new RestBuilder()
         def resp = rest.head(url)
-        if(resp.statusCode in [HttpStatus.TEMPORARY_REDIRECT, HttpStatus.MOVED_PERMANENTLY] && resp.headers['Location']) {
+        if (resp.status in [HttpServletResponse.SC_TEMPORARY_REDIRECT, HttpServletResponse.SC_MOVED_PERMANENTLY, HttpServletResponse.SC_MOVED_TEMPORARILY] && resp.headers['Location']) {
             String redirectUrl = resp.headers['Location'].first()
             resp = followUrl(redirectUrl)
         }
@@ -77,14 +81,25 @@ class EntriesService {
     void verifyBlogsEntrySources() {
         def blogEntries = BlogEntry.list(max: 25, sort: 'sourceStatusDate', order: 'asc')
         assert blogEntries.size() <= 25
-        blogEntries.each {
+        blogEntries.each { blogEntry ->
             try {
-                log.debug("Checking source of blog entry $it")
-                checkBlogEntrySource(it)
+                log.debug("Checking source of blog entry $blogEntry")
+                checkBlogEntrySource(blogEntry.id)
             } catch (e) {
-                log.warn("Failed to verify blog entry $it.",e)
+                log.warn("Failed to verify blog entry $blogEntry.", e)
             }
         }
 
+    }
+
+    @Transactional
+    void toggleDisableFlag(BlogEntry blogEntry) {
+        grailsCacheManager.getCache('recentList').clear()
+        grailsCacheManager.getCache('popularList').clear()
+
+        def nextState = !blogEntry.disabled
+        blogEntry.disabled = nextState
+        log.debug("Blog-entry $blogEntry has been ${nextState ? 'disabled':'enabled'}")
+        blogEntry.save(failOnError: true, flush: true)
     }
 }

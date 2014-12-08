@@ -12,6 +12,24 @@ class BlogEntry {
     SortedSet<Date> visits
     int sourceStatus = 200
     Date sourceStatusDate
+    boolean disabled
+
+
+    static namedQueries = {
+        enabledAndSourceAvailable {
+            and {
+                eq('sourceStatus', 200)
+                eq('disabled', false)
+            }
+        }
+        dateAddedAfter  {Date date ->
+            gte('dateAdded', date)
+        }
+
+        hasHitCount  {
+            gt('hitCount',0)
+        }
+    }
 
     static hasMany = [visits: Date]
 

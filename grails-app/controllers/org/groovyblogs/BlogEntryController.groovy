@@ -7,8 +7,12 @@ class BlogEntryController {
     static scaffold = true
     def entriesService
 
-    def checkBlogs() {
-        entriesService.verifyBlogsEntrySources()
-        render('ok')
+    def toggleDisableFlag(BlogEntry blogEntry) {
+        log.debug("toggleDisableFlag: $blogEntry")
+        if(blogEntry) {
+            entriesService.toggleDisableFlag(blogEntry)
+        }
+        redirect(controller: 'entries')
     }
+
 }
