@@ -147,9 +147,10 @@ log4j = {
             'grails.app.controllers.org.groovyblogs',
             'grails.app.services.org.groovyblogs',
             'grails.app.taglibs.org.groovyblogs',
-            'grails.app.jobs.org.groovyblogs'
+            'grails.app.jobs.org.groovyblogs',
+            'org.springframework.cache'
 
-    // trace  gb: ['org.codehaus.groovy.grails.commons'] // Good for debugging bean creation issues
+//     trace  'org.codehaus.groovy.grails.commons' // Good for debugging bean creation issues
 
 }
 

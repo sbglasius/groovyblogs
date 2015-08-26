@@ -45,11 +45,7 @@
       <driver-ref>mysql</driver-ref>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/groovyblogs_dev</jdbc-url>
-      <libraries>
-        <library>
-          <url>file://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.29/mysql-connector-java-5.1.29.jar</url>
-        </library>
-      </libraries>
+      <libraries />
     </data-source>
   </component>
   <component name="DependencyValidationManager">

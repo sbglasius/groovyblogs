@@ -15,6 +15,10 @@ beans = {
 //        timeToLive = 60*60*24*14 // 14 days
 //    }
 
+    cacheManager {
+        shared = true
+    }
+
     feedCache(EhCacheFactoryBean) {
         timeToLive = 60
     }
