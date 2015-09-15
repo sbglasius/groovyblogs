@@ -1,14 +1,24 @@
 buildscript {
     ext {
         grailsVersion = project.grailsVersion
+        bootstrapFramework = [
+                useLess    : true,
+                fontAwesome: [
+                        install: true,
+                        useLess: true
+                ]
+        ]
+
     }
     repositories {
         mavenLocal()
         maven { url "https://repo.grails.org/grails/core" }
+        jcenter()
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
         classpath 'com.bertramlabs.plugins:asset-pipeline-gradle:2.1.1'
+        classpath "com.siprell.plugins:bootstrap-framework:1.0.3"
     }
 }
 
@@ -26,6 +36,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: "org.grails.grails-web"
 apply plugin: "org.grails.grails-gsp"
+apply plugin: "com.siprell.plugins.bootstrap-framework"
 
 ext {
     grailsVersion = project.grailsVersion
@@ -59,7 +70,9 @@ dependencies {
 
     compile "org.grails.plugins:hibernate"
     compile "org.grails.plugins:cache"
-    compile "org.hibernate:hibernate-ehcache"
+    compile "org.hibernate:hibernate-ehcache", {
+        exclude module: 'ehcache-core'
+    }
     compile "org.grails.plugins:scaffolding"
     compile 'com.rometools:rome:1.5.1'
     compile 'com.commsen:jwebthumb:0.3'
@@ -71,7 +84,7 @@ dependencies {
     compile "org.grails:grails-datastore-rest-client:4.0.4.RELEASE"
 
     runtime "org.grails.plugins:asset-pipeline"
-    
+    runtime "org.grails.plugins:less-asset-pipeline:2.3.0"
 
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"

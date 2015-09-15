@@ -83,7 +83,8 @@ class ThumbnailService implements InitializingBean {
 
     @Override
     void afterPropertiesSet() throws Exception {
-        root = new File(grailsApplication.config.thumbcache)
+        def thumbCacheLocation = grailsApplication.config.thumbcache  ?: '/Users/sbg/projects/github/groovyblogs3/target/thumbcache'
+        root = new File(thumbCacheLocation)
         root.mkdirs()
         log.info("Thumbs root set to $root.absolutePath")
         on('requestThumbnail') { BlogEntry blogEntry ->

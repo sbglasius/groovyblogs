@@ -1,4 +1,4 @@
 //= require jquery
-//= require bootstrap
+//= require bootstrap-all
 //= require thumbs-fetcher
 //= require pwstrength

@@ -9,7 +9,7 @@ grails.config.locations = [
         "classpath:${appName}-config.properties",
         "classpath:${appName}-config.groovy",
         "file:${userHome}/.grails/${appName}-config.properties",
-        "file:${userHome}/.grails/${appName}-config.groovy",
+        "file:${userHome}/.grails/groovyblogs-config.groovy",
         "file://${catalinaBase}/conf/${appName}-config.groovy"]
 
 println "Expected config locations: ${grails.config.locations}"
