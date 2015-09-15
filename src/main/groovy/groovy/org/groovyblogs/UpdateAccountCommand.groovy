@@ -2,8 +2,7 @@ package org.groovyblogs
 
 import grails.validation.Validateable
 
-@Validateable
-class UpdateAccountCommand {
+class UpdateAccountCommand implements Validateable {
     String name
     String twitter
     String newPassword

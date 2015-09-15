@@ -8,7 +8,7 @@ class BlogController {
     private static final List STATUSES = [BlogStatus.PENDING, BlogStatus.NO_GROOVY, BlogStatus.LOOKS_BAD, BlogStatus.ERROR]
 
     def feedService
-    static scaffold = true
+    static scaffold = Blog
 
     def checkPendingBlogs() {
         def blogs = params.list('blog.id').collect { Blog.get(it) }.findAll { it.status in STATUSES }

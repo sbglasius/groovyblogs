@@ -37,7 +37,7 @@ class EntriesService {
 
     @Transactional
     BlogEntry getEntry(long id) {
-        def blogEntry = BlogEntry.get(id)
+        BlogEntry blogEntry = BlogEntry.get(id)
         if (blogEntry) {
             blogEntry.hitCount++
             blogEntry.addToVisits(new Date())

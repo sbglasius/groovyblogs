@@ -63,7 +63,12 @@ dependencies {
     compile "org.grails.plugins:scaffolding"
     compile 'com.rometools:rome:1.5.1'
     compile 'com.commsen:jwebthumb:0.3'
-
+    compile 'jfree:jfreechart:1.0.4'
+    compile 'net.homeip.yusuke:twitter4j:2.0.10'
+    compile "org.grails.plugins:recaptcha:3.0.0"
+    compile 'org.grails.plugins:grails3-i18n-enums:2.0.0'
+    compile 'org.grails.plugins:spring-security-core:3.0.0.M1'
+    compile "org.grails:grails-datastore-rest-client:4.0.4.RELEASE"
 
     runtime "org.grails.plugins:asset-pipeline"
     

@@ -1,7 +1,7 @@
 <%@ page defaultCodec="html" %>
-<%@ page import="org.springframework.util.ClassUtils" %>
-<%@ page import="grails.plugin.searchable.internal.lucene.LuceneUtils" %>
-<%@ page import="grails.plugin.searchable.internal.util.StringQueryUtils" %>
+%{--<%@ page import="org.springframework.util.ClassUtils" %>--}%
+%{--<%@ page import="grails.plugin.searchable.internal.lucene.LuceneUtils" %>--}%
+%{--<%@ page import="grails.plugin.searchable.internal.util.StringQueryUtils" %>--}%
 <html>
 <head>
     <meta name="layout" content="main"/>
