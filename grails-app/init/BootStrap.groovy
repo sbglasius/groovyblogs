@@ -63,7 +63,8 @@ class BootStrap {
     }
 
     void createAdminUserIfRequired() {
-        def config = grailsApplication.config.org.groovyblogs
+        def grailsConfig = grailsApplication.config
+        def config = grailsConfig.org.groovyblogs
         def adminRole = Role.findOrSaveWhere(authority: 'ROLE_ADMIN').save(flush: true, failOnError: true)
         def userRole = Role.findOrSaveWhere(authority: 'ROLE_USER').save(flush: true, failOnError: true)
 

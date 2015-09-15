@@ -1,69 +1,5 @@
 import org.groovyblogs.UserService
 
-// locations to search for config files that get merged into the main config
-// config files can either be Java properties files or ConfigSlurper scripts
-
-def catalinaBase = System.properties.getProperty('catalina.base')
-
-grails.config.locations = [
-        "classpath:${appName}-config.properties",
-        "classpath:${appName}-config.groovy",
-        "file:${userHome}/.grails/${appName}-config.properties",
-        "file:${userHome}/.grails/groovyblogs-config.groovy",
-        "file://${catalinaBase}/conf/${appName}-config.groovy"]
-
-println "Expected config locations: ${grails.config.locations}"
-
-// grails.config.locations = [ "file:/opt/groovyblogs/groovyblogs-config.properties" ]
-
-grails.controllers.defaultScope = 'singleton'
-grails.converters.encoding = "UTF-8"
-grails.enable.native2ascii = true
-grails.exceptionresolver.params.exclude = ['password']
-grails.hibernate.cache.queries = false
-grails.hibernate.osiv.readonly = false
-grails.hibernate.pass.readonly = false
-grails.json.legacy.builder = false
-grails.mail.host = "localhost"
-grails.mail.default.from = "info@groovyblogs.org"
-grails.mime.disable.accept.header.userAgents = ['Gecko', 'WebKit', 'Presto', 'Trident']
-grails.mime.types = [
-        all          : '*/*',
-        atom         : 'application/atom+xml',
-        css          : 'text/css',
-        csv          : 'text/csv',
-        form         : 'application/x-www-form-urlencoded',
-        html         : ['text/html', 'application/xhtml+xml'],
-        js           : 'text/javascript',
-        json         : ['application/json', 'text/json'],
-        multipartForm: 'multipart/form-data',
-        rss          : 'application/rss+xml',
-        text         : 'text/plain',
-        hal          : ['application/hal+json', 'application/hal+xml'],
-        xml          : ['text/xml', 'application/xml']
-]
-grails.project.groupId = appName
-grails.scaffolding.templates.domainSuffix = 'Instance'
-grails.spring.bean.packages = []
-grails.views.default.codec = "html"
-grails {
-    views {
-        gsp {
-            encoding = 'UTF-8'
-            htmlcodec = 'xml'
-            codecs {
-                expression = 'html'
-                scriptlet = 'html'
-                taglib = 'none'
-                staticparts = 'none'
-            }
-        }
-        // escapes all not-encoded output at final stage of outputting
-        // filteringCodecForContentType.'text/html' = 'html'
-    }
-}
-grails.web.disable.multipart = false
-
 thumbnail {
     enabled = false
     // user = your_user_id
@@ -126,31 +62,6 @@ environments {
     development {
         http.usefeedburner = false
     }
-}
-
-// log4j configuration
-log4j = {
-
-    appenders {
-        rollingFile name: "gb",
-                file: "groovyblogs.log",
-                maxFileSize: "10MB",
-                layout: pattern(conversionPattern: '%d %p %c{2} %m%n')
-
-    }
-
-    error 'org.codehaus.groovy.grails',
-            'org.springframework',
-            'org.hibernate'
-
-    debug 'grails.app.domain.org.groovyblogs',
-            'grails.app.controllers.org.groovyblogs',
-            'grails.app.services.org.groovyblogs',
-            'grails.app.taglibs.org.groovyblogs',
-            'grails.app.jobs.org.groovyblogs'
-
-    // trace  gb: ['org.codehaus.groovy.grails.commons'] // Good for debugging bean creation issues
-
 }
 
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'org.groovyblogs.User'
@@ -255,5 +166,26 @@ recaptcha {
     useSecureAPI = true
 }
 
+//environments {
+//    development {
+//        dataSource {
+//            dbCreate = "update"
+//            url = "jdbc:mysql://localhost:3306/groovyblogs_dev"
+//            driverClassName = "com.mysql.jdbc.Driver"
+//            dialect = 'org.hibernate.dialect.MySQL5InnoDBDialect'
+//            username ="root"
+//            password = "root"
+//        }
+//    }
+//    test {
+//        dataSource {
+//            dbCreate = "update"
+//            driverClassName = "org.h2.Driver"
+//            username = "sa"
+//            password = ""
+//            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+//        }
+//    }
+//}
 
 

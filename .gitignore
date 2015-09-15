@@ -48,3 +48,5 @@ out/
 *.ipr
 *.iws
 *.iml
+
+/grails-app/assets/**/bootstrap

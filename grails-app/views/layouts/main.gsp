@@ -9,6 +9,7 @@
 
     <title>groovyblogs.org - <g:layoutTitle default="Welcome"/></title>
     <link rel="shortcut icon" href="${assetPath(src: 'favicon.png')}" type="image/png">
+    <script src="http://code.jquery.com/jquery-2.1.4.js" type="text/javascript"></script>
 
     <asset:stylesheet src="application.css"/>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
