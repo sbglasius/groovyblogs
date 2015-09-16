@@ -12,7 +12,7 @@
 <div id="show-user" class="content scaffold-show" role="main">
     <h1><g:message code="default.show.label" args="[entityName]"/></h1>
     <tmpl:/templates/message/>
-    <f:with bean="${userInstance}">
+    <f:with bean="${user}">
         <f:display property="username"/>
         %{--<f:display property="name"/>--}%
         %{--<f:display property="twitter"/>--}%
@@ -31,9 +31,9 @@
         <f:display property="registered"/>
         <f:display property="lastLogin"/>
     </f:with>
-    <g:form url="[resource: userInstance, action: 'delete']" method="DELETE">
+    <g:form url="[resource: user, action: 'delete']" method="DELETE">
         <fieldset class="buttons">
-            <g:link class="btn btn-primary" action="edit" resource="${userInstance}"><g:message code="default.button.edit.label" default="Edit"/></g:link>
+            <g:link class="btn btn-primary" action="edit" resource="${user}"><g:message code="default.button.edit.label" default="Edit"/></g:link>
             <g:actionSubmit class="btn btn-warning" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}"
                             onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
         </fieldset>

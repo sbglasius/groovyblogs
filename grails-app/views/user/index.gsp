@@ -29,23 +29,23 @@
         </tr>
         </thead>
         <tbody>
-        <g:each in="${userInstanceList}" status="i" var="userInstance">
+        <g:each in="${userList}" status="i" var="user">
             <tr>
 
-                <td><g:link action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "username")}</g:link></td>
+                <td><g:link action="show" id="${user.id}">${fieldValue(bean: user, field: "username")}</g:link></td>
 
 
-                <td>${fieldValue(bean: userInstance, field: "email")}</td>
+                <td>${fieldValue(bean: user, field: "email")}</td>
 
-                <td>${fieldValue(bean: userInstance, field: "lastLogin")}</td>
+                <td>${fieldValue(bean: user, field: "lastLogin")}</td>
 
                 <td>
-                    <i class="fa ${userInstance.accountExpired ? ' fa-times-circle':'fa-dot-circle-o'}" title="${userInstance.accountExpired ? 'Account expired':'Account active'}" ></i>
-                    <i class="fa ${userInstance.accountLocked ? ' fa-lock':'fa-unlock-alt'}" title="${userInstance.accountLocked ? 'Account locked':'Account unlocked'}" ></i>
+                    <i class="fa ${user.accountExpired ? ' fa-times-circle':'fa-dot-circle-o'}" title="${user.accountExpired ? 'Account expired':'Account active'}" ></i>
+                    <i class="fa ${user.accountLocked ? ' fa-lock':'fa-unlock-alt'}" title="${user.accountLocked ? 'Account locked':'Account unlocked'}" ></i>
 
                 </td>
 
-                <td>${userInstance.blogs?.size()}</td>
+                <td>${user.blogs?.size()}</td>
 
             </tr>
         </g:each>
@@ -53,7 +53,7 @@
     </table>
 
     <div class="pagination">
-        <g:paginate total="${userInstanceCount ?: 0}"/>
+        <p:paginate total="${userCount ?: 0}"/>
     </div>
     <div>
         <g:link action="create" class="btn btn-primary"><g:message code="default.new.label" args="[entityName]"/></g:link>

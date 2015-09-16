@@ -86,6 +86,7 @@ dependencies {
     compile "org.grails:grails-datastore-rest-client:4.0.4.RELEASE"
     compile "org.grails.plugins:quartz:2.0.0"
     compile "org.grails.plugins:quartz-monitor:1.2"
+    compile "org.grails.plugins:fields:2.1.0"
 
     runtime "org.grails.plugins:asset-pipeline:3.0.8"
     runtime "com.bertramlabs.plugins:less-asset-pipeline:2.3.0"
