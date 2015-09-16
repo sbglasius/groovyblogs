@@ -1,5 +1,4 @@
 package org.groovyblogs
-
 import grails.plugin.cache.Cacheable
 import grails.plugins.rest.client.RestBuilder
 import grails.plugins.rest.client.RestResponse
@@ -79,7 +78,7 @@ class EntriesService {
 
     @Transactional
     void verifyBlogsEntrySources() {
-        def blogEntries = BlogEntry.list(max: 25, sort: 'sourceStatusDate', order: 'asc')
+        def blogEntries = BlogEntry.list(max: 25, sort: 'sourceStatusDate', order: 'asc', readOnly: true)
         assert blogEntries.size() <= 25
         blogEntries.each { blogEntry ->
             try {

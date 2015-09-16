@@ -14,6 +14,9 @@ appender('STDOUT', ConsoleAppender) {
 
 root(ERROR, ['STDOUT'])
 logger('org.groovyblogs',DEBUG)
+['controllers','services','domains','tagLibs'].each {
+    logger("grails.app.${it}.org.groovyblogs",DEBUG)
+}
 if(Environment.current == Environment.DEVELOPMENT) {
     def targetDir = BuildSettings.TARGET_DIR
     if(targetDir) {

@@ -1,9 +1,11 @@
 package org.groovyblogs
 
+import grails.core.GrailsApplication
+
 class UpdateTweetsJob {
 
     FeedService feedService
-    def grailsApplication
+    GrailsApplication grailsApplication
 
     def concurrent = false
 

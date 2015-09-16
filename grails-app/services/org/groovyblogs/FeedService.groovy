@@ -3,6 +3,7 @@ import com.rometools.rome.feed.synd.*
 import com.rometools.rome.io.SyndFeedInput
 import com.rometools.rome.io.SyndFeedOutput
 import com.rometools.rome.io.XmlReader
+import grails.config.Config
 import grails.transaction.NotTransactional
 import grails.transaction.Transactional
 import grails.util.Environment
@@ -90,7 +91,7 @@ class FeedService {
             }
             return feedInfo
         } catch (e) {
-            log.warn("Error parsing ${feedUrlStr}: ${e.message}",e)
+            log.warn("Error parsing ${feedUrlStr}: ${e.message}")
             return null
         }
 
@@ -169,7 +170,7 @@ class FeedService {
 
     void updateFeed(Blog blog) {
         log.info("Now polling: [$blog.title]")
-        FeedInfo fi = getFeedInfo(blog.feedUrl, config.translate.enabled)
+        FeedInfo fi = getFeedInfo(blog.feedUrl, config.getProperty('translate.enabled', Boolean))
         if (fi) {
             updateFeed(blog, fi)
             markBlogUpdateSuccess(blog)
@@ -179,7 +180,7 @@ class FeedService {
         }
     }
 
-    protected ConfigObject getConfig() {
+    protected Config getConfig() {
         grailsApplication.config
     }
 
