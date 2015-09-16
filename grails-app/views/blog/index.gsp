@@ -33,21 +33,21 @@
             </tr>
             </thead>
             <tbody>
-            <g:each in="${blogInstanceList}" status="i" var="blogInstance">
+            <g:each in="${blogList}" status="i" var="blog">
                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-                    <td><g:link action="show" id="${blogInstance.id}">${fieldValue(bean: blogInstance, field: "title")}</g:link></td>
+                    <td><g:link action="show" id="${blog.id}">${fieldValue(bean: blog, field: "title")}</g:link></td>
 
-                    <td>${fieldValue(bean: blogInstance, field: "description")}</td>
+                    <td>${fieldValue(bean: blog, field: "description")}</td>
 
                     <sec:ifAllGranted roles="ROLE_ADMIN">
-                        <td style="max-width: 300px;word-wrap: break-word"><a href="${blogInstance.feedUrl}" target="_blank">${fieldValue(bean: blogInstance, field: "feedUrl")}</a></td>
+                        <td style="max-width: 300px;word-wrap: break-word"><a href="${blog.feedUrl}" target="_blank">${fieldValue(bean: blog, field: "feedUrl")}</a></td>
 
-                        <td>${fieldValue(bean: blogInstance, field: "pollFrequency")}</td>
+                        <td>${fieldValue(bean: blog, field: "pollFrequency")}</td>
 
-                        <td>${fieldValue(bean: blogInstance, field: "status")}</td>
+                        <td>${fieldValue(bean: blog, field: "status")}</td>
 
-                        <td style="max-width: 300px;word-wrap: break-word">${fieldValue(bean: blogInstance, field: "lastError")}</td>
+                        <td style="max-width: 300px;word-wrap: break-word">${fieldValue(bean: blog, field: "lastError")}</td>
                     </sec:ifAllGranted>
                 </tr>
             </g:each>
@@ -57,7 +57,7 @@
 
     <div>
         <g:form action="checkPendingBlogs" method="POST">
-            <g:each in="${blogInstanceList}" var="blog" status="i">
+            <g:each in="${blogList}" var="blog" status="i">
                 <g:hiddenField name="blog.id" value="${blog.id}"/>
             </g:each>
             <g:hiddenField name="max" value="${params.max}"/>
@@ -69,7 +69,7 @@
     </div>
 
     <div class="pagination">
-        <g:paginate total="${blogInstanceCount ?: 0}"/>
+        <p:paginate total="${blogCount ?: 0}"/>
     </div>
 </div>
 </body>
