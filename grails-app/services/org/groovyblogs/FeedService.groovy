@@ -1,4 +1,5 @@
 package org.groovyblogs
+
 import com.rometools.rome.feed.synd.*
 import com.rometools.rome.io.SyndFeedInput
 import com.rometools.rome.io.SyndFeedOutput
@@ -8,6 +9,7 @@ import grails.transaction.NotTransactional
 import grails.transaction.Transactional
 import grails.util.Environment
 import net.sf.ehcache.Element
+
 //import org.grails.plugin.platform.events.EventMessage
 
 @Transactional()
@@ -42,7 +44,7 @@ class FeedService {
             def syndFeedInput = new SyndFeedInput()
             syndFeedInput.xmlHealerOn = true
             def url = feedUrlStr.toURL().newInputStream()
-            def feedReader = new XmlReader(url, true,'UTF-8')
+            def feedReader = new XmlReader(url, true, 'UTF-8')
             SyndFeed syndFeed = syndFeedInput.build(feedReader)
             def feedInfo = new FeedInfo(feedUrl: feedUrlStr, title: syndFeed.title,
                     description: syndFeed.description ?: "",
@@ -138,7 +140,7 @@ class FeedService {
                             }
 
                             if (config.thumbnail.enabled) {
-                                  notify "requestThumbnail", blogEntry
+                                notify "requestThumbnail", blogEntry
 //                                grailsEventsPublisher.event(new EventMessage('requestThumbnail', blogEntry, 'thumbnail'))
                             }
                         }
@@ -170,14 +172,22 @@ class FeedService {
 
     void updateFeed(Blog blog) {
         log.info("Now polling: [$blog.title]")
-        FeedInfo fi = getFeedInfo(blog.feedUrl, config.getProperty('translate.enabled', Boolean))
-        if (fi) {
-            updateFeed(blog, fi)
-            markBlogUpdateSuccess(blog)
-        } else {
-            log.warn("Could not parse feed [$blog.feedUrl]")
-            markBlogWithError(blog)
+        try {
+
+            FeedInfo fi = getFeedInfo(blog.feedUrl, config.getProperty('translate.enabled', Boolean))
+            if (fi) {
+                updateFeed(blog, fi)
+                markBlogUpdateSuccess(blog)
+            } else {
+                log.warn("Could not parse feed [$blog.feedUrl]")
+                markBlogWithError(blog)
+            }
+        } catch (e) {
+            log.warn("FeedService failed to update $blog: ${e.message}")
+            markBlogWithError(blog, e)
+
         }
+
     }
 
     protected Config getConfig() {
@@ -199,12 +209,7 @@ class FeedService {
         }
 
         feedsToUpdate.each { blog ->
-            try {
-                updateFeed(blog)
-            } catch (Exception e) {
-                log.warn("FeedService failed to update $blog: ${e.message}")
-                markBlogWithError(blog, e)
-            }
+            updateFeed(blog)
         }
 
         log.info("FeedService finished polled update")
