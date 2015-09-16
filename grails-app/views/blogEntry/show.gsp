@@ -14,19 +14,19 @@
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
-    <f:with bean="blogEntryInstance">
+    <f:with bean="blogEntry">
         <f:display property="title"/>
         <f:display property="link"/>
         <f:display property="dateAdded"/>
         <f:display property="hitCount"/>
         <f:display property="description">
-            <iframe src="${blogEntryInstance.link}" width="800px" height="800px">
+            <iframe src="${blogEntry.link}" width="800px" height="800px">
         </f:display>
 
     </f:with>
-    <g:form url="[resource: blogEntryInstance, action: 'delete']" method="DELETE">
+    <g:form url="[resource: blogEntry, action: 'delete']" method="DELETE">
         <fieldset class="buttons">
-            <g:link class="edit" action="edit" resource="${blogEntryInstance}"><g:message code="default.button.edit.label" default="Edit"/></g:link>
+            <g:link class="edit" action="edit" resource="${blogEntry}"><g:message code="default.button.edit.label" default="Edit"/></g:link>
             <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}"
                             onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
         </fieldset>

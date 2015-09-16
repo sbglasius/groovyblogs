@@ -8,15 +8,6 @@
 </head>
 
 <body>
-<a href="#list-blogEntry" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-
-<div class="nav" role="navigation">
-    <ul>
-        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-        <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></li>
-    </ul>
-</div>
-
 <div id="list-blogEntry" class="content scaffold-list" role="main">
     <h1><g:message code="default.list.label" args="[entityName]"/></h1>
     <g:if test="${flash.message}">
@@ -40,25 +31,25 @@
         </tr>
         </thead>
         <tbody>
-        <g:each in="${blogEntryInstanceList}" status="i" var="blogEntryInstance">
+        <g:each in="${blogEntryList}" status="i" var="blogEntry">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-                <td><g:link action="show" id="${blogEntryInstance.id}">${fieldValue(bean: blogEntryInstance, field: "id")}</g:link></td>
+                <td><g:link action="show" id="${blogEntry.id}">${fieldValue(bean: blogEntry, field: "id")}</g:link></td>
 
 
-                <td>${fieldValue(bean: blogEntryInstance.blog, field: "title")}</td>
+                <td>${fieldValue(bean: blogEntry.blog, field: "title")}</td>
 
-                <td><g:formatDate date="${blogEntryInstance.dateAdded}"/></td>
+                <td><g:formatDate date="${blogEntry.dateAdded}"/></td>
 
-                <td><a href="${blogEntryInstance.link}" target="_blank">link ${blogEntryInstance.groovyRelated}</a></td>
-                <td><iframe src="${blogEntryInstance.link}" width="400px" height="200px"></iframe></td>
+                <td><a href="${blogEntry.link}" target="_blank">link ${blogEntry.groovyRelated}</a></td>
+                <td><iframe src="${blogEntry.link}" width="400px" height="200px"></iframe></td>
             </tr>
         </g:each>
         </tbody>
     </table>
 
     <div class="pagination">
-        <g:paginate total="${blogEntryInstanceCount ?: 0}"/>
+        <p:paginate total="${blogEntryCount ?: 0}"/>
     </div>
 </div>
 </body>
