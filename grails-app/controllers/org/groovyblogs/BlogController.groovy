@@ -5,7 +5,7 @@ import grails.plugin.springsecurity.annotation.Secured
 @Secured(['ROLE_ADMIN'])
 class BlogController {
 
-    private static final List STATUSES = [BlogStatus.PENDING, BlogStatus.NO_GROOVY, BlogStatus.LOOKS_BAD, BlogStatus.ERROR]
+    private static final List STATUSES = [BlogStatus.PENDING, BlogStatus.NOT_GROOVY, BlogStatus.ERROR]
 
     def feedService
     static scaffold = Blog

@@ -319,7 +319,7 @@ class FeedService {
                 BlogEntry blogEntry = new BlogEntry(title: entry.title, description: entry.description)
                 blogEntry.groovyRelated
             }
-            blog.status = hasGroovyContent ? BlogStatus.LOOKS_GOOD : BlogStatus.NO_GROOVY
+            blog.status = hasGroovyContent ? BlogStatus.LOOKS_GOOD : BlogStatus.NOT_GROOVY
             blog.save()
         }
 
