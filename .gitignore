@@ -50,3 +50,7 @@ out/
 *.iml
 
 /grails-app/assets/**/bootstrap
+/grails-app/assets/**/bootstrap*
+/grails-app/assets/**/font-awesome*
+
+.asscache
