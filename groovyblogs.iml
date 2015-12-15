@@ -56,6 +56,7 @@
       <sourceFolder url="file://$MODULE_DIR$/grails-app/controllers" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/domain" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/init" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/grails-app/jobs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/services" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/taglib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/utils" isTestSource="false" />
@@ -309,5 +310,6 @@
     <orderEntry type="library" exported="" name="Gradle: stax:stax-api:1.0.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: stax:stax:1.2.0" level="project" />
     <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: mysql:mysql-connector-java:5.1.29" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.grails.plugins:grails3-i18n-enums:2.0.0" level="project" />
   </component>
 </module>

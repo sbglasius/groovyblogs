@@ -6,7 +6,6 @@ import net.sf.ehcache.Element
 
 class BlogTagLib {
 
-    def grailsApplication
     def recentBlogsCache
     def recentStatsCache
 

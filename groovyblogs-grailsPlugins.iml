@@ -222,5 +222,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Gradle: stax:stax-api:1.0.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: stax:stax:1.2.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: mysql:mysql-connector-java:5.1.29" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.grails.plugins:grails3-i18n-enums:2.0.0" level="project" />
   </component>
 </module>

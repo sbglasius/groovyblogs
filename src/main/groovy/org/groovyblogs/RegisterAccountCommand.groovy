@@ -2,8 +2,7 @@ package org.groovyblogs
 
 import grails.validation.Validateable
 
-@Validateable
-class RegisterAccountCommand {
+class RegisterAccountCommand implements Validateable{
 
     String username
     String password

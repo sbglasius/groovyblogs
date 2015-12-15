@@ -12,7 +12,6 @@ import grails.transaction.NotTransactional
 import grails.transaction.Transactional
 import grails.util.Environment
 import net.sf.ehcache.Element
-import org.grails.plugin.platform.events.EventMessage
 
 @Transactional()
 class FeedService {
@@ -142,7 +141,8 @@ class FeedService {
                             }
 
                             if (config.thumbnail.enabled) {
-                                grailsEventsPublisher.event(new EventMessage('requestThumbnail', blogEntry, 'thumbnail'))
+                                // TODO Implement event
+//                                grailsEventsPublisher.event(new EventMessage('requestThumbnail', blogEntry, 'thumbnail'))
                             }
                         }
                     } catch (t) {
