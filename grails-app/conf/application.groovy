@@ -1,4 +1,5 @@
 import org.groovyblogs.UserService
+import org.hibernate.dialect.MySQL5InnoDBDialect
 
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
@@ -16,17 +17,6 @@ println "Expected config locations: ${grails.config.locations}"
 
 // grails.config.locations = [ "file:/opt/groovyblogs/groovyblogs-config.properties" ]
 
-grails.controllers.defaultScope = 'singleton'
-grails.converters.encoding = "UTF-8"
-grails.enable.native2ascii = true
-grails.exceptionresolver.params.exclude = ['password']
-grails.hibernate.cache.queries = false
-grails.hibernate.osiv.readonly = false
-grails.hibernate.pass.readonly = false
-grails.json.legacy.builder = false
-grails.mail.host = "localhost"
-grails.mail.default.from = "info@groovyblogs.org"
-grails.mime.disable.accept.header.userAgents = ['Gecko', 'WebKit', 'Presto', 'Trident']
 grails.mime.types = [
         all          : '*/*',
         atom         : 'application/atom+xml',
@@ -42,27 +32,6 @@ grails.mime.types = [
         hal          : ['application/hal+json', 'application/hal+xml'],
         xml          : ['text/xml', 'application/xml']
 ]
-grails.project.groupId = appName
-grails.scaffolding.templates.domainSuffix = 'Instance'
-grails.spring.bean.packages = []
-grails.views.default.codec = "html"
-grails {
-    views {
-        gsp {
-            encoding = 'UTF-8'
-            htmlcodec = 'xml'
-            codecs {
-                expression = 'html'
-                scriptlet = 'html'
-                taglib = 'none'
-                staticparts = 'none'
-            }
-        }
-        // escapes all not-encoded output at final stage of outputting
-        // filteringCodecForContentType.'text/html' = 'html'
-    }
-}
-grails.web.disable.multipart = false
 
 thumbnail {
     enabled = false
@@ -254,6 +223,41 @@ recaptcha {
 
     // Communicate using HTTPS
     useSecureAPI = true
+}
+
+dataSource {
+    pooled = true
+    jmxExport = true
+}
+hibernate {
+    cache.use_second_level_cache = true
+    cache.use_query_cache = false
+//    cache.region.factory_class = 'org.hibernate.cache.SingletonEhCacheRegionFactory'
+    cache.region.factory_class = 'org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory' // Hibernate 4
+    singleSession = true // configure OSIV singleSession mode
+    flush.mode = 'manual' // OSIV session flush mode outside of transactional context
+}
+
+environments {
+    development {
+        dataSource {
+            dbCreate = "update"
+            url = "jdbc:mysql://localhost:3306/groovyblogs"
+            driverClassName = "com.mysql.jdbc.Driver"
+            dialect = MySQL5InnoDBDialect
+            username = "root"
+            password = "root"
+        }
+    }
+    test {
+        dataSource {
+            dbCreate = "update"
+            driverClassName = "org.h2.Driver"
+            username = "sa"
+            password = ""
+            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+        }
+    }
 }
 
 

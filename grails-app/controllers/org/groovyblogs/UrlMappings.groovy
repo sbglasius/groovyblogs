@@ -1,3 +1,5 @@
+package org.groovyblogs
+
 class UrlMappings {
     static mappings = {
         "/feed/atom"(controller: 'feed', action: 'atom')

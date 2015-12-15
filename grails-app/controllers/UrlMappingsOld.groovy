@@ -1,4 +1,4 @@
-class UrlMappings {
+class UrlMappingsOld {
 
     static mappings = {
         "/$controller/$action?/$id?(.$format)?"{
