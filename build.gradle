@@ -41,6 +41,7 @@ assets {
 repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
+//    maven { url "http://dl.bintray.com/iamthechad/plugins" }
 }
 
 dependencyManagement {
@@ -63,7 +64,19 @@ dependencies {
     compile "org.hibernate:hibernate-ehcache"
     compile "org.grails.plugins:scaffolding"
 
+    runtime 'mysql:mysql-connector-java:5.1.29'
+    compile 'jfree:jfreechart:1.0.4'
+    compile 'net.homeip.yusuke:twitter4j:2.0.10'
+    compile 'com.rometools:rome:1.5.0'
+    compile 'com.google.code.maven-play-plugin.spy:memcached:2.4.2'
+    compile 'com.commsen:jwebthumb:0.3'
+
+
+    compile "org.grails.plugins:spring-security-core:3.0.0.M1"
+    compile "org.grails.plugins:recaptcha:3.0.1"
+
     runtime "org.grails.plugins:asset-pipeline"
+
 
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"

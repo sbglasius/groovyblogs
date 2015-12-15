@@ -1,123 +1,29 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta name="layout" content="main"/>
-        <title>Welcome to Grails</title>
-        <style type="text/css" media="screen">
-            #status {
-                background-color: #eee;
-                border: .2em solid #fff;
-                margin: 2em 2em 1em;
-                padding: 1em;
-                width: 12em;
-                float: left;
-                -moz-box-shadow: 0px 0px 1.25em #ccc;
-                -webkit-box-shadow: 0px 0px 1.25em #ccc;
-                box-shadow: 0px 0px 1.25em #ccc;
-                -moz-border-radius: 0.6em;
-                -webkit-border-radius: 0.6em;
-                border-radius: 0.6em;
-            }
+	<head>
+		<meta name="layout" content="main"/>
+		<title>Welcome to Groovy-Blogs</title>
+	</head>
+	<body>
+    <div class="jumbotron">
+        <h1 class="text-center">The new GroovyBlogs is coming.</h1>
+        <p>
+            The old groovyblog's hosting provider stopped their sponsorship on Sept. 1st. Since then we have been working hard on
+            getting it back online.
+        </p>
+        <p>
+            We are reusing the code that Glen Smith wrote (running on Grails 1.2) and are revamping it to run on the latest Grails. This
+            takes a little time, so please bear with us.
+        </p>
+        <p>
+            The good part is, that the feeds are running again and that you can read the RSS feeds again.
+        </p>
+        <p>
+            The new GroovyBlogs are run by the team behind <a href="http://gr8conf.org">GR8Conf</a> and the hosting is sponsored by <a href="http://easyspeedy.com">EasySpeedy</a>
+        </p>
+        <h3 class="text-center">Please stay tuned while we get the rest of the site working again</h3>
+        <p>For questions and to give moral support write <a href="mailto:sbglasius(at)gr8conf.org">sbglasius<i class="fa fa-at"></i>gr8conf.org</a>.</p>
+    </div>
 
-            #status ul {
-                font-size: 0.9em;
-                list-style-type: none;
-                margin-bottom: 0.6em;
-                padding: 0;
-            }
-
-            #status li {
-                line-height: 1.3;
-            }
-
-            #status h1 {
-                text-transform: uppercase;
-                font-size: 1.1em;
-                margin: 0 0 0.3em;
-            }
-
-            #page-body {
-                margin: 2em 1em 1.25em 18em;
-            }
-
-            h2 {
-                margin-top: 1em;
-                margin-bottom: 0.3em;
-                font-size: 1em;
-            }
-
-            p {
-                line-height: 1.5;
-                margin: 0.25em 0;
-            }
-
-            #controller-list ul {
-                list-style-position: inside;
-            }
-
-            #controller-list li {
-                line-height: 1.3;
-                list-style-position: inside;
-                margin: 0.25em 0;
-            }
-
-            @media screen and (max-width: 480px) {
-                #status {
-                    display: none;
-                }
-
-                #page-body {
-                    margin: 0 1em 1em;
-                }
-
-                #page-body h1 {
-                    margin-top: 0;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div id="status" role="complementary">
-            <h1>Application Status</h1>
-            <ul>
-                <li>Environment: ${grails.util.Environment.current.name}</li>
-                <li>App profile: ${grailsApplication.config.grails?.profile}</li>
-                <li>App version: <g:meta name="info.app.version"/></li>
-                <li>Grails version: <g:meta name="info.app.grailsVersion"/></li>
-                <li>Groovy version: ${GroovySystem.getVersion()}</li>
-                <li>JVM version: ${System.getProperty('java.version')}</li>
-                <li>Reloading active: ${grails.util.Environment.reloadingAgentEnabled}</li>
-            </ul>
-            <h1>Artefacts</h1>
-            <ul>
-                <li>Controllers: ${grailsApplication.controllerClasses.size()}</li>
-                <li>Domains: ${grailsApplication.domainClasses.size()}</li>
-                <li>Services: ${grailsApplication.serviceClasses.size()}</li>
-                <li>Tag Libraries: ${grailsApplication.tagLibClasses.size()}</li>
-            </ul>
-            <h1>Installed Plugins</h1>
-            <ul>
-                <g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
-                    <li>${plugin.name} - ${plugin.version}</li>
-                </g:each>
-            </ul>
-        </div>
-        <div id="page-body" role="main">
-            <h1>Welcome to Grails</h1>
-            <p>Congratulations, you have successfully started your first Grails application! At the moment
-               this is the default page, feel free to modify it to either redirect to a controller or display whatever
-               content you may choose. Below is a list of controllers that are currently deployed in this application,
-               click on each to execute its default action:</p>
-
-            <div id="controller-list" role="navigation">
-                <h2>Available Controllers:</h2>
-                <ul>
-                    <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-                        <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-                    </g:each>
-                </ul>
-            </div>
-        </div>
-    </body>
+	</body>
 </html>

@@ -34,7 +34,7 @@ grails.project.dependency.resolution = {
 //        compile 'commons-httpclient:commons-httpclient:3.1'
         compile 'com.google.code.maven-play-plugin.spy:memcached:2.4.2'
 
-        test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
+//        test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
         compile 'com.commsen:jwebthumb:0.3'
     }
 
@@ -49,7 +49,7 @@ grails.project.dependency.resolution = {
         compile ":less-asset-pipeline:2.3.0"
         compile ":quartz:1.0.2"
         compile ":quartz-monitor:1.1"
-        compile ":spring-security-core:2.0-RC5"
+//        compile ":spring-security-core:2.0-RC5"
         compile ":google-chart:0.5.2"
         compile ":mail:1.0.7"
         compile ":greenmail:1.3.4"
@@ -59,7 +59,7 @@ grails.project.dependency.resolution = {
         compile ":google-analytics:2.3.3"
         compile ":fields:1.5.1"
         compile ":i18n-enums:1.0.7"
-        compile ":recaptcha:1.3.0"
+//        compile ":recaptcha:1.3.0"
         compile ":platform-core:1.0.0"
         compile ":rest-client-builder:2.1.1"
 
