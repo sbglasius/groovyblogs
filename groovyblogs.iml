@@ -34,6 +34,7 @@
         <sourceRoots>
           <root url="file://$MODULE_DIR$/grails-app/utils" />
           <root url="file://$MODULE_DIR$/grails-app/init" />
+          <root url="file://$MODULE_DIR$/grails-app/jobs" />
           <root url="file://$MODULE_DIR$/src/main/resources" />
           <root url="file://$MODULE_DIR$/grails-app/services" />
           <root url="file://$MODULE_DIR$/grails-app/domain" />
@@ -131,11 +132,9 @@
     <orderEntry type="library" exported="" name="Gradle: org.jboss.logging:jboss-logging:3.1.3.GA" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.jboss.logging:jboss-logging-annotations:1.2.0.Beta1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.hibernate:hibernate-core:4.3.11.Final" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: net.sf.ehcache:ehcache-core:2.4.3" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.grails.plugins:fields:2.1.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.springframework.security:spring-security-core:3.2.8.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.springframework.security:spring-security-web:3.2.8.RELEASE" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: net.sf.ehcache:ehcache:2.9.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: ch.qos.logback:logback-core:1.1.3" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.4.6" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-context:4.1.8.RELEASE" level="project" />
@@ -311,5 +310,18 @@
     <orderEntry type="library" exported="" name="Gradle: stax:stax:1.2.0" level="project" />
     <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: mysql:mysql-connector-java:5.1.29" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.grails.plugins:grails3-i18n-enums:2.0.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.grails.plugins:cache-ehcache:2.0.0.BUILD-SNAPSHOT" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: net.sf.ehcache:ehcache:2.10.1" level="project" />
+    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: com.bertramlabs.plugins:less-asset-pipeline:2.6.2" level="project" />
+    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: log4j:log4j:1.2.17" level="project" />
+    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: com.github.sommeri:less4j:1.15.1" level="project" />
+    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: com.github.sommeri:less4j-javascript:0.0.1" level="project" />
+    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: org.antlr:antlr-runtime:3.5.2" level="project" />
+    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: commons-beanutils:commons-beanutils:1.8.3" level="project" />
+    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: org.json:json:20090211" level="project" />
+    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: junit:junit:4.11" level="project" />
+    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: ro.isdc.wro4j:rhino:1.7R5-20130223-1" level="project" />
+    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: commons-io:commons-io:2.3" level="project" />
   </component>
 </module>

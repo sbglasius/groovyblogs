@@ -59,11 +59,9 @@
             <element id="library" level="project" name="Gradle: org.jboss.logging:jboss-logging:3.1.3.GA" />
             <element id="library" level="project" name="Gradle: org.jboss.logging:jboss-logging-annotations:1.2.0.Beta1" />
             <element id="library" level="project" name="Gradle: org.hibernate:hibernate-core:4.3.11.Final" />
-            <element id="library" level="project" name="Gradle: net.sf.ehcache:ehcache-core:2.4.3" />
             <element id="library" level="project" name="Gradle: org.grails.plugins:fields:2.1.1" />
             <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-core:3.2.8.RELEASE" />
             <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-web:3.2.8.RELEASE" />
-            <element id="library" level="project" name="Gradle: net.sf.ehcache:ehcache:2.9.0" />
             <element id="library" level="project" name="Gradle: ch.qos.logback:logback-core:1.1.3" />
             <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.4.6" />
             <element id="library" level="project" name="Gradle: org.springframework:spring-context:4.1.8.RELEASE" />
@@ -183,11 +181,23 @@
             <element id="library" level="project" name="Gradle: com.rometools:rome-utils:1.5.0" />
             <element id="library" level="project" name="Gradle: org.jdom:jdom:2.0.2" />
             <element id="library" level="project" name="Gradle: org.simpleframework:simple-xml:2.3.5" />
-            <element id="library" level="project" name="Gradle: commons-io:commons-io:1.4" />
             <element id="library" level="project" name="Gradle: stax:stax-api:1.0.1" />
             <element id="library" level="project" name="Gradle: stax:stax:1.2.0" />
             <element id="library" level="project" name="Gradle: mysql:mysql-connector-java:5.1.29" />
-            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/grails/plugins/grails3-i18n-enums/2.0.0/grails3-i18n-enums-2.0.0.jar" />
+            <element id="library" level="project" name="Gradle: org.grails.plugins:grails3-i18n-enums:2.0.0" />
+            <element id="library" level="project" name="Gradle: org.grails.plugins:cache-ehcache:2.0.0.BUILD-SNAPSHOT" />
+            <element id="library" level="project" name="Gradle: net.sf.ehcache:ehcache:2.10.1" />
+            <element id="library" level="project" name="Gradle: org.hamcrest:hamcrest-core:1.3" />
+            <element id="library" level="project" name="Gradle: com.bertramlabs.plugins:less-asset-pipeline:2.6.2" />
+            <element id="library" level="project" name="Gradle: log4j:log4j:1.2.17" />
+            <element id="library" level="project" name="Gradle: com.github.sommeri:less4j:1.15.1" />
+            <element id="library" level="project" name="Gradle: com.github.sommeri:less4j-javascript:0.0.1" />
+            <element id="library" level="project" name="Gradle: org.antlr:antlr-runtime:3.5.2" />
+            <element id="library" level="project" name="Gradle: commons-beanutils:commons-beanutils:1.8.3" />
+            <element id="library" level="project" name="Gradle: org.json:json:20090211" />
+            <element id="library" level="project" name="Gradle: junit:junit:4.11" />
+            <element id="library" level="project" name="Gradle: ro.isdc.wro4j:rhino:1.7R5-20130223-1" />
+            <element id="library" level="project" name="Gradle: commons-io:commons-io:2.3" />
           </element>
         </element>
         <element id="directory" name="META-INF">
@@ -248,11 +258,9 @@
             <element id="library" level="project" name="Gradle: org.jboss.logging:jboss-logging:3.1.3.GA" />
             <element id="library" level="project" name="Gradle: org.jboss.logging:jboss-logging-annotations:1.2.0.Beta1" />
             <element id="library" level="project" name="Gradle: org.hibernate:hibernate-core:4.3.11.Final" />
-            <element id="library" level="project" name="Gradle: net.sf.ehcache:ehcache-core:2.4.3" />
             <element id="library" level="project" name="Gradle: org.grails.plugins:fields:2.1.1" />
             <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-core:3.2.8.RELEASE" />
             <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-web:3.2.8.RELEASE" />
-            <element id="library" level="project" name="Gradle: net.sf.ehcache:ehcache:2.9.0" />
             <element id="library" level="project" name="Gradle: ch.qos.logback:logback-core:1.1.3" />
             <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.4.6" />
             <element id="library" level="project" name="Gradle: org.springframework:spring-context:4.1.8.RELEASE" />
@@ -372,11 +380,23 @@
             <element id="library" level="project" name="Gradle: com.rometools:rome-utils:1.5.0" />
             <element id="library" level="project" name="Gradle: org.jdom:jdom:2.0.2" />
             <element id="library" level="project" name="Gradle: org.simpleframework:simple-xml:2.3.5" />
-            <element id="library" level="project" name="Gradle: commons-io:commons-io:1.4" />
             <element id="library" level="project" name="Gradle: stax:stax-api:1.0.1" />
             <element id="library" level="project" name="Gradle: stax:stax:1.2.0" />
             <element id="library" level="project" name="Gradle: mysql:mysql-connector-java:5.1.29" />
-            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/grails/plugins/grails3-i18n-enums/2.0.0/grails3-i18n-enums-2.0.0.jar" />
+            <element id="library" level="project" name="Gradle: org.grails.plugins:grails3-i18n-enums:2.0.0" />
+            <element id="library" level="project" name="Gradle: org.grails.plugins:cache-ehcache:2.0.0.BUILD-SNAPSHOT" />
+            <element id="library" level="project" name="Gradle: net.sf.ehcache:ehcache:2.10.1" />
+            <element id="library" level="project" name="Gradle: org.hamcrest:hamcrest-core:1.3" />
+            <element id="library" level="project" name="Gradle: com.bertramlabs.plugins:less-asset-pipeline:2.6.2" />
+            <element id="library" level="project" name="Gradle: log4j:log4j:1.2.17" />
+            <element id="library" level="project" name="Gradle: com.github.sommeri:less4j:1.15.1" />
+            <element id="library" level="project" name="Gradle: com.github.sommeri:less4j-javascript:0.0.1" />
+            <element id="library" level="project" name="Gradle: org.antlr:antlr-runtime:3.5.2" />
+            <element id="library" level="project" name="Gradle: commons-beanutils:commons-beanutils:1.8.3" />
+            <element id="library" level="project" name="Gradle: org.json:json:20090211" />
+            <element id="library" level="project" name="Gradle: junit:junit:4.11" />
+            <element id="library" level="project" name="Gradle: ro.isdc.wro4j:rhino:1.7R5-20130223-1" />
+            <element id="library" level="project" name="Gradle: commons-io:commons-io:2.3" />
           </element>
         </element>
         <element id="directory" name="META-INF">
@@ -721,6 +741,15 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.bertramlabs.plugins/asset-pipeline-core/2.6.2/bf479d6bb8a768847b9b37298bf1312ff46f41b3/asset-pipeline-core-2.6.2-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Gradle: com.bertramlabs.plugins:less-asset-pipeline:2.6.2">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.bertramlabs.plugins/less-asset-pipeline/2.6.2/4f327202eab4ee8be6dbc1c99f8d890014b4635/less-asset-pipeline-2.6.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.bertramlabs.plugins/less-asset-pipeline/2.6.2/a464a23c699fbfbbf3b4c1a9216082e63c7f2804/less-asset-pipeline-2.6.2-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Gradle: com.commsen:jwebthumb:0.3">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/com/commsen/jwebthumb/0.3/jwebthumb-0.3.jar!/" />
@@ -761,6 +790,22 @@
       </CLASSES>
       <JAVADOC />
       <SOURCES />
+    </library>
+    <library name="Gradle: com.github.sommeri:less4j-javascript:0.0.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/github/sommeri/less4j-javascript/0.0.1/less4j-javascript-0.0.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Gradle: com.github.sommeri:less4j:1.15.1">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.sommeri/less4j/1.15.1/2bb0b66bb22d1de661825d4933e1727a0bd16386/less4j-1.15.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.sommeri/less4j/1.15.1/1a44db4aedb56945aac39b1a9daa17e5da20ca85/less4j-1.15.1-sources.jar!/" />
+      </SOURCES>
     </library>
     <library name="Gradle: com.goldmansachs:gs-collections-api:5.1.0">
       <CLASSES>
@@ -888,6 +933,15 @@
       <JAVADOC />
       <SOURCES />
     </library>
+    <library name="Gradle: commons-beanutils:commons-beanutils:1.8.3">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils/1.8.3/commons-beanutils-1.8.3.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils/1.8.3/commons-beanutils-1.8.3-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Gradle: commons-codec:commons-codec:1.6">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.6/commons-codec-1.6.jar!/" />
@@ -914,6 +968,13 @@
     <library name="Gradle: commons-io:commons-io:1.4">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/commons-io/commons-io/1.4/commons-io-1.4.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Gradle: commons-io:commons-io:2.3">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-io/commons-io/2.3/commons-io-2.3.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
@@ -1037,6 +1098,13 @@
       <JAVADOC />
       <SOURCES />
     </library>
+    <library name="Gradle: junit:junit:4.11">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
     <library name="Gradle: junit:junit:4.12">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/junit/junit/4.12/2973d150c0dc1fefe998f834810d68f278ea58ec/junit-4.12.jar!/" />
@@ -1045,6 +1113,13 @@
       <SOURCES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/junit/junit/4.12/a6c32b40bf3d76eca54e3c601e5d1470c86fcdfa/junit-4.12-sources.jar!/" />
       </SOURCES>
+    </library>
+    <library name="Gradle: log4j:log4j:1.2.17">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/log4j/log4j/1.2.17/log4j-1.2.17.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
     </library>
     <library name="Gradle: mysql:mysql-connector-java:5.1.29">
       <CLASSES>
@@ -1085,21 +1160,14 @@
       <JAVADOC />
       <SOURCES />
     </library>
-    <library name="Gradle: net.sf.ehcache:ehcache-core:2.4.3">
+    <library name="Gradle: net.sf.ehcache:ehcache:2.10.1">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.ehcache/ehcache-core/2.4.3/fd258ef6959f27fb678b04f90139ded4588e2d15/ehcache-core-2.4.3.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.ehcache/ehcache/2.10.1/a507a1302b631d0718fe29ae95d4e52e646ecc5a/ehcache-2.10.1.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.ehcache/ehcache-core/2.4.3/feb524620a8697865caa581a51a2e0921620b71c/ehcache-core-2.4.3-sources.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.ehcache/ehcache/2.10.1/4e85d6f9a50017296937f55e28e2661581748b4f/ehcache-2.10.1-sources.jar!/" />
       </SOURCES>
-    </library>
-    <library name="Gradle: net.sf.ehcache:ehcache:2.9.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/net/sf/ehcache/ehcache/2.9.0/ehcache-2.9.0.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
     </library>
     <library name="Gradle: net.sourceforge.cssparser:cssparser:0.9.14">
       <CLASSES>
@@ -1140,6 +1208,13 @@
     <library name="Gradle: opensymphony:sitemesh:2.4">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/opensymphony/sitemesh/2.4/sitemesh-2.4.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Gradle: org.antlr:antlr-runtime:3.5.2">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/antlr/antlr-runtime/3.5.2/antlr-runtime-3.5.2.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
@@ -1478,6 +1553,15 @@
       <JAVADOC />
       <SOURCES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails.plugins/asset-pipeline/3.0.11/15273d5af2127271e208049882444f321eba0afd/asset-pipeline-3.0.11-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.grails.plugins:cache-ehcache:2.0.0.BUILD-SNAPSHOT">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/grails/plugins/cache-ehcache/2.0.0.BUILD-SNAPSHOT/cache-ehcache-2.0.0.BUILD-SNAPSHOT.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/grails/plugins/cache-ehcache/2.0.0.BUILD-SNAPSHOT/cache-ehcache-2.0.0.BUILD-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Gradle: org.grails.plugins:cache:3.0.1">
@@ -2101,6 +2185,13 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.json/json/20080701/71bd54221e701df9d112bf9ba2918e13b0671f3a/json-20080701-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Gradle: org.json:json:20090211">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/json/json/20090211/json-20090211.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
     <library name="Gradle: org.mockito:mockito-core:1.10.19">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mockito/mockito-core/1.10.19/e8546f5bef4e061d8dd73895b4e8f40e3fe6effe/mockito-core-1.10.19.jar!/" />
@@ -2468,6 +2559,13 @@
       <SOURCES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.yaml/snakeyaml/1.14/4c6bcedc3efa772a5ae1c2fd01efee8e4d15edac/snakeyaml-1.14-sources.jar!/" />
       </SOURCES>
+    </library>
+    <library name="Gradle: ro.isdc.wro4j:rhino:1.7R5-20130223-1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/ro/isdc/wro4j/rhino/1.7R5-20130223-1/rhino-1.7R5-20130223-1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
     </library>
     <library name="Gradle: stax:stax-api:1.0.1">
       <CLASSES>

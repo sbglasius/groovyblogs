@@ -8,13 +8,17 @@ buildscript {
     }
     dependencies {        
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
-        classpath 'com.bertramlabs.plugins:asset-pipeline-gradle:2.5.0'
+        classpath 'com.bertramlabs.plugins:asset-pipeline-gradle:2.6.7'
+        classpath 'com.bertramlabs.plugins:less-asset-pipeline:2.6.7'
+
         classpath "org.grails.plugins:hibernate:4.3.10.5"
     }
 }
 
 plugins {
     id "io.spring.dependency-management" version "0.5.2.RELEASE"
+    id 'com.craigburke.bower-installer' version '2.5.1'
+
 }
 
 version "2.1.RC4"
@@ -36,6 +40,23 @@ ext {
 assets {
     minifyJs = true
     minifyCss = true
+    excludes = ['**/*.less','**/LICENSE'] //Example Exclude GLOB pattern
+    includes = ['application.css.less']
+}
+
+bower {
+    installBase = 'grails-app/assets/bower'
+
+    'bootstrap'('3.3.x') {
+        source 'less/**' >> 'less/'
+        source 'dist/fonts/**' >> 'fonts/'
+        source 'dist/js/**' >> 'js/'
+
+    }
+}
+
+configurations.all {
+    exclude module: 'ehcache-core'
 }
 
 repositories {
@@ -70,13 +91,14 @@ dependencies {
     compile 'com.rometools:rome:1.5.0'
     compile 'com.google.code.maven-play-plugin.spy:memcached:2.4.2'
     compile 'com.commsen:jwebthumb:0.3'
-
+    compile "org.grails.plugins:cache-ehcache:2.0.0.BUILD-SNAPSHOT"
 
     compile "org.grails.plugins:spring-security-core:3.0.0.M1"
     compile "org.grails.plugins:recaptcha:3.0.1"
     compile "org.grails.plugins:grails3-i18n-enums:2.0.0"
 
     runtime "org.grails.plugins:asset-pipeline"
+    assets 'com.bertramlabs.plugins:less-asset-pipeline:2.6.2'
 
 
     testCompile "org.grails:grails-plugin-testing"

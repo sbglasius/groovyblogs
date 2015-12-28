@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" dynamicConfig="true">
+
+    <diskStore path="java.io.tmpdir" />
+
+    <cacheManagerEventListenerFactory class="" properties="" />
+
+    <defaultCache maxElementsInMemory="10000"
+                  eternal="false"
+                  timeToLiveSeconds="1200"
+                  overflowToDisk="false"
+                  diskPersistent="false" />
+
+</ehcache>

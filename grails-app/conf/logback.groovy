@@ -1,3 +1,6 @@
+import ch.qos.logback.classic.encoder.PatternLayoutEncoder
+import ch.qos.logback.core.ConsoleAppender
+import ch.qos.logback.core.FileAppender
 import grails.util.BuildSettings
 import grails.util.Environment
 
@@ -20,4 +23,15 @@ if (Environment.isDevelopmentMode() && targetDir) {
         }
     }
     logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
+//    logger("org.springframework.boot", DEBUG)
+}
+
+[ 'grails.app.domain.org.groovyblogs',
+        'grails.app.controllers.org.groovyblogs',
+        'grails.app.services.org.groovyblogs',
+        'grails.app.taglibs.org.groovyblogs',
+        'grails.app.jobs.org.groovyblogs',
+        'org.springframework.cache'
+].each {
+    logger(it, DEBUG, ['STDOUT'], false)
 }
