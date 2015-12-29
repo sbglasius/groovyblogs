@@ -141,8 +141,7 @@ class FeedService {
                             }
 
                             if (config.thumbnail.enabled) {
-                                // TODO Implement event
-//                                grailsEventsPublisher.event(new EventMessage('requestThumbnail', blogEntry, 'thumbnail'))
+                                notify "thumbnail.request", blogEntry
                             }
                         }
                     } catch (t) {

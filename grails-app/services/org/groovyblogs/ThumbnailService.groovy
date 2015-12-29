@@ -35,7 +35,7 @@ class ThumbnailService implements InitializingBean {
     }
 
     void processThumbnail(String jobId, String key) {
-        def thumbRequest = pendingCache.get(key)?.value as ThumbRequest
+        def thumbRequest = pendingCache.get(key)?.objectValue as ThumbRequest
         if(thumbRequest?.jobId != jobId) {
             log.info("Discarding request for jobId: $jobId")
             pendingCache.remove(key)
@@ -57,8 +57,7 @@ class ThumbnailService implements InitializingBean {
         }
         def thumb = retrieve(blogEntry)
         if(!thumb) {
-           // TODO: Implement event
-//            grailsEventsPublisher.event(new EventMessage('requestThumbnail', blogEntry, 'thumbnail'))
+            notify "thumbnail.request", blogEntry
             return null
         }
         log.trace("Serving image for blogEntry: $blogEntry")
@@ -87,6 +86,9 @@ class ThumbnailService implements InitializingBean {
         root = new File(grailsApplication.config.thumbcache)
         root.mkdirs()
         log.info("Thumbs root set to $root.absolutePath")
+        on('thumbnail.request') { BlogEntry  blogEntry ->
+            this.requestThumbnail(blogEntry)
+        }
     }
 
     private static class ThumbRequest implements Serializable{

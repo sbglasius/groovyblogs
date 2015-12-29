@@ -50,8 +50,11 @@ bower {
     'bootstrap'('3.3.x') {
         source 'less/**' >> 'less/'
         source 'dist/fonts/**' >> 'fonts/'
-        source 'dist/js/**' >> 'js/'
-
+        source 'dist/js/bootstrap.js' >> 'js/'
+    }
+    'fontawesome'('4.5.x') {
+        source 'fonts/**' >> 'fonts/'
+        source 'less/**' >> 'less/'
     }
 }
 

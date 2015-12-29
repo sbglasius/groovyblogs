@@ -755,7 +755,9 @@
         <root url="jar://$MAVEN_REPOSITORY$/com/commsen/jwebthumb/0.3/jwebthumb-0.3.jar!/" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ideaLibSources/jwebthumb-0.3-sources.jar!/" />
+      </SOURCES>
     </library>
     <library name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.4.0">
       <CLASSES>
