@@ -29,7 +29,7 @@
         </tr>
         </thead>
         <tbody>
-        <g:each in="${userInstanceList}" status="i" var="userInstance">
+        <g:each in="${userList}" status="i" var="userInstance">
             <tr>
 
                 <td><g:link action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "username")}</g:link></td>
@@ -53,7 +53,7 @@
     </table>
 
     <div class="pagination">
-        <g:paginate total="${userInstanceCount ?: 0}"/>
+        <b:paginate total="${userInstanceCount ?: 0}"/>
     </div>
     <div>
         <g:link action="create" class="btn btn-primary"><g:message code="default.new.label" args="[entityName]"/></g:link>
