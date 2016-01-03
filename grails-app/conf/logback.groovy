@@ -32,7 +32,6 @@ if (Environment.isDevelopmentMode() && targetDir) {
         'grails.app.taglibs.org.groovyblogs',
         'grails.app.jobs.org.groovyblogs',
         'org.groovyblogs'
-//        'org.springframework.cache'
 ].each {
-    logger(it, DEBUG, ['STDOUT'], false)
+    logger(it, Environment.isDevelopmentMode() ? DEBUG : INFO, ['STDOUT'], false)
 }
