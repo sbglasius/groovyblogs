@@ -160,15 +160,6 @@
             <element id="library" level="project" name="Gradle: xml-apis:xml-apis:1.0.b2" />
             <element id="library" level="project" name="Gradle: org.aspectj:aspectjweaver:1.8.7" />
             <element id="library" level="project" name="Gradle: org.javassist:javassist:3.18.1-GA" />
-            <element id="library" level="project" name="Gradle: org.grails.plugins:asset-pipeline:3.0.11" />
-            <element id="library" level="project" name="Gradle: org.mozilla:rhino:1.7R4" />
-            <element id="library" level="project" name="Gradle: com.bertramlabs.plugins:asset-pipeline-core:2.6.2" />
-            <element id="library" level="project" name="Gradle: com.google.javascript:closure-compiler:v20141023" />
-            <element id="library" level="project" name="Gradle: com.google.javascript:closure-compiler-externs:v20141023" />
-            <element id="library" level="project" name="Gradle: args4j:args4j:2.0.26" />
-            <element id="library" level="project" name="Gradle: com.google.guava:guava:18.0" />
-            <element id="library" level="project" name="Gradle: com.google.protobuf:protobuf-java:2.5.0" />
-            <element id="library" level="project" name="Gradle: com.google.code.findbugs:jsr305:1.3.9" />
             <element id="library" level="project" name="Gradle: org.grails.plugins:recaptcha:3.0.1" />
             <element id="library" level="project" name="Gradle: org.grails:grails-datastore-rest-client:4.0.0.RELEASE" />
             <element id="library" level="project" name="Gradle: javax.servlet:javax.servlet-api:3.0.1" />
@@ -198,6 +189,19 @@
             <element id="library" level="project" name="Gradle: junit:junit:4.11" />
             <element id="library" level="project" name="Gradle: ro.isdc.wro4j:rhino:1.7R5-20130223-1" />
             <element id="library" level="project" name="Gradle: commons-io:commons-io:2.3" />
+            <element id="library" level="project" name="Gradle: org.grails.plugins:asset-pipeline:3.0.11" />
+            <element id="library" level="project" name="Gradle: com.bertramlabs.plugins:asset-pipeline-core:2.6.2" />
+            <element id="library" level="project" name="Gradle: org.mozilla:rhino:1.7R4" />
+            <element id="library" level="project" name="Gradle: com.google.javascript:closure-compiler:v20141023" />
+            <element id="library" level="project" name="Gradle: com.google.protobuf:protobuf-java:2.5.0" />
+            <element id="library" level="project" name="Gradle: com.google.javascript:closure-compiler-externs:v20141023" />
+            <element id="library" level="project" name="Gradle: args4j:args4j:2.0.26" />
+            <element id="library" level="project" name="Gradle: com.google.guava:guava:18.0" />
+            <element id="library" level="project" name="Gradle: com.google.code.findbugs:jsr305:1.3.9" />
+            <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails.plugins/quartz/2.0.3/afbe3efd7ec72f59d84ef1a827b709b5cc6fe0cd/quartz-2.0.3.jar" />
+            <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails.plugins/quartz-monitor/1.2/21bf5b77b70e4a91d3cb59cc8fb45639ed02a17e/quartz-monitor-1.2.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/quartz-scheduler/quartz/2.2.1/quartz-2.2.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/c3p0/c3p0/0.9.1.1/c3p0-0.9.1.1.jar" />
           </element>
         </element>
         <element id="directory" name="META-INF">
@@ -359,15 +363,6 @@
             <element id="library" level="project" name="Gradle: xml-apis:xml-apis:1.0.b2" />
             <element id="library" level="project" name="Gradle: org.aspectj:aspectjweaver:1.8.7" />
             <element id="library" level="project" name="Gradle: org.javassist:javassist:3.18.1-GA" />
-            <element id="library" level="project" name="Gradle: org.grails.plugins:asset-pipeline:3.0.11" />
-            <element id="library" level="project" name="Gradle: org.mozilla:rhino:1.7R4" />
-            <element id="library" level="project" name="Gradle: com.bertramlabs.plugins:asset-pipeline-core:2.6.2" />
-            <element id="library" level="project" name="Gradle: com.google.javascript:closure-compiler:v20141023" />
-            <element id="library" level="project" name="Gradle: com.google.javascript:closure-compiler-externs:v20141023" />
-            <element id="library" level="project" name="Gradle: args4j:args4j:2.0.26" />
-            <element id="library" level="project" name="Gradle: com.google.guava:guava:18.0" />
-            <element id="library" level="project" name="Gradle: com.google.protobuf:protobuf-java:2.5.0" />
-            <element id="library" level="project" name="Gradle: com.google.code.findbugs:jsr305:1.3.9" />
             <element id="library" level="project" name="Gradle: org.grails.plugins:recaptcha:3.0.1" />
             <element id="library" level="project" name="Gradle: org.grails:grails-datastore-rest-client:4.0.0.RELEASE" />
             <element id="library" level="project" name="Gradle: javax.servlet:javax.servlet-api:3.0.1" />
@@ -397,6 +392,19 @@
             <element id="library" level="project" name="Gradle: junit:junit:4.11" />
             <element id="library" level="project" name="Gradle: ro.isdc.wro4j:rhino:1.7R5-20130223-1" />
             <element id="library" level="project" name="Gradle: commons-io:commons-io:2.3" />
+            <element id="library" level="project" name="Gradle: org.grails.plugins:asset-pipeline:3.0.11" />
+            <element id="library" level="project" name="Gradle: com.bertramlabs.plugins:asset-pipeline-core:2.6.2" />
+            <element id="library" level="project" name="Gradle: org.mozilla:rhino:1.7R4" />
+            <element id="library" level="project" name="Gradle: com.google.javascript:closure-compiler:v20141023" />
+            <element id="library" level="project" name="Gradle: com.google.protobuf:protobuf-java:2.5.0" />
+            <element id="library" level="project" name="Gradle: com.google.javascript:closure-compiler-externs:v20141023" />
+            <element id="library" level="project" name="Gradle: args4j:args4j:2.0.26" />
+            <element id="library" level="project" name="Gradle: com.google.guava:guava:18.0" />
+            <element id="library" level="project" name="Gradle: com.google.code.findbugs:jsr305:1.3.9" />
+            <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails.plugins/quartz/2.0.3/afbe3efd7ec72f59d84ef1a827b709b5cc6fe0cd/quartz-2.0.3.jar" />
+            <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails.plugins/quartz-monitor/1.2/21bf5b77b70e4a91d3cb59cc8fb45639ed02a17e/quartz-monitor-1.2.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/quartz-scheduler/quartz/2.2.1/quartz-2.2.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/c3p0/c3p0/0.9.1.1/c3p0-0.9.1.1.jar" />
           </element>
         </element>
         <element id="directory" name="META-INF">
@@ -474,7 +482,7 @@
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleHome" value="$USER_HOME$/.sdkman/gradle/2.8" />
-        <option name="gradleJvm" value="#JAVA_HOME" />
+        <option name="gradleJvm" value="1.8" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -646,7 +654,7 @@
       <module fileurl="file://$PROJECT_DIR$/groovyblogs-grailsPlugins.iml" filepath="$PROJECT_DIR$/groovyblogs-grailsPlugins.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="SvnBranchConfigurationManager">
@@ -694,6 +702,13 @@
     <library name="Gradle: asm:asm:3.3.1">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/asm/asm/3.3.1/asm-3.3.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Gradle: c3p0:c3p0:0.9.1.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/c3p0/c3p0/0.9.1.1/c3p0-0.9.1.1.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
@@ -755,9 +770,7 @@
         <root url="jar://$MAVEN_REPOSITORY$/com/commsen/jwebthumb/0.3/jwebthumb-0.3.jar!/" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES>
-        <root url="jar://$USER_HOME$/.ideaLibSources/jwebthumb-0.3-sources.jar!/" />
-      </SOURCES>
+      <SOURCES />
     </library>
     <library name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.4.0">
       <CLASSES>
@@ -1611,6 +1624,24 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails.plugins/hibernate/4.3.10.7/d7078edee5271de6ddff81b9a0804de1a0924a65/hibernate-4.3.10.7-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Gradle: org.grails.plugins:quartz-monitor:1.2">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails.plugins/quartz-monitor/1.2/21bf5b77b70e4a91d3cb59cc8fb45639ed02a17e/quartz-monitor-1.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails.plugins/quartz-monitor/1.2/e9d007d6bbf41fe2851c76ef07f4eb4530a04947/quartz-monitor-1.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.grails.plugins:quartz:2.0.3">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails.plugins/quartz/2.0.3/afbe3efd7ec72f59d84ef1a827b709b5cc6fe0cd/quartz-2.0.3.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails.plugins/quartz/2.0.3/d48faae7eb5dafb0243f6dd666054ca06e244db4/quartz-2.0.3-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Gradle: org.grails.plugins:recaptcha:3.0.1">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.grails.plugins/recaptcha/3.0.1/75ec1e685d2e42eaa9ff7796e4f24ec082c6cb7a/recaptcha-3.0.1.jar!/" />
@@ -2216,6 +2247,15 @@
       </CLASSES>
       <JAVADOC />
       <SOURCES />
+    </library>
+    <library name="Gradle: org.quartz-scheduler:quartz:2.2.1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/quartz-scheduler/quartz/2.2.1/quartz-2.2.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.ideaLibSources/quartz-2.2.1-sources.jar!/" />
+      </SOURCES>
     </library>
     <library name="Gradle: org.reactivestreams:reactive-streams:1.0.0">
       <CLASSES>

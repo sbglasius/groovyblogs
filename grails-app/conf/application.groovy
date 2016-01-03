@@ -176,12 +176,15 @@ try {
             timeToLiveSeconds 24 * 60 * 60
         }
     }
-
+    quartz {
+        jdbcStore = false
+    }
     environments {
         development {
             grails.mail.port = com.icegreen.greenmail.util.ServerSetupTest.SMTP.port
             quartz {
                 autoStartup = true
+                pluginEnabled = true
             }
         }
         test {
@@ -193,6 +196,8 @@ try {
             grails.mail.host = "localhost"
             grails.mail.default.from = "sbglasius@groovyblogs.org"
             greenmail.disabled = true
+            pluginEnabled = true
+
         }
     }
 

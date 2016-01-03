@@ -3,7 +3,6 @@ package org.groovyblogs
 class UpdateTweetsJob {
 
     FeedService feedService
-    def grailsApplication
 
     def concurrent = false
 

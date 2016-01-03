@@ -54,12 +54,12 @@ class EntriesController {
     }
 
     def jump(Long id) {
-        BlogEntry be = entriesService.getEntry(id)
-        if (be) {
-            response.sendRedirect(be.link)
-        } else {
+        BlogEntry blogEntry = entriesService.getEntry(id)
+        if (!blogEntry) {
             flash.message = "Could not find link for blogEntry id $params.id"
             redirect(action: 'recent')
+        } else {
+            response.sendRedirect(blogEntry.link)
         }
     }
 

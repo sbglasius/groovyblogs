@@ -63,6 +63,7 @@ grails.project.dependency.resolution = {
         compile ":platform-core:1.0.0"
         compile ":rest-client-builder:2.1.1"
 
+
         runtime ":hibernate4:4.3.10"
 //        runtime ":hibernate:3.6.10.18"
         runtime ":database-migration:1.4.0"

@@ -4,6 +4,7 @@ class UpdateFeedsJob {
 
     FeedService feedService
 
+    static sessionRequired = false
     def concurrent = false
 
     static triggers = {
