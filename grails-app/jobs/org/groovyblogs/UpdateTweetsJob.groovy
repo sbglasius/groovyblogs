@@ -16,10 +16,10 @@ class UpdateTweetsJob {
         if (!grailsApplication.config.tweets.enable) {
             return
         }
-        log.info("Starting scheduled tweets check at: ${new Date()}")
+        log.debug("Starting scheduled tweets check at: ${new Date()}")
 
         feedService.updateTweets()
 
-        log.info("Finished scheduled tweets check at: ${new Date()}")
+        log.debug("Finished scheduled tweets check at: ${new Date()}")
     }
 }

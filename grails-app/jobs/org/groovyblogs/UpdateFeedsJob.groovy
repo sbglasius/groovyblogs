@@ -12,7 +12,7 @@ class UpdateFeedsJob {
 
     void execute() {
 
-        log.info("Starting scheduled feed check at: ${new Date()}")
+        log.debug("Starting scheduled feed check at: ${new Date()}")
 
         try {
             feedService.updateFeeds()
@@ -20,6 +20,6 @@ class UpdateFeedsJob {
             log.error("Error updating feeds: $t.message", t)
         }
 
-        log.info("Finished scheduled feed check at: ${new Date()}")
+        log.debug("Finished scheduled feed check at: ${new Date()}")
     }
 }

@@ -12,10 +12,10 @@ class UpdateListsJob {
 
     void execute() {
 
-        log.info("Starting scheduled lists check at: ${new Date()}")
+        log.debug("Starting scheduled lists check at: ${new Date()}")
 
         feedService.updateLists()
 
-        log.info("Finished scheduled lists check at: ${new Date()}")
+        log.debug("Finished scheduled lists check at: ${new Date()}")
     }
 }
