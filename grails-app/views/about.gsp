@@ -11,7 +11,7 @@
 
     <p>
         groovyblogs was first created by <a href="http://blogs.bytecode.com.au/glen" target="_blank">Glen Smith</a> in March 2007 (according to
-        <a href="http://web.archive.org/web/20070302182955/http://www.groovyblogs.org/entries/recen">archive.org</a>). Back then it was build on
+        <a href="http://web.archive.org/web/20070302182955/http://www.groovyblogs.org/entries/recent" target="_blank">archive.org</a>). Back then it was build on
         Grails 0.4.2! Since then it had undergone upgrades and improvements, reaching Grails 1.2.x. Then in September 2014 the previous hosting
         provider stopped its sponsorship, and Glen felt that it was time to move on; asking the team behind <a href="http://gr8conf.eu">GR8Conf Europe</a>
         if they would take over.
@@ -22,6 +22,9 @@
         on Grails 1.2.x and was using jSecurity for login. We have reused large portions of Glen's work, but had to replace some of it
         to get it running on Grails 2.4.x. The biggest changes are the replacement of jSecurity in favor of Spring Security and
         revamping the UI using Twitter Bootstrap.</p>
+    <p>
+        The current version is running on the latest Grails 3.0.x.
+    </p>
 
     <p>
         The new groovyblogs.org is maintained by the team behind <a href="http://gr8conf.eu">GR8Conf Europe</a> and the hosting is

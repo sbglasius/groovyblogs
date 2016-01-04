@@ -41,7 +41,7 @@ class EntriesService {
         if (blogEntry) {
             blogEntry.hitCount++
             blogEntry.addToVisits(new Date())
-            blogEntry.save(failOnError: true)
+            blogEntry.save()
         }
         return blogEntry
     }
