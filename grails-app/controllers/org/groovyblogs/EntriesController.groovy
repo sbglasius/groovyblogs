@@ -59,7 +59,8 @@ class EntriesController {
             flash.message = "Could not find link for blogEntry id $params.id"
             redirect(action: 'recent')
         } else {
-            response.sendRedirect(blogEntry.link)
+//            response.sendRedirect(blogEntry.link)
+            [blogEntry: blogEntry]
         }
     }
 
