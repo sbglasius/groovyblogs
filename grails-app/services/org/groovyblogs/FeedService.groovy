@@ -15,12 +15,16 @@ import grails.transaction.Transactional
 import grails.util.Environment
 import net.sf.ehcache.Element
 import org.grails.exceptions.reporting.DefaultStackTraceFilterer
+import org.springframework.transaction.annotation.Propagation
 
 import javax.annotation.PostConstruct
 
 @Transactional()
 class FeedService {
 
+    public static final String FEED_UPDATE = 'feed.update'
+    public static final String BLOG_MARK_SUCCESS = 'blog.mark.success'
+    public static final String BLOG_MARK_ERROR = 'blog.mark.error'
     GrailsApplication grailsApplication
     def listCache
     def feedCache
@@ -63,30 +67,23 @@ class FeedService {
         )
         for (SyndEntry entry in syndFeed.entries) {
             String title = entry.title
-            String description = entry.description?.value
+            String description = entry.description?.value ?: ''
             if (!description) {  // mustn't be rss... could be atom
-                description = entry.contents[0]?.value
+                description = entry.contents[0]?.value ?: ''
             }
             // trim to 4k-ish size for db storage
-            if (description?.length() > 4000) {
-                description = description[0..3999]
-            }
+            description = description?.take(4000)
             String link = entry.link
             Date publishedDate = entry.publishedDate
-            def summary
-            if (description) {
-                // strip html for the summary, then truncate
-                summary = description.replaceAll("</?[^>]+>", "")
-                summary = summary.length() > 200 ? summary[0..199] : summary
-            }
+            String summary = description.replaceAll("</?[^>]+>", "").take(200) ?: ''
 
             def feedEntry = new FeedEntry(title: title, link: link, publishedDate: publishedDate,
-                    description: description ?: "",
-                    summary: summary ?: "",
+                    description: description,
+                    summary: summary,
                     author: entry.author ?: "")
 
             //TODO ignore stuff older than X days
-            def trimEntriesOlderThanXdays = config.feeds.ignoreFeedEntriesOlderThan
+            int trimEntriesOlderThanXdays = config.feeds.ignoreFeedEntriesOlderThan
             if (trimEntriesOlderThanXdays) {
                 def trimTime = new Date() - trimEntriesOlderThanXdays // X days ago
                 if (publishedDate && publishedDate < trimTime) {
@@ -129,8 +126,8 @@ class FeedService {
                     try {
                         if (!blogEntry.validate()) {
                             log.warn("Validation failed updating blog entry [$blogEntry.title]")
-                            blogEntry.errors.allErrors.each {
-                                log.warn(it)
+                            blogEntry.errors.fieldErrors.each {
+                                log.warn "${it.field}: ${it.code}"
                             }
                         } else {
                             blog.addToBlogEntries(blogEntry)
@@ -155,37 +152,28 @@ class FeedService {
                 }
             }
         }
-
-        blog.lastPolled = new Date()
-        long nextPollTime = System.currentTimeMillis() + blog.pollFrequency * 60 * 60 * 1000
-        blog.nextPoll = new Date(nextPollTime)
-        if (!blog.validate()) {
-            log.warn("Validation failed updating blog [$blog.title]")
-            blog.errors.allErrors.each {
-                log.warn(it)
-            }
-        } else {
-            blog.save(failOnError: true, flush: true)
-            log.trace("Updated poll time for blog: $blog")
-        }
-        log.debug("Next poll of [$blog.title] at $blog.nextPoll")
+        blog.save(flush: true)
     }
+
 
     @Transactional(noRollbackFor = [FileNotFoundException, ParsingFeedException, UnknownHostException])
     void updateFeed(Blog blog) {
         try {
             refreshBlogUrl(blog)
-            log.info("Now polling: [$blog.title: $blog.feedUrl]")
+            log.info("Now polling: [$blog]")
             FeedInfo feedInfo = getFeedInfo(blog.feedUrl, config.translate.enabled as Boolean)
             if (feedInfo) {
                 updateFeed(blog, feedInfo)
-                markBlogUpdateSuccess(blog)
+                notify BLOG_MARK_SUCCESS, blog.id
+                //markBlogUpdateSuccess(blog)
             } else {
-                markBlogWithError(blog)
+                notify BLOG_MARK_ERROR, blog.id
+                //markBlogWithError(blog)
             }
         } catch (Exception e) {
             log.warn("Error parsing ${blog.feedUrl}: ${e.message}")
-            markBlogWithError(blog, new DefaultStackTraceFilterer().filter(e, true))
+            notify BLOG_MARK_ERROR, [blog.id, e.message]
+//            markBlogWithError(blog, new DefaultStackTraceFilterer().filter(e, true))
         }
         blog.save()
     }
@@ -202,13 +190,14 @@ class FeedService {
 
         // Limit to 5 updated blogs per minute. Could probably up this significantly
         // by going multithreaded...
-        if (feedsToUpdate.size() > config.http.maxpollsperminute) {
-            log.warn("${feedsToUpdate.size()} exceeds max for this minute. Limiting update to ${config.http.maxpollsperminute}.")
-            feedsToUpdate = feedsToUpdate[0..config.http.maxpollsperminute - 1]
-        }
+        int maxPollsPerMinute = config.http.maxpollsperminute
+//        if (feedsToUpdate.size() > maxpollsperminute) {
+//            log.warn("${feedsToUpdate.size()} exceeds max for this minute. Limiting update to ${maxpollsperminute}.")
+//            feedsToUpdate = feedsToUpdate[0..maxpollsperminute - 1]
+//        }
 
-        feedsToUpdate.each { blog ->
-            notify "feed.update", blog.id
+        feedsToUpdate.take(maxPollsPerMinute).each { blog ->
+            notify FEED_UPDATE, blog.id
 
 //                updateFeed(blog)
         }
@@ -455,37 +444,85 @@ class FeedService {
     private void refreshBlogUrl(Blog blog) {
         String url = getFinalURL(blog.feedUrl)
         if (url != blog.feedUrl) {
+            def oldUrl = blog.feedUrl
             blog.feedUrl = url
+            if (!blog.validate(['feedUrl'])) {
+                def duplicate = Blog.findByFeedUrl(url)
+                throw new RuntimeException("Resolved feedUrl for $blog is a dupplicate of $duplicate. Reverting to $oldUrl")
+            }
         }
     }
 
-    private void markBlogUpdateSuccess(Blog blog) {
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    void markBlogUpdateSuccess(Long id) {
+        Blog blog = Blog.get(id)
+
+        if (blog.status == BlogStatus.ACTIVE) return
         log.debug("FeedService marked blog $blog ACTIVE")
         blog.lastError = ''
         blog.errorCount = 0
         blog.status = BlogStatus.ACTIVE
+        updateNextPollForBlog(blog)
+
         blog.save()
     }
 
-    private void markBlogWithError(Blog blog, Throwable e = null) {
-        blog.lastError = "Error parsing [$blog.feedUrl] ${e?.message ?: ''}"
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    void markBlogWithError(Long id, String message = null) {
+        Blog blog = Blog.get(id)
+
+        blog.lastError = message?.take(254) ?: ''
         blog.errorCount = blog.errorCount + 1
-        log.warn("Encountered error in [${blog.feedUrl}]. This is error number ${blog.errorCount}")
+        log.warn("${blog.id}: Encountered error in [$blog]: $message.")
+        log.warn("${blog.id}: -- This is error number ${blog.errorCount}")
         if (blog.errorCount > (config.groovyblogs.maxErrors ?: 10)) {
-            log.debug("FeedService marked blog $blog with ERROR")
+            log.warn("${blog.id}: -- Exceeded max ${config.groovyblogs.maxErrors ?: 10}. Blog marked with ERROR")
             blog.status = BlogStatus.ERROR
         }
+        updateNextPollForBlog(blog)
         blog.save()
     }
+
+    private void updateNextPollForBlog(Blog blog) {
+//        Blog blog = Blog.get(id)
+
+        blog.lastPolled = new Date()
+        long nextPollTime = System.currentTimeMillis() + blog.pollFrequency * 60 * 60 * 1000
+        blog.nextPoll = new Date(nextPollTime)
+
+        log.debug("Next poll of [$blog.title] at $blog.nextPoll")
+    }
+
 
     @PostConstruct
     void setupEventListener() {
-        on('feed.update') { Long id ->
+        on(FEED_UPDATE) { Long id ->
             log.debug("Updating by id: $id")
             Blog.withNewSession {
                 Blog blog = Blog.get(id)
                 this.updateFeed(blog)
             }
+        }
+        on(BLOG_MARK_SUCCESS) { Long id ->
+            try {
+                Blog.withNewSession {
+                    this.markBlogUpdateSuccess(id)
+//                    this.updateNextPollForBlog(id)
+                }
+            } catch (e) {
+                log.error(e.message, e)
+            }
+        }
+        on(BLOG_MARK_ERROR) { Long id, String message = null ->
+            try {
+                Blog.withNewSession {
+                    this.markBlogWithError(id, message)
+//                    this.updateNextPollForBlog(id)
+                }
+            } catch (e) {
+                log.error(e.message, e)
+            }
+
         }
 
     }

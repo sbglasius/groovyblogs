@@ -10,7 +10,7 @@ class BlogEntry {
     String language
     String hash
     SortedSet<Date> visits
-    int sourceStatus = 200
+    Integer sourceStatus = 200
     Date sourceStatusDate
     boolean disabled
 

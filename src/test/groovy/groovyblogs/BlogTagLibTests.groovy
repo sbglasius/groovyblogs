@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat
 
 import org.groovyblogs.BlogTagLib
 
-class BlogTagLibTests extends GroovyTestCase {
+class BlogTagLibTests {
 
     void testNiceDate() {
 

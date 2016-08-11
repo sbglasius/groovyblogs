@@ -44,7 +44,7 @@ try {
 
 
     feeds {
-        ignoreFeedEntriesOlderThan = 30 // days
+        ignoreFeedEntriesOlderThan = 120 // days
         moderate = true
         moderator_email = "sbglasius@groovyblogs.org"
         // moderator_email = you@yourhost.com
@@ -90,20 +90,20 @@ try {
     grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'org.groovyblogs.UserRole'
     grails.plugin.springsecurity.authority.className = 'org.groovyblogs.Role'
     grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-            '/'                 : ['permitAll'],
-            '/about'            : ['permitAll'],
-            '/searchable/**'    : ['permitAll'],
-            '/index'            : ['permitAll'],
-            '/index*'           : ['permitAll'],
-            '/assets/**'        : ['permitAll'],
-            '/**/js/**'         : ['permitAll'],
-            '/**/css/**'        : ['permitAll'],
-            '/**/images/**'     : ['permitAll'],
-            '/**/favicon.ico'   : ['permitAll'],
-            '/dbconsole/**'     : ['ROLE_ADMIN'],
-            '/quartz/**'        : ['ROLE_ADMIN'],
-            '/runtimeLogging/**': ['ROLE_ADMIN'],
-            '/greenmail/**'     : ['permitAll']
+            [pattern: '/'                 , access: ['permitAll']],
+            [pattern: '/about'            , access: ['permitAll']],
+            [pattern: '/searchable/**'    , access: ['permitAll']],
+            [pattern: '/index'            , access: ['permitAll']],
+            [pattern: '/index*'           , access: ['permitAll']],
+            [pattern: '/assets/**'        , access: ['permitAll']],
+            [pattern: '/**/js/**'         , access: ['permitAll']],
+            [pattern: '/**/css/**'        , access: ['permitAll']],
+            [pattern: '/**/images/**'     , access: ['permitAll']],
+            [pattern: '/**/favicon.ico'   , access: ['permitAll']],
+            [pattern: '/dbconsole/**'     , access: ['ROLE_ADMIN']],
+            [pattern: '/quartz/**'        , access: ['ROLE_ADMIN']],
+            [pattern: '/runtimeLogging/**', access: ['ROLE_ADMIN']],
+            [pattern: '/greenmail/**'     , access: ['permitAll']]
 
     ]
     grails.plugin.springsecurity.roleHierarchy = '''
@@ -237,7 +237,7 @@ try {
         development {
             dataSource {
                 dbCreate = "update"
-                url = "jdbc:mysql://localhost:3306/groovyblogs_dev"
+                url = "jdbc:mysql://localhost:3306/groovyblogs_dev?useUnicode=true&characterEncoding=UTF-8"
                 driverClassName = "com.mysql.jdbc.Driver"
                 dialect = MySQL5InnoDBDialect
                 username = "root"

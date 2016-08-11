@@ -32,4 +32,8 @@ class Blog {
     static mapping = {
         nextPoll index: 'Next_Poll_Idx'
     }
+
+    String toString() {
+        "org.groovyblogs.Blog(#$id, $title, $feedUrl)"
+    }
 }

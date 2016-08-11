@@ -64,6 +64,7 @@ configurations.all {
 
 repositories {
     mavenLocal()
+    jcenter()
     maven { url "https://repo.grails.org/grails/core" }
 //    maven { url "http://dl.bintray.com/iamthechad/plugins" }
 }
@@ -83,9 +84,12 @@ dependencies {
     compile "org.grails:grails-dependencies"
     compile "org.grails:grails-web-boot"
 
-    compile "org.grails.plugins:hibernate"
+    compile "org.grails.plugins:hibernate5:5.0.8"
+    compile "org.hibernate:hibernate-core:5.1.0.Final"
+    compile "org.hibernate:hibernate-ehcache:5.1.0.Final"
+    //    compile "org.grails.plugins:hibernate4:5.0.8.RELEASE"
+//    compile "org.hibernate:hibernate-ehcache"
     compile "org.grails.plugins:cache"
-    compile "org.hibernate:hibernate-ehcache"
     compile "org.grails.plugins:scaffolding"
 
     runtime 'mysql:mysql-connector-java:5.1.29'
@@ -96,7 +100,7 @@ dependencies {
     compile 'com.commsen:jwebthumb:0.3'
     compile "org.grails.plugins:cache-ehcache:2.0.0.BUILD-SNAPSHOT"
 
-    compile "org.grails.plugins:spring-security-core:3.0.0.M1"
+    compile 'org.grails.plugins:spring-security-core:3.1.1'
     compile "org.grails.plugins:recaptcha:3.0.1"
     compile "org.grails.plugins:grails3-i18n-enums:2.0.0"
     compile "org.grails.plugins:quartz:2.0.3"
