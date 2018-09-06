@@ -1,8 +1,7 @@
 package org.groovyblogs
 import grails.validation.Validateable
 
-@Validateable
-class ResetPasswordCommand extends TokenCommand {
+class ResetPasswordCommand extends TokenCommand implements Validateable {
     String newPassword
     String repeatPassword
 
