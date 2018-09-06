@@ -1,77 +1,29 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-    <meta name="layout" content="main"/>
-    <title>Welcome to Grails</title>
-</head>
-<body>
-    <content tag="nav">
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Application Status <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="#">Environment: ${grails.util.Environment.current.name}</a></li>
-                <li><a href="#">App profile: ${grailsApplication.config.grails?.profile}</a></li>
-                <li><a href="#">App version:
-                    <g:meta name="info.app.version"/></a>
-                </li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Grails version:
-                    <g:meta name="info.app.grailsVersion"/></a>
-                </li>
-                <li><a href="#">Groovy version: ${GroovySystem.getVersion()}</a></li>
-                <li><a href="#">JVM version: ${System.getProperty('java.version')}</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Reloading active: ${grails.util.Environment.reloadingAgentEnabled}</a></li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Artefacts <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="#">Controllers: ${grailsApplication.controllerClasses.size()}</a></li>
-                <li><a href="#">Domains: ${grailsApplication.domainClasses.size()}</a></li>
-                <li><a href="#">Services: ${grailsApplication.serviceClasses.size()}</a></li>
-                <li><a href="#">Tag Libraries: ${grailsApplication.tagLibClasses.size()}</a></li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Installed Plugins <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
-                    <li><a href="#">${plugin.name} - ${plugin.version}</a></li>
-                </g:each>
-            </ul>
-        </li>
-    </content>
-
-    <div class="svg" role="presentation">
-        <div class="grails-logo-container">
-            <asset:image src="grails-cupsonly-logo-white.svg" class="grails-logo"/>
-        </div>
+	<head>
+		<meta name="layout" content="main"/>
+		<title>Welcome to Groovy-Blogs</title>
+	</head>
+	<body>
+    <div class="jumbotron">
+        <h1 class="text-center">The new GroovyBlogs is coming.</h1>
+        <p>
+            The old groovyblog's hosting provider stopped their sponsorship on Sept. 1st. Since then we have been working hard on
+            getting it back online.
+        </p>
+        <p>
+            We are reusing the code that Glen Smith wrote (running on Grails 1.2) and are revamping it to run on the latest Grails. This
+            takes a little time, so please bear with us.
+        </p>
+        <p>
+            The good part is, that the feeds are running again and that you can read the RSS feeds again.
+        </p>
+        <p>
+            The new GroovyBlogs are run by the team behind <a href="http://gr8conf.org">GR8Conf</a> and the hosting is sponsored by <a href="http://easyspeedy.com">EasySpeedy</a>
+        </p>
+        <h3 class="text-center">Please stay tuned while we get the rest of the site working again</h3>
+        <p>For questions and to give moral support write <a href="mailto:sbglasius(at)gr8conf.org">sbglasius<i class="fa fa-at"></i>gr8conf.org</a>.</p>
     </div>
 
-    <div id="content" role="main">
-        <section class="row colset-2-its">
-            <h1>Welcome to Grails</h1>
-
-            <p>
-                Congratulations, you have successfully started your first Grails application! At the moment
-                this is the default page, feel free to modify it to either redirect to a controller or display
-                whatever content you may choose. Below is a list of controllers that are currently deployed in
-                this application, click on each to execute its default action:
-            </p>
-
-            <div id="controllers" role="navigation">
-                <h2>Available Controllers:</h2>
-                <ul>
-                    <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-                        <li class="controller">
-                            <g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link>
-                        </li>
-                    </g:each>
-                </ul>
-            </div>
-        </section>
-    </div>
-
-</body>
+	</body>
 </html>
