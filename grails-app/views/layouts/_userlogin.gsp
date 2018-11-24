@@ -23,14 +23,15 @@
                 </div>
             </sec:ifLoggedIn>
             <sec:ifNotLoggedIn>
-                <form action='${createLink(uri: '/j_spring_security_check')}' method='POST' id='loginForm' class='login-box text-left' autocomplete='off'>
+                <form action='${createLink(uri: '/login/authenticate')}' method='POST' id='loginForm'
+                      class='login-box text-left' autocomplete='off'>
                     <div class="row">
                         <div class="col-xs-12 pad-bottom-5">
-                            <input type='text' class='form-control' name='j_username' id='username'/>
+                            <input type='text' class='form-control' name='username' id='username'/>
                         </div>
 
                         <div class="col-xs-12  pad-bottom-5">
-                            <input type='password' class='form-control' name='j_password' id='password'/>
+                            <input type='password' class='form-control' name='password' id='password'/>
                         </div>
 
                         <div class="col-xs-12 text-right">

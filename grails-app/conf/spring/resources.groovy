@@ -56,5 +56,4 @@ beans = {
     authenticationSuccessEventListener(AuthenticationSuccessEventListener)
     userDetailsService(GroovyBlogsUserDetailsService)
     webThumbService(WebThumbService, application.config.jwebthumb.apiKey)
-
 }

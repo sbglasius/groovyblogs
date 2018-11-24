@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="col-xs-12">
-                            <input type='text' class='form-control' name='j_username' id='username'/>
+                            <input type='text' class='form-control' name='username' id='username'/>
                         </div>
                     </div>
 
@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="col-xs-12">
-                            <input type='password' class='form-control' name='j_password' id='password'/>
+                            <input type='password' class='form-control' name='password' id='password'/>
                         </div>
                         <div class="col-xs-12 text-right">
                             <g:link controller="forgotPassword"><small>Forgot password?</small></g:link>
@@ -62,7 +62,7 @@
 
 <asset:script>
     $(function () {
-        $('#j_username').focus();
+        $('#username').focus();
         $('#login').modal('show')
     });
 </asset:script>

@@ -2,25 +2,31 @@ package org.groovyblogs
 import com.commsen.jwebthumb.WebThumbFetchRequest
 import com.commsen.jwebthumb.WebThumbJob
 import com.commsen.jwebthumb.WebThumbRequest
-import grails.events.Listener
+import grails.core.GrailsApplication
+import grails.events.EventPublisher
+import grails.events.annotation.Subscriber
+import grails.web.mapping.LinkGenerator
 import net.sf.ehcache.Ehcache
 import net.sf.ehcache.Element
-import org.grails.plugin.platform.events.EventMessage
 import org.springframework.beans.factory.InitializingBean
+import org.springframework.beans.factory.annotation.Value
+
 /**
  * @author Glen Smith
  */
-class ThumbnailService implements InitializingBean {
+class ThumbnailService implements InitializingBean, EventPublisher {
 
-    def grailsApplication
+    GrailsApplication grailsApplication
     def webThumbService
-    def grailsEventsPublisher
-    def grailsLinkGenerator
+    LinkGenerator grailsLinkGenerator
+
+    @Value('thumbcache:null')
+    String thumbCache
 
     Ehcache pendingCache
     private File root
 
-    @Listener(namespace = 'thumbnail')
+    @Subscriber
     void requestThumbnail(BlogEntry blogEntry) {
         def key = blogEntry.title.encodeAsMD5()
         if(pendingCache.get(key)) {
@@ -60,7 +66,7 @@ class ThumbnailService implements InitializingBean {
         }
         def thumb = retrieve(blogEntry)
         if(!thumb) {
-            grailsEventsPublisher.event(new EventMessage('requestThumbnail', blogEntry, 'thumbnail'))
+            notify('requestThumbnail', blogEntry)
             return null
         }
         log.trace("Serving image for blogEntry: $blogEntry")
@@ -86,7 +92,7 @@ class ThumbnailService implements InitializingBean {
 
     @Override
     void afterPropertiesSet() throws Exception {
-        root = new File(grailsApplication.config.thumbcache)
+        root = new File(thumbCache)
         root.mkdirs()
         log.info("Thumbs root set to $root.absolutePath")
     }

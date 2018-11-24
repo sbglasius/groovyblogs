@@ -1,12 +1,11 @@
 package org.groovyblogs
 
-import java.text.SimpleDateFormat
-
 import net.sf.ehcache.Element
+
+import java.text.SimpleDateFormat
 
 class BlogTagLib {
 
-    def grailsApplication
     def recentBlogsCache
     def recentStatsCache
 

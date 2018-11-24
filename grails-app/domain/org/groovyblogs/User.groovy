@@ -1,8 +1,9 @@
 package org.groovyblogs
 
-class User {
+import grails.compiler.GrailsCompileStatic
 
-    transient springSecurityService
+@GrailsCompileStatic
+class User implements Serializable {
 
     String username
     String name
@@ -33,28 +34,7 @@ class User {
     }
 
     Set<Role> getAuthorities() {
-        UserRole.findAllByUser(this).collect { it.role }
-    }
-
-    def beforeInsert() {
-        encodePassword()
-    }
-
-    def beforeUpdate() {
-        if (isDirty('password')) {
-            encodePassword()
-        }
-    }
-
-    @SuppressWarnings("UnnecessaryQualifiedReference")
-    def beforeDelete() {
-        UserRole.withNewSession {
-            UserRole.findAllByUser(this)*.delete(flush: true)
-        }
-    }
-
-    protected void encodePassword() {
-        password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
+        (UserRole.findAllByUser(this) as List<UserRole>)*.role as Set<Role>
     }
 
     String toString() {

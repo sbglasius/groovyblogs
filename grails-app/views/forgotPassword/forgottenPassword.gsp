@@ -46,7 +46,7 @@
 
 <asset:script>
     $(function () {
-        $('#j_username').focus();
+        $('#username').focus();
         $('#login').modal('show')
     });
 </asset:script>

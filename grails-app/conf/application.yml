@@ -91,17 +91,21 @@ hibernate:
 dataSource:
     pooled: true
     jmxExport: true
-    driverClassName: org.h2.Driver
-    username: sa
-    password: ''
 
 environments:
     development:
         dataSource:
-            dbCreate: create-drop
-            url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+          driverClassName: com.mysql.cj.jdbc.Driver
+          dialect: org.hibernate.dialect.MySQL57InnoDBDialect
+          username: root
+          password: root
+          dbCreate: update
+          url: "jdbc:mysql://localhost:3306/groovyblogs_dev"
     test:
         dataSource:
+          driverClassName: org.h2.Driver
+          username: sa
+          password: ''
             dbCreate: update
             url: jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
     production:

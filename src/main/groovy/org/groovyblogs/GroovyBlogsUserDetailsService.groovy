@@ -2,10 +2,12 @@ package org.groovyblogs
 
 import grails.plugin.springsecurity.userdetails.GormUserDetailsService
 import grails.plugin.springsecurity.userdetails.NoStackUsernameNotFoundException
+import groovy.util.logging.Slf4j
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 
+@Slf4j
 class GroovyBlogsUserDetailsService extends GormUserDetailsService {
     @Override
     UserDetails loadUserByUsername(String username, boolean loadRoles) throws UsernameNotFoundException {

@@ -8,14 +8,14 @@ import com.rometools.rome.feed.synd.SyndFeedImpl
 import com.rometools.rome.io.SyndFeedInput
 import com.rometools.rome.io.SyndFeedOutput
 import com.rometools.rome.io.XmlReader
-import grails.transaction.NotTransactional
+import grails.events.EventPublisher
 import grails.gorm.transactions.Transactional
+import grails.transaction.NotTransactional
 import grails.util.Environment
 import net.sf.ehcache.Element
-import org.grails.plugin.platform.events.EventMessage
 
 @Transactional()
-class FeedService {
+class FeedService implements EventPublisher {
 
     def grailsApplication
     def listCache
@@ -26,7 +26,6 @@ class FeedService {
     def mailService
     def groovyPageRenderer
     def grailsLinkGenerator
-    def grailsEventsPublisher
 
     // Returns the HTML for the supplied URL
     @NotTransactional
@@ -142,7 +141,8 @@ class FeedService {
                             }
 
                             if (config.thumbnail.enabled) {
-                                grailsEventsPublisher.event(new EventMessage('requestThumbnail', blogEntry, 'thumbnail'))
+                                notify('requestThumbnail', blogEntry)
+//                                grailsEventsPublisher.event(new EventMessage('requestThumbnail', blogEntry, 'thumbnail'))
                             }
                         }
                     } catch (t) {

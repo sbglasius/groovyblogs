@@ -34,3 +34,7 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
     logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
 }
 root(ERROR, ['STDOUT'])
+logger('org.groovyblogs', DEBUG)
+logger('asset.pipeline', DEBUG)
+//logger('grails.plugin.springsecurity',DEBUG)
+//logger 'org.springframework.security', DEBUG
