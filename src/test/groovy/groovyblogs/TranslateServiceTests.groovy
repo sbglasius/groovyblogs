@@ -2,7 +2,7 @@ package groovyblogs
 
 import grails.test.GrailsUnitTestCase
 
-import org.codehaus.groovy.grails.plugins.codecs.URLCodec
+import org.grails.plugins.codecs.URLCodec
 import org.groovyblogs.TranslateService
 
 class TranslateServiceTests extends GrailsUnitTestCase {

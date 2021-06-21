@@ -3,7 +3,7 @@ package org.groovyblogs
 import grails.plugin.cache.Cacheable
 import grails.plugins.rest.client.RestBuilder
 import grails.plugins.rest.client.RestResponse
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 
 import javax.servlet.http.HttpServletResponse
 
