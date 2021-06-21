@@ -1,3 +1,12 @@
+/ **
+ * Configuration of module test environment.
+ * Neither application.groovy nor application.yml will be included in published module artefact!
+ *
+ * application.yml loads first, then loads application.groovy (and overwrites any) - last loaded configuration wins
+ *
+ * application.yml is based on Grails 3/4 because Spring uses yml - yml configuration should not be affected for future upgrades. #Vanilla
+ * For backwards compatibility, Grails 3/4 supports application.groovy - this is used when upgrading thus minimizing the amount of changes.
+ * /
 import org.groovyblogs.UserService
 
 // locations to search for config files that get merged into the main config
