@@ -1,13 +1,13 @@
 package org.groovyblogs
 
-import grails.test.mixin.TestFor
+import grails.testing.services.ServiceUnitTest
+
 import spock.lang.Specification
 
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
-@TestFor(ChartService)
-class ChartServiceSpec extends Specification {
+class ChartServiceSpec extends Specification implements ServiceUnitTest<ChartService> {
 
     def setup() {
     }

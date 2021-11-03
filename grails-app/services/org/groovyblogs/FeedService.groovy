@@ -8,13 +8,10 @@ import com.rometools.rome.feed.synd.SyndFeedImpl
 import com.rometools.rome.io.SyndFeedInput
 import com.rometools.rome.io.SyndFeedOutput
 import com.rometools.rome.io.XmlReader
-import grails.transaction.NotTransactional
 import grails.gorm.transactions.Transactional
 import grails.util.Environment
 import net.sf.ehcache.Element
-import org.grails.plugin.platform.events.EventMessage
 
-@Transactional()
 class FeedService {
 
     def grailsApplication
@@ -29,7 +26,6 @@ class FeedService {
     def grailsEventsPublisher
 
     // Returns the HTML for the supplied URL
-    @NotTransactional
     String getHtmlForUrl(String url) {
 
         log.info("Trying to fetch [$url]")
@@ -40,7 +36,6 @@ class FeedService {
     }
 
     // takes a URL and returns ROME feed info
-    @NotTransactional
     FeedInfo getFeedInfo(String feedUrlStr, boolean translate = false) {
         try {
             def syndFeedInput = new SyndFeedInput()
@@ -101,6 +96,7 @@ class FeedService {
 
     }
 
+    @Transactional()
     void updateFeed(Blog blog, FeedInfo fi) {
 
         //def existingEntries = blog.blogEntries
@@ -142,7 +138,7 @@ class FeedService {
                             }
 
                             if (config.thumbnail.enabled) {
-                                grailsEventsPublisher.event(new EventMessage('requestThumbnail', blogEntry, 'thumbnail'))
+//                                grailsEventsPublisher.event(new EventMessage('requestThumbnail', blogEntry, 'thumbnail'))
                             }
                         }
                     } catch (t) {
@@ -171,6 +167,7 @@ class FeedService {
         log.debug("Next poll of [$blog.title] at $blog.nextPoll")
     }
 
+    @Transactional()
     void updateFeed(Blog blog) {
         log.info("Now polling: [$blog.title]")
         FeedInfo fi = getFeedInfo(blog.feedUrl, config.translate.enabled)
@@ -213,6 +210,7 @@ class FeedService {
         log.info("FeedService finished polled update")
     }
 
+    @Transactional()
     def markBlogWithError(Blog blog, Exception e = null) {
         blog.lastError = "Error parsing [$blog.feedUrl] ${e?.message ?: ''}"
         blog.errorCount = blog.errorCount + 1
@@ -224,6 +222,7 @@ class FeedService {
         blog.save(failOnError: true)
     }
 
+    @Transactional()
     void markBlogUpdateSuccess(Blog blog) {
         log.info("FeedService marked blog $blog ACTIVE")
         blog.lastError = ''
@@ -232,6 +231,7 @@ class FeedService {
         blog.save()
     }
 
+    @Transactional()
     def updateLists() {
 
         def allEntries = []
@@ -271,10 +271,12 @@ class FeedService {
         return allEntries
     }
 
+    @Transactional()
     def getCachedListEntries() {
         listCache.get("listEntries")?.value ?: updateLists()
     }
 
+    @Transactional()
     def updateTweets() {
         if (!config.tweets.enable) {
             return
@@ -334,6 +336,7 @@ class FeedService {
      * @param feedUrl
      * @return
      */
+    @Transactional()
     Blog testFeed(String feedUrl) {
         def feedInfo = getFeedInfo(feedUrl)
         if (feedInfo) {
@@ -352,6 +355,7 @@ class FeedService {
      * @param account
      * @return
      */
+    @Transactional()
     Blog createBlog(String feedUrl, User account = null) {
         def feedInfo = getFeedInfo(feedUrl)
         if (feedInfo) {
@@ -373,6 +377,7 @@ class FeedService {
         return blog
     }
 
+    @Transactional()
     boolean saveBlog(Blog blog) {
         blog.save(flush: true)
         if (grailsApplication.config.feeds.moderate) {

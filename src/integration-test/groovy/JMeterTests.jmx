@@ -1,3 +1,7 @@
+import grails.gorm.transactions.Rollback
+import grails.testing.mixin.integration.Integration
+@Integration
+@Rollback
 <jmeterTestPlan version="1.2" properties="1.8">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">

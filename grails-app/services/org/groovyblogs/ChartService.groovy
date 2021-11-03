@@ -1,6 +1,5 @@
 package org.groovyblogs
 import grails.plugin.cache.Cacheable
-import grails.transaction.NotTransactional
 import grails.gorm.transactions.Transactional
 import org.jfree.chart.ChartFactory
 import org.jfree.chart.JFreeChart

@@ -4,12 +4,14 @@ import grails.plugin.cache.Cacheable
 import grails.plugins.rest.client.RestBuilder
 import grails.plugins.rest.client.RestResponse
 import grails.gorm.transactions.Transactional
+import org.springframework.cache.CacheManager
 
 import javax.servlet.http.HttpServletResponse
 
 @Transactional(readOnly = true)
 class EntriesService {
-    def grailsCacheManager
+
+    CacheManager grailsCacheManager
     protected static final int DEFAULT_DAYS_TO_REPORT = 7
 
     @Cacheable('recentList')

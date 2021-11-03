@@ -2,10 +2,8 @@ package org.groovyblogs
 import com.commsen.jwebthumb.WebThumbFetchRequest
 import com.commsen.jwebthumb.WebThumbJob
 import com.commsen.jwebthumb.WebThumbRequest
-import grails.events.Listener
 import net.sf.ehcache.Ehcache
 import net.sf.ehcache.Element
-import org.grails.plugin.platform.events.EventMessage
 import org.springframework.beans.factory.InitializingBean
 /**
  * @author Glen Smith
@@ -20,7 +18,7 @@ class ThumbnailService implements InitializingBean {
     Ehcache pendingCache
     private File root
 
-    @Listener(namespace = 'thumbnail')
+//    @Listener(namespace = 'thumbnail')
     void requestThumbnail(BlogEntry blogEntry) {
         def key = blogEntry.title.encodeAsMD5()
         if(pendingCache.get(key)) {
@@ -60,7 +58,7 @@ class ThumbnailService implements InitializingBean {
         }
         def thumb = retrieve(blogEntry)
         if(!thumb) {
-            grailsEventsPublisher.event(new EventMessage('requestThumbnail', blogEntry, 'thumbnail'))
+//            grailsEventsPublisher.event(new EventMessage('requestThumbnail', blogEntry, 'thumbnail'))
             return null
         }
         log.trace("Serving image for blogEntry: $blogEntry")

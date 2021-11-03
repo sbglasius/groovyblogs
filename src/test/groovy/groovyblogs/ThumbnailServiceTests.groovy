@@ -1,15 +1,14 @@
 package groovyblogs
 
-import grails.test.GrailsUnitTestCase
-
-import org.grails.plugins.codecs.MD5Codec
+import grails.testing.web.GrailsWebUnitTest
+import groovy.test.GroovyTestCase
+import org.grails.testing.GrailsUnitTest
 import org.groovyblogs.ThumbnailService
 
-class ThumbnailServiceTests extends GrailsUnitTestCase {
+class ThumbnailServiceTests extends GroovyTestCase implements GrailsWebUnitTest {
 
     protected void setUp() {
         super.setUp()
-        loadCodec(MD5Codec)
         mockLogging(ThumbnailService, true)
     }
 

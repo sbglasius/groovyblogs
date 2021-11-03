@@ -1,11 +1,11 @@
 package groovyblogs
 
-import grails.test.GrailsUnitTestCase
-
+import grails.testing.web.GrailsWebUnitTest
+import groovy.test.GroovyTestCase
 import org.grails.plugins.codecs.URLCodec
 import org.groovyblogs.TranslateService
 
-class TranslateServiceTests extends GrailsUnitTestCase {
+class TranslateServiceTests extends GroovyTestCase implements GrailsWebUnitTest {
 
     protected void setUp() {
         super.setUp()
