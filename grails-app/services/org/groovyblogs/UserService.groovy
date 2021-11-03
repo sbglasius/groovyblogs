@@ -1,6 +1,6 @@
 package org.groovyblogs
 
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 import org.apache.commons.lang.RandomStringUtils
 import org.springframework.cache.Cache
 

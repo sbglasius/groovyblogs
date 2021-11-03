@@ -2,7 +2,7 @@ package groovyblogs
 
 import grails.test.GrailsUnitTestCase
 
-import org.codehaus.groovy.grails.plugins.codecs.MD5Codec
+import org.grails.plugins.codecs.MD5Codec
 import org.groovyblogs.ThumbnailService
 
 class ThumbnailServiceTests extends GrailsUnitTestCase {

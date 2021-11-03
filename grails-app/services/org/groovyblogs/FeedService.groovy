@@ -9,7 +9,7 @@ import com.rometools.rome.io.SyndFeedInput
 import com.rometools.rome.io.SyndFeedOutput
 import com.rometools.rome.io.XmlReader
 import grails.transaction.NotTransactional
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 import grails.util.Environment
 import net.sf.ehcache.Element
 import org.grails.plugin.platform.events.EventMessage

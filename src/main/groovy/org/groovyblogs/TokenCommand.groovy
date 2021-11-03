@@ -3,8 +3,7 @@ package org.groovyblogs
 import grails.validation.Validateable
 import org.springframework.beans.factory.annotation.Autowired
 
-@Validateable
-class TokenCommand {
+class TokenCommand implements Validateable {
     @Autowired
     UserService userService
 
