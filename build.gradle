@@ -85,9 +85,13 @@ dependencies {
     implementation 'com.google.code.maven-play-plugin.spy:memcached:2.4.2'
     implementation 'org.grails:grails-datastore-rest-client:6.1.12.RELEASE'
     implementation 'org.grails.plugins:recaptcha:3.2.0'
-
-    testImplementation "org.grails:grails-plugin-codecs"
+    implementation 'dk.glasius:external-config:2.0.1'
     implementation "org.grails:grails-plugin-codecs"
+    implementation 'org.codehaus.groovy:groovy-dateutil'
+    testImplementation "org.grails:grails-plugin-codecs"
+    assets 'com.bertramlabs.plugins:less-asset-pipeline:3.3.4'
+
+    runtimeOnly 'mysql:mysql-connector-java:8.0.25'
 
 }
 
@@ -129,6 +133,9 @@ tasks.withType(Test) {
 assets {
     minifyJs = true
     minifyCss = true
+
+    includes = ['**/custom-bootstrap.less']
+    excludes = ['**/*.less']
 }
 /**
  *

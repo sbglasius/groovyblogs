@@ -1,4 +1,4 @@
-/ **
+/**
  * Configuration of module test environment.
  * Neither application.groovy nor application.yml will be included in published module artefact!
  *
@@ -6,72 +6,17 @@
  *
  * application.yml is based on Grails 3/4 because Spring uses yml - yml configuration should not be affected for future upgrades. #Vanilla
  * For backwards compatibility, Grails 3/4 supports application.groovy - this is used when upgrading thus minimizing the amount of changes.
- * /
+ */
 import org.groovyblogs.UserService
 
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
 
-def catalinaBase = System.properties.getProperty('catalina.base')
-
 grails.config.locations = [
-        "classpath:${appName}-config.properties",
-        "classpath:${appName}-config.groovy",
-        "file:${userHome}/.grails/${appName}-config.properties",
-        "file:${userHome}/.grails/${appName}-config.groovy",
-        "file://${catalinaBase}/conf/${appName}-config.groovy"]
-
-println "Expected config locations: ${grails.config.locations}"
-
-// grails.config.locations = [ "file:/opt/groovyblogs/groovyblogs-config.properties" ]
-
-grails.controllers.defaultScope = 'singleton'
-grails.converters.encoding = "UTF-8"
-grails.enable.native2ascii = true
-grails.exceptionresolver.params.exclude = ['password']
-grails.hibernate.cache.queries = false
-grails.hibernate.osiv.readonly = false
-grails.hibernate.pass.readonly = false
-grails.json.legacy.builder = false
-grails.mail.host = "localhost"
-grails.mail.default.from = "info@groovyblogs.org"
-grails.mime.disable.accept.header.userAgents = ['Gecko', 'WebKit', 'Presto', 'Trident']
-grails.mime.types = [
-        all          : '*/*',
-        atom         : 'application/atom+xml',
-        css          : 'text/css',
-        csv          : 'text/csv',
-        form         : 'application/x-www-form-urlencoded',
-        html         : ['text/html', 'application/xhtml+xml'],
-        js           : 'text/javascript',
-        json         : ['application/json', 'text/json'],
-        multipartForm: 'multipart/form-data',
-        rss          : 'application/rss+xml',
-        text         : 'text/plain',
-        hal          : ['application/hal+json', 'application/hal+xml'],
-        xml          : ['text/xml', 'application/xml']
+        "~/.grails/groovyblogs-config.yml",
+        "~/.grails/groovyblogs-config.groovy",
+//        "/opt/groovyblogs/groovyblogs-config.yml"
 ]
-grails.project.groupId = appName
-grails.scaffolding.templates.domainSuffix = 'Instance'
-grails.spring.bean.packages = []
-grails.views.default.codec = "html"
-grails {
-    views {
-        gsp {
-            encoding = 'UTF-8'
-            htmlcodec = 'xml'
-            codecs {
-                expression = 'html'
-                scriptlet = 'html'
-                taglib = 'none'
-                staticparts = 'none'
-            }
-        }
-        // escapes all not-encoded output at final stage of outputting
-        // filteringCodecForContentType.'text/html' = 'html'
-    }
-}
-grails.web.disable.multipart = false
 
 thumbnail {
     enabled = false
@@ -129,7 +74,6 @@ translate {
     url = 'http://translate.google.com/translate?hl=${to}&sl=auto&tl=${to}&u=${url}'
     // http://translate.google.com/translate?u=http%3A%2F%2Fgroovy.org.es%2Fhome%2Fstory%2F12&langpair=es%7Cen&hl=en&ie=UTF-8&oe=UTF-8&prev=%2Flanguage_tools
 
-
 }
 environments {
     development {
@@ -137,49 +81,24 @@ environments {
     }
 }
 
-// log4j configuration
-log4j = {
-
-    appenders {
-        rollingFile name: "gb",
-                file: "groovyblogs.log",
-                maxFileSize: "10MB",
-                layout: pattern(conversionPattern: '%d %p %c{2} %m%n')
-
-    }
-
-    error 'org.codehaus.groovy.grails',
-            'org.springframework',
-            'org.hibernate'
-
-    debug 'grails.app.domain.org.groovyblogs',
-            'grails.app.controllers.org.groovyblogs',
-            'grails.app.services.org.groovyblogs',
-            'grails.app.taglibs.org.groovyblogs',
-            'grails.app.jobs.org.groovyblogs'
-
-    // trace  gb: ['org.codehaus.groovy.grails.commons'] // Good for debugging bean creation issues
-
-}
-
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'org.groovyblogs.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'org.groovyblogs.UserRole'
 grails.plugin.springsecurity.authority.className = 'org.groovyblogs.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-        '/'                 : ['permitAll'],
-        '/about'            : ['permitAll'],
-        '/searchable/**'    : ['permitAll'],
-        '/index'            : ['permitAll'],
-        '/index.gsp'        : ['permitAll'],
-        '/assets/**'        : ['permitAll'],
-        '/**/js/**'         : ['permitAll'],
-        '/**/css/**'        : ['permitAll'],
-        '/**/images/**'     : ['permitAll'],
-        '/**/favicon.ico'   : ['permitAll'],
-        '/dbconsole/**'     : ['ROLE_ADMIN'],
-        '/quartz/**'        : ['ROLE_ADMIN'],
-        '/runtimeLogging/**': ['ROLE_ADMIN'],
-        '/greenmail/**'     : ['permitAll']
+       [pattern: '/'                 , access: ['permitAll']],
+       [pattern: '/about'            , access: ['permitAll']],
+       [pattern: '/searchable/**'    , access: ['permitAll']],
+       [pattern: '/index'            , access: ['permitAll']],
+       [pattern: '/index.gsp'        , access: ['permitAll']],
+       [pattern: '/assets/**'        , access: ['permitAll']],
+       [pattern: '/**/js/**'         , access: ['permitAll']],
+       [pattern: '/**/css/**'        , access: ['permitAll']],
+       [pattern: '/**/images/**'     , access: ['permitAll']],
+       [pattern: '/**/favicon.ico'   , access: ['permitAll']],
+       [pattern: '/dbconsole/**'     , access: ['ROLE_ADMIN']],
+       [pattern: '/quartz/**'        , access: ['ROLE_ADMIN']],
+       [pattern: '/runtimeLogging/**', access: ['ROLE_ADMIN']],
+       [pattern: '/greenmail/**'     , access: ['permitAll']]
 
 ]
 grails.plugin.springsecurity.roleHierarchy = '''
@@ -212,7 +131,6 @@ grails.cache.config = {
         name 'chart'
         timeToLiveSeconds 60
     }
-
 
     cache {
         name UserService.TOKENS_CACHE

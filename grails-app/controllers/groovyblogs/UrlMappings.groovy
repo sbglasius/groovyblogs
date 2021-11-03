@@ -3,14 +3,16 @@ package groovyblogs
 class UrlMappings {
 
     static mappings = {
-        "/$controller/$action?/$id?(.$format)?"{
+        "/feed/atom"(controller: 'feed', action: 'atom')
+        "/feed/rss"(controller: 'feed', action: 'rss')
+        "/feed/$feedFormat"(controller: 'feed', action: 'otherFormat')
+        "/$controller/$action?/$id?(.$format)?" {
             constraints {
                 // apply constraints here
             }
         }
-
-        "/"(view:"/index")
-        "500"(view:'/error')
-        "404"(view:'/notFound')
-    }
+        "/about"(view: '/about')
+        "/"(controller: "entries")
+        "500"(view: '/error')
+        "404"(view: '/notFound')    }
 }
