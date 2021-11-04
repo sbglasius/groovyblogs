@@ -4,6 +4,7 @@ import grails.plugin.cache.Cacheable
 import grails.plugins.rest.client.RestBuilder
 import grails.plugins.rest.client.RestResponse
 import grails.gorm.transactions.Transactional
+import org.groovyblogs.data.BlogEntryDataService
 import org.springframework.cache.CacheManager
 
 import javax.servlet.http.HttpServletResponse
@@ -14,11 +15,13 @@ class EntriesService {
     CacheManager grailsCacheManager
     protected static final int DEFAULT_DAYS_TO_REPORT = 7
 
+    BlogEntryDataService blogEntryDataService
+
     @Cacheable('recentList')
     Collection<BlogEntry> getRecentEntries(Integer max, Long offset) {
         log.debug "getRecentEntries(max=$max, offset=$offset)"
 
-        def entries = BlogEntry.enabledAndSourceAvailable.list([sort: 'dateAdded', order: "desc", max: max, offset: offset])
+        def entries = blogEntryDataService.list(sort: 'dateAdded', order: "desc", max: max, offset: offset)
 
         entries.findAll { it.groovyRelated }
     }
@@ -28,11 +31,9 @@ class EntriesService {
 
         log.debug "getPopularEntries(days=$days, max=$max, offset=$offset)"
 
-        def aWhileAgo = new Date() - days
+        Date aWhileAgo = new Date() - days
 
-        def entries = BlogEntry.enabledAndSourceAvailable.dateAddedAfter(aWhileAgo).hasHitCount.list([sort: 'hitCount', order: "desc", max: max, offset: offset])
-
-//        def entries = BlogEntry.findAllByDateAddedGreaterThanAndHitCountGreaterThan(aWhileAgo, 0, [sort: 'hitCount', order: "desc", max: max, offset: offset])
+        def entries = blogEntryDataService.listAfterDateWithHitCount(aWhileAgo, sort: 'hitCount', order: "desc", max: max, offset: offset)
 
         entries.findAll { it.groovyRelated }
     }

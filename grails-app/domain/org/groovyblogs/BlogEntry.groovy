@@ -1,5 +1,7 @@
 package org.groovyblogs
 
+import grails.gorm.DetachedCriteria
+
 class BlogEntry {
 
     String title
@@ -10,26 +12,9 @@ class BlogEntry {
     String language
     String hash
     SortedSet<Date> visits
-    int sourceStatus = 200
+    Integer sourceStatus = 200
     Date sourceStatusDate
     boolean disabled
-
-
-    static namedQueries = {
-        enabledAndSourceAvailable {
-            and {
-                eq('sourceStatus', 200)
-                eq('disabled', false)
-            }
-        }
-        dateAddedAfter  {Date date ->
-            gte('dateAdded', date)
-        }
-
-        hasHitCount  {
-            gt('hitCount',0)
-        }
-    }
 
     static hasMany = [visits: Date]
 
@@ -38,7 +23,7 @@ class BlogEntry {
     }
 
     // info is used for sticking stuff like "Only showing 3 entries for this user"
-    static transients = ["groovyRelated","sourceAvailable"]
+    static transients = ["groovyRelated", "sourceAvailable"]
 
     static belongsTo = [blog: Blog]
 
