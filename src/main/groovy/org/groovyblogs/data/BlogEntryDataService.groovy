@@ -6,13 +6,13 @@ import org.groovyblogs.BlogEntry
 
 @Service(BlogEntry)
 interface BlogEntryDataService {
-    @Where ({ disabled == false })
-    List<BlogEntry> list(Map params)
 
-    @Where ( { disabled == false && dateAdded >= date})
-    List<BlogEntry> listAfterDate(Map params, Date date)
+    List<BlogEntry> list(Map args)
 
-    @Where ( { disabled == false && dateAdded >= date && hitCount > 0})
-    List<BlogEntry> listAfterDateWithHitCount(Map params, Date date)
+    @Where({ dateAdded >= date })
+    List<BlogEntry> listAfterDate(Map args, Date date)
+
+    @Where({ dateAdded >= date && hitCount > 0 })
+    List<BlogEntry> listAfterDateWithHitCount(Map args, Date date)
 
 }

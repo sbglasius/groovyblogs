@@ -57,14 +57,14 @@ class EntriesService {
             String url = blogEntry.link
             RestResponse resp = followUrl(url)
             newSourceStatus = resp.status
-        } catch (e) {
+        } catch (ignore) {
             newSourceStatus = HttpServletResponse.SC_INTERNAL_SERVER_ERROR
         }
         if (blogEntry.sourceStatus != newSourceStatus) {
             blogEntry.sourceStatus = newSourceStatus
         }
         blogEntry.sourceStatusDate = new Date()
-        blogEntry.save(failOnError: true, flush: true)
+            blogEntry.save(failOnError: true, flush: true)
         if (!blogEntry.isSourceAvailable()) {
             log.info("Blog entry id: ${blogEntry.id} source reported as not available. Code: $newSourceStatus")
         }
