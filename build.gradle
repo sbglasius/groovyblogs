@@ -88,10 +88,20 @@ dependencies {
     implementation 'dk.glasius:external-config:2.0.1'
     implementation "org.grails:grails-plugin-codecs"
     implementation 'org.codehaus.groovy:groovy-dateutil'
-    testImplementation "org.grails:grails-plugin-codecs"
+    implementation 'org.grails.plugins:quartz:2.0.13'
+    implementation("org.quartz-scheduler:quartz:2.2.3") {
+        exclude module: 'slf4j-api'
+        exclude module: 'c3p0'
+    }
+
+    runtimeOnly "org.grails.plugins:async:4.0.0"
+    runtimeOnly "org.grails:grails-events-rxjava2:4.0.0"
+    runtimeOnly 'mysql:mysql-connector-java:8.0.25'
+
     assets 'com.bertramlabs.plugins:less-asset-pipeline:3.3.4'
 
-    runtimeOnly 'mysql:mysql-connector-java:8.0.25'
+    testImplementation "org.grails:grails-plugin-codecs"
+
 
 }
 

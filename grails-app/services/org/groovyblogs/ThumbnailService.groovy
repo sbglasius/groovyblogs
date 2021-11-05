@@ -1,32 +1,45 @@
 package org.groovyblogs
+
 import com.commsen.jwebthumb.WebThumbFetchRequest
 import com.commsen.jwebthumb.WebThumbJob
 import com.commsen.jwebthumb.WebThumbRequest
+import com.commsen.jwebthumb.WebThumbService
+import grails.core.GrailsApplication
+import grails.events.EventPublisher
+import grails.events.annotation.Subscriber
+import grails.web.mapping.LinkGenerator
 import net.sf.ehcache.Ehcache
 import net.sf.ehcache.Element
 import org.springframework.beans.factory.InitializingBean
+import org.springframework.beans.factory.annotation.Value
+
 /**
  * @author Glen Smith
  */
-class ThumbnailService implements InitializingBean {
+class ThumbnailService implements InitializingBean, EventPublisher {
 
-    def grailsApplication
-    def webThumbService
-    def grailsEventsPublisher
-    def grailsLinkGenerator
+    @Value('${thumbcache}')
+    String thumbCache
+
+    @Value('${jwebthumb.callbackUrl}')
+    String webthumbCallbackUrl
+
+    GrailsApplication grailsApplication
+    WebThumbService webThumbService
+    LinkGenerator grailsLinkGenerator
 
     Ehcache pendingCache
     private File root
 
-//    @Listener(namespace = 'thumbnail')
+    @Subscriber('requestThumbnail')
     void requestThumbnail(BlogEntry blogEntry) {
-        def key = blogEntry.title.encodeAsMD5()
-        if(pendingCache.get(key)) {
+        String key = blogEntry.title.encodeAsMD5()
+        if (pendingCache.get(key)) {
             return
         }
         log.debug("Requesting thumbnail for blogEntry: $blogEntry")
 
-        def url = grailsApplication.config.jwebthumb.callbackUrl ?: grailsLinkGenerator.link(controller: 'thumbnail', action: 'callback', absolute: true)
+        def url = webthumbCallbackUrl ?: grailsLinkGenerator.link(controller: 'thumbnail', action: 'callback', absolute: true)
 
         WebThumbRequest request = new WebThumbRequest(blogEntry.link, WebThumbRequest.OutputType.jpg)
         request.notify = "$url?key=${key}"
@@ -36,8 +49,8 @@ class ThumbnailService implements InitializingBean {
     }
 
     void processThumbnail(String jobId, String key) {
-        def thumbRequest = pendingCache.get(key)?.value as ThumbRequest
-        if(thumbRequest?.jobId != jobId) {
+        def thumbRequest = pendingCache.get(key)?.objectValue as ThumbRequest
+        if (thumbRequest?.jobId != jobId) {
             log.info("Discarding request for jobId: $jobId")
             pendingCache.remove(key)
             return
@@ -51,14 +64,13 @@ class ThumbnailService implements InitializingBean {
         pendingCache.remove(key)
     }
 
-
     byte[] serveThumbnail(BlogEntry blogEntry) {
-        if(!blogEntry) {
+        if (!blogEntry) {
             return null
         }
         def thumb = retrieve(blogEntry)
-        if(!thumb) {
-//            grailsEventsPublisher.event(new EventMessage('requestThumbnail', blogEntry, 'thumbnail'))
+        if (!thumb) {
+            notify('requestThumbnail', blogEntry)
             return null
         }
         log.trace("Serving image for blogEntry: $blogEntry")
@@ -84,12 +96,13 @@ class ThumbnailService implements InitializingBean {
 
     @Override
     void afterPropertiesSet() throws Exception {
-        root = new File(grailsApplication.config.thumbcache)
+        root = new File(thumbCache)
         root.mkdirs()
         log.info("Thumbs root set to $root.absolutePath")
     }
 
-    private static class ThumbRequest implements Serializable{
+    private static class ThumbRequest implements Serializable {
+
         String jobId
         BlogEntry blogEntry
     }

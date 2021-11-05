@@ -8,11 +8,12 @@ import com.rometools.rome.feed.synd.SyndFeedImpl
 import com.rometools.rome.io.SyndFeedInput
 import com.rometools.rome.io.SyndFeedOutput
 import com.rometools.rome.io.XmlReader
+import grails.events.EventPublisher
 import grails.gorm.transactions.Transactional
 import grails.util.Environment
 import net.sf.ehcache.Element
 
-class FeedService {
+class FeedService implements EventPublisher {
 
     def grailsApplication
     def listCache
@@ -23,7 +24,6 @@ class FeedService {
     def mailService
     def groovyPageRenderer
     def grailsLinkGenerator
-    def grailsEventsPublisher
 
     // Returns the HTML for the supplied URL
     String getHtmlForUrl(String url) {
@@ -126,7 +126,7 @@ class FeedService {
                         if (!blogEntry.validate()) {
                             log.warn("Validation failed updating blog entry [$blogEntry.title]")
                             blogEntry.errors.allErrors.each {
-                                log.warn(it)
+                                log.warn(it.toString())
                             }
                         } else {
                             blog.addToBlogEntries(blogEntry)
@@ -138,7 +138,7 @@ class FeedService {
                             }
 
                             if (config.thumbnail.enabled) {
-//                                grailsEventsPublisher.event(new EventMessage('requestThumbnail', blogEntry, 'thumbnail'))
+                                notify('requestThumbnail', blogEntry)
                             }
                         }
                     } catch (t) {
@@ -202,7 +202,7 @@ class FeedService {
             try {
                 updateFeed(blog)
             } catch (Exception e) {
-                log.warn("FeedService failed to update $blog: ${e.message}")
+                log.warn("FeedService failed to update $blog.title: ${e.message}")
                 markBlogWithError(blog, e)
             }
         }
@@ -216,7 +216,7 @@ class FeedService {
         blog.errorCount = blog.errorCount + 1
         log.warn("Encountered error in [${blog.feedUrl}]. This is error number ${blog.errorCount}")
         if (blog.errorCount > (config.groovyblogs.maxErrors ?: 10)) {
-            log.info("FeedService marked blog $blog with ERROR")
+            log.info("FeedService marked blog $blog.title with ERROR")
             blog.status = BlogStatus.ERROR
         }
         blog.save(failOnError: true)
@@ -224,7 +224,7 @@ class FeedService {
 
     @Transactional()
     void markBlogUpdateSuccess(Blog blog) {
-        log.info("FeedService marked blog $blog ACTIVE")
+        log.info("FeedService marked blog $blog.title ACTIVE")
         blog.lastError = ''
         blog.status = BlogStatus.ACTIVE
         blog.errorCount = 0

@@ -1,9 +1,13 @@
 package org.groovyblogs
 
+import org.springframework.beans.factory.annotation.Value
+
 class UpdateTweetsJob {
 
+    @Value('${tweets.enable:false}')
+    boolean tweetsEnabled
+
     FeedService feedService
-    def grailsApplication
 
     def concurrent = false
 
@@ -13,7 +17,7 @@ class UpdateTweetsJob {
     }
 
     void execute() {
-        if (!grailsApplication.config.tweets.enable) {
+        if (!tweetsEnabled) {
             return
         }
         log.info("Starting scheduled tweets check at: ${new Date()}")
