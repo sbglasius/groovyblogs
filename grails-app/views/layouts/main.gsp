@@ -54,7 +54,6 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><g:link controller='entries' action='recent'>Latest Blogs</g:link></li>
                             <li><g:link controller='entries' action='popular'>Popular Blogs</g:link></li>
-                            <li><g:link controller='entries' action='lists'>Mailing Lists</g:link></li>
                         </ul>
                     </li>
                     <sec:ifAnyGranted roles="ROLE_ADMIN">
@@ -65,6 +64,7 @@
                                 <li><g:link controller='blog' action='index'>Blogs</g:link></li>
                                 <li><g:link controller='blogEntry' action='index'>Blog-entries</g:link></li>
                                 <li><g:link controller='quartz' action='index'>Quartz control</g:link></li>
+                                <li><g:link controller='entries' action='lists'>Mailing Lists</g:link></li>
                             </ul>
                         </li>
                     </sec:ifAnyGranted>
@@ -109,9 +109,8 @@
             <tmpl:/layouts/sidebar/>
         </div>
     </div>
-</div>
 <asset:javascript src="application.js"/>
-<ga:trackPageview/>
 <asset:deferredScripts/>
+</div>
 </body>
 </html>

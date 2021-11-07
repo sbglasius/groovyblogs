@@ -2,11 +2,15 @@ package org.groovyblogs
 
 import grails.plugin.springsecurity.annotation.Secured
 import groovy.text.SimpleTemplateEngine
+import org.springframework.beans.factory.annotation.Value
 
 import javax.servlet.http.HttpServletResponse
 
 @Secured(['permitAll'])
 class EntriesController {
+
+    @Value('${thumbnail.enabled}')
+    boolean thumbnailEnabled
 
     static final LinkedHashMap<Serializable, String> DAYS_AVAILABLE = [7: '7 Days', 14: '14 Days', 31: 'Month', 90: '3 Months', 182: '6 Months', 365: 'Year', (99999): 'like forever']
     static final int PAGE_LENGTH = 7
@@ -24,7 +28,7 @@ class EntriesController {
     def recentNext(Integer page) {
         def entries = entriesService.getRecentEntries(PAGE_LENGTH, PAGE_LENGTH * (page ?: 0))
         render template: 'entries', model: [entries   : entries,
-                                            thumbnails: grailsApplication.config.thumbnail.enabled]
+                                            thumbnails: thumbnailEnabled]
 
     }
 
@@ -42,15 +46,7 @@ class EntriesController {
             response.setStatus(HttpServletResponse.SC_NO_CONTENT)
         }
         render template: 'entries', model: [entries   : entries,
-                                            thumbnails: grailsApplication.config.thumbnail.enabled]
-    }
-
-    def lists() {
-        [entries: feedService.getCachedListEntries()]
-    }
-
-    def tweets() {
-        [entries: feedService.getCachedTweetEntries()]
+                                            thumbnails: thumbnailEnabled]
     }
 
     def jump(Long id) {

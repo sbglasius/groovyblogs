@@ -8,22 +8,55 @@ import com.rometools.rome.feed.synd.SyndFeedImpl
 import com.rometools.rome.io.SyndFeedInput
 import com.rometools.rome.io.SyndFeedOutput
 import com.rometools.rome.io.XmlReader
+import grails.config.Config
+import grails.core.GrailsApplication
+import grails.core.support.GrailsConfigurationAware
 import grails.events.EventPublisher
 import grails.gorm.transactions.Transactional
+import grails.gsp.PageRenderer
 import grails.util.Environment
+import grails.web.mapping.LinkGenerator
 import net.sf.ehcache.Element
+import org.springframework.beans.factory.annotation.Value
 
 class FeedService implements EventPublisher {
 
-    def grailsApplication
+    @Value('${feeds.moderate:false}')
+    boolean moderateFeeds
+
+    @Value('${translate.enabled:false}')
+    boolean translateEnabled
+
+    @Value('${feeds.ignoreFeedEntriesOlderThan:0}') // 0 = do not ignore
+    int trimEntriesOlderThanXDays
+
+    @Value('${thumbnail.enabled}')
+    boolean thumbnailEnabled
+
+    @Value('${http.maxpollsperminute:5}')
+    int maxPollsPerMinute
+
+    @Value('${groovyblogs.maxErrors:10}')
+    int maxErrors
+
+    @Value('${twitter.enabled:false}')
+    boolean twitterEnabled
+
+    @Value('${tweets.url}')
+    String tweetFeed
+
+    @Value('${feeds.moderator_email}')
+    String moderatorEmail
+
+    GrailsApplication grailsApplication
     def listCache
     def feedCache
     def tweetCache
     TranslateService translateService
     TwitterService twitterService
     def mailService
-    def groovyPageRenderer
-    def grailsLinkGenerator
+    PageRenderer groovyPageRenderer
+    LinkGenerator grailsLinkGenerator
 
     // Returns the HTML for the supplied URL
     String getHtmlForUrl(String url) {
@@ -38,11 +71,12 @@ class FeedService implements EventPublisher {
     // takes a URL and returns ROME feed info
     FeedInfo getFeedInfo(String feedUrlStr, boolean translate = false) {
         try {
-            def syndFeedInput = new SyndFeedInput()
+            SyndFeedInput syndFeedInput = new SyndFeedInput()
             syndFeedInput.xmlHealerOn = true
-            def url = feedUrlStr.toURL().newInputStream()
-            def feedReader = new XmlReader(url, true,'UTF-8')
+            InputStream url = feedUrlStr.toURL().newInputStream()
+            XmlReader feedReader = new XmlReader(url, true,'UTF-8')
             SyndFeed syndFeed = syndFeedInput.build(feedReader)
+
             def feedInfo = new FeedInfo(feedUrl: feedUrlStr, title: syndFeed.title,
                     description: syndFeed.description ?: "",
                     author: syndFeed.author, type: syndFeed.feedType)
@@ -58,7 +92,7 @@ class FeedService implements EventPublisher {
                 }
                 String link = entry.link
                 Date publishedDate = entry.publishedDate
-                def summary
+                def summary = null
                 if (description) {
                     // strip html for the summary, then truncate
                     summary = description.replaceAll("</?[^>]+>", "")
@@ -71,9 +105,8 @@ class FeedService implements EventPublisher {
                         author: entry.author ?: "")
 
                 //TODO ignore stuff older than X days
-                def trimEntriesOlderThanXdays = config.feeds.ignoreFeedEntriesOlderThan
-                if (trimEntriesOlderThanXdays) {
-                    def trimTime = new Date() - trimEntriesOlderThanXdays // X days ago
+                if (trimEntriesOlderThanXDays) {
+                    def trimTime = new Date() - trimEntriesOlderThanXDays // X days ago
                     if (publishedDate && publishedDate < trimTime) {
                         log.debug("Skipping old entry: [$title] from [$publishedDate]")
                         feedEntry = null // too old to include
@@ -133,11 +166,11 @@ class FeedService implements EventPublisher {
                             blogEntry.save(flush: true)
                             blog.save(flush: true)
 
-                            if (config.twitter.enabled) {
+                            if (twitterEnabled) {
                                 twitterService.sendTweet("${blogEntry.title} -- ${blogEntry.link} -- ${blog.title}")
                             }
 
-                            if (config.thumbnail.enabled) {
+                            if (thumbnailEnabled) {
                                 notify('requestThumbnail', blogEntry)
                             }
                         }
@@ -170,7 +203,7 @@ class FeedService implements EventPublisher {
     @Transactional()
     void updateFeed(Blog blog) {
         log.info("Now polling: [$blog.title]")
-        FeedInfo fi = getFeedInfo(blog.feedUrl, config.translate.enabled)
+        FeedInfo fi = getFeedInfo(blog.feedUrl, translateEnabled)
         if (fi) {
             updateFeed(blog, fi)
             markBlogUpdateSuccess(blog)
@@ -180,11 +213,6 @@ class FeedService implements EventPublisher {
         }
     }
 
-    protected ConfigObject getConfig() {
-        grailsApplication.config
-    }
-
-
     void updateFeeds() {
 
         log.info("FeedService starting polled update")
@@ -193,9 +221,10 @@ class FeedService implements EventPublisher {
 
         // Limit to 5 updated blogs per minute. Could probably up this significantly
         // by going multithreaded...
-        if (feedsToUpdate.size() > config.http.maxpollsperminute) {
-            log.warn("${feedsToUpdate.size()} exceeds max for this minute. Limiting update to ${config.http.maxpollsperminute}.")
-            feedsToUpdate = feedsToUpdate[0..config.http.maxpollsperminute - 1]
+
+        if (feedsToUpdate.size() > maxPollsPerMinute) {
+            log.warn("${feedsToUpdate.size()} exceeds max for this minute. Limiting update to ${maxPollsPerMinute}.")
+            feedsToUpdate = feedsToUpdate[0..maxPollsPerMinute - 1]
         }
 
         feedsToUpdate.each { blog ->
@@ -215,7 +244,7 @@ class FeedService implements EventPublisher {
         blog.lastError = "Error parsing [$blog.feedUrl] ${e?.message ?: ''}"
         blog.errorCount = blog.errorCount + 1
         log.warn("Encountered error in [${blog.feedUrl}]. This is error number ${blog.errorCount}")
-        if (blog.errorCount > (config.groovyblogs.maxErrors ?: 10)) {
+        if (blog.errorCount > maxErrors) {
             log.info("FeedService marked blog $blog.title with ERROR")
             blog.status = BlogStatus.ERROR
         }
@@ -232,58 +261,8 @@ class FeedService implements EventPublisher {
     }
 
     @Transactional()
-    def updateLists() {
-
-        def allEntries = []
-
-        config.lists.each { name, url ->
-
-            log.info("Updating list [$name] from [$url]")
-            def feed = getFeedInfo(url, false)
-            if (feed) {
-                Blog listBlog = new Blog(title: feed.title)
-
-                def filter = new Date() - 1 // 1 days ago
-
-                // Add 8 hours from Nabble feed time...
-                def rightDates = feed.entries.collect { entry ->
-                    def diff = entry.publishedDate.time + 1000 * 60 * 60 * 7
-                    entry.publishedDate = new Date(diff)
-                    return entry
-                }
-                def feedEntries = rightDates.findAll { entry -> entry.publishedDate.after(filter) }
-                log.info "Filtered original entries from ${feed.entries.size()} to ${feedEntries.size()}"
-                feedEntries.each { entry ->
-                    entry.info = name
-                    allEntries << entry
-                }
-            }
-
-        }
-
-        // sort in date desc
-        allEntries = allEntries.sort { it.publishedDate }
-
-        log.debug("Putting to list cache: ${allEntries.size()}")
-
-        listCache.put(new Element("listEntries", allEntries))
-
-        return allEntries
-    }
-
-    @Transactional()
-    def getCachedListEntries() {
-        listCache.get("listEntries")?.value ?: updateLists()
-    }
-
-    @Transactional()
     def updateTweets() {
-        if (!config.tweets.enable) {
-            return
-        }
-
-        def tweetFeed = getFeedInfo(config.tweets.url, false)
-        if (tweetFeed) {
+        if (twitterEnabled && tweetFeed) {
             def allEntries = tweetFeed.entries.collect { entry ->
                 // entry.description = entry.description.replaceFirst("[^:]+:\\s*", "")
                 entry
@@ -344,9 +323,9 @@ class FeedService implements EventPublisher {
             feedInfo.entries.each {
                 blog.addToBlogEntries(title: it.title, description: it.description)
             }
-
             return blog
         }
+        return null
     }
 
     /**
@@ -362,6 +341,7 @@ class FeedService implements EventPublisher {
             return createBlogFromFeedInfo(feedInfo, account)
 
         }
+        return null
     }
 
     private Blog createBlogFromFeedInfo(FeedInfo feedInfo, User account = null) {
@@ -380,13 +360,13 @@ class FeedService implements EventPublisher {
     @Transactional()
     boolean saveBlog(Blog blog) {
         blog.save(flush: true)
-        if (grailsApplication.config.feeds.moderate) {
+        if (moderateFeeds) {
             blog.status = BlogStatus.PENDING
             try {
                 def approve = grailsLinkGenerator.link(controller: 'account', action: 'approveFeed', id: blog.id, absolute: true)
                 def reject = grailsLinkGenerator.link(controller: 'account', action: 'removeFeed', id: blog.id, absolute: true)
                 mailService.sendMail {
-                    to grailsApplication.config.feeds.moderator_email
+                    to moderatorEmail
                     subject "groovyblogs: Feed approval for ${blog.title}"
                     body groovyPageRenderer.render(template: '/mailtemplates/moderateFeed', model: [blog: blog, approve: approve, reject: reject])
                 }
@@ -437,4 +417,5 @@ class FeedService implements EventPublisher {
             return writer.toString()
         }
     }
+
 }

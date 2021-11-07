@@ -7,7 +7,6 @@
  * application.yml is based on Grails 3/4 because Spring uses yml - yml configuration should not be affected for future upgrades. #Vanilla
  * For backwards compatibility, Grails 3/4 supports application.groovy - this is used when upgrading thus minimizing the amount of changes.
  */
-import org.groovyblogs.UserService
 
 // locations to search for config files that get merged into the main config
 // config files can either be Java properties files or ConfigSlurper scripts
@@ -57,8 +56,8 @@ http {
 }
 
 lists {
-    groovy = "http://groovy.329449.n5.nabble.com/groovy-user-f329450.xml"
-    grails = "http://grails.1312388.n4.nabble.com/Grails-user-f1312389.xml"
+    groovyUser = "https://mail-archives.apache.org/mod_mbox/groovy-users/?format=atom"
+    groovyDev = "https://mail-archives.apache.org/mod_mbox/groovy-dev/?format=atom"
 }
 
 tweets {
@@ -133,7 +132,7 @@ grails.cache.config = {
     }
 
     cache {
-        name UserService.TOKENS_CACHE
+        name 'tokens'
         timeToLiveSeconds 24 * 60 * 60
     }
 
