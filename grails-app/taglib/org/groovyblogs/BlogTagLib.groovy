@@ -11,7 +11,7 @@ class BlogTagLib {
 
     def summariseEntry = { attrs ->
         // strip html for the summary, then truncate
-        out << FeedEntry.summarize(attrs.description)
+        out << FeedEntry.summarize(attrs.description as String)
     }
 
     String getNiceDate(Date date) {
@@ -21,28 +21,27 @@ class BlogTagLib {
         def diff = Math.abs(now.getTime() - date.getTime())
 
         long second = 1000
-        long minute = 1000 * 60
+        long minute = second * 60
         long hour = minute * 60
         long day = hour * 24
 
         def niceTime = ""
 
-        long calc = Math.floor(diff / day)
-        if (calc > 0) {
-            niceTime += calc + " day" + (calc > 1 ? "s " : " ")
+        long days = Math.floor(diff / day).longValue()
+        if (days > 0) {
+            niceTime += "$days day${days > 1 ? "s " : " "}"
             diff = diff % day
         }
 
-        calc = Math.floor(diff / hour)
-        if (calc > 0) {
-            niceTime += calc + " hour" + (calc > 1 ? "s " : " ")
+        long hours = Math.floor(diff / hour).longValue()
+        if (days < 8 && hours > 0) {
+            niceTime += "$hours hour${hours > 1 ? "s " : " "}"
             diff = diff % hour
         }
 
-        calc = Math.floor(diff / minute)
-        if (calc > 0) {
-            niceTime += calc + " minute" + (calc > 1 ? "s " : " ")
-            diff = diff % minute
+        long minutes = Math.floor(diff / minute).longValue()
+        if (days < 8 && minutes > 0) {
+            niceTime += "$minutes minute${minutes > 1 ? "s " : " "}"
         }
 
         if (niceTime.length() == 0) {

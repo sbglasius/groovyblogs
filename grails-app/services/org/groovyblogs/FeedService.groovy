@@ -213,6 +213,7 @@ class FeedService implements EventPublisher {
         }
     }
 
+    @Transactional
     void updateFeeds() {
 
         log.info("FeedService starting polled update")
