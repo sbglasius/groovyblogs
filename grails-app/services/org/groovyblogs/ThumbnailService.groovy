@@ -24,7 +24,9 @@ class ThumbnailService implements InitializingBean, EventPublisher {
     @Value('${jwebthumb.callbackUrl}')
     String webthumbCallbackUrl
 
-    GrailsApplication grailsApplication
+    @Value('${jwebthumb.apiKey}')
+    String apiKey
+
     WebThumbService webThumbService
     LinkGenerator grailsLinkGenerator
 
@@ -96,6 +98,7 @@ class ThumbnailService implements InitializingBean, EventPublisher {
 
     @Override
     void afterPropertiesSet() throws Exception {
+        webThumbService = new WebThumbService(apiKey)
         root = new File(thumbCache)
         root.mkdirs()
         log.info("Thumbs root set to $root.absolutePath")

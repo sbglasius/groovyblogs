@@ -1,21 +1,12 @@
 /**
  * Configuration of module test environment.
- * Neither application.groovy nor application.yml will be included in published module artefact!
+ * Values from application.groovy and application.yml will be overwritten by external config.
  *
  * application.yml loads first, then loads application.groovy (and overwrites any) - last loaded configuration wins
  *
  * application.yml is based on Grails 3/4 because Spring uses yml - yml configuration should not be affected for future upgrades. #Vanilla
  * For backwards compatibility, Grails 3/4 supports application.groovy - this is used when upgrading thus minimizing the amount of changes.
  */
-
-// locations to search for config files that get merged into the main config
-// config files can either be Java properties files or ConfigSlurper scripts
-
-grails.config.locations = [
-        "~/.grails/groovyblogs-config.yml",
-        "~/.grails/groovyblogs-config.groovy",
-//        "/opt/groovyblogs/groovyblogs-config.yml"
-]
 
 thumbnail {
     enabled = false

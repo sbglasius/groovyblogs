@@ -1,0 +1,26 @@
+version: '2'
+services:
+    db:
+        image: mysql/mysql-server:8.0
+        container_name: db
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: groovyblogs
+            MYSQL_USER: groovyblogs
+            MYSQL_PASSWORD: groovyblogs
+        volumes:
+            - "./db:/docker-entrypoint-initdb.d"
+            - "/opt/groovyblogs/database:/var/lib/mysql/"
+    
+    app:
+        image: docker.gr8conf.org/groovyblogs
+        container_name: app
+        environment:
+            VIRTUAL_HOST: groovyblogs.org
+        volumes:
+            - /opt/groovyblogs:/etc/app
+            - /opt/groovyblogs/thumb-cache:/var/thumb-cache
+        ports:
+            - "80:8080"
+        links:
+            - db

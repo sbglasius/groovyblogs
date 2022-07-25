@@ -20,7 +20,7 @@
     <p>
         The relaunch groovyblogs.org is largely based on Glen's work. When we got the code it was still build to run
         on Grails 1.2.x and was using jSecurity for login. We have reused large portions of Glen's work, but had to replace some of it
-        to get it running on Grails 2.4.x. In December 2021 it was upgraded to Grails 5.0.x. </p>
+        to get it running on Grails 2.4.x. In spring 2022 it was upgraded to Grails 5.2.0. </p>
 
     <p>
         The new groovyblogs.org is maintained by the team behind <a href="http://gr8conf.eu">GR8Conf Europe</a> and the hosting is

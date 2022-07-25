@@ -1,32 +1,34 @@
 buildscript {
     repositories {
         mavenLocal()
-        mavenCentral()
         maven { url "https://repo.grails.org/grails/core" }
+        mavenCentral()
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsGradlePluginVersion"
-        classpath "org.grails.plugins:hibernate5:7.1.0"
-        classpath "gradle.plugin.com.github.erdi.webdriver-binaries:webdriver-binaries-gradle-plugin:2.6"
-        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:3.3.4"
-
-        classpath 'org.grails.plugins:database-migration:4.0.0-RC2'
+        classpath "org.grails.plugins:hibernate5:7.3.0"
+        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:3.4.6"
+        classpath 'org.grails.plugins:database-migration:4.1.0'
     }
 }
 
-version "3.0.0"
+plugins {
+    id 'com.palantir.docker' version '0.34.0'
+    id "com.magnetichq.client-dependencies" version "2.0.0"
+}
+
+version "5.0.0"
 group "org.groovyblogs"
 
 apply plugin:"war"
 apply plugin:"org.grails.grails-web"
-apply plugin:"com.github.erdi.webdriver-binaries"
 apply plugin:"org.grails.grails-gsp"
 apply plugin:"com.bertramlabs.asset-pipeline"
 
 repositories {
     mavenLocal()
-    mavenCentral()
     maven { url "https://repo.grails.org/grails/core" }
+    mavenCentral()
 }
 
 configurations {
@@ -58,7 +60,7 @@ dependencies {
     implementation "org.grails.plugins:async"
     implementation "org.grails.plugins:scaffolding"
     implementation "org.grails.plugins:hibernate5"
-    implementation "org.hibernate:hibernate-core:5.5.7.Final"
+    implementation "org.hibernate:hibernate-core:5.6.9.Final"
     implementation "org.grails.plugins:events"
     implementation "org.grails.plugins:gsp"
     profile "org.grails.profiles:web"
@@ -66,7 +68,7 @@ dependencies {
     runtimeOnly "com.h2database:h2"
     runtimeOnly "org.apache.tomcat:tomcat-jdbc"
     runtimeOnly "javax.xml.bind:jaxb-api:2.3.1"
-    runtimeOnly "com.bertramlabs.plugins:asset-pipeline-grails:3.3.4"
+    runtimeOnly "com.bertramlabs.plugins:asset-pipeline-grails:3.4.6"
     testImplementation "io.micronaut:micronaut-inject-groovy"
     testImplementation "org.grails:grails-gorm-testing-support"
     testImplementation "org.mockito:mockito-core"
@@ -87,7 +89,7 @@ dependencies {
     implementation 'com.google.code.maven-play-plugin.spy:memcached:2.4.2'
     implementation 'org.grails:grails-datastore-rest-client:6.1.12.RELEASE'
     implementation 'org.grails.plugins:recaptcha:3.2.0'
-    implementation 'dk.glasius:external-config:2.0.1'
+    implementation 'dk.glasius:external-config:3.0.0'
     implementation "org.grails:grails-plugin-codecs"
     implementation 'org.codehaus.groovy:groovy-dateutil'
     implementation 'org.grails.plugins:quartz:2.0.13'
@@ -95,8 +97,8 @@ dependencies {
         exclude module: 'slf4j-api'
         exclude module: 'c3p0'
     }
-    implementation 'org.grails.plugins:database-migration:4.0.0-RC2'
-    implementation 'org.liquibase:liquibase-core:4.6.1'
+    implementation 'org.grails.plugins:database-migration:4.1.0'
+    implementation 'org.liquibase:liquibase-core:4.8.0'
     
     runtimeOnly "org.grails.plugins:async:4.0.0"
     runtimeOnly "org.grails:grails-events-rxjava2:4.0.0"
@@ -112,6 +114,15 @@ sourceSets {
         resources {
             srcDir 'grails-app/migrations'
         }
+    }
+}
+
+clientDependencies {
+    fileExtensions 'less'
+    npm {
+        'jquery'('3.6.0') 
+        'bootstrap-less'('3.3.8') 
+        'font-awesome'('^4.7')
     }
 }
 
@@ -137,18 +148,6 @@ tasks.withType(Test) {
     useJUnitPlatform()
 }
 
-webdriverBinaries {
-    chromedriver '2.45.0'
-    geckodriver '0.24.0'
-}
-
-tasks.withType(Test) {
-    systemProperty "geb.env", System.getProperty('geb.env')
-    systemProperty "geb.build.reportsDir", reporting.file("geb/integrationTest")
-    systemProperty "webdriver.chrome.driver", System.getProperty('webdriver.chrome.driver')
-    systemProperty "webdriver.gecko.driver", System.getProperty('webdriver.gecko.driver')
-}
-
 
 assets {
     minifyJs = true
@@ -157,33 +156,15 @@ assets {
     includes = ['**/custom-bootstrap.less']
     excludes = ['**/*.less']
 }
-/**
- *
- compile 'net.homeip.yusuke:twitter4j:2.0.10'
- compile 'com.google.code.maven-play-plugin.spy:memcached:2.4.2'
- compile ':scaffolding:2.1.2'
- compile ':cache:1.1.8'
- compile ':cache-ehcache:1.0.1'
- compile ':asset-pipeline:1.9.9'
- compile ':less-asset-pipeline:1.10.0'
- compile ':quartz:1.0.2'
- compile ':quartz-monitor:1.0'
- compile ':spring-security-core:2.0-RC4'
- compile ':google-chart:0.5.2'
- compile ':mail:1.0.7'
- compile ':greenmail:1.3.4'
- compile ':runtime-logging:0.4'
- compile ':searchable:0.6.9'
- compile ':scaffolding:2.1.2'
- compile ':google-analytics:2.3.3'
- compile ':fields:1.5-SNAPSHOT'
- compile ':i18n-enums:1.0.7'
- compile ':recaptcha:0.6.9'
- compile ':platform-core:1.0.0'
- runtime 'mysql:mysql-connector-java:5.1.29'
- runtime ':hibernate:3.6.10.18'
- runtime ':database-migration:1.4.0'
- runtime ':twitter-bootstrap:3.2.0.2'
- runtime ':font-awesome-resources:4.2.0.0'
 
- */
+docker {
+    name "docker.gr8conf.org/groovyblogs:${project.version}"
+    tag "groovyblogs", "docker.gr8conf.org/groovyblogs"
+    copySpec.into('app').from(tasks.bootJar.outputs) {
+            rename { fileName -> fileName - "-${project.version}" }
+        }
+    copySpec.into('app').from('src/main/docker/app')
+    dockerfile file('src/main/docker/Dockerfile')
+    pull true
+    noCache true
+}

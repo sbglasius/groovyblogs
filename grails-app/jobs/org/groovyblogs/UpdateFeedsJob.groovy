@@ -8,7 +8,7 @@ class UpdateFeedsJob {
     def concurrent = false
 
     static triggers = {
-        simple name: 'updateFeedJobTrigger', repeatInterval: 1000 * 60, startDelay: 1000 * 15
+        simple name: 'updateFeedJobTrigger', repeatInterval: 1000 * 30, startDelay: 1000 * 15
     }
 
     void execute() {
@@ -18,7 +18,8 @@ class UpdateFeedsJob {
             feedService.updateFeeds()
             log.info("Finished scheduled feed check at: ${new Date()}")
         } catch (t) {
-            log.error("Error updating feeds: $t.message", t)
+            
+            log.error("Error updating feeds: $t.message")
         }
     }
 }

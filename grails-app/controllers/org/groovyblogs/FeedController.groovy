@@ -1,12 +1,14 @@
 package org.groovyblogs
 
 import com.rometools.rome.feed.synd.impl.Converters
+import grails.core.GrailsApplication
 import grails.plugin.springsecurity.annotation.Secured
 
 @Secured(['permitAll'])
 class FeedController {
 
-    def feedService
+    FeedService feedService
+    GrailsApplication grailsApplication
 
     static final SUPPORTED_FORMATS = new Converters().supportedFeedTypes.collect().sort()
 
@@ -14,7 +16,7 @@ class FeedController {
 
     def rss() {
         if (useFeedburner) {
-            response.sendRedirect(grailsApplication.config.http.feedburner_rss)
+            response.sendRedirect(grailsApplication.config.getProperty('http.feedburner_rss'))
         } else {
             render(text: feedService.getFeedData("rss_2.0"), contentType: "text/xml", encoding: "UTF-8")
         }
@@ -22,7 +24,7 @@ class FeedController {
 
     def atom() {
         if (useFeedburner) {
-            response.sendRedirect(grailsApplication.config.http.feedburner_atom)
+            response.sendRedirect(grailsApplication.config.getProperty('http.feedburner_atom'))
         } else {
             render(text: feedService.getFeedData("atom_1.0"), contentType: "text/xml", encoding: "UTF-8")
         }
@@ -37,7 +39,7 @@ class FeedController {
     }
 
     private boolean isUseFeedburner() {
-        if (!grailsApplication.config.http.usefeedburner) {
+        if (!grailsApplication.config.getProperty('http.usefeedburner')) {
             return false
         }
 

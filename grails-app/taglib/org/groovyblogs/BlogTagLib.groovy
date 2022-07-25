@@ -1,11 +1,15 @@
 package org.groovyblogs
 
+import grails.core.GrailsApplication
+
 import java.text.SimpleDateFormat
 
 import net.sf.ehcache.Element
 
 class BlogTagLib {
 
+    GrailsApplication grailsApplication
+    
     def recentBlogsCache
     def recentStatsCache
 
@@ -63,7 +67,7 @@ class BlogTagLib {
 
     def translate = { attrs ->
 
-        if (!grailsApplication.config.translate.enabled) {
+        if (!grailsApplication.config.getProperty('translate.enabled')) {
             return
         }
 
@@ -163,13 +167,13 @@ class BlogTagLib {
 
     def feedburner = { attr ->
 
-        if (!grailsApplication.config.http.usefeedburner) {
+        if (!grailsApplication.config.getProperty('http.usefeedburner')) {
             return
         }
 
         out << """
         <p style='margin-top: 5px'>
-                <img src="${grailsApplication.config.http.feedburner_stats_url}" height="26" width="88" style="border:0" alt="Feedburner Stats" />
+                <img src="${grailsApplication.config.getProperty('http.feedburner_stats_url')}" height="26" width="88" style="border:0" alt="Feedburner Stats" />
         </p>
         """
     }

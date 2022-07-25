@@ -65,7 +65,7 @@ class EntriesController {
         def lang = params.lang
         if (be && lang) {
             def engine = new SimpleTemplateEngine()
-            def template = engine.createTemplate(grailsApplication.config.translate.url)
+            def template = engine.createTemplate(grailsApplication.config.getProperty('translate.url'))
             def binding = [
                     from: lang,
                     to  : "en",

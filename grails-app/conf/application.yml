@@ -110,7 +110,7 @@ environments:
             driverClassName: com.mysql.cj.jdbc.Driver
             username: groovyblogs
             password: groovyblogs
-            url: jdbc:mysql://localhost:3306/groovyblogs_dev
+            url: jdbc:mysql://localhost:3308/groovyblogs_dev
     test:
         dataSource:
             dbCreate: update
@@ -120,8 +120,12 @@ environments:
             url: jdbc:h2:mem:testDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
     production:
         dataSource:
-            dbCreate: none
-            url: jdbc:h2:./prodDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            driverClassName: com.mysql.cj.jdbc.Driver
+            dbCreate: update
+            url: jdbc:mysql://db/groovyblogs #docker container
+            username: groovyblogs
+            password: groovyblogs
+            dialect: org.hibernate.dialect.MySQL8Dialect
             properties:
                 jmxEnabled: true
                 initialSize: 5
@@ -140,3 +144,13 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+---
+grails:
+    config:
+        locations:
+            - ~/.grails/groovyblogs-config.yml
+            - ${catalina.base}/conf/groovyblogs-config.groovy
+            - file:/etc/app/groovyblogs.yml
+            - file:/etc/app/groovyblogs.groovy
+            - file:/opt/groovyblogs/groovyblogs.yml
+            - file:/opt/groovyblogs/groovyblogs.groovy

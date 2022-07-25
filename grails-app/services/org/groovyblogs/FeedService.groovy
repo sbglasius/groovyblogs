@@ -123,7 +123,7 @@ class FeedService implements EventPublisher {
             }
             return feedInfo
         } catch (e) {
-            log.warn("Error parsing ${feedUrlStr}: ${e.message}",e)
+            log.warn("Error parsing ${feedUrlStr}: ${e.message}")
             return null
         }
 

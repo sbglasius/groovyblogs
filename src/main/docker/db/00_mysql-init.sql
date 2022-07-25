@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS gr8cfp;
+USE gr8cfp;
