@@ -3,6 +3,7 @@
 @import "bootstrap-less/bootstrap/bootstrap.less";
 //noinspection CssUnknownTarget
 @import "font-awesome/less/font-awesome.less";
+
 @fa-font-path: "./font-awesome/fonts";
 
 body {
@@ -10,55 +11,66 @@ body {
 
   .container-logo {
     position: relative;
-    width: 185px;
-    margin: 0 auto;
-    padding: 0 0 0 0;
-    opacity: 1;
+    width:    185px;
+    margin:   0 auto;
+    padding:  0 0 0 0;
+    opacity:  1;
+
     .logo {
-      margin: 0 auto;
-      position: fixed;
-      top: 0;
-      z-index: 5999;
+      margin:     0 auto;
+      position:   fixed;
+      top:        0;
+      z-index:    5999;
 
       text-align: center;
+
       a {
         background: url('../images/top-arrow.png');
-        display: block;
-        width: 185px;
-        height: 120px;
+        display:    block;
+        width:      185px;
+        height:     120px;
+
         .groovy-logo, .groovy-blogs {
-          padding: 0;
+          padding:        0;
           vertical-align: top;
         }
+
         .groovy-blogs {
         }
       }
+
       span {
         position: absolute;
-        top: -5000px;
+        top:      -5000px;
       }
     }
 
   }
+
   .login {
     margin: 80px 0;
   }
+
   .login-spacer {
     height: 300px;
   }
+
   .login-box {
     padding: 5px;
   }
+
   .tab-pane.well {
-    border-top: none;
+    border-top:              none;
     border-top-right-radius: 0;
-    border-top-left-radius: 0;
-    background-color: transparent;
+    border-top-left-radius:  0;
+    background-color:        transparent;
   }
 }
+
 .pad-bottom-5 {
   padding-bottom: 5px;
 }
+
 .pad-bottom-10 {
   padding-bottom: 10px;
 }
@@ -77,19 +89,21 @@ body {
 
 
 .thumbnail {
-  width: 145px;
+  width:  145px;
   height: 145px;
+
   .thumbnail-waiting {
-    display: inline-block;
-    line-height: 145px;
+    display:          inline-block;
+    line-height:      145px;
     background-color: transparent;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    vertical-align: bottom;
+    width:            100%;
+    height:           100%;
+    text-align:       center;
+    vertical-align:   bottom;
   }
+
   @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
-    width: 100px;
+    width:  100px;
     height: 100px;
     .thumbnail-waiting {
       line-height: 100px;
@@ -97,7 +111,7 @@ body {
   }
 
   @media (max-width: @screen-xs-max) {
-    width: 50px;
+    width:  50px;
     height: 50px;
     .thumbnail-waiting {
       line-height: 50px;
@@ -106,7 +120,86 @@ body {
 }
 
 @media (max-width: @screen-xs-max) {
-    .navbar-collapse {
-      margin-top: 70px;
+  .navbar-collapse {
+    margin-top: 70px;
+  }
+}
+
+a, small {
+  display: inline-block;
+}
+
+.groovyblogs-overlay {
+  .loading-frame {
+    position:  relative;
+    font-size: 150%;
+
+    .centered {
+      position:  fixed;
+      top:       50%;
+      left:      50%;
+      /* bring your own prefixes */
+      transform: translate(-50%, -50%);
     }
+
+  }
+
+  .content-frame {
+    position: relative;
+
+    iframe {
+      position: fixed;
+      top:      0;
+      left:     0;
+      width:    100%;
+      height:   100%;
+      border:   none;
+    }
+  }
+
+  .loaded-frame {
+    position: relative;
+
+    .overlay {
+      position:                fixed;
+      background:              white;
+      left:                    5%;
+      bottom:                  -60px;
+      transition:              bottom 2000ms ease-in-out;
+      height:                  60px;
+      padding-left:            5px;
+      padding-right:           5px;
+      padding-top:             3px;
+      width:                   90%;
+      border-left:             1px solid black;
+      border-right:            1px solid black;
+      border-top:              1px solid black;
+      border-top-left-radius:  5px;
+      border-top-right-radius: 5px;
+      font-size:               120%;
+      @media (max-width: @screen-sm-max) {
+          height: 160px;
+          bottom: -160px;
+        img {
+          width: 60%
+        }
+      }
+
+      &.activate {
+        bottom: 0;
+      }
+
+      .extra-small {
+        font-size: 70%;
+      }
+
+      .close {
+        position: absolute;
+        right:    8px;
+        float:    none;
+        z-index: 10;
+      }
+    }
+  }
+
 }
