@@ -49,6 +49,11 @@ class FeedController {
             return false
         }
 
+        if(params.noburner) {
+            log.info("No Burner in params")
+            return false
+        }
+        
         log.debug("Redirecting: [$userAgent] from [${request.remoteAddr}] to feedburner")
         return true
     }
