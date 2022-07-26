@@ -75,6 +75,7 @@ class FeedService implements EventPublisher {
             syndFeedInput.xmlHealerOn = true
             InputStream url = feedUrlStr.toURL().newInputStream()
             XmlReader feedReader = new XmlReader(url, true,'UTF-8')
+            
             SyndFeed syndFeed = syndFeedInput.build(feedReader)
 
             def feedInfo = new FeedInfo(feedUrl: feedUrlStr, title: syndFeed.title,

@@ -11,3 +11,5 @@ out/
 .settings
 .classpath
 grails-app/assets/vendor
+docker/mysql/groovyblogs.sql
+
