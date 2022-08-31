@@ -100,6 +100,8 @@ dependencies {
     implementation 'org.grails.plugins:database-migration:4.1.0'
     implementation 'org.liquibase:liquibase-core:4.8.0'
     
+    implementation 'org.grails.plugins:mail:3.0.0'
+    
     runtimeOnly "org.grails.plugins:async:4.0.0"
     runtimeOnly "org.grails:grails-events-rxjava2:4.0.0"
     runtimeOnly 'mysql:mysql-connector-java:8.0.25'
